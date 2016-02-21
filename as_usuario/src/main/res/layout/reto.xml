@@ -19,7 +19,7 @@
                     android:layout_height="60dp"
                     android:layout_weight="1"
                     android:id="@+id/iconoConfig"
-                    android:src="@drawable/configuracion"
+                    android:src="@drawable/volver"
                     android:layout_gravity="center"
                     android:clickable="true"
                     android:focusableInTouchMode="false" />
