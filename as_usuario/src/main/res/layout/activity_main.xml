@@ -41,4 +41,126 @@
                     android:clickable="true" />
 
             </LinearLayout>
+
+    <ImageView
+        android:layout_width="109dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/avatar"
+        android:src="@drawable/contactIcon"
+        android:layout_marginTop="29dp"
+        android:layout_below="@+id/cabecera"
+        android:layout_toStartOf="@+id/editSemanal" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Cambiar Avatar"
+        android:id="@+id/editAvatar"
+        android:layout_gravity="center_horizontal"
+        android:layout_alignBottom="@+id/avatar"
+        android:layout_toEndOf="@+id/editFondo" />
+
+    <EditText
+        android:layout_width="325dp"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:text="Nombre"
+        android:ems="10"
+        android:id="@+id/editNombre"
+        android:layout_gravity="center_horizontal"
+        android:layout_below="@+id/avatar"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="24dp" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Aceptar"
+        android:id="@+id/envioConfig"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Diario"
+        android:id="@+id/editDiario"
+        android:layout_alignBaseline="@+id/editSemanal"
+        android:layout_alignBottom="@+id/editSemanal"
+        android:layout_alignStart="@+id/editNombre" />
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Semanal"
+        android:id="@+id/editSemanal"
+        android:layout_above="@+id/envioConfig"
+        android:layout_alignEnd="@+id/envioConfig"
+        android:layout_marginBottom="29dp" />
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Mensual"
+        android:id="@+id/editMensual"
+        android:layout_alignTop="@+id/editDiario"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="25dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Enviar informe a mi correo"
+        android:id="@+id/editEnvioInforme"
+        android:layout_above="@+id/editDiario"
+        android:layout_alignStart="@+id/editTono" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Personalizar fondo"
+        android:id="@+id/editFondo"
+        android:layout_centerVertical="true"
+        android:layout_alignStart="@+id/avatar" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Personalizar tono"
+        android:id="@+id/editTono"
+        android:layout_above="@+id/editEnvioInforme"
+        android:layout_alignStart="@+id/editDiario"
+        android:layout_marginBottom="32dp" />
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Nuevo fondo"
+        android:id="@+id/menuEditFondo"
+        android:layout_centerVertical="true"
+        android:layout_toEndOf="@+id/editEnvioInforme" />
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Nuevo tono"
+        android:id="@+id/menuEditTono"
+        android:layout_alignTop="@+id/editTono"
+        android:layout_toEndOf="@+id/editEnvioInforme" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Configuracion"
+        android:id="@+id/tituloConfig"
+        android:layout_below="@+id/cabecera"
+        android:layout_centerHorizontal="true" />
+
 </RelativeLayout>
