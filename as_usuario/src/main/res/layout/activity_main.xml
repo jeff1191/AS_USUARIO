@@ -11,7 +11,7 @@
                 android:layout_height="70dp"
                 android:gravity="center_vertical"
                 android:id="@+id/cabecera"
-                android:background="#3074f2">
+                android:background="@color/blue">
 
                 <ImageView
                     android:layout_width="60dp"
@@ -62,7 +62,7 @@
             android:id="@+id/configuracion"
             android:layout_below="@+id/cabecera"
             android:layout_centerHorizontal="true"
-            android:textColor="#3074f2"
+            android:textColor="@color/blue"
             android:textStyle="bold"
             android:layout_gravity="center_horizontal" />
 
@@ -87,6 +87,7 @@
                 android:layout_height="wrap_content"
                 android:inputType="textPersonName"
                 android:text="nombreActual"
+                android:textColor="@color/blue"
                 android:ems="10"
                 android:id="@+id/editarNombre"
                 android:layout_marginTop="80dp"
@@ -117,6 +118,9 @@
                 android:layout_centerVertical="true"
                 android:layout_toEndOf="@+id/tituloEnvio"
                 android:layout_gravity="center_horizontal"
+                android:onClick="cambiarFondoApp"
+                android:background="@color/blue"
+                android:textColor="@color/white"
                 android:layout_columnSpan="80" />
 
             <Button
@@ -124,10 +128,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Cambiar tono "
+                android:text="Cambiar tono"
                 android:id="@+id/editarTono"
                 android:layout_columnSpan="97"
-                android:layout_gravity="center_horizontal"
+                android:onClick="cambiarTonoApp"
+                android:background="@color/blue"
+                android:textColor="@color/white"
                 android:layout_column="83" />
         </LinearLayout>
 
@@ -146,51 +152,58 @@
                 android:text="Enviar informe a mi correo"
                 android:id="@+id/tituloEnvio"
                 android:gravity="center_horizontal"
-                android:textColor="#3074f2"
+                android:textColor="@color/blue"
                 android:textStyle="bold"
                 android:layout_alignStart="@+id/editarTono"
                 android:layout_marginBottom="10dp" />
 
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:id="@+id/frecuenciaEnvio"
-                android:layout_marginLeft="20dp">
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/frecuenciaEnvio"
+                    android:layout_marginLeft="20dp">
 
-                <RadioButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Diario"
-                    android:id="@+id/diario"
-                    android:layout_alignBaseline="@+id/semanal"
-                    android:layout_alignBottom="@+id/semanal"
-                    android:layout_alignStart="@+id/editarNombre"
-                    android:layout_weight="1"
-                    android:layout_gravity="center_horizontal"
-                    android:gravity="center_vertical" />
+                    <RadioGroup
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal">
 
-                <RadioButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Semanal"
-                    android:id="@+id/semanal"
-                    android:layout_above="@+id/envioNuevaConfig"
-                    android:layout_alignEnd="@+id/envioNuevaConfig"
-                    android:layout_weight="1"
-                    android:layout_gravity="center_horizontal"
-                    android:gravity="center_vertical" />
+                        <RadioButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Diario"
+                            android:id="@+id/diario"
+                            android:layout_alignBaseline="@+id/semanal"
+                            android:layout_alignBottom="@+id/semanal"
+                            android:layout_alignStart="@+id/editarNombre"
+                            android:layout_weight="1"
+                            android:layout_gravity="center_horizontal"
+                            android:gravity="center_vertical" />
 
-                <RadioButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Mensual"
-                    android:id="@+id/mensual"
-                    android:layout_alignTop="@+id/diario"
-                    android:layout_alignParentEnd="true"
-                    android:layout_weight="1"
-                    android:gravity="center_vertical" />
-            </LinearLayout>
+                        <RadioButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Semanal"
+                            android:id="@+id/semanal"
+                            android:layout_above="@+id/envioNuevaConfig"
+                            android:layout_alignEnd="@+id/envioNuevaConfig"
+                            android:layout_weight="1"
+                            android:layout_gravity="center_horizontal"
+                            android:gravity="center_vertical" />
+
+                        <RadioButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Mensual"
+                            android:id="@+id/mensual"
+                            android:layout_alignTop="@+id/diario"
+                            android:layout_alignParentEnd="true"
+                            android:layout_weight="1"
+                            android:gravity="center_vertical" />
+                    </RadioGroup>
+
+                </LinearLayout>
 
         </TableLayout>
 
@@ -199,6 +212,8 @@
             android:layout_height="wrap_content"
             android:text="Aceptar"
             android:id="@+id/envioNuevaConfig"
+            android:background="@color/blue"
+            android:textColor="@color/white"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true" />
     </LinearLayout>
