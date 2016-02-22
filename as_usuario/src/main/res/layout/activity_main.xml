@@ -42,125 +42,163 @@
 
             </LinearLayout>
 
-    <ImageView
-        android:layout_width="109dp"
-        android:layout_height="wrap_content"
-        android:id="@+id/avatar"
-        android:src="@drawable/contactIcon"
-        android:layout_marginTop="29dp"
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/cuerpo"
+        android:layout_alignParentStart="true"
         android:layout_below="@+id/cabecera"
-        android:layout_toStartOf="@+id/editSemanal" />
+        android:gravity="center_horizontal"
+        android:layout_marginTop="30dp"
+        android:weightSum="1">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Cambiar Avatar"
-        android:id="@+id/editAvatar"
-        android:layout_gravity="center_horizontal"
-        android:layout_alignBottom="@+id/avatar"
-        android:layout_toEndOf="@+id/editFondo" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Configuracion"
+            android:id="@+id/configuracion"
+            android:layout_below="@+id/cabecera"
+            android:layout_centerHorizontal="true"
+            android:textColor="@string/_COLOR"
+            android:textStyle="bold"
+            android:layout_gravity="center_horizontal" />
 
-    <EditText
-        android:layout_width="325dp"
-        android:layout_height="wrap_content"
-        android:inputType="textPersonName"
-        android:text="Nombre"
-        android:ems="10"
-        android:id="@+id/editNombre"
-        android:layout_gravity="center_horizontal"
-        android:layout_below="@+id/avatar"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="24dp" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="152dp"
+            android:id="@+id/avatarNombre">
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Aceptar"
-        android:id="@+id/envioConfig"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true" />
+            <ImageView
+                android:layout_width="109dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/editarAvatar"
+                android:src="@drawable/contactIcon"
+                android:layout_gravity="center_horizontal"
+                android:layout_centerVertical="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginStart="35dp" />
 
-    <CheckBox
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Diario"
-        android:id="@+id/editDiario"
-        android:layout_alignBaseline="@+id/editSemanal"
-        android:layout_alignBottom="@+id/editSemanal"
-        android:layout_alignStart="@+id/editNombre" />
+            <EditText
+                android:layout_width="325dp"
+                android:layout_height="wrap_content"
+                android:inputType="textPersonName"
+                android:text="nombreActual"
+                android:ems="10"
+                android:id="@+id/editarNombre"
+                android:layout_marginTop="80dp"
+                android:layout_alignTop="@+id/cuerpo"
+                android:layout_alignParentStart="true"
+                android:layout_marginStart="188dp" />
 
-    <CheckBox
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Semanal"
-        android:id="@+id/editSemanal"
-        android:layout_above="@+id/envioConfig"
-        android:layout_alignEnd="@+id/envioConfig"
-        android:layout_marginBottom="29dp" />
+        </RelativeLayout>
 
-    <CheckBox
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Mensual"
-        android:id="@+id/editMensual"
-        android:layout_alignTop="@+id/editDiario"
-        android:layout_alignParentEnd="true"
-        android:layout_marginEnd="25dp" />
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/fondoTono"
+            android:layout_gravity="center"
+            android:layout_marginLeft="28dp"
+            android:layout_marginRight="28dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="15dp">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Enviar informe a mi correo"
-        android:id="@+id/editEnvioInforme"
-        android:layout_above="@+id/editDiario"
-        android:layout_alignStart="@+id/editTono" />
+            <Button
+                style="?android:attr/buttonStyleSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Cambiar fondo"
+                android:id="@+id/editarFondo"
+                android:layout_centerVertical="true"
+                android:layout_toEndOf="@+id/tituloEnvio"
+                android:layout_gravity="center_horizontal"
+                android:layout_columnSpan="80" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Personalizar fondo"
-        android:id="@+id/editFondo"
-        android:layout_centerVertical="true"
-        android:layout_alignStart="@+id/avatar" />
+            <Button
+                style="?android:attr/buttonStyleSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Cambiar tono "
+                android:id="@+id/editarTono"
+                android:layout_columnSpan="97"
+                android:layout_gravity="center_horizontal"
+                android:layout_column="83" />
+        </LinearLayout>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Personalizar tono"
-        android:id="@+id/editTono"
-        android:layout_above="@+id/editEnvioInforme"
-        android:layout_alignStart="@+id/editDiario"
-        android:layout_marginBottom="32dp" />
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="71dp"
+            android:gravity="center_horizontal"
+            android:id="@+id/envioInforme"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="10dp">
 
-    <Button
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Nuevo fondo"
-        android:id="@+id/menuEditFondo"
-        android:layout_centerVertical="true"
-        android:layout_toEndOf="@+id/editEnvioInforme" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Enviar informe a mi correo"
+                android:id="@+id/tituloEnvio"
+                android:gravity="center_horizontal"
+                android:textColor="@string/_COLOR"
+                android:textStyle="bold"
+                android:layout_alignStart="@+id/editarTono"
+                android:layout_marginBottom="10dp" />
 
-    <Button
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Nuevo tono"
-        android:id="@+id/menuEditTono"
-        android:layout_alignTop="@+id/editTono"
-        android:layout_toEndOf="@+id/editEnvioInforme" />
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/frecuenciaEnvio"
+                android:layout_marginLeft="20dp">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Configuracion"
-        android:id="@+id/tituloConfig"
-        android:layout_below="@+id/cabecera"
-        android:layout_centerHorizontal="true" />
+                <CheckBox
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Diario"
+                    android:id="@+id/diario"
+                    android:layout_alignBaseline="@+id/semanal"
+                    android:layout_alignBottom="@+id/semanal"
+                    android:layout_alignStart="@+id/editarNombre"
+                    android:layout_weight="1"
+                    android:layout_gravity="center_horizontal"
+                    android:gravity="center_vertical" />
+
+                <CheckBox
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Semanal"
+                    android:id="@+id/semanal"
+                    android:layout_above="@+id/envioNuevaConfig"
+                    android:layout_alignEnd="@+id/envioNuevaConfig"
+                    android:layout_weight="1"
+                    android:layout_gravity="center_horizontal"
+                    android:gravity="center_vertical" />
+
+                <CheckBox
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Mensual"
+                    android:id="@+id/mensual"
+                    android:layout_alignTop="@+id/diario"
+                    android:layout_alignParentEnd="true"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical" />
+            </LinearLayout>
+
+        </TableLayout>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Aceptar"
+            android:id="@+id/envioNuevaConfig"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true" />
+    </LinearLayout>
 
 </RelativeLayout>
