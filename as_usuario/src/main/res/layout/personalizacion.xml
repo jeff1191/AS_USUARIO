@@ -1,8 +1,9 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:layout_weight="1"
-    android:paddingBottom="@dimen/activity_vertical_margin" tools:context=".MainActivity">
+    tools:context=".MainActivity">
 
             <LinearLayout
                 android:orientation="horizontal"
@@ -18,7 +19,7 @@
                     android:layout_height="60dp"
                     android:layout_weight="1"
                     android:id="@+id/iconoConfig"
-                    android:src="@drawable/configuracion"
+                    android:src="@drawable/volver"
                     android:layout_gravity="center"
                     android:clickable="true"
                     android:focusableInTouchMode="false" />
@@ -50,7 +51,6 @@
         android:layout_alignParentStart="true"
         android:layout_below="@+id/cabecera"
         android:gravity="center_horizontal"
-        android:layout_marginTop="30dp"
         android:weightSum="1"
         android:layout_alignParentBottom="true">
 
@@ -64,15 +64,17 @@
             android:layout_centerHorizontal="true"
             android:textColor="@color/blue"
             android:textStyle="bold"
-            android:layout_gravity="center_horizontal" />
+            android:layout_gravity="center_horizontal"
+            android:paddingTop="20dp"/>
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="152dp"
-            android:id="@+id/avatarNombre">
+            android:id="@+id/avatarNombre"
+            android:layout_weight="0.43">
 
             <ImageView
-                android:layout_width="109dp"
+                android:layout_width="130dp"
                 android:layout_height="wrap_content"
                 android:id="@+id/editarAvatar"
                 android:src="@drawable/avatar"
@@ -80,7 +82,9 @@
                 android:layout_alignParentStart="true"
                 android:layout_marginStart="35dp"
                 android:layout_alignParentTop="true"
-                android:layout_alignParentBottom="true" />
+                android:layout_alignParentBottom="true"
+                android:paddingBottom="15dp"
+                android:paddingTop="15dp" />
 
             <EditText
                 android:layout_width="325dp"
@@ -90,38 +94,40 @@
                 android:textColor="@color/blue"
                 android:ems="10"
                 android:id="@+id/editarNombre"
-                android:layout_marginTop="80dp"
-                android:layout_alignParentStart="true"
-                android:layout_marginStart="188dp"
-                android:layout_marginRight="24dp" />
+                android:layout_centerVertical="true"
+                android:layout_alignParentEnd="true"
+                android:layout_toEndOf="@+id/editarAvatar"
+                android:layout_marginRight="20dp"
+                android:layout_marginLeft="20dp" />
 
         </RelativeLayout>
 
-        <LinearLayout
-            android:orientation="horizontal"
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/fondoTono"
             android:layout_gravity="center"
-            android:layout_marginLeft="28dp"
-            android:layout_marginRight="28dp"
-            android:layout_marginTop="15dp"
-            android:layout_marginBottom="15dp">
+            android:id="@+id/fondoTono"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:paddingTop="20dp">
 
             <Button
                 style="?android:attr/buttonStyleSmall"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Cambiar fondo"
+                android:text="Cambiar color"
                 android:id="@+id/editarFondo"
-                android:layout_centerVertical="true"
-                android:layout_toEndOf="@+id/tituloEnvio"
                 android:layout_gravity="center_horizontal"
                 android:onClick="cambiarFondoApp"
                 android:background="@color/blue"
                 android:textColor="@color/white"
-                android:layout_columnSpan="80" />
+                android:layout_columnSpan="80"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginRight="15dp" />
 
             <Button
                 style="?android:attr/buttonStyleSmall"
@@ -134,16 +140,23 @@
                 android:onClick="cambiarTonoApp"
                 android:background="@color/blue"
                 android:textColor="@color/white"
-                android:layout_column="83" />
-        </LinearLayout>
+                android:layout_column="83"
+                android:paddingRight="10dp"
+                android:paddingLeft="10dp"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginLeft="15dp" />
+        </RelativeLayout>
 
         <TableLayout
             android:layout_width="match_parent"
-            android:layout_height="71dp"
+            android:layout_height="wrap_content"
             android:gravity="center_horizontal"
             android:id="@+id/envioInforme"
             android:layout_marginBottom="10dp"
-            android:layout_marginTop="10dp">
+            android:layout_marginTop="10dp"
+            android:paddingTop="20dp"
+            android:paddingBottom="20dp">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -215,7 +228,10 @@
             android:background="@color/blue"
             android:textColor="@color/white"
             android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true" />
+            android:layout_centerHorizontal="true"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:layout_marginBottom="20dp" />
     </LinearLayout>
 
 </RelativeLayout>
