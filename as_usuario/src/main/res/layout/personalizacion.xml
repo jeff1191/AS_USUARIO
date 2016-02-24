@@ -21,6 +21,7 @@
                     android:id="@+id/iconoConfig"
                     android:src="@drawable/volver"
                     android:layout_gravity="center"
+                    android:onClick="volver"
                     android:clickable="true"
                     android:focusableInTouchMode="false" />
 
@@ -39,6 +40,7 @@
                     android:id="@+id/iconoAyuda"
                     android:src="@drawable/ayuda"
                     android:layout_gravity="center"
+                    android:onClick="ayuda"
                     android:clickable="true" />
 
             </LinearLayout>
@@ -48,11 +50,9 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/cuerpo"
-        android:layout_alignParentStart="true"
         android:layout_below="@+id/cabecera"
         android:gravity="center_horizontal"
-        android:weightSum="1"
-        android:layout_alignParentBottom="true">
+        android:weightSum="1" >
 
         <TextView
             android:layout_width="wrap_content"
@@ -65,13 +65,13 @@
             android:textColor="@color/blue"
             android:textStyle="bold"
             android:layout_gravity="center_horizontal"
-            android:paddingTop="20dp"/>
+            android:paddingTop="20dp"
+            android:layout_marginBottom="10dp" />
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="152dp"
-            android:id="@+id/avatarNombre"
-            android:layout_weight="0.43">
+            android:id="@+id/avatarNombre">
 
             <ImageView
                 android:layout_width="130dp"
@@ -103,49 +103,78 @@
         </RelativeLayout>
 
         <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_height="108dp"
             android:layout_gravity="center"
             android:id="@+id/fondoTono"
             android:paddingLeft="20dp"
             android:paddingRight="20dp"
-            android:paddingTop="20dp">
+            android:layout_weight="0.47"
+            android:layout_marginTop="10dp">
 
-            <Button
-                style="?android:attr/buttonStyleSmall"
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Cambiar color"
-                android:id="@+id/editarFondo"
-                android:layout_gravity="center_horizontal"
-                android:onClick="cambiarFondoApp"
-                android:background="@color/blue"
-                android:textColor="@color/white"
-                android:layout_columnSpan="80"
-                android:paddingLeft="10dp"
-                android:paddingRight="10dp"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentEnd="true"
-                android:layout_marginRight="15dp" />
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Personalizar"
+                android:id="@+id/Personalizar"
+                android:gravity="center_horizontal"
+                android:layout_centerHorizontal="true"
+                android:textColor="@color/blue"
+                android:textStyle="bold"  />
 
-            <Button
-                style="?android:attr/buttonStyleSmall"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Cambiar tono"
-                android:id="@+id/editarTono"
-                android:layout_columnSpan="97"
-                android:onClick="cambiarTonoApp"
-                android:background="@color/blue"
-                android:textColor="@color/white"
-                android:layout_column="83"
-                android:paddingRight="10dp"
-                android:paddingLeft="10dp"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentStart="true"
-                android:layout_marginLeft="15dp" />
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="47dp"
+                android:id="@+id/editColor"
+                android:layout_below="@+id/Personalizar">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="Color:"
+                    android:id="@+id/colorApp"
+                    android:textColor="@color/blue"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="80dp" />
+
+                <Spinner
+                    android:layout_width="wrap_content"
+                    android:layout_height="47dp"
+                    android:id="@+id/coloresPosibles"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="20dp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/editTono"
+                android:layout_below="@+id/editColor">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="Tono:"
+                    android:id="@+id/tonoApp"
+                    android:textColor="@color/blue"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="80dp" />
+
+                <Spinner
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:id="@+id/tonosPosibles"
+                    android:layout_marginLeft="20dp" />
+            </LinearLayout>
+
         </RelativeLayout>
 
         <TableLayout
@@ -153,10 +182,8 @@
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
             android:id="@+id/envioInforme"
-            android:layout_marginBottom="10dp"
             android:layout_marginTop="10dp"
-            android:paddingTop="20dp"
-            android:paddingBottom="20dp">
+            android:layout_marginBottom="10dp">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -167,7 +194,6 @@
                 android:gravity="center_horizontal"
                 android:textColor="@color/blue"
                 android:textStyle="bold"
-                android:layout_alignStart="@+id/editarTono"
                 android:layout_marginBottom="10dp" />
 
                 <LinearLayout
@@ -191,6 +217,7 @@
                             android:layout_alignBottom="@+id/semanal"
                             android:layout_alignStart="@+id/editarNombre"
                             android:layout_weight="1"
+                            android:textColor="@color/blue"
                             android:layout_gravity="center_horizontal"
                             android:gravity="center_vertical" />
 
@@ -202,6 +229,7 @@
                             android:layout_above="@+id/envioNuevaConfig"
                             android:layout_alignEnd="@+id/envioNuevaConfig"
                             android:layout_weight="1"
+                            android:textColor="@color/blue"
                             android:layout_gravity="center_horizontal"
                             android:gravity="center_vertical" />
 
@@ -212,6 +240,7 @@
                             android:id="@+id/mensual"
                             android:layout_alignTop="@+id/diario"
                             android:layout_alignParentEnd="true"
+                            android:textColor="@color/blue"
                             android:layout_weight="1"
                             android:gravity="center_vertical" />
                     </RadioGroup>
@@ -222,7 +251,7 @@
 
         <Button
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="32dp"
             android:text="Aceptar"
             android:id="@+id/envioNuevaConfig"
             android:background="@color/blue"
@@ -231,7 +260,7 @@
             android:layout_centerHorizontal="true"
             android:paddingLeft="20dp"
             android:paddingRight="20dp"
-            android:layout_marginBottom="20dp" />
+            android:layout_marginTop="10dp" />
     </LinearLayout>
 
 </RelativeLayout>

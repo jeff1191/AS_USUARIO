@@ -20,6 +20,7 @@
                     android:layout_weight="1"
                     android:id="@+id/iconoConfig"
                     android:src="@drawable/configuracion"
+                    android:onClick="personalizacion"
                     android:layout_gravity="center"
                     android:clickable="true"
                     android:focusableInTouchMode="false" />

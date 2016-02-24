@@ -15,12 +15,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".EditBackground"
-            android:theme="@android:style/Theme.Holo.Dialog"/>
-        <activity
-            android:name=".EditTone"
-            android:theme="@android:style/Theme.Holo.Dialog"/>
+        <activity android:name=".Settings"></activity>
 
 
     </application>
