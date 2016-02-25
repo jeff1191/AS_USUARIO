@@ -1,58 +1,146 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="fill_parent"
+    android:layout_width="match_parent"
     android:layout_height="fill_parent"
     tools:context=".MainActivity">
 
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_weight="2"
+        android:layout_width="fill_parent"
+        android:layout_height="70dp"
+        android:gravity="center_vertical"
+        android:id="@+id/cabecera"
+        android:background="@color/blue">
 
-            <LinearLayout
-                android:orientation="horizontal"
+        <ImageView
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_weight="1"
+            android:id="@+id/iconoConfig"
+            android:src="@drawable/configuracion"
+            android:layout_gravity="center"
+            android:clickable="true"
+            android:focusableInTouchMode="false" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="70dp"
+            android:layout_weight="1"
+            android:id="@+id/logo"
+            android:src="@drawable/logo"
+            android:layout_gravity="center" />
+
+        <ImageView
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_weight="1"
+            android:id="@+id/iconoAyuda"
+            android:src="@drawable/ayuda"
+            android:layout_gravity="center"
+            android:clickable="true" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_weight="1"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:id="@+id/cuerpo"
+        android:background="#FFFFFF"
+        android:layout_marginTop="70dp"
+        android:gravity="center_horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.75"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="@string/nombreUsuario"
+            android:id="@+id/nombreUser"
+            android:layout_gravity="center"
+            android:textStyle="bold"
+            android:textColor="@color/blue"
+            android:paddingTop="20dp" />
+
+        <ImageView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:id="@+id/avatar"
+            android:src="@drawable/avatar"
+            android:layout_gravity="center_horizontal"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentBottom="true" />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_weight="1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/puntuacion"
+        android:background="#FFFFFF"
+        android:gravity="center_horizontal">
+
+            <ImageView
+                android:layout_width="60dp"
+                android:layout_height="60dp"
                 android:layout_weight="1"
-                android:layout_width="fill_parent"
-                android:layout_height="70dp"
-                android:gravity="center_vertical"
-                android:id="@+id/cabecera"
-                android:background="@color/blue">
+                android:id="@+id/puntuacionImg"
+                android:src="@drawable/puntuacion"
+                android:layout_gravity="center"
+                android:background="@color/blue"
+                android:clickable="true" />
 
-                <ImageView
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
-                    android:layout_weight="1"
-                    android:id="@+id/iconoConfig"
-                    android:src="@drawable/configuracion"
-                    android:layout_gravity="center"
-                    android:clickable="true"
-                    android:focusableInTouchMode="false" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="@string/puntuacion"
+            android:id="@+id/puntuacionUsuario"
+            android:layout_gravity="center"
+            android:textColor="@color/blue"
+            android:paddingLeft="20dp" />
 
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="70dp"
-                    android:layout_weight="1"
-                    android:id="@+id/logo"
-                    android:src="@drawable/logo"
-                    android:layout_gravity="center" />
+        </LinearLayout>
 
-                <ImageView
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
-                    android:layout_weight="1"
-                    android:id="@+id/iconoAyuda"
-                    android:src="@drawable/ayuda"
-                    android:layout_gravity="center"
-                    android:clickable="true" />
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="¿Cómo vas?"
+            android:id="@+id/informe"
+            android:layout_gravity="center_horizontal"
+            android:background="@color/blue"
+            android:textColor="#FFFFFF"
+            android:layout_weight="1"
+            android:layout_marginBottom="1dp"
+            android:layout_marginTop="1dp" />
 
-            </LinearLayout>
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Próximos eventos"
+            android:id="@+id/eventos"
+            android:layout_gravity="center_horizontal"
+            android:background="@color/blue"
+            android:textColor="#FFFFFF"
+            android:layout_weight="1"
+            android:layout_marginBottom="1dp" />
 
-            <LinearLayout
-                android:orientation="vertical"
-                android:layout_weight="1"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:id="@+id/cuerpo"
-                android:background="#FFFFFF"
-                android:layout_marginTop="70dp"
-                android:gravity="center_horizontal">
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Reto"
+            android:id="@+id/reto"
+            android:layout_gravity="center_horizontal"
+            android:background="@color/blue"
+            android:textColor="#FFFFFF"
+            android:layout_weight="1"
+            android:singleLine="false"
+            android:layout_marginBottom="1dp" />
 
-
-            </LinearLayout>
+    </LinearLayout>
 </RelativeLayout>

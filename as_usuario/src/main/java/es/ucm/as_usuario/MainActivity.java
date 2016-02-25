@@ -2,11 +2,8 @@ package es.ucm.as_usuario;
 
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
-import android.support.v7.app.AlertDialog;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 
 
 public class MainActivity extends ActionBarActivity {
@@ -14,7 +11,7 @@ public class MainActivity extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.personalizacion);
+        setContentView(R.layout.activity_main);
 
     }
 
@@ -38,27 +35,5 @@ public class MainActivity extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
-    }
-
-    public void cambiarFondoApp(View v){
-        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
-        builder.setTitle("Fondo");
-
-        LayoutInflater inflater = MainActivity.this.getLayoutInflater();
-        builder.setView(inflater.inflate(R.layout.edit_background, null));
-
-        AlertDialog dialog = builder.create();
-        dialog.show();
-    }
-
-    public void cambiarTonoApp(View v){
-        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
-        builder.setTitle("Tono");
-
-        LayoutInflater inflater = MainActivity.this.getLayoutInflater();
-        builder.setView(inflater.inflate(R.layout.edit_tone, null));
-
-        AlertDialog dialog = builder.create();
-        dialog.show();
     }
 }
