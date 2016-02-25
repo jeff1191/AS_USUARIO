@@ -75,6 +75,7 @@
             android:textStyle="normal"
             android:paddingLeft="20dp"
             android:paddingRight="20dp"
+            android:textColor="@color/blue"
             android:gravity="center_horizontal" />
 
         <LinearLayout
@@ -97,7 +98,7 @@
                 android:layout_marginRight="20dp"
                 android:layout_marginLeft="20dp"
                 android:background="@color/blue"
-                android:textColor="#FFFFFF"
+                android:textColor="@color/white"
                 android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large" />
 
             <Button
@@ -111,7 +112,7 @@
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
                 android:background="@color/blue"
-                android:textColor="#FFFFFF"
+                android:textColor="@color/white"
                 android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large" />/>
 
         </LinearLayout>
@@ -125,6 +126,7 @@
             android:id="@+id/textView"
             android:layout_gravity="center"
             android:textAlignment="center"
+            android:textColor="@color/blue"
             android:paddingBottom="20dp" />
 
         <ProgressBar

@@ -80,11 +80,13 @@
                 android:src="@drawable/avatar"
                 android:layout_gravity="center_horizontal"
                 android:layout_alignParentStart="true"
-                android:layout_marginStart="35dp"
+                android:layout_marginStart="20dp"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentBottom="true"
                 android:paddingBottom="15dp"
-                android:paddingTop="15dp" />
+                android:paddingTop="15dp"
+                android:clickable="true"
+                android:onClick="cambiarImagenPerfil" />
 
             <EditText
                 android:layout_width="325dp"
@@ -104,13 +106,13 @@
 
         <RelativeLayout
             android:layout_width="wrap_content"
-            android:layout_height="108dp"
+            android:layout_height="88dp"
             android:layout_gravity="center"
             android:id="@+id/fondoTono"
             android:paddingLeft="20dp"
             android:paddingRight="20dp"
-            android:layout_weight="0.47"
-            android:layout_marginTop="10dp">
+            android:layout_marginTop="10dp"
+            android:layout_weight="0.36">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -121,58 +123,44 @@
                 android:gravity="center_horizontal"
                 android:layout_centerHorizontal="true"
                 android:textColor="@color/blue"
-                android:textStyle="bold"  />
-
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="47dp"
-                android:id="@+id/editColor"
-                android:layout_below="@+id/Personalizar">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:text="Color:"
-                    android:id="@+id/colorApp"
-                    android:textColor="@color/blue"
-                    android:layout_centerVertical="true"
-                    android:layout_alignParentStart="true"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="80dp" />
-
-                <Spinner
-                    android:layout_width="wrap_content"
-                    android:layout_height="47dp"
-                    android:id="@+id/coloresPosibles"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="20dp" />
-
-            </LinearLayout>
+                android:textStyle="bold"
+                android:layout_marginBottom="10dp" />
 
             <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:id="@+id/editTono"
-                android:layout_below="@+id/editColor">
+                android:id="@+id/editColor"
+                android:layout_below="@+id/Personalizar"
+                android:layout_marginTop="10dp"
+                android:layout_alignParentBottom="true">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:text="Tono:"
-                    android:id="@+id/tonoApp"
-                    android:textColor="@color/blue"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="80dp" />
+                <Button
+                    android:layout_width="130dp"
+                    android:layout_height="55dp"
+                    android:text="Color aplicacion"
+                    android:background="@color/blue"
+                    android:textColor="@color/white"
+                    android:id="@+id/cambiarColor"
+                    android:paddingLeft="20dp"
+                    android:paddingRight="20dp"
+                    android:onClick="cambiarColorApp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="20dp" />
 
-                <Spinner
-                    android:layout_width="wrap_content"
-                    android:layout_height="50dp"
-                    android:id="@+id/tonosPosibles"
-                    android:layout_marginLeft="20dp" />
+                <Button
+                    android:layout_width="130dp"
+                    android:layout_height="55dp"
+                    android:text="Tono aplicacion"
+                    android:background="@color/blue"
+                    android:textColor="@color/white"
+                    android:id="@+id/cambiarTono"
+                    android:paddingLeft="20dp"
+                    android:paddingRight="20dp"
+                    android:onClick="cambiarTonoApp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp" />
+
             </LinearLayout>
 
         </RelativeLayout>
@@ -182,8 +170,8 @@
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
             android:id="@+id/envioInforme"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp">
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -201,7 +189,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:id="@+id/frecuenciaEnvio"
-                    android:layout_marginLeft="20dp">
+                    android:layout_marginLeft="15dp">
 
                     <RadioGroup
                         android:layout_width="match_parent"
@@ -251,7 +239,7 @@
 
         <Button
             android:layout_width="wrap_content"
-            android:layout_height="32dp"
+            android:layout_height="40dp"
             android:text="Aceptar"
             android:id="@+id/envioNuevaConfig"
             android:background="@color/blue"
@@ -259,8 +247,8 @@
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
             android:paddingLeft="20dp"
-            android:paddingRight="20dp"
-            android:layout_marginTop="10dp" />
+            android:paddingRight="20dp" />
+
     </LinearLayout>
 
 </RelativeLayout>

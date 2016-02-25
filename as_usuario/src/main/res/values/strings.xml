@@ -3,18 +3,4 @@
     <string name="action_settings">Settings</string>
     <string name="textoReto">Lavarse las manos después de comer</string>
     <string name="contadorReto">10</string>
-    <string-array name="colores">
-        <item>azul</item>
-        <item>verde</item>
-        <item>rosa</item>
-        <item>negro</item>
-        <item>rojo</item>
-    </string-array>
-    <string-array name="tonos">
-        <item>ringtone1</item>
-        <item>ringtone2</item>
-        <item>ringtone3</item>
-        <item>ringtone4</item>
-        <item>ringtone5</item>
-    </string-array>
 </resources>

@@ -1,11 +1,12 @@
 package es.ucm.as_usuario;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.Spinner;
 
 /**
  * Clase asociada a la vista de personalizacion
@@ -14,30 +15,13 @@ import android.widget.Spinner;
  */
 public class Settings extends Activity {
 
+    static final int REQUEST_IMAGE_CAPTURE = 1;
+    static final int SELECT_FILE = 1;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.personalizacion);
-
-        //Get the color Spinner from personlaizacion.xml
-        Spinner colorSpinner = (Spinner) findViewById(R.id.coloresPosibles);
-        // Create an ArrayAdapter using the string array and a default spinner layout
-        ArrayAdapter<CharSequence> colorAdapter = ArrayAdapter.createFromResource(this,
-                R.array.colores, R.layout.my_spinner_item);
-        // Specify the layout to use when the list of choices appears
-        colorAdapter.setDropDownViewResource(R.layout.my_spinner_dropdown_item);
-        // Apply the adapter to the spinner
-        colorSpinner.setAdapter(colorAdapter);
-
-        //Get the tono Spinner from personlaizacion.xml
-        Spinner tonoSpinner = (Spinner) findViewById(R.id.tonosPosibles);
-        // Create an ArrayAdapter using the string array and a default spinner layout
-        ArrayAdapter<CharSequence> tonoAdapter = ArrayAdapter.createFromResource(this,
-                R.array.tonos, R.layout.my_spinner_item);
-        // Specify the layout to use when the list of choices appears
-        tonoAdapter.setDropDownViewResource(R.layout.my_spinner_dropdown_item);
-        // Apply the adapter to the spinner
-        tonoSpinner.setAdapter(tonoAdapter);
 
     }
 
@@ -48,5 +32,50 @@ public class Settings extends Activity {
 
     public void ayuda(View v){
         //Esto debera llevar al pdf con la ayuda
+    }
+
+    public void cambiarColorApp(View v){
+        AlertDialog.Builder builder = new AlertDialog.Builder(Settings.this);
+
+        LayoutInflater inflater = Settings.this.getLayoutInflater();
+        builder.setView(inflater.inflate(R.layout.edit_color, null));
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
+
+    public void cambiarTonoApp(View v){
+        AlertDialog.Builder builder = new AlertDialog.Builder(Settings.this);
+
+        LayoutInflater inflater = Settings.this.getLayoutInflater();
+        builder.setView(inflater.inflate(R.layout.edit_tone, null));
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
+
+    public void cambiarImagenPerfil(View v) {
+        final CharSequence[] items = { "Tomar foto", "Elegir de la galeria", "Salir" };
+        AlertDialog.Builder builder = new AlertDialog.Builder(Settings.this);
+        builder.setItems(items, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int item) {
+                if (items[item].equals("Tomar foto")) {
+                    Intent intent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+                    startActivityForResult(intent, REQUEST_IMAGE_CAPTURE);
+                } else if (items[item].equals("Elegir de la galeria")) {
+                    Intent intent = new Intent(
+                            Intent.ACTION_PICK,
+                            android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                    intent.setType("image/*");
+                    startActivityForResult(
+                            Intent.createChooser(intent, "Select File"),
+                            SELECT_FILE);
+                } else if (items[item].equals("Salir")) {
+                    dialog.dismiss();
+                }
+            }
+        });
+        builder.show();
     }
 }
