@@ -7,6 +7,6 @@ import android.app.Activity;
  *
  * Created by Juan Lu on 24/02/2016.
  */
-public class EditTone extends Activity {
+public class CambiarTono extends Activity {
 
 }

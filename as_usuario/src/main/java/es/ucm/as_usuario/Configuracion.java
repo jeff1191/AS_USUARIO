@@ -13,7 +13,7 @@ import android.view.View;
  *
  * Created by Juan Lu on 24/02/2016.
  */
-public class Settings extends Activity {
+public class Configuracion extends Activity {
 
     static final int REQUEST_IMAGE_CAPTURE = 1;
     static final int SELECT_FILE = 1;
@@ -35,9 +35,9 @@ public class Settings extends Activity {
     }
 
     public void cambiarColorApp(View v){
-        AlertDialog.Builder builder = new AlertDialog.Builder(Settings.this);
+        AlertDialog.Builder builder = new AlertDialog.Builder(Configuracion.this);
 
-        LayoutInflater inflater = Settings.this.getLayoutInflater();
+        LayoutInflater inflater = Configuracion.this.getLayoutInflater();
         builder.setView(inflater.inflate(R.layout.edit_color, null));
 
         AlertDialog dialog = builder.create();
@@ -45,9 +45,9 @@ public class Settings extends Activity {
     }
 
     public void cambiarTonoApp(View v){
-        AlertDialog.Builder builder = new AlertDialog.Builder(Settings.this);
+        AlertDialog.Builder builder = new AlertDialog.Builder(Configuracion.this);
 
-        LayoutInflater inflater = Settings.this.getLayoutInflater();
+        LayoutInflater inflater = Configuracion.this.getLayoutInflater();
         builder.setView(inflater.inflate(R.layout.edit_tone, null));
 
         AlertDialog dialog = builder.create();
@@ -56,7 +56,7 @@ public class Settings extends Activity {
 
     public void cambiarImagenPerfil(View v) {
         final CharSequence[] items = { "Tomar foto", "Elegir de la galeria", "Salir" };
-        AlertDialog.Builder builder = new AlertDialog.Builder(Settings.this);
+        AlertDialog.Builder builder = new AlertDialog.Builder(Configuracion.this);
         builder.setItems(items, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int item) {

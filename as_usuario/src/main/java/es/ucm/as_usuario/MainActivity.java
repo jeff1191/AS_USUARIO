@@ -1,14 +1,14 @@
 package es.ucm.as_usuario;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
 
-public class MainActivity extends ActionBarActivity {
+public class MainActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,12 +39,17 @@ public class MainActivity extends ActionBarActivity {
     }
 
     public void personalizacion(View v){
-        Intent cambiosUsuario = new Intent (getApplicationContext(), Settings.class);
+        Intent cambiosUsuario = new Intent (getApplicationContext(), Configuracion.class);
         startActivity(cambiosUsuario);
     }
 
     public void ayuda(View v){
         //Esto debera llevar al pdf con la ayuda
+    }
+
+    public void verReto(View v){
+        Intent verRetoUsuario = new Intent (getApplicationContext(), VerReto.class);
+        startActivity(verRetoUsuario);
     }
 
 }
