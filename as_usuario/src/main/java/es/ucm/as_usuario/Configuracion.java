@@ -55,12 +55,12 @@ public class Configuracion extends Activity {
     }
 
     public void cambiarImagenPerfil(View v) {
-        final CharSequence[] items = { "Tomar foto", "Elegir de la galeria", "Salir" };
+        final CharSequence[] items = { "Hacer foto", "Elegir de la galeria", "Salir" };
         AlertDialog.Builder builder = new AlertDialog.Builder(Configuracion.this);
         builder.setItems(items, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int item) {
-                if (items[item].equals("Tomar foto")) {
+                if (items[item].equals("Hacer foto")) {
                     Intent intent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
                     startActivityForResult(intent, REQUEST_IMAGE_CAPTURE);
                 } else if (items[item].equals("Elegir de la galeria")) {

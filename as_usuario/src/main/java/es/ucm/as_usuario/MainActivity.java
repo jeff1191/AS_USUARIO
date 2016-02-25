@@ -47,6 +47,15 @@ public class MainActivity extends Activity {
         //Esto debera llevar al pdf con la ayuda
     }
 
+    public void verComoVas(View v){
+        //Esto debera llevar al pdf con el informe de actividad
+    }
+
+    public void verEventos(View v){
+        Intent verEventosUsuario = new Intent (getApplicationContext(), VerEventos.class);
+        startActivity(verEventosUsuario);
+    }
+
     public void verReto(View v){
         Intent verRetoUsuario = new Intent (getApplicationContext(), VerReto.class);
         startActivity(verRetoUsuario);

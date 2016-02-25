@@ -24,6 +24,7 @@
             android:name=".CambiarTono"
             android:theme="@android:style/Theme.Holo.Dialog"/>
         <activity android:name=".VerReto"></activity>
+        <activity android:name=".VerEventos"></activity>
 
     </application>
 
