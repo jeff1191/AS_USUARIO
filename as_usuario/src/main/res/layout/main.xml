@@ -85,14 +85,14 @@
         android:gravity="center_horizontal">
 
             <ImageView
-            android:background="@color/blue"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:layout_weight="1"
-            android:id="@+id/puntuacionImg"
-            android:src="@drawable/puntuacion"
-            android:layout_gravity="center"
-            android:clickable="true" />
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_weight="1"
+                android:id="@+id/puntuacionImg"
+                android:src="@drawable/puntuacion"
+                android:layout_gravity="center"
+                android:background="@color/blue"
+                android:clickable="true" />
 
         <TextView
             android:layout_width="wrap_content"
