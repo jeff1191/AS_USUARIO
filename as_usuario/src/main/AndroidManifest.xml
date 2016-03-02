@@ -7,7 +7,7 @@
         android:icon="@drawable/logo"
         android:theme="@style/AppTheme" >
         <activity
-            android:name=".MainActivity"
+            android:name=".presentacion.MainActivity"
             android:label="@string/app_name"
             android:theme="@android:style/Theme.NoTitleBar">
             <intent-filter>
@@ -16,15 +16,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Configuracion"></activity>
+        <activity android:name=".presentacion.Configuracion"></activity>
         <activity
-            android:name=".CambiarColor"
+            android:name=".presentacion.CambiarColor"
             android:theme="@android:style/Theme.Holo.Dialog"/>
         <activity
-            android:name=".CambiarTono"
+            android:name=".presentacion.CambiarTono"
             android:theme="@android:style/Theme.Holo.Dialog"/>
-        <activity android:name=".VerReto"></activity>
-        <activity android:name=".VerEventos"></activity>
+        <activity android:name=".presentacion.VerReto"></activity>
+        <activity android:name=".presentacion.VerEventos"></activity>
 
     </application>
 

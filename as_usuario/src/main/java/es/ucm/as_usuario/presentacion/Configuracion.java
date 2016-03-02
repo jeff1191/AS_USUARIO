@@ -1,4 +1,4 @@
-package es.ucm.as_usuario;
+package es.ucm.as_usuario.presentacion;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -7,6 +7,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+
+import es.ucm.as_usuario.R;
 
 /**
  * Clase asociada a la vista de personalizacion

@@ -1,21 +1,23 @@
-package es.ucm.as_usuario;
+package es.ucm.as_usuario.presentacion;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
+import es.ucm.as_usuario.R;
+
 /**
- * Clase para que se muestre el reto
+ * Clase para que se vean los eventos temporales
  *
  * Created by Juan Lu on 25/02/2016.
  */
-public class VerReto extends Activity{
+public class VerEventos  extends Activity{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.reto);
+        setContentView(R.layout.eventos);
     }
 
     public void volver(View v){

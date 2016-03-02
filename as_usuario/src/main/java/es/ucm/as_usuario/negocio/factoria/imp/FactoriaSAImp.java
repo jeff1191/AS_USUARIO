@@ -1,0 +1,39 @@
+/**
+ * 
+ */
+package es.ucm.as_usuario.negocio.factoria.imp;
+
+import es.ucm.as_usuario.negocio.factoria.FactoriaSA;
+import es.ucm.as_usuario.negocio.tarea.SATarea;
+import es.ucm.as_usuario.negocio.usuario.SAUsuario;
+
+/** 
+ * <!-- begin-UML-doc -->
+ * <!-- end-UML-doc -->
+ * @author Jeffer
+ * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
+ */
+public class FactoriaSAImp extends FactoriaSA {
+	/** 
+	 * (sin Javadoc)
+	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
+	 */
+	public SAUsuario nuevoSAUsuario() {
+		// begin-user-code
+		// TODO Ap�ndice de m�todo generado autom�ticamente
+		return null;
+		// end-user-code
+	}
+
+	/** 
+	 * (sin Javadoc)
+	 * @see FactoriaSA#nuevoSATarea()
+	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
+	 */
+	public SATarea nuevoSATarea() {
+		// begin-user-code
+		// TODO Ap�ndice de m�todo generado autom�ticamente
+		return null;
+		// end-user-code
+	}
+}
