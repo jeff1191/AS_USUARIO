@@ -101,7 +101,8 @@
                 android:layout_marginLeft="20dp"
                 android:background="@color/blue"
                 android:textColor="@color/white"
-                android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large" />
+                android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large"
+                android:onClick="responderSiReto" />
 
             <Button
                 style="?android:attr/buttonStyleSmall"

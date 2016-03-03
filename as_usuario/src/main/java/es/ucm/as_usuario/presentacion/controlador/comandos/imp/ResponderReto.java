@@ -12,15 +12,16 @@ public class ResponderReto implements Command {
     @Override
     public Object ejecutaComando(Object datos) throws commandException {
         SATarea servicioTareas= new SATareaImp();
-        /*
-        Seguramente haga falta un metodo en el dispatcher que sea mandar error o algo asi
-        if(!servicioTareas.responderReto(TransferTarea(datos.....)))
-           throw new commandException("MANDO ERROR AL DISPATCHER"); //lo captura el controlador
 
-        return "Has respondido el reto"; //se enviaria al controlador para luego enviarselo al dispatcher
-         */
 
-        servicioTareas.responderReto(); //dependiendo de lo que te devuelva este metodo lanzas excepcion o no
+        //Seguramente haga falta un metodo en el dispatcher que sea mandar error o algo asi
+        servicioTareas.responderReto((Integer) datos);
+           //throw new commandException("MANDO ERROR AL DISPATCHER"); //lo captura el controlador
+
+        //return "Has respondido el reto"; //se enviaria al controlador para luego enviarselo al dispatcher
+
+
+       // servicioTareas.responderReto(); //dependiendo de lo que te devuelva este metodo lanzas excepcion o no
         return null;//aqui devolverias algo bonito para que lo actualice el dispatcher, seguramente un string (Toast) o algo asi
     }
 }

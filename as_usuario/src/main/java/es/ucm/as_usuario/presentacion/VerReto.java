@@ -6,6 +6,9 @@ import android.os.Bundle;
 import android.view.View;
 
 import es.ucm.as_usuario.R;
+import es.ucm.as_usuario.negocio.tarea.TransferReto;
+import es.ucm.as_usuario.presentacion.controlador.Controlador;
+import es.ucm.as_usuario.presentacion.controlador.ListaComandos;
 
 /**
  * Clase para que se muestre el reto
@@ -27,5 +30,8 @@ public class VerReto extends Activity{
 
     public void ayuda(View v){
         //Esto debera llevar al pdf con la ayuda
+    }
+    public void responderSiReto(View v){
+        Controlador.getInstancia().ejecutaComando(ListaComandos.RESPONDER_SI_RETO,1);
     }
 }

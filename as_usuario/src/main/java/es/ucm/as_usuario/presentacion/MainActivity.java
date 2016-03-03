@@ -7,15 +7,23 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.j256.ormlite.android.apptools.OrmLiteBaseActivity;
+
 import es.ucm.as_usuario.R;
+import es.ucm.as_usuario.negocio.base_datos.Contexto;
+import es.ucm.as_usuario.negocio.base_datos.DBHelper;
 
 
 public class MainActivity extends Activity {
+
+    private DBHelper db = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Contexto c = new Contexto();
+        c.setContext(this.getApplicationContext());
     }
 
     @Override

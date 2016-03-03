@@ -17,6 +17,6 @@ public interface SATarea {
     public void consultarReto();
     public void mostrarAlarma();
     public void responderPregunta();
-    public void responderReto();
+    public void responderReto(Integer respuesta);
     public void sincronizar();
 }

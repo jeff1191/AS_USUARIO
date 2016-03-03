@@ -2,32 +2,18 @@
 <items version="2" >
 
     <item
-        jar="C:\Users\Juan Lu\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\22.2.0\support-annotations-22.2.0.jar"
+        jar="C:\Users\msalitu\.gradle\caches\modules-2\files-2.1\com.j256.ormlite\ormlite-core\4.48\e579bd2905d0399af5029aaaf9817d5fa0ca88a5\ormlite-core-4.48.jar"
         jumboMode="false"
         revision="22.0.1"
-        sha1="66b42a1f3eb7676070b7ef7f14b603483aecbee1">
-        <dex dex="C:\Users\Juan Lu\git\AS\as_usuario\build\intermediates\pre-dexed\debug\support-annotations-22.2.0-85161731f1f35ed4ad301b2f3fba0b9b134f4962.jar" />
+        sha1="e579bd2905d0399af5029aaaf9817d5fa0ca88a5">
+        <dex dex="C:\Users\msalitu\.AndroidStudio1.5\AS_USUARIO\as_usuario\build\intermediates\pre-dexed\debug\ormlite-core-4.48-d2ae5a2c17ab15c4e4982bd4e2ce0b92afd4379b.jar" />
     </item>
     <item
-        jar="C:\Users\Juan Lu\git\AS\as_usuario\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.0\jars\classes.jar"
+        jar="C:\Users\msalitu\.gradle\caches\modules-2\files-2.1\com.j256.ormlite\ormlite-android\4.48\afa06f539a4026c10b247386312aa67404b80a16\ormlite-android-4.48.jar"
         jumboMode="false"
         revision="22.0.1"
-        sha1="73753982da6bde518f3a4c6b372749981d14d1a0">
-        <dex dex="C:\Users\Juan Lu\git\AS\as_usuario\build\intermediates\pre-dexed\debug\classes-7ce18225b585aab27199f78f1aa305bf0eb145ac.jar" />
-    </item>
-    <item
-        jar="C:\Users\Juan Lu\git\AS\as_usuario\build\intermediates\exploded-aar\com.android.support\support-v4\22.2.0\jars\libs\internal_impl-22.2.0.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="57f2ab85c164ff1676ec64dee787981c046fab79">
-        <dex dex="C:\Users\Juan Lu\git\AS\as_usuario\build\intermediates\pre-dexed\debug\internal_impl-22.2.0-b4e4d1d2a699ae32a6e0c3e3b31eefe641575f58.jar" />
-    </item>
-    <item
-        jar="C:\Users\Juan Lu\git\AS\as_usuario\build\intermediates\exploded-aar\com.android.support\support-v4\22.2.0\jars\classes.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="1ee588ff2c4daf7b97c1cbf922a6c7f027285c2f">
-        <dex dex="C:\Users\Juan Lu\git\AS\as_usuario\build\intermediates\pre-dexed\debug\classes-55883853281d7e11546a2e3619367db5027fd08e.jar" />
+        sha1="afa06f539a4026c10b247386312aa67404b80a16">
+        <dex dex="C:\Users\msalitu\.AndroidStudio1.5\AS_USUARIO\as_usuario\build\intermediates\pre-dexed\debug\ormlite-android-4.48-f5f7009f4ad00f61f41866e6d4acb4b63deefeb6.jar" />
     </item>
 
 </items>

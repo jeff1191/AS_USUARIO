@@ -5,6 +5,7 @@ package es.ucm.as_usuario.presentacion.controlador;
  */
 public class ListaComandos {
     public static final String CREAR_USUARIO = "crearUsuario";
+    public static final String RESPONDER_SI_RETO = "responderRetoSi";
     /*
     .
     .
