@@ -23,10 +23,7 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        Contexto contexto = new Contexto();
-        Context c = this;
-        contexto.setContext(c);
+        Contexto.getInstancia().setContext(this);
     }
 
     @Override
