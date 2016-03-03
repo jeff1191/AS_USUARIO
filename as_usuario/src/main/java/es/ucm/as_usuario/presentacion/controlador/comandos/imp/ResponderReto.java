@@ -1,5 +1,6 @@
 package es.ucm.as_usuario.presentacion.controlador.comandos.imp;
 
+import es.ucm.as_usuario.negocio.factoria.FactoriaSA;
 import es.ucm.as_usuario.negocio.tarea.SATarea;
 import es.ucm.as_usuario.negocio.tarea.imp.SATareaImp;
 import es.ucm.as_usuario.presentacion.controlador.comandos.Command;
@@ -11,7 +12,7 @@ import es.ucm.as_usuario.presentacion.controlador.comandos.exceptions.commandExc
 public class ResponderReto implements Command {
     @Override
     public Object ejecutaComando(Object datos) throws commandException {
-        SATarea servicioTareas= new SATareaImp();
+        SATarea servicioTareas= FactoriaSA.getInstancia().nuevoSATarea();
 
 
         //Seguramente haga falta un metodo en el dispatcher que sea mandar error o algo asi

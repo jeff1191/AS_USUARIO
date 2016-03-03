@@ -5,6 +5,7 @@ package es.ucm.as_usuario.negocio.factoria.imp;
 
 import es.ucm.as_usuario.negocio.factoria.FactoriaSA;
 import es.ucm.as_usuario.negocio.tarea.SATarea;
+import es.ucm.as_usuario.negocio.tarea.imp.SATareaImp;
 import es.ucm.as_usuario.negocio.usuario.SAUsuario;
 
 /** 
@@ -33,7 +34,7 @@ public class FactoriaSAImp extends FactoriaSA {
 	public SATarea nuevoSATarea() {
 		// begin-user-code
 		// TODO Ap�ndice de m�todo generado autom�ticamente
-		return null;
+		return new SATareaImp();
 		// end-user-code
 	}
 }

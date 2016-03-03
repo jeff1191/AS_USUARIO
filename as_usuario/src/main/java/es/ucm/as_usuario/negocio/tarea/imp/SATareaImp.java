@@ -23,6 +23,7 @@ public class SATareaImp implements SATarea {
 
     private DBHelper getHelper() {
         if (mDBHelper == null) {
+
             mDBHelper = OpenHelperManager.getHelper(Contexto.getInstancia().getContext(), DBHelper.class);
         }
         return mDBHelper;
