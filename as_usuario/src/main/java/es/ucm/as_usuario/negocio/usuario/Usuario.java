@@ -46,7 +46,7 @@ public class Usuario {
 	private String tono;
 
 	@DatabaseField(columnName = "FREC")
-	private Enum frecuenciaRecibirInforme;
+	private String frecuenciaRecibirInforme;
 
 	//@ForeignCollectionField
 	//private List<Tarea> tareas;
@@ -60,8 +60,8 @@ public class Usuario {
 	@DatabaseField(columnName = "URL_AYUDA")
 	private String ayuda;
 
-	@ForeignCollectionField
-	private ForeignCollection<Respuesta> respuestas;
+	//@ForeignCollectionField
+	//private ForeignCollection<Respuesta> respuestas;
 
 	public Integer getId() {
 		return this.id;
@@ -99,7 +99,7 @@ public class Usuario {
 		return this.tono;
 	}
 
-	public Enum getFrecuenciaRecibirInformes() {
+	public String getFrecuenciaRecibirInformes() {
 		return this.frecuenciaRecibirInforme;
 	}
 /*
@@ -151,7 +151,7 @@ public class Usuario {
 		this.color=nuevoColor;
 	}
 
-	public void setFrecuenciaRecibirInforme(Enum nuevaFrecuencia) {
+	public void setFrecuenciaRecibirInforme(String nuevaFrecuencia) {
 		this.frecuenciaRecibirInforme=nuevaFrecuencia;
 	}
 /*
