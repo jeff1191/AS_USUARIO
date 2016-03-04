@@ -12,6 +12,8 @@ import es.ucm.as_usuario.negocio.utils.Frecuencia;
 
 public class Usuario {
 
+	public static Usuario instancia= new Usuario();
+
 	private Integer id;
 
 	private String nombre;
@@ -39,6 +41,13 @@ public class Usuario {
 	private String correoTutor;
 
 	private String ayuda;
+
+	private Usuario(){
+
+	}
+	public static Usuario getInstancia() {
+		return instancia;
+	}
 
 	public Integer getId() {
 		return this.id;
