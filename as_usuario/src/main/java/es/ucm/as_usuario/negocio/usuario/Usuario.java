@@ -3,65 +3,42 @@
  */
 package es.ucm.as_usuario.negocio.usuario;
 
-import com.j256.ormlite.dao.ForeignCollection;
-import com.j256.ormlite.field.DatabaseField;
-import com.j256.ormlite.field.ForeignCollectionField;
-
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
-import java.util.Set;
 
-import es.ucm.as_usuario.negocio.tarea.Respuesta;
 import es.ucm.as_usuario.negocio.tarea.Reto;
-import es.ucm.as_usuario.negocio.tarea.Tarea;
+import es.ucm.as_usuario.negocio.tarea.Evento;
+import es.ucm.as_usuario.negocio.utils.Frecuencia;
 
 
 public class Usuario {
-	@DatabaseField(generatedId = true, columnName = "ID")
+
 	private Integer id;
 
-	@DatabaseField(columnName = "NOMBRE")
 	private String nombre;
 
-	@DatabaseField(columnName = "CORREO")
 	private String correo;
 
-	@DatabaseField(columnName = "AVATAR")
 	private String avatar;
 
-	@DatabaseField(foreign=true,foreignAutoRefresh=true)
 	private Reto reto;
 
-	@DatabaseField(columnName = "INFORME")
 	private String informe;
 
-	@DatabaseField(columnName = "PUNTUACION")
 	private Integer puntuacion;
 
-	@DatabaseField(columnName = "COLOR")
 	private String color;
 
-	@DatabaseField(columnName = "TONO")
 	private String tono;
 
-	@DatabaseField(columnName = "FREC")
-	private String frecuenciaRecibirInforme;
+	private Frecuencia frecuenciaRecibirInforme;
 
-	//@ForeignCollectionField
-	//private List<Tarea> tareas;
+	private List<Evento> tareas;
 
-	@DatabaseField(columnName = "NOMBRE_TUTOR")
 	private String nombreTutor;
 
-	@DatabaseField(columnName = "CORREO_TUTOR")
 	private String correoTutor;
 
-	@DatabaseField(columnName = "URL_AYUDA")
 	private String ayuda;
-
-	//@ForeignCollectionField
-	//private ForeignCollection<Respuesta> respuestas;
 
 	public Integer getId() {
 		return this.id;
@@ -99,13 +76,13 @@ public class Usuario {
 		return this.tono;
 	}
 
-	public String getFrecuenciaRecibirInformes() {
+	public Frecuencia getFrecuenciaRecibirInformes() {
 		return this.frecuenciaRecibirInforme;
 	}
-/*
-	public List<Tarea> getTareas() {
+
+	public List<Evento> getTareas() {
 		return tareas;
-	}*/
+	}
 
 	public String getNombreTutor() {
 		return nombreTutor;
@@ -151,13 +128,13 @@ public class Usuario {
 		this.color=nuevoColor;
 	}
 
-	public void setFrecuenciaRecibirInforme(String nuevaFrecuencia) {
+	public void setFrecuenciaRecibirInforme(Frecuencia nuevaFrecuencia) {
 		this.frecuenciaRecibirInforme=nuevaFrecuencia;
 	}
-/*
-	public void setTareas(List<Tarea> nuevasTareas) {
+
+	public void setTareas(List<Evento> nuevasTareas) {
 		this.tareas=nuevasTareas;
-	}*/
+	}
 
 	public void setNombreTutor(String nuevoNombreTutor) {
 		this.nombreTutor=nuevoNombreTutor;

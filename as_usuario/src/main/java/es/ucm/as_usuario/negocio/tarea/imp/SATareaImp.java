@@ -1,7 +1,5 @@
 package es.ucm.as_usuario.negocio.tarea.imp;
 
-import android.util.Log;
-
 import com.j256.ormlite.android.apptools.OpenHelperManager;
 import com.j256.ormlite.dao.Dao;
 
@@ -10,14 +8,12 @@ import java.sql.SQLException;
 import es.ucm.as_usuario.negocio.base_datos.Contexto;
 import es.ucm.as_usuario.negocio.base_datos.DBHelper;
 import es.ucm.as_usuario.negocio.tarea.Reto;
-import es.ucm.as_usuario.negocio.tarea.SATarea;
-import es.ucm.as_usuario.negocio.usuario.Usuario;
-import es.ucm.as_usuario.presentacion.MainActivity;
+import es.ucm.as_usuario.negocio.tarea.SASuceso;
 
 /**
  * Created by Jeffer on 02/03/2016.
  */
-public class SATareaImp implements SATarea {
+public class SATareaImp implements SASuceso {
 
     private DBHelper mDBHelper;
 

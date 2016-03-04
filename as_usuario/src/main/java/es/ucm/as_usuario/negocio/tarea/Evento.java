@@ -5,13 +5,15 @@ package es.ucm.as_usuario.negocio.tarea;
 
 import com.j256.ormlite.field.DataType;
 import com.j256.ormlite.field.DatabaseField;
+import com.j256.ormlite.field.ForeignCollectionField;
 
 import java.sql.Timestamp;
+import java.util.List;
+import java.util.Set;
 
 import es.ucm.as_usuario.negocio.utils.Frecuencia;
 
-public class Tarea {
-
+public class Evento {
 	@DatabaseField(generatedId = true, columnName = "ID")
 	private Integer id;
 
@@ -38,10 +40,6 @@ public class Tarea {
 
 	@DatabaseField(columnName = "FREC_TAREA", dataType = DataType.ENUM_STRING)
 	private Frecuencia frecuenciaTarea;
-
-	@DatabaseField(columnName = "MEJORAR")
-	private Integer mejorar;
-
 
 	public Integer getId() {
 		return id;
@@ -95,10 +93,6 @@ public class Tarea {
 		return contador;
 	}
 
-	public void setContador(Integer contador) {
-		this.contador = contador;
-	}
-
 	public Integer getNoSeguidos() {
 		return noSeguidos;
 	}
@@ -115,11 +109,7 @@ public class Tarea {
 		this.frecuenciaTarea = frecuenciaTarea;
 	}
 
-	public Integer getMejorar() {
-		return mejorar;
-	}
-
-	public void setMejorar(Integer mejorar) {
-		this.mejorar = mejorar;
+	public void setContador(Integer contador) {
+		this.contador = contador;
 	}
 }

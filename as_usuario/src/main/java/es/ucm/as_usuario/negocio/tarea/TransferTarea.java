@@ -6,251 +6,107 @@ package es.ucm.as_usuario.negocio.tarea;
 import java.sql.Timestamp;
 import java.util.Collection;
 
-/** 
- * <!-- begin-UML-doc -->
- * <!-- end-UML-doc -->
- * @author Jeffer
- * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
- */
+import es.ucm.as_usuario.negocio.utils.Frecuencia;
+
 public class TransferTarea {
-	/** 
-	 * <!-- begin-UML-doc -->
-	 * <!-- end-UML-doc -->
-	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
+
+	private Integer id;
+
 	private String textoPregunta;
-	/** 
-	 * <!-- begin-UML-doc -->
-	 * <!-- end-UML-doc -->
-	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
+
 	private String textoAlarma;
-	/** 
-	 * <!-- begin-UML-doc -->
-	 * <!-- end-UML-doc -->
-	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
+
 	private Timestamp horaPregunta;
-	/** 
-	 * <!-- begin-UML-doc -->
-	 * <!-- end-UML-doc -->
-	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
+
 	private Timestamp horaAlarma;
-	/** 
-	 * <!-- begin-UML-doc -->
-	 * <!-- end-UML-doc -->
-	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
+
 	private Timestamp fechaIni;
-	/** 
-	 * <!-- begin-UML-doc -->
-	 * <!-- end-UML-doc -->
-	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
-	private Collection respuestas;
-	/** 
-	 * <!-- begin-UML-doc -->
-	 * <!-- end-UML-doc -->
-	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
+
+	private Integer contador;
+
+	private Integer noSeguidos;
+
+	private Frecuencia frecuenciaTarea;
+
 	private Integer mejorar;
-	/** 
-	 * <!-- begin-UML-doc -->
-	 * <!-- end-UML-doc -->
-	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
-	private Integer frecuencia;
 
-	/** 
-	 * <!-- begin-UML-doc -->
-	 * <!-- end-UML-doc -->
-	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
-	public void getTextoPregunta() {
-		// begin-user-code
-		// TODO Ap�ndice de m�todo generado autom�ticamente
-
-		// end-user-code
+	public Integer getId() {
+		return id;
 	}
 
-	/** 
-	 * <!-- begin-UML-doc -->
-	 * <!-- end-UML-doc -->
-	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
-	public void getTextoAlarma() {
-		// begin-user-code
-		// TODO Ap�ndice de m�todo generado autom�ticamente
-
-		// end-user-code
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
-	/** 
-	 * <!-- begin-UML-doc -->
-	 * <!-- end-UML-doc -->
-	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
-	public void getHoraPregunta() {
-		// begin-user-code
-		// TODO Ap�ndice de m�todo generado autom�ticamente
-
-		// end-user-code
+	public String getTextoPregunta() {
+		return textoPregunta;
 	}
 
-	/** 
-	 * <!-- begin-UML-doc -->
-	 * <!-- end-UML-doc -->
-	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
-	public void getHoraAlarma() {
-		// begin-user-code
-		// TODO Ap�ndice de m�todo generado autom�ticamente
-
-		// end-user-code
+	public void setTextoPregunta(String textoPregunta) {
+		this.textoPregunta = textoPregunta;
 	}
 
-	/** 
-	 * <!-- begin-UML-doc -->
-	 * <!-- end-UML-doc -->
-	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
-	public void getFechaIni() {
-		// begin-user-code
-		// TODO Ap�ndice de m�todo generado autom�ticamente
-
-		// end-user-code
+	public String getTextoAlarma() {
+		return textoAlarma;
 	}
 
-	/** 
-	 * <!-- begin-UML-doc -->
-	 * <!-- end-UML-doc -->
-	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
-	public void getRespuestas() {
-		// begin-user-code
-		// TODO Ap�ndice de m�todo generado autom�ticamente
-
-		// end-user-code
+	public void setTextoAlarma(String textoAlarma) {
+		this.textoAlarma = textoAlarma;
 	}
 
-	/** 
-	 * <!-- begin-UML-doc -->
-	 * <!-- end-UML-doc -->
-	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
-	public void setTextoPregunta() {
-		// begin-user-code
-		// TODO Ap�ndice de m�todo generado autom�ticamente
-
-		// end-user-code
+	public Timestamp getHoraPregunta() {
+		return horaPregunta;
 	}
 
-	/** 
-	 * <!-- begin-UML-doc -->
-	 * <!-- end-UML-doc -->
-	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
-	public void setTextoAlarma() {
-		// begin-user-code
-		// TODO Ap�ndice de m�todo generado autom�ticamente
-
-		// end-user-code
+	public void setHoraPregunta(Timestamp horaPregunta) {
+		this.horaPregunta = horaPregunta;
 	}
 
-	/** 
-	 * <!-- begin-UML-doc -->
-	 * <!-- end-UML-doc -->
-	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
-	public void setHoraPregunta() {
-		// begin-user-code
-		// TODO Ap�ndice de m�todo generado autom�ticamente
-
-		// end-user-code
+	public Timestamp getHoraAlarma() {
+		return horaAlarma;
 	}
 
-	/** 
-	 * <!-- begin-UML-doc -->
-	 * <!-- end-UML-doc -->
-	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
-	public void setHoraAlarma() {
-		// begin-user-code
-		// TODO Ap�ndice de m�todo generado autom�ticamente
-
-		// end-user-code
+	public void setHoraAlarma(Timestamp horaAlarma) {
+		this.horaAlarma = horaAlarma;
 	}
 
-	/** 
-	 * <!-- begin-UML-doc -->
-	 * <!-- end-UML-doc -->
-	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
-	public void setFechaIni() {
-		// begin-user-code
-		// TODO Ap�ndice de m�todo generado autom�ticamente
-
-		// end-user-code
+	public Timestamp getFechaIni() {
+		return fechaIni;
 	}
 
-	/** 
-	 * <!-- begin-UML-doc -->
-	 * <!-- end-UML-doc -->
-	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
-	public void setRespuestas() {
-		// begin-user-code
-		// TODO Ap�ndice de m�todo generado autom�ticamente
-
-		// end-user-code
+	public void setFechaIni(Timestamp fechaIni) {
+		this.fechaIni = fechaIni;
 	}
 
-	/** 
-	 * <!-- begin-UML-doc -->
-	 * <!-- end-UML-doc -->
-	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
-	public void getMejorar() {
-		// begin-user-code
-		// TODO Ap�ndice de m�todo generado autom�ticamente
-
-		// end-user-code
+	public Integer getContador() {
+		return contador;
 	}
 
-	/** 
-	 * <!-- begin-UML-doc -->
-	 * <!-- end-UML-doc -->
-	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
-	public void getFrecuencia() {
-		// begin-user-code
-		// TODO Ap�ndice de m�todo generado autom�ticamente
-
-		// end-user-code
+	public void setContador(Integer contador) {
+		this.contador = contador;
 	}
 
-	/** 
-	 * <!-- begin-UML-doc -->
-	 * <!-- end-UML-doc -->
-	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
-	public void setMejorar() {
-		// begin-user-code
-		// TODO Ap�ndice de m�todo generado autom�ticamente
-
-		// end-user-code
+	public Integer getNoSeguidos() {
+		return noSeguidos;
 	}
 
-	/** 
-	 * <!-- begin-UML-doc -->
-	 * <!-- end-UML-doc -->
-	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
-	public void setFrecuencia() {
-		// begin-user-code
-		// TODO Ap�ndice de m�todo generado autom�ticamente
+	public void setNoSeguidos(Integer noSeguidos) {
+		this.noSeguidos = noSeguidos;
+	}
 
-		// end-user-code
+	public Frecuencia getFrecuenciaTarea() {
+		return frecuenciaTarea;
+	}
+
+	public void setFrecuenciaTarea(Frecuencia frecuenciaTarea) {
+		this.frecuenciaTarea = frecuenciaTarea;
+	}
+
+	public Integer getMejorar() {
+		return mejorar;
+	}
+
+	public void setMejorar(Integer mejorar) {
+		this.mejorar = mejorar;
 	}
 }

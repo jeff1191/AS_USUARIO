@@ -1,6 +1,6 @@
 package es.ucm.as_usuario.negocio.factoria;
 import es.ucm.as_usuario.negocio.factoria.imp.FactoriaSAImp;
-import es.ucm.as_usuario.negocio.tarea.SATarea;
+import es.ucm.as_usuario.negocio.tarea.SASuceso;
 import es.ucm.as_usuario.negocio.usuario.SAUsuario;
 
 /** 
@@ -31,7 +31,7 @@ public abstract class FactoriaSA {
 	 * @return
 	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	 */
-	public abstract SATarea nuevoSATarea();
+	public abstract SASuceso nuevoSATarea();
 
 	/** 
 	 * <!-- begin-UML-doc -->
