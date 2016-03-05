@@ -5,7 +5,7 @@ package es.ucm.as_usuario.negocio.factoria.imp;
 
 import es.ucm.as_usuario.negocio.factoria.FactoriaSA;
 import es.ucm.as_usuario.negocio.tarea.SASuceso;
-import es.ucm.as_usuario.negocio.tarea.imp.SATareaImp;
+import es.ucm.as_usuario.negocio.tarea.imp.SASucesoImp;
 import es.ucm.as_usuario.negocio.usuario.SAUsuario;
 
 /** 
@@ -28,13 +28,13 @@ public class FactoriaSAImp extends FactoriaSA {
 
 	/** 
 	 * (sin Javadoc)
-	 * @see FactoriaSA#nuevoSATarea()
+	 * @see FactoriaSA#nuevoSASuceso()
 	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	 */
-	public SASuceso nuevoSATarea() {
+	public SASuceso nuevoSASuceso() {
 		// begin-user-code
 		// TODO Ap�ndice de m�todo generado autom�ticamente
-		return new SATareaImp();
+		return new SASucesoImp();
 		// end-user-code
 	}
 }

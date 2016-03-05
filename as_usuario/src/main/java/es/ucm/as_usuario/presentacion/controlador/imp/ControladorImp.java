@@ -1,5 +1,7 @@
 package es.ucm.as_usuario.presentacion.controlador.imp;
 
+import android.util.Log;
+
 import es.ucm.as_usuario.presentacion.controlador.Controlador;
 import es.ucm.as_usuario.presentacion.controlador.Dispatcher;
 import es.ucm.as_usuario.presentacion.controlador.comandos.Command;
@@ -16,7 +18,7 @@ public class ControladorImp extends Controlador {
         Object ret;
         try {
             ret = comando.ejecutaComando(datos);
-            //actualizaVista(accion,ret);
+            actualizaVista(accion,ret);
         } catch (commandException e) {
             // TODO Auto-generated catch block
             //AQUI SEGURAMENTE HAGA FALTA OTRO METOODO PARA QUE EL DISPATCHER LANCE ERROREs
@@ -25,6 +27,7 @@ public class ControladorImp extends Controlador {
 
     @Override
     public void actualizaVista(String accion, Object datos) {
+        Log.d("Info", "actualizaVista");
         Dispatcher.getInstancia().dispatch(accion, datos);
     }
 }

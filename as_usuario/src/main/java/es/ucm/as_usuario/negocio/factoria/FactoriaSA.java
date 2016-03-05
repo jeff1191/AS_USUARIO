@@ -31,7 +31,7 @@ public abstract class FactoriaSA {
 	 * @return
 	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	 */
-	public abstract SASuceso nuevoSATarea();
+	public abstract SASuceso nuevoSASuceso();
 
 	/** 
 	 * <!-- begin-UML-doc -->

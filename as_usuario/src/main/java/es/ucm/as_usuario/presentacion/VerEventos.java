@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ListView;
 
 import es.ucm.as_usuario.R;
 
@@ -13,7 +14,7 @@ import es.ucm.as_usuario.R;
  * Created by Juan Lu on 25/02/2016.
  */
 public class VerEventos  extends Activity{
-
+    private ListView list;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

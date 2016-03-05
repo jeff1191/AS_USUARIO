@@ -1,26 +1,29 @@
 package es.ucm.as_usuario.negocio.tarea.imp;
 
+import android.util.Log;
+
 import com.j256.ormlite.android.apptools.OpenHelperManager;
 import com.j256.ormlite.dao.Dao;
 
 import java.sql.SQLException;
+import java.util.List;
 
 import es.ucm.as_usuario.negocio.base_datos.Contexto;
 import es.ucm.as_usuario.negocio.base_datos.DBHelper;
+import es.ucm.as_usuario.negocio.tarea.Evento;
 import es.ucm.as_usuario.negocio.tarea.Reto;
 import es.ucm.as_usuario.negocio.tarea.SASuceso;
 
 /**
  * Created by Jeffer on 02/03/2016.
  */
-public class SATareaImp implements SASuceso {
+public class SASucesoImp implements SASuceso {
 
     private DBHelper mDBHelper;
 
     private DBHelper getHelper() {
         if (mDBHelper == null) {
-
-            mDBHelper = OpenHelperManager.getHelper(Contexto.getInstancia().getContext(), DBHelper.class);
+            mDBHelper = OpenHelperManager.getHelper(Contexto.getInstancia().getActividadPrincipal().getApplicationContext(), DBHelper.class);
         }
         return mDBHelper;
     }
@@ -40,8 +43,18 @@ public class SATareaImp implements SASuceso {
     }
 
     @Override
-    public void consultarTareasPuntuales() {
+    public List<Evento> consultarEventos() {
+        Log.d("Info", "consultaEventos");
+        Dao<Evento, Integer> eventos;
+        List<Evento> listaEventos = null;
+        try {
+            eventos = getHelper().getEventoDao();
 
+            listaEventos= eventos.queryForAll();
+        } catch (SQLException e) {
+
+        }
+        return listaEventos;
     }
 
     @Override

@@ -3,17 +3,13 @@
  */
 package es.ucm.as_usuario.negocio.tarea;
 
-/** 
- * <!-- begin-UML-doc -->
- * <!-- end-UML-doc -->
- * @author Jeffer
- * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
- */
+import java.util.List;
+
 public interface SASuceso {
     public void editarUsuario();
     public void ayudaUsuario();
     public void consultarInforme();
-    public void consultarTareasPuntuales();
+    public List<Evento> consultarEventos();
     public void consultarReto();
     public void mostrarAlarma();
     public void responderPregunta();

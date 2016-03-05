@@ -1,5 +1,6 @@
 package es.ucm.as_usuario.negocio.base_datos;
 
+import android.app.Activity;
 import android.content.Context;
 
 /**
@@ -8,7 +9,7 @@ import android.content.Context;
 public class Contexto {
     private static Contexto instancia = new Contexto();
 
-    private Context context;
+    private Activity actividadPrincipal;
 
     public static Contexto getInstancia() {
         return instancia;
@@ -17,11 +18,11 @@ public class Contexto {
     public Contexto() {
     }
 
-    public Context getContext() {
-        return context;
+    public Activity getActividadPrincipal() {
+        return actividadPrincipal;
     }
 
-    public void setContext(Context context) {
-        this.context = context;
+    public void setActividadPrincipal(Activity actividadPrincipal) {
+        this.actividadPrincipal = actividadPrincipal;
     }
 }

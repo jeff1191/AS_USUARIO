@@ -11,7 +11,7 @@ import es.ucm.as_usuario.presentacion.controlador.comandos.exceptions.commandExc
 public class ResponderReto implements Command {
     @Override
     public Object ejecutaComando(Object datos) throws commandException {
-        SASuceso servicioTareas= FactoriaSA.getInstancia().nuevoSATarea();
+        SASuceso servicioTareas= FactoriaSA.getInstancia().nuevoSASuceso();
 
 
         //Seguramente haga falta un metodo en el dispatcher que sea mandar error o algo asi

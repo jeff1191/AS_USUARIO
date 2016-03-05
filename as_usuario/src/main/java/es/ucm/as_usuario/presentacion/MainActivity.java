@@ -13,6 +13,8 @@ import com.j256.ormlite.android.apptools.OrmLiteBaseActivity;
 import es.ucm.as_usuario.R;
 import es.ucm.as_usuario.negocio.base_datos.Contexto;
 import es.ucm.as_usuario.negocio.base_datos.DBHelper;
+import es.ucm.as_usuario.presentacion.controlador.Controlador;
+import es.ucm.as_usuario.presentacion.controlador.ListaComandos;
 
 
 public class MainActivity extends Activity {
@@ -23,7 +25,7 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Contexto.getInstancia().setContext(this);
+        Contexto.getInstancia().setActividadPrincipal(this);
     }
 
     @Override
@@ -64,6 +66,7 @@ public class MainActivity extends Activity {
     public void verEventos(View v){
         Intent verEventosUsuario = new Intent (getApplicationContext(), VerEventos.class);
         startActivity(verEventosUsuario);
+        Controlador.getInstancia().ejecutaComando(ListaComandos.VER_EVENTOS, null);
     }
 
     public void verReto(View v){

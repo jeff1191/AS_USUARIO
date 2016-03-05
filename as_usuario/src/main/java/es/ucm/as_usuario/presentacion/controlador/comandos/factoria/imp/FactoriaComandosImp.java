@@ -4,6 +4,7 @@ import es.ucm.as_usuario.presentacion.controlador.ListaComandos;
 import es.ucm.as_usuario.presentacion.controlador.comandos.Command;
 import es.ucm.as_usuario.presentacion.controlador.comandos.factoria.FactoriaComandos;
 import es.ucm.as_usuario.presentacion.controlador.comandos.imp.ResponderReto;
+import es.ucm.as_usuario.presentacion.controlador.comandos.imp.verEventosCommand;
 
 /**
  * Created by Jeffer on 02/03/2016.
@@ -11,11 +12,16 @@ import es.ucm.as_usuario.presentacion.controlador.comandos.imp.ResponderReto;
 public class FactoriaComandosImp extends FactoriaComandos {
     @Override
     public Command getCommand(String comando) {
-        //dependiendo del string definido el lista comandos devuelve un comando de ese tipo para que lo execute la factoria
-        //un switch seria lo mejor
-        if(comando.equals(ListaComandos.RESPONDER_SI_RETO))
-            return new ResponderReto();
+        Command ret = null;
+        switch(comando){
+            case ListaComandos.RESPONDER_SI_RETO:
+                ret= new ResponderReto();
+            break;
+            case ListaComandos.VER_EVENTOS:
+                ret= new verEventosCommand();
+            break;
+        }
 
-        return null;
+        return ret;
     }
 }
