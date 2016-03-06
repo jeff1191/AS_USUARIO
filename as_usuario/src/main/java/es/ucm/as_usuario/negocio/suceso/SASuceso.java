@@ -10,9 +10,9 @@ public interface SASuceso {
     public void ayudaUsuario();
     public void consultarInforme();
     public List<Evento> consultarEventos();
-    public void consultarReto();
+    public Reto verReto();
     public void mostrarAlarma();
     public void responderPregunta();
-    public void responderReto(Integer respuesta);
+    public Integer responderReto(Integer respuesta);
     public void sincronizar();
 }

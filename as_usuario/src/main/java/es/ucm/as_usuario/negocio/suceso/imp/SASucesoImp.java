@@ -8,6 +8,7 @@ import com.j256.ormlite.dao.Dao;
 import java.sql.SQLException;
 import java.util.List;
 
+import es.ucm.as_usuario.negocio.suceso.TransferReto;
 import es.ucm.as_usuario.presentacion.Contexto;
 import es.ucm.as_usuario.integracion.DBHelper;
 import es.ucm.as_usuario.negocio.suceso.Evento;
@@ -58,11 +59,6 @@ public class SASucesoImp implements SASuceso {
     }
 
     @Override
-    public void consultarReto() {
-
-    }
-
-    @Override
     public void mostrarAlarma() {
 
     }
@@ -72,23 +68,49 @@ public class SASucesoImp implements SASuceso {
 
     }
 
+
     @Override
-    public void responderReto(Integer respuesta) {
+    public Reto verReto() {
         Dao<Reto, Integer> dao;
-        //Dao dao;
+        Reto reto = new Reto();
         try {
             dao = getHelper().getRetoDao();
-            Reto nuevojiji= new Reto();
+
+            // esto se omitira porque se coge de la BBDD
+           /* Reto nuevojiji= new Reto();
             nuevojiji.setNombre("LO QUE SEA");
+            nuevojiji.setSuperado(false);
             nuevojiji.setContador(0);
             dao.create(nuevojiji);
-
-
-            Reto nuevoReto= (Reto) dao.queryForId(1);
-            nuevoReto.setContador(nuevoReto.getContador()+respuesta);
-            dao.update(nuevoReto);
+            ///////////////////////////////////////////*/
+            reto = (Reto) dao.queryForId(1);
         } catch (SQLException e) {
+
         }
+        return reto;
+    }
+
+
+    @Override
+    public Integer responderReto(Integer respuesta) {
+        Dao<Reto, Integer> dao;
+        Reto reto = new Reto();
+        try {
+            dao = getHelper().getRetoDao();
+            reto = (Reto) dao.queryForId(1);
+            //Si el reto no esta superado y se puede incrementar o decrementar aun se modifica
+            if(!reto.getSuperado() && respuesta == -1 && reto.getContador() > 0 ||
+                    !reto.getSuperado() && respuesta == 1 && reto.getContador() <= 30){
+                        reto.setContador(reto.getContador()+respuesta);
+                        dao.update(reto);
+            }
+            if(reto.getContador() == 30)
+                reto.setSuperado(true);
+
+        } catch (SQLException e) {
+
+        }
+        return reto.getContador();
     }
 
     @Override

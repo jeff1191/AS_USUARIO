@@ -71,7 +71,6 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="@string/textoReto"
             android:id="@+id/textoReto"
             android:textAlignment="gravity"
             android:textStyle="normal"
@@ -102,7 +101,7 @@
                 android:background="@color/blue"
                 android:textColor="@color/white"
                 android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large"
-                android:onClick="responderSiReto" />
+                android:onClick="responderRetoSI" />
 
             <Button
                 style="?android:attr/buttonStyleSmall"
@@ -116,7 +115,9 @@
                 android:layout_marginRight="20dp"
                 android:background="@color/blue"
                 android:textColor="@color/white"
-                android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large" />/>
+                android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large"
+                android:onClick="responderRetoNO"/>
+
 
         </LinearLayout>
 
@@ -125,8 +126,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="@string/contadorReto"
-            android:id="@+id/textView"
+            android:id="@+id/tv"
             android:layout_gravity="center"
             android:textAlignment="center"
             android:textColor="@color/blue"
@@ -141,7 +141,6 @@
             android:layout_marginBottom="40dp"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
-            android:progress="@string/contadorReto"
             android:max="30"
             android:progressDrawable="@drawable/our_progress_bar"/>
 

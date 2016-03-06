@@ -8,6 +8,7 @@ import com.j256.ormlite.field.DatabaseField;
 import java.sql.Timestamp;
 
 public class Reto {
+
 	@DatabaseField(generatedId = true, columnName = "ID")
 	private Integer id;
 
@@ -20,13 +21,14 @@ public class Reto {
 	@DatabaseField(columnName = "CONTADOR")
 	private Integer contador;
 
+	@DatabaseField(columnName = "SUPERADO")
+	private boolean superado;
+
 	public Integer getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
-		this.id = id;
-	}
+	public void setId(Integer id) {this.id = id;}
 
 	public String getNombre() {
 		return nombre;
@@ -44,12 +46,13 @@ public class Reto {
 		this.fechaIni = fechaIni;
 	}
 
-	public Integer getContador() {
-		return contador;
-	}
+	public Integer getContador() {return contador;}
 
 	public void setContador(Integer contador) {
 		this.contador = contador;
 	}
 
+	public boolean getSuperado() {return superado;}
+
+	public void setSuperado(boolean superado) {this.superado = superado;}
 }

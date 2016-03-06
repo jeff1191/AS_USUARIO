@@ -68,8 +68,7 @@ public class MainActivity extends Activity {
     }
 
     public void verReto(View v){
-        Intent verRetoUsuario = new Intent (getApplicationContext(), VerReto.class);
-        startActivity(verRetoUsuario);
+        Controlador.getInstancia().ejecutaComando(ListaComandos.VER_RETO, null);
     }
 
 }
