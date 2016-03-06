@@ -4,8 +4,8 @@
 package es.ucm.as_usuario.negocio.factoria.imp;
 
 import es.ucm.as_usuario.negocio.factoria.FactoriaSA;
-import es.ucm.as_usuario.negocio.tarea.SASuceso;
-import es.ucm.as_usuario.negocio.tarea.imp.SASucesoImp;
+import es.ucm.as_usuario.negocio.suceso.SASuceso;
+import es.ucm.as_usuario.negocio.suceso.imp.SASucesoImp;
 import es.ucm.as_usuario.negocio.usuario.SAUsuario;
 
 /** 

@@ -7,8 +7,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import es.ucm.as_usuario.negocio.factoria.FactoriaSA;
-import es.ucm.as_usuario.negocio.tarea.Evento;
-import es.ucm.as_usuario.negocio.tarea.SASuceso;
+import es.ucm.as_usuario.negocio.suceso.Evento;
+import es.ucm.as_usuario.negocio.suceso.SASuceso;
 import es.ucm.as_usuario.presentacion.controlador.comandos.Command;
 import es.ucm.as_usuario.presentacion.controlador.comandos.exceptions.commandException;
 

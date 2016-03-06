@@ -1,18 +1,14 @@
 package es.ucm.as_usuario.presentacion;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
-import com.j256.ormlite.android.apptools.OrmLiteBaseActivity;
-
 import es.ucm.as_usuario.R;
-import es.ucm.as_usuario.negocio.base_datos.Contexto;
-import es.ucm.as_usuario.negocio.base_datos.DBHelper;
+import es.ucm.as_usuario.integracion.DBHelper;
 import es.ucm.as_usuario.presentacion.controlador.Controlador;
 import es.ucm.as_usuario.presentacion.controlador.ListaComandos;
 
@@ -25,7 +21,7 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Contexto.getInstancia().setActividadPrincipal(this);
+        Contexto.getInstancia().setContext(this);
     }
 
     @Override
@@ -64,9 +60,11 @@ public class MainActivity extends Activity {
     }
 
     public void verEventos(View v){
-        Intent verEventosUsuario = new Intent (getApplicationContext(), VerEventos.class);
-        startActivity(verEventosUsuario);
-        Controlador.getInstancia().ejecutaComando(ListaComandos.VER_EVENTOS, null);
+
+       //Intent verEventosUsuario = new Intent (getApplicationContext(), VerEventos.class);
+        //verEventosUsuario.putExtra("tituloEventos", "dsadsadas");//un String a modo de prueba
+       Controlador.getInstancia().ejecutaComando(ListaComandos.VER_EVENTOS, null);
+        //startActivity(verEventosUsuario);
     }
 
     public void verReto(View v){

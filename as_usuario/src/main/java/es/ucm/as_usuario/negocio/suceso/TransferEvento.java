@@ -1,4 +1,4 @@
-package es.ucm.as_usuario.negocio.tarea;
+package es.ucm.as_usuario.negocio.suceso;
 
 import java.sql.Timestamp;
 

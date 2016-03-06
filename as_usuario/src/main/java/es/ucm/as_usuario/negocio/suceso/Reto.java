@@ -1,13 +1,12 @@
 /**
  * 
  */
-package es.ucm.as_usuario.negocio.tarea;
+package es.ucm.as_usuario.negocio.suceso;
 
 import com.j256.ormlite.field.DatabaseField;
 
 import java.sql.Timestamp;
 
-import es.ucm.as_usuario.negocio.usuario.Usuario;
 public class Reto {
 	@DatabaseField(generatedId = true, columnName = "ID")
 	private Integer id;

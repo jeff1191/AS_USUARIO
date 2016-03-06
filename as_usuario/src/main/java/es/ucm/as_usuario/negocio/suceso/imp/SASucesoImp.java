@@ -1,4 +1,4 @@
-package es.ucm.as_usuario.negocio.tarea.imp;
+package es.ucm.as_usuario.negocio.suceso.imp;
 
 import android.util.Log;
 
@@ -8,11 +8,11 @@ import com.j256.ormlite.dao.Dao;
 import java.sql.SQLException;
 import java.util.List;
 
-import es.ucm.as_usuario.negocio.base_datos.Contexto;
-import es.ucm.as_usuario.negocio.base_datos.DBHelper;
-import es.ucm.as_usuario.negocio.tarea.Evento;
-import es.ucm.as_usuario.negocio.tarea.Reto;
-import es.ucm.as_usuario.negocio.tarea.SASuceso;
+import es.ucm.as_usuario.presentacion.Contexto;
+import es.ucm.as_usuario.integracion.DBHelper;
+import es.ucm.as_usuario.negocio.suceso.Evento;
+import es.ucm.as_usuario.negocio.suceso.Reto;
+import es.ucm.as_usuario.negocio.suceso.SASuceso;
 
 /**
  * Created by Jeffer on 02/03/2016.
@@ -23,7 +23,7 @@ public class SASucesoImp implements SASuceso {
 
     private DBHelper getHelper() {
         if (mDBHelper == null) {
-            mDBHelper = OpenHelperManager.getHelper(Contexto.getInstancia().getActividadPrincipal().getApplicationContext(), DBHelper.class);
+            mDBHelper = OpenHelperManager.getHelper(Contexto.getInstancia().getContext().getApplicationContext(), DBHelper.class);
         }
         return mDBHelper;
     }

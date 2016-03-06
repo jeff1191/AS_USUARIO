@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.view.View;
 
 import es.ucm.as_usuario.R;
-import es.ucm.as_usuario.negocio.tarea.TransferReto;
 import es.ucm.as_usuario.presentacion.controlador.Controlador;
 import es.ucm.as_usuario.presentacion.controlador.ListaComandos;
 
@@ -21,6 +20,7 @@ public class VerReto extends Activity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.reto);
+
     }
 
     public void volver(View v){

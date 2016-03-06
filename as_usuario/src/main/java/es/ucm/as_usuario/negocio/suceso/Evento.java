@@ -1,34 +1,42 @@
 /**
  * 
  */
-package es.ucm.as_usuario.negocio.tarea;
+package es.ucm.as_usuario.negocio.suceso;
+
+import com.j256.ormlite.field.DataType;
+import com.j256.ormlite.field.DatabaseField;
 
 import java.sql.Timestamp;
-import java.util.Collection;
 
 import es.ucm.as_usuario.negocio.utils.Frecuencia;
 
-public class TransferTarea {
-
+public class Evento {
+	@DatabaseField(generatedId = true, columnName = "ID")
 	private Integer id;
 
+	@DatabaseField(columnName = "TEXTO_PREGUNTA")
 	private String textoPregunta;
 
+	@DatabaseField(columnName = "TEXTO_ALARMA")
 	private String textoAlarma;
 
+	@DatabaseField(columnName = "HORA_PREGUNTA")
 	private Timestamp horaPregunta;
 
+	@DatabaseField(columnName = "HORA_ALARMA")
 	private Timestamp horaAlarma;
 
+	@DatabaseField(columnName = "FECHA_INI")
 	private Timestamp fechaIni;
 
+	@DatabaseField(columnName = "CONTADOR")
 	private Integer contador;
 
+	@DatabaseField(columnName = "NO_SEGUIDOS")
 	private Integer noSeguidos;
 
+	@DatabaseField(columnName = "FREC_TAREA", dataType = DataType.ENUM_STRING)
 	private Frecuencia frecuenciaTarea;
-
-	private Integer mejorar;
 
 	public Integer getId() {
 		return id;
@@ -82,10 +90,6 @@ public class TransferTarea {
 		return contador;
 	}
 
-	public void setContador(Integer contador) {
-		this.contador = contador;
-	}
-
 	public Integer getNoSeguidos() {
 		return noSeguidos;
 	}
@@ -102,11 +106,7 @@ public class TransferTarea {
 		this.frecuenciaTarea = frecuenciaTarea;
 	}
 
-	public Integer getMejorar() {
-		return mejorar;
-	}
-
-	public void setMejorar(Integer mejorar) {
-		this.mejorar = mejorar;
+	public void setContador(Integer contador) {
+		this.contador = contador;
 	}
 }

@@ -1,15 +1,11 @@
-package es.ucm.as_usuario.negocio.base_datos;
+package es.ucm.as_usuario.presentacion;
 
-import android.app.Activity;
 import android.content.Context;
 
-/**
- * Created by msalitu on 03/03/2016.
- */
 public class Contexto {
     private static Contexto instancia = new Contexto();
 
-    private Activity actividadPrincipal;
+    private Context actividadPrincipal;
 
     public static Contexto getInstancia() {
         return instancia;
@@ -18,11 +14,11 @@ public class Contexto {
     public Contexto() {
     }
 
-    public Activity getActividadPrincipal() {
+    public Context getContext() {
         return actividadPrincipal;
     }
 
-    public void setActividadPrincipal(Activity actividadPrincipal) {
+    public void setContext(Context actividadPrincipal) {
         this.actividadPrincipal = actividadPrincipal;
     }
 }

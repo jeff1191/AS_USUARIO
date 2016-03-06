@@ -1,47 +1,33 @@
 /**
  * 
  */
-package es.ucm.as_usuario.negocio.tarea;
-
-import com.j256.ormlite.field.DataType;
-import com.j256.ormlite.field.DatabaseField;
+package es.ucm.as_usuario.negocio.suceso;
 
 import java.sql.Timestamp;
 
 import es.ucm.as_usuario.negocio.utils.Frecuencia;
 
-public class Tarea {
+public class TransferTarea {
 
-	@DatabaseField(generatedId = true, columnName = "ID")
 	private Integer id;
 
-	@DatabaseField(columnName = "TEXTO_PREGUNTA")
 	private String textoPregunta;
 
-	@DatabaseField(columnName = "TEXTO_ALARMA")
 	private String textoAlarma;
 
-	@DatabaseField(columnName = "HORA_PREGUNTA")
 	private Timestamp horaPregunta;
 
-	@DatabaseField(columnName = "HORA_ALARMA")
 	private Timestamp horaAlarma;
 
-	@DatabaseField(columnName = "FECHA_INI")
 	private Timestamp fechaIni;
 
-	@DatabaseField(columnName = "CONTADOR")
 	private Integer contador;
 
-	@DatabaseField(columnName = "NO_SEGUIDOS")
 	private Integer noSeguidos;
 
-	@DatabaseField(columnName = "FREC_TAREA", dataType = DataType.ENUM_STRING)
 	private Frecuencia frecuenciaTarea;
 
-	@DatabaseField(columnName = "MEJORAR")
 	private Integer mejorar;
-
 
 	public Integer getId() {
 		return id;

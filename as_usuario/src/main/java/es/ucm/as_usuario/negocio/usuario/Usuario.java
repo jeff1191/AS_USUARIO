@@ -5,8 +5,8 @@ package es.ucm.as_usuario.negocio.usuario;
 
 import java.util.List;
 
-import es.ucm.as_usuario.negocio.tarea.Reto;
-import es.ucm.as_usuario.negocio.tarea.Evento;
+import es.ucm.as_usuario.negocio.suceso.Reto;
+import es.ucm.as_usuario.negocio.suceso.Evento;
 import es.ucm.as_usuario.negocio.utils.Frecuencia;
 
 

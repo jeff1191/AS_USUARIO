@@ -1,13 +1,13 @@
-package es.ucm.as_usuario.negocio.base_datos;
+package es.ucm.as_usuario.integracion;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 
 import java.sql.SQLException;
 
-import es.ucm.as_usuario.negocio.tarea.Reto;
-import es.ucm.as_usuario.negocio.tarea.Evento;
-import es.ucm.as_usuario.negocio.tarea.Tarea;
+import es.ucm.as_usuario.negocio.suceso.Reto;
+import es.ucm.as_usuario.negocio.suceso.Evento;
+import es.ucm.as_usuario.negocio.suceso.Tarea;
 
 import com.j256.ormlite.android.apptools.OrmLiteSqliteOpenHelper;
 import com.j256.ormlite.dao.Dao;
