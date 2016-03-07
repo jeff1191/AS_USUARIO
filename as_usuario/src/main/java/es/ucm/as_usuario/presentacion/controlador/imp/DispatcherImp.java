@@ -44,21 +44,25 @@ public class DispatcherImp extends Dispatcher{
                 break;
 
             case ListaComandos.VER_RETO:
-                Intent i = new Intent(Contexto.getInstancia().getContext().getApplicationContext(), VerEventos.class);
+
+                Intent i = new Intent(Contexto.getInstancia().getContext().getApplicationContext(), VerReto.class);
                 Reto r = (Reto)datos;
-                i.getExtras().putString("textReto", r.getNombre());
-               // i.getExtras().putInt("cont", r.getContador());
+
+                //i.putExtra("textReto", r.getNombre());
+                //i.putExtra("cont", r.getContador());
+                //i.getExtras().putString("textReto", r.getNombre());
+                //i.getExtras().putInt("cont", r.getContador());
                 Contexto.getInstancia().getContext().startActivity(i);
                 break;
 
             case ListaComandos.RESPONDER_RETO:
-                Intent intentReto = new Intent(Contexto.getInstancia().getContext().getApplicationContext(), VerReto.class);
+               /*Intent intentReto = new Intent(Contexto.getInstancia().getContext().getApplicationContext(), VerReto.class);
                 Integer c = (Integer)datos;
                 intentReto.putExtra("contador", c);
 
                 //intentReto.putExtra("contadorReto", cont);
                 Contexto.getInstancia().getContext().startActivity(intentReto);
-                break;
+                break;*/
         }
 
     }

@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -23,9 +24,9 @@ import es.ucm.as_usuario.presentacion.controlador.ListaComandos;
 public class VerReto extends Activity {
 
     private ProgressBar progreso;
-    private Integer cont;
+    private Integer contInt;
     private Integer nuevo;
-    private TextView tv;
+    //private TextView c;
 
 
     @Override
@@ -37,7 +38,7 @@ public class VerReto extends Activity {
         //nombre = bundle.getString("textReto");
         //cont = bundle.getInt("contadorReto");
 
-        tv = (TextView) findViewById(R.id.tv);
+        //c = (TextView) findViewById(R.id.cont);
         //Bundle bundle = getIntent().getExtras();
         // tv.setText(cont.toString());
 
@@ -57,30 +58,30 @@ public class VerReto extends Activity {
 
     public void responderRetoNO(View v){
 
-        Controlador.getInstancia().ejecutaComando(ListaComandos.RESPONDER_RETO, -1);
+        //Controlador.getInstancia().ejecutaComando(ListaComandos.RESPONDER_RETO, -1);
 
         // si el progreso es 0 no se hace nada
         if (progreso.getProgress() > 0){
             progreso.incrementProgressBy(-1);
-            cont = progreso.getProgress();
+            contInt = progreso.getProgress();
         }
 
-        final TextView tv = (TextView) findViewById(R.id.tv);
-        tv.setText(cont.toString() + "/30");
+        final TextView tv = (TextView) findViewById(R.id.cont);
+        tv.setText(contInt.toString() + "/30");
     }
 
 
     public void responderRetoSI(View v){
 
-        Controlador.getInstancia().ejecutaComando(ListaComandos.RESPONDER_RETO, 1);
+        //Controlador.getInstancia().ejecutaComando(ListaComandos.RESPONDER_RETO, 1);
 
         nuevo = progreso.getProgress()+1;
         if (nuevo <= 30) {
             progreso.setProgress(0);
-            cont = 0;
+            contInt = 0;
             new Thread(myThread).start();
 
-            final TextView tv = (TextView) findViewById(R.id.tv);
+            final TextView tv = (TextView) findViewById(R.id.cont);
             tv.setText(nuevo.toString() + "/30");
         }
         if (nuevo == 30){
@@ -95,7 +96,7 @@ public class VerReto extends Activity {
 
         public void run() {
 
-            while (cont < nuevo){
+            while (contInt < nuevo){
                 try{
                     myHandle.sendMessage(myHandle.obtainMessage());
                     Thread.sleep(50);
@@ -106,8 +107,8 @@ public class VerReto extends Activity {
         Handler myHandle = new Handler(){
             @Override
             public void handleMessage(Message msg) {
-                cont++;
-                progreso.setProgress(cont);
+                contInt++;
+                progreso.setProgress(contInt);
             }
         };
 

@@ -1,5 +1,7 @@
 package es.ucm.as_usuario.presentacion.controlador.comandos.imp;
 
+import android.util.Log;
+
 import es.ucm.as_usuario.negocio.factoria.FactoriaSA;
 import es.ucm.as_usuario.negocio.suceso.Reto;
 import es.ucm.as_usuario.negocio.suceso.SASuceso;
@@ -12,8 +14,14 @@ import es.ucm.as_usuario.presentacion.controlador.comandos.exceptions.commandExc
 public class VerRetoComando implements Command {
     @Override
     public Object ejecutaComando(Object datos) throws commandException {
-        SASuceso ss= FactoriaSA.getInstancia().nuevoSASuceso();
-        Reto reto = ss.verReto();
+        //SASuceso ss= FactoriaSA.getInstancia().nuevoSASuceso();
+        //Reto reto = ss.verReto();
+
+        Reto reto = new Reto();
+        reto.setContador(5);
+        reto.setSuperado(false);
+        reto.setNombre("Ducharse por las mañanas");
+        Log.d("Info", "ejecutaComando verRetoComando");
         return reto;
     }
 }
