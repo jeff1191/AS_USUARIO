@@ -46,7 +46,6 @@ public class VerReto extends Activity {
 
         progreso = (ProgressBar) findViewById(R.id.progressBar);
         progreso.setProgress(contInt);
-
     }
 
     public void volver(View v){
@@ -113,8 +112,5 @@ public class VerReto extends Activity {
                 progreso.setProgress(contInt);
             }
         };
-
     };
-
-
 }
