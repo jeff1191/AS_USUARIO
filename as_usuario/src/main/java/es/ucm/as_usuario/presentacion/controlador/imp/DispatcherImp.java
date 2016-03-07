@@ -48,10 +48,9 @@ public class DispatcherImp extends Dispatcher{
                 Intent i = new Intent(Contexto.getInstancia().getContext().getApplicationContext(), VerReto.class);
                 Reto r = (Reto)datos;
 
-                //i.putExtra("textReto", r.getNombre());
-                //i.putExtra("cont", r.getContador());
-                //i.getExtras().putString("textReto", r.getNombre());
-                //i.getExtras().putInt("cont", r.getContador());
+                i.putExtra("textReto", r.getNombre());
+                i.putExtra("contadorReto", r.getContador());
+
                 Contexto.getInstancia().getContext().startActivity(i);
                 break;
 

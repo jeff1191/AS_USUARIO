@@ -26,24 +26,26 @@ public class VerReto extends Activity {
     private ProgressBar progreso;
     private Integer contInt;
     private Integer nuevo;
-    //private TextView c;
-
+    private TextView c;
+    private TextView tv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.reto);
 
-        //Bundle bundle = getIntent().getExtras();
-        //nombre = bundle.getString("textReto");
-        //cont = bundle.getInt("contadorReto");
+        Bundle bundle = getIntent().getExtras();
+        String nombre = bundle.getString("textReto");
 
-        //c = (TextView) findViewById(R.id.cont);
-        //Bundle bundle = getIntent().getExtras();
-        // tv.setText(cont.toString());
+        tv = (TextView) findViewById(R.id.textoReto);
+        tv.setText(nombre);
+
+        contInt = bundle.getInt("contadorReto");
+        c = (TextView) findViewById(R.id.cont);
+        c.setText(contInt.toString());
 
         progreso = (ProgressBar) findViewById(R.id.progressBar);
-        //progreso.setProgress(cont);
+        progreso.setProgress(contInt);
 
     }
 
