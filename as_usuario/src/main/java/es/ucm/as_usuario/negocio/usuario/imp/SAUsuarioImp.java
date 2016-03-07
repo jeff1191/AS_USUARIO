@@ -4,6 +4,8 @@
 package es.ucm.as_usuario.negocio.usuario.imp;
 
 import es.ucm.as_usuario.negocio.usuario.SAUsuario;
+import es.ucm.as_usuario.negocio.usuario.TransferUsuario;
+import es.ucm.as_usuario.negocio.usuario.Usuario;
 
 /**
  * <!-- begin-UML-doc -->
@@ -15,12 +17,12 @@ public class SAUsuarioImp implements SAUsuario {
 	/** 
 	 * (sin Javadoc)
 	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
+	 * @param datos
 	 */
-	public void editarUsuario() {
-		// begin-user-code
-		// TODO Ap�ndice de m�todo generado autom�ticamente
+	public Usuario editarUsuario(TransferUsuario datos) {
+		Usuario.getInstancia().setNombre(datos.getNombre());
 
-		// end-user-code
+		return Usuario.getInstancia();
 	}
 
 	/** 
@@ -109,5 +111,10 @@ public class SAUsuarioImp implements SAUsuario {
 		// TODO Ap�ndice de m�todo generado autom�ticamente
 
 		// end-user-code
+	}
+
+	@Override
+	public Usuario usuarioActivo() {
+		return Usuario.getInstancia();
 	}
 }

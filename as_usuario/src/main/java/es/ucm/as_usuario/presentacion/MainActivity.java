@@ -6,21 +6,42 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 
 import es.ucm.as_usuario.R;
 import es.ucm.as_usuario.integracion.DBHelper;
+import es.ucm.as_usuario.negocio.usuario.Usuario;
+import es.ucm.as_usuario.negocio.utils.Frecuencia;
 import es.ucm.as_usuario.presentacion.controlador.Controlador;
 import es.ucm.as_usuario.presentacion.controlador.ListaComandos;
 
 
 public class MainActivity extends Activity {
 
-    private DBHelper db = null;
+    private TextView nombrePrincipal;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        nombrePrincipal=(TextView)findViewById(R.id.nombreUser);
+        Bundle bundle = getIntent().getExtras();
+        if(bundle.getString("editarUsuario")!= null)
+        {
+            //Falta rellenar los demás campos...imagen tono color
+            nombrePrincipal.setText(bundle.getString("editarUsuario"));
+        }
+
+        //MODIFICARR!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        Usuario.getInstancia().setNombre("Albertin");
+        Usuario.getInstancia().setAvatar("imagen1.jpg");
+        Usuario.getInstancia().setColor("blue");
+        Usuario.getInstancia().setTono("Ringtone 1");
+        Usuario.getInstancia().setFrecuenciaRecibirInforme(Frecuencia.DIARIA);
+        //////////////////////////////////////////////////////////////////////
+
+
         Contexto.getInstancia().setContext(this);
     }
 
@@ -47,8 +68,9 @@ public class MainActivity extends Activity {
     }
 
     public void personalizacion(View v){
-        Intent cambiosUsuario = new Intent (getApplicationContext(), Configuracion.class);
-        startActivity(cambiosUsuario);
+        //Intent cambiosUsuario = new Intent (getApplicationContext(), Configuracion.class);
+       // startActivity(cambiosUsuario);
+        Controlador.getInstancia().ejecutaComando(ListaComandos.CONFIGURACION, null);
     }
 
     public void ayuda(View v){

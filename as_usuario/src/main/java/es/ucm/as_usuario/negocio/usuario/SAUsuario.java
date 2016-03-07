@@ -14,8 +14,9 @@ public interface SAUsuario {
 	 * <!-- begin-UML-doc -->
 	 * <!-- end-UML-doc -->
 	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
+	 * @param datos
 	 */
-	public void editarUsuario();
+	public Usuario editarUsuario(TransferUsuario datos);
 
 	/** 
 	 * <!-- begin-UML-doc -->
@@ -72,4 +73,6 @@ public interface SAUsuario {
 	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	 */
 	public void sincronizar();
+
+	public Usuario usuarioActivo();
 }

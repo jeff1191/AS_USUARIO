@@ -6,8 +6,11 @@ import android.util.Log;
 import java.util.ArrayList;
 import java.util.List;
 
+import es.ucm.as_usuario.negocio.usuario.Usuario;
+import es.ucm.as_usuario.presentacion.Configuracion;
 import es.ucm.as_usuario.presentacion.Contexto;
 import es.ucm.as_usuario.negocio.suceso.Evento;
+import es.ucm.as_usuario.presentacion.MainActivity;
 import es.ucm.as_usuario.presentacion.VerEventos;
 import es.ucm.as_usuario.presentacion.controlador.Dispatcher;
 import es.ucm.as_usuario.presentacion.controlador.ListaComandos;
@@ -33,6 +36,18 @@ public class DispatcherImp extends Dispatcher{
                 }
                 intent.putStringArrayListExtra("listaEventos", listaActividad);
                 Contexto.getInstancia().getContext().startActivity(intent);
+                break;
+            case ListaComandos.CONFIGURACION:
+                Intent intentConfiguracion = new Intent(Contexto.getInstancia().getContext().getApplicationContext(), Configuracion.class);
+                Usuario conf = (Usuario) datos;
+                intentConfiguracion.putExtra("nombreConfiguracion",conf.getNombre());
+                Contexto.getInstancia().getContext().startActivity(intentConfiguracion);
+                break;
+            case ListaComandos.EDITAR_USUARIO:
+                Intent intentEditarUsuario = new Intent(Contexto.getInstancia().getContext().getApplicationContext(), MainActivity.class);
+                Usuario editarUsuario = (Usuario) datos;
+                intentEditarUsuario.putExtra("editarUsuario",editarUsuario.getNombre());
+                Contexto.getInstancia().getContext().startActivity(intentEditarUsuario);
                 break;
         }
 

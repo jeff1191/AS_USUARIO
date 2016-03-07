@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import java.util.ArrayList;
 
@@ -18,14 +17,13 @@ import es.ucm.as_usuario.R;
  * Created by Juan Lu on 25/02/2016.
  */
 public class VerEventos  extends Activity{
-    private ListView list;
+    private ListView listaEventos;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.eventos);
-        list = (ListView)findViewById(R.id.listViewEventos);
-        TextView userName = (TextView)findViewById(R.id.tituloEventos);
+        listaEventos = (ListView)findViewById(R.id.listViewEventos);
         Bundle bundle = getIntent().getExtras();
 
        /*if(bundle.getString("hola")!= null)
@@ -36,7 +34,7 @@ public class VerEventos  extends Activity{
         if(bundle.getStringArrayList("listaEventos") != null){
             ArrayList<String> listaE = bundle.getStringArrayList("listaEventos");
             ArrayAdapter<String> adaptador = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, listaE);
-            list.setAdapter(adaptador);
+            listaEventos.setAdapter(adaptador);
         }
     }
 

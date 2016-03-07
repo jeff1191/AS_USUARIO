@@ -7,6 +7,7 @@ import es.ucm.as_usuario.negocio.factoria.FactoriaSA;
 import es.ucm.as_usuario.negocio.suceso.SASuceso;
 import es.ucm.as_usuario.negocio.suceso.imp.SASucesoImp;
 import es.ucm.as_usuario.negocio.usuario.SAUsuario;
+import es.ucm.as_usuario.negocio.usuario.imp.SAUsuarioImp;
 
 /** 
  * <!-- begin-UML-doc -->
@@ -22,7 +23,7 @@ public class FactoriaSAImp extends FactoriaSA {
 	public SAUsuario nuevoSAUsuario() {
 		// begin-user-code
 		// TODO Ap�ndice de m�todo generado autom�ticamente
-		return null;
+		return new SAUsuarioImp();
 		// end-user-code
 	}
 

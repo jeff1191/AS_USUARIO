@@ -138,7 +138,7 @@
                 <Button
                     android:layout_width="130dp"
                     android:layout_height="55dp"
-                    android:text="Color aplicacion"
+                    android:text="Color"
                     android:background="@color/blue"
                     android:textColor="@color/white"
                     android:id="@+id/cambiarColor"
@@ -151,7 +151,7 @@
                 <Button
                     android:layout_width="130dp"
                     android:layout_height="55dp"
-                    android:text="Tono aplicacion"
+                    android:text="Tono"
                     android:background="@color/blue"
                     android:textColor="@color/white"
                     android:id="@+id/cambiarTono"
