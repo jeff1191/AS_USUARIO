@@ -16,12 +16,6 @@ public class VerRetoComando implements Command {
     public Object ejecutaComando(Object datos) throws commandException {
         SASuceso ss= FactoriaSA.getInstancia().nuevoSASuceso();
         Reto reto = ss.verReto();
-
-        /*Reto reto = new Reto();
-        reto.setContador(5);
-        reto.setSuperado(false);
-        reto.setNombre("Ducharse por las mañanas");*/
-
         return reto;
     }
 }

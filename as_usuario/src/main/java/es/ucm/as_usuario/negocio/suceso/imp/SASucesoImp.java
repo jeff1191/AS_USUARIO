@@ -77,10 +77,10 @@ public class SASucesoImp implements SASuceso {
             dao = getHelper().getRetoDao();
 
             // esto se omitira porque se coge de la BBDD
-           /* Reto nuevojiji= new Reto();
-            nuevojiji.setNombre("LO QUE SEA");
+            /*Reto nuevojiji= new Reto();
+            nuevojiji.setNombre("DUCHARSE POR LAS MAÑANAS");
             nuevojiji.setSuperado(false);
-            nuevojiji.setContador(0);
+            nuevojiji.setContador(28);
             dao.create(nuevojiji);
             ///////////////////////////////////////////*/
             reto = (Reto) dao.queryForId(1);
@@ -98,15 +98,25 @@ public class SASucesoImp implements SASuceso {
         try {
             dao = getHelper().getRetoDao();
             reto = (Reto) dao.queryForId(1);
-            //Si el reto no esta superado y se puede incrementar o decrementar aun se modifica
-            if(!reto.getSuperado() && respuesta == -1 && reto.getContador() > 0 ||
-                    !reto.getSuperado() && respuesta == 1 && reto.getContador() <= 30){
-                        reto.setContador(reto.getContador()+respuesta);
-                        dao.update(reto);
-            }
-            if(reto.getContador() == 30)
-                reto.setSuperado(true);
+            if (!reto.equals(null)) {
+                //Si el reto no esta superado y se puede incrementar o decrementar aun se modifica
+                if (!reto.getSuperado() && respuesta == -1 && reto.getContador() > 0 ||
+                        !reto.getSuperado() && respuesta == 1 && reto.getContador() <= 30) {
+                    reto.setContador(reto.getContador() + respuesta);
+                    dao.update(reto);
+                }
+                if (reto.getContador() == 30) {
+                    reto.setSuperado(true);
+                    dao.update(reto);
+                }
 
+            }else {
+                reto = new Reto();
+                reto.setNombre("NINGUNO");
+                reto.setContador(0);
+                reto.setSuperado(false);
+                dao.update(reto);
+            }
         } catch (SQLException e) {
 
         }

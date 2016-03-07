@@ -50,18 +50,19 @@ public class DispatcherImp extends Dispatcher{
 
                 i.putExtra("textReto", r.getNombre());
                 i.putExtra("contadorReto", r.getContador());
+                i.putExtra("superadoReto", r.getSuperado());
 
                 Contexto.getInstancia().getContext().startActivity(i);
                 break;
 
             case ListaComandos.RESPONDER_RETO:
-               /*Intent intentReto = new Intent(Contexto.getInstancia().getContext().getApplicationContext(), VerReto.class);
-                Integer c = (Integer)datos;
-                intentReto.putExtra("contador", c);
+               //Intent intentReto = new Intent(Contexto.getInstancia().getContext().getApplicationContext(), VerReto.class);
+                //Integer c = (Integer)datos;
+                //intentReto.putExtra("contador", c);
 
                 //intentReto.putExtra("contadorReto", cont);
-                Contexto.getInstancia().getContext().startActivity(intentReto);
-                break;*/
+                //Contexto.getInstancia().getContext().startActivity(intentReto);
+                break;
         }
 
     }

@@ -102,7 +102,6 @@
                 android:textColor="@color/white"
                 android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large"
                 android:onClick="responderRetoSI" />
-
             <Button
                 style="?android:attr/buttonStyleSmall"
                 android:layout_width="wrap_content"
@@ -117,8 +116,6 @@
                 android:textColor="@color/white"
                 android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large"
                 android:onClick="responderRetoNO"/>
-
-
         </LinearLayout>
 
 

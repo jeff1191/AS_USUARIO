@@ -15,9 +15,6 @@ public class Reto {
 	@DatabaseField(columnName = "NOMBRE")
 	private String nombre;
 
-	@DatabaseField(columnName = "FECHA")
-	private Timestamp fechaIni;
-
 	@DatabaseField(columnName = "CONTADOR")
 	private Integer contador;
 
@@ -30,21 +27,9 @@ public class Reto {
 
 	public void setId(Integer id) {this.id = id;}
 
-	public String getNombre() {
-		return nombre;
-	}
+	public String getNombre() {return nombre;}
 
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
-
-	public Timestamp getFechaIni() {
-		return fechaIni;
-	}
-
-	public void setFechaIni(Timestamp fechaIni) {
-		this.fechaIni = fechaIni;
-	}
+	public void setNombre(String nombre) {this.nombre = nombre;}
 
 	public Integer getContador() {return contador;}
 

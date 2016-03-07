@@ -2,11 +2,13 @@ package es.ucm.as_usuario.presentacion;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -37,15 +39,34 @@ public class VerReto extends Activity {
         Bundle bundle = getIntent().getExtras();
         String nombre = bundle.getString("textReto");
 
-        tv = (TextView) findViewById(R.id.textoReto);
-        tv.setText(nombre);
 
-        contInt = bundle.getInt("contadorReto");
-        c = (TextView) findViewById(R.id.cont);
-        c.setText(contInt.toString());
+            tv = (TextView) findViewById(R.id.textoReto);
+            tv.setText(nombre);
 
-        progreso = (ProgressBar) findViewById(R.id.progressBar);
-        progreso.setProgress(contInt);
+            contInt = bundle.getInt("contadorReto");
+            c = (TextView) findViewById(R.id.cont);
+            c.setText(contInt.toString()+"/30");
+
+            progreso = (ProgressBar) findViewById(R.id.progressBar);
+            progreso.setProgress(contInt);
+
+            boolean superado = bundle.getBoolean("superadoReto");
+
+            if (superado) {
+                Button si = (Button) findViewById(R.id.si);
+                si.setEnabled(false);
+                si.setVisibility(View.INVISIBLE);
+                Button no = (Button) findViewById(R.id.no);
+                no.setEnabled(false);
+                no.setVisibility(View.INVISIBLE);
+                TextView sup = (TextView) findViewById(R.id.tituloReto);
+                sup.setText("RETO SUPERADO");
+            }
+        /*}else {
+            TextView sup = (TextView) findViewById(R.id.tituloReto);
+            sup.setText("NINGUN RETO DISPONIBLE");
+        }*/
+
     }
 
     public void volver(View v){
@@ -59,7 +80,7 @@ public class VerReto extends Activity {
 
     public void responderRetoNO(View v){
 
-        //Controlador.getInstancia().ejecutaComando(ListaComandos.RESPONDER_RETO, -1);
+        Controlador.getInstancia().ejecutaComando(ListaComandos.RESPONDER_RETO, -1);
 
         // si el progreso es 0 no se hace nada
         if (progreso.getProgress() > 0){
@@ -74,7 +95,7 @@ public class VerReto extends Activity {
 
     public void responderRetoSI(View v){
 
-        //Controlador.getInstancia().ejecutaComando(ListaComandos.RESPONDER_RETO, 1);
+        Controlador.getInstancia().ejecutaComando(ListaComandos.RESPONDER_RETO, 1);
 
         nuevo = progreso.getProgress()+1;
         if (nuevo <= 30) {
@@ -87,8 +108,17 @@ public class VerReto extends Activity {
         }
         if (nuevo == 30){
             Toast toast = Toast.makeText(Contexto.getInstancia().getContext(),
-                    "¡Ehnorabuena! Has superado tu reto", Toast.LENGTH_LONG);
+                    "¡Enhorabuena! Has superado tu reto", Toast.LENGTH_LONG);
             toast.show();
+            Button si = (Button) findViewById(R.id.si);
+            si.setEnabled(false);
+            si.setVisibility(View.INVISIBLE);
+            Button no = (Button) findViewById(R.id.no);
+            no.setEnabled(false);
+            no.setVisibility(View.INVISIBLE);
+            TextView sup = (TextView) findViewById(R.id.tituloReto);
+            sup.setText("RETO SUPERADO");
+
         }
     }
 
