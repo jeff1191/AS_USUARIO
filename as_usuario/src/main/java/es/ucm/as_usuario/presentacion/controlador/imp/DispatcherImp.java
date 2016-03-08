@@ -1,14 +1,13 @@
 package es.ucm.as_usuario.presentacion.controlador.imp;
 
 import android.content.Intent;
-import android.os.Bundle;
 import android.util.Log;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
 import es.ucm.as_usuario.negocio.suceso.Reto;
+import es.ucm.as_usuario.presentacion.Ayuda;
 import es.ucm.as_usuario.presentacion.Contexto;
 import es.ucm.as_usuario.negocio.suceso.Evento;
 import es.ucm.as_usuario.presentacion.VerEventos;
@@ -40,11 +39,12 @@ public class DispatcherImp extends Dispatcher{
                 break;
 
             case ListaComandos.AYUDA:
-                Intent intentAyuda = new Intent(Contexto.getInstancia().getContext().getApplicationContext(), null);
+                Intent intentAyuda = new Intent(Contexto.getInstancia().getContext().getApplicationContext(), Ayuda.class);
+                intentAyuda.putExtra("pantalla", (String)datos);
+                Contexto.getInstancia().getContext().startActivity(intentAyuda);
                 break;
 
             case ListaComandos.VER_RETO:
-
                 Intent i = new Intent(Contexto.getInstancia().getContext().getApplicationContext(), VerReto.class);
                 Reto r = (Reto)datos;
 

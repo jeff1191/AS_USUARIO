@@ -4,6 +4,7 @@ import es.ucm.as_usuario.presentacion.controlador.ListaComandos;
 import es.ucm.as_usuario.presentacion.controlador.comandos.Command;
 import es.ucm.as_usuario.presentacion.controlador.comandos.factoria.FactoriaComandos;
 import es.ucm.as_usuario.presentacion.controlador.comandos.imp.ResponderRetoComando;
+import es.ucm.as_usuario.presentacion.controlador.comandos.imp.VerAyudaComando;
 import es.ucm.as_usuario.presentacion.controlador.comandos.imp.VerRetoComando;
 import es.ucm.as_usuario.presentacion.controlador.comandos.imp.verEventosCommand;
 
@@ -24,6 +25,8 @@ public class FactoriaComandosImp extends FactoriaComandos {
             case ListaComandos.VER_EVENTOS:
                 ret = new verEventosCommand();
             break;
+            case ListaComandos.AYUDA:
+                ret = new VerAyudaComando();
         }
 
         return ret;

@@ -25,7 +25,9 @@
             android:theme="@android:style/Theme.Holo.Dialog"/>
         <activity android:name=".presentacion.VerReto"></activity>
         <activity android:name=".presentacion.VerEventos"></activity>
+        <activity android:name=".presentacion.Ayuda"></activity>
 
     </application>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
 </manifest>

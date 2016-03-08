@@ -27,7 +27,6 @@ public class ControladorImp extends Controlador {
 
     @Override
     public void actualizaVista(String accion, Object datos) {
-        Log.d("Info", "actualizaVista");
         Dispatcher.getInstancia().dispatch(accion, datos);
     }
 }

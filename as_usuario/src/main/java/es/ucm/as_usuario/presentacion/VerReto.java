@@ -2,11 +2,9 @@ package es.ucm.as_usuario.presentacion;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
@@ -75,7 +73,7 @@ public class VerReto extends Activity {
     }
 
     public void ayuda(View v){
-        //Esto debera llevar al pdf con la ayuda
+        Controlador.getInstancia().ejecutaComando(ListaComandos.AYUDA, "reto");
     }
 
     public void responderRetoNO(View v){
@@ -118,7 +116,6 @@ public class VerReto extends Activity {
             no.setVisibility(View.INVISIBLE);
             TextView sup = (TextView) findViewById(R.id.tituloReto);
             sup.setText("RETO SUPERADO");
-
         }
     }
 
@@ -126,7 +123,6 @@ public class VerReto extends Activity {
     private Runnable myThread = new Runnable(){
 
         public void run() {
-
             while (contInt < nuevo){
                 try{
                     myHandle.sendMessage(myHandle.obtainMessage());

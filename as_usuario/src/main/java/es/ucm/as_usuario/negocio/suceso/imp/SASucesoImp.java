@@ -8,7 +8,6 @@ import com.j256.ormlite.dao.Dao;
 import java.sql.SQLException;
 import java.util.List;
 
-import es.ucm.as_usuario.negocio.suceso.TransferReto;
 import es.ucm.as_usuario.presentacion.Contexto;
 import es.ucm.as_usuario.integracion.DBHelper;
 import es.ucm.as_usuario.negocio.suceso.Evento;
@@ -28,20 +27,7 @@ public class SASucesoImp implements SASuceso {
         }
         return mDBHelper;
     }
-    @Override
-    public void editarUsuario() {
 
-    }
-
-    @Override
-    public void ayudaUsuario() {
-
-    }
-
-    @Override
-    public void consultarInforme() {
-
-    }
 
     @Override
     public List<Evento> consultarEventos() {

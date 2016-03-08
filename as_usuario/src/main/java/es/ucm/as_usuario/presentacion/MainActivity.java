@@ -51,8 +51,8 @@ public class MainActivity extends Activity {
         startActivity(cambiosUsuario);
     }
 
-    public void ayuda(View v){
-        //Esto debera llevar al pdf con la ayuda
+    public void ayuda(View v) {
+        Controlador.getInstancia().ejecutaComando(ListaComandos.AYUDA, "principal");
     }
 
     public void verComoVas(View v){

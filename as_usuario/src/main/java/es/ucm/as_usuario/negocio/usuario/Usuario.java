@@ -152,4 +152,6 @@ public class Usuario {
 	public void setCorreoTutor(String nuevoCorreoTutor) {
 		this.correoTutor=nuevoCorreoTutor;
 	}
+
+	public void setAyuda(String nuevaAyuda){this.ayuda=nuevaAyuda;}
 }
