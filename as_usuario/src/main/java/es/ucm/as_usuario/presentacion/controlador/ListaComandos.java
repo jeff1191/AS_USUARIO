@@ -8,6 +8,7 @@ public class ListaComandos {
     public static final String VER_RETO = "verReto";
     public static final String VER_EVENTOS = "verEventos";
     public static final String AYUDA = "ayuda";
+    public static final String VER_INFORME = "verInforme";
 
 
     /*

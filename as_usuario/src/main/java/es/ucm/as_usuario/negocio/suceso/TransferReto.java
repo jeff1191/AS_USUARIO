@@ -12,9 +12,9 @@ public class TransferReto {
 
 	private String nombre;
 
-	private Timestamp fechaIni;
-
 	private Integer contador;
+
+	private boolean superado;
 
 	public Integer getId() {
 		return id;
@@ -24,20 +24,14 @@ public class TransferReto {
 		this.id = id;
 	}
 
+	public TransferReto(){	}
+
 	public String getNombre() {
 		return nombre;
 	}
 
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
-	}
-
-	public Timestamp getFechaIni() {
-		return fechaIni;
-	}
-
-	public void setFechaIni(Timestamp fechaIni) {
-		this.fechaIni = fechaIni;
 	}
 
 	public Integer getContador() {
@@ -47,4 +41,8 @@ public class TransferReto {
 	public void setContador(Integer contador) {
 		this.contador = contador;
 	}
+
+	public boolean getSuperado() {return superado;	}
+
+	public void setSuperado(boolean superado) {		this.superado = superado;	}
 }

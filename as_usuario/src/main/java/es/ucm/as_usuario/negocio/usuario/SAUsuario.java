@@ -7,7 +7,5 @@ public interface SAUsuario {
 
 	public void editarUsuario();
 
-	public String consultarInforme();
-
 	public void sincronizar();
 }

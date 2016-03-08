@@ -30,6 +30,9 @@ public class Ayuda extends Activity{
             case "configuracion":
                 iv.setImageResource(R.drawable.ayuda_main);
                 break;
+            case "informe":
+                iv.setImageResource(R.drawable.ayuda_main);
+                break;
         }
     }
 

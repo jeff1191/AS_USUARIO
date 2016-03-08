@@ -37,33 +37,32 @@ public class VerReto extends Activity {
         Bundle bundle = getIntent().getExtras();
         String nombre = bundle.getString("textReto");
 
+        tv = (TextView) findViewById(R.id.textoReto);
+        tv.setText(nombre);
 
-            tv = (TextView) findViewById(R.id.textoReto);
-            tv.setText(nombre);
+        contInt = bundle.getInt("contadorReto");
+        c = (TextView) findViewById(R.id.cont);
+        c.setText(contInt.toString()+"/30");
 
-            contInt = bundle.getInt("contadorReto");
-            c = (TextView) findViewById(R.id.cont);
-            c.setText(contInt.toString()+"/30");
+        progreso = (ProgressBar) findViewById(R.id.progressBar);
+        progreso.setProgress(contInt);
 
-            progreso = (ProgressBar) findViewById(R.id.progressBar);
-            progreso.setProgress(contInt);
+        boolean superado = bundle.getBoolean("superadoReto");
 
-            boolean superado = bundle.getBoolean("superadoReto");
-
-            if (superado) {
-                Button si = (Button) findViewById(R.id.si);
-                si.setEnabled(false);
-                si.setVisibility(View.INVISIBLE);
-                Button no = (Button) findViewById(R.id.no);
-                no.setEnabled(false);
-                no.setVisibility(View.INVISIBLE);
-                TextView sup = (TextView) findViewById(R.id.tituloReto);
-                sup.setText("RETO SUPERADO");
-            }
-        /*}else {
+        if (superado) {
+            Button si = (Button) findViewById(R.id.si);
+            si.setEnabled(false);
+            si.setVisibility(View.INVISIBLE);
+            Button no = (Button) findViewById(R.id.no);
+            no.setEnabled(false);
+            no.setVisibility(View.INVISIBLE);
             TextView sup = (TextView) findViewById(R.id.tituloReto);
-            sup.setText("NINGUN RETO DISPONIBLE");
-        }*/
+            sup.setText("RETO SUPERADO");
+        }
+    /*}else {
+        TextView sup = (TextView) findViewById(R.id.tituloReto);
+        sup.setText("NINGUN RETO DISPONIBLE");
+    }*/
 
     }
 

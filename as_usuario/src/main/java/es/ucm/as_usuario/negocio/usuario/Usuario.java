@@ -22,10 +22,6 @@ public class Usuario {
 
 	private String avatar;
 
-	private Reto reto;
-
-	private String informe;
-
 	private Integer puntuacion;
 
 	private String color;
@@ -34,28 +30,19 @@ public class Usuario {
 
 	private Frecuencia frecuenciaRecibirInforme;
 
-	private List<Evento> tareas;
-
 	private String nombreTutor;
 
 	private String correoTutor;
 
-	private String ayuda;
+	private Usuario(){	}
 
-	private Usuario(){
-
-	}
 	public static Usuario getInstancia() {
 		return instancia;
 	}
 
-	public Integer getId() {
-		return this.id;
-	}
+	public Integer getId() {		return this.id;	}
 
-	public String getNombre() {
-		return this.nombre;
-	}
+	public String getNombre() {		return this.nombre;	}
 
 	public String getCorreo() {
 		return this.correo;
@@ -63,14 +50,6 @@ public class Usuario {
 
 	public String getAvatar() {
 		return this.avatar;
-	}
-
-	public Reto getReto() {
-		return this.reto;
-	}
-
-	public String getInforme() {
-		return this.informe;
 	}
 
 	public Integer getPuntuacion() {
@@ -89,20 +68,12 @@ public class Usuario {
 		return this.frecuenciaRecibirInforme;
 	}
 
-	public List<Evento> getTareas() {
-		return tareas;
-	}
-
 	public String getNombreTutor() {
 		return nombreTutor;
 	}
 
 	public String getCorreoTutor() {
 		return correoTutor;
-	}
-
-	public String getAyuda() {
-		return this.ayuda;
 	}
 
 	public void setNombre(String nuevoNombre) {
@@ -113,25 +84,11 @@ public class Usuario {
 		this.correo=nuevoCorreo;
 	}
 
-	public void setAvatar(String nuevoAvatar) {
-		this.avatar=nuevoAvatar;
-	}
+	public void setAvatar(String nuevoAvatar) {	this.avatar=nuevoAvatar;}
 
-	public void setPuntuacion(Integer nuevaPuntuacion) {
-		this.puntuacion=nuevaPuntuacion;
-	}
+	public void setPuntuacion(Integer nuevaPuntuacion) {this.puntuacion=nuevaPuntuacion;	}
 
-	public void setReto(Reto nuevoReto) {
-		this.reto=nuevoReto;
-	}
-
-	public void setInforme(String nuevoInforme) {
-		this.informe=nuevoInforme;
-	}
-
-	public void setTono(String nuevoTono) {
-		this.tono=nuevoTono;
-	}
+	public void setTono(String nuevoTono) {		this.tono=nuevoTono;	}
 
 	public void setColor(String nuevoColor) {
 		this.color=nuevoColor;
@@ -139,10 +96,6 @@ public class Usuario {
 
 	public void setFrecuenciaRecibirInforme(Frecuencia nuevaFrecuencia) {
 		this.frecuenciaRecibirInforme=nuevaFrecuencia;
-	}
-
-	public void setTareas(List<Evento> nuevasTareas) {
-		this.tareas=nuevasTareas;
 	}
 
 	public void setNombreTutor(String nuevoNombreTutor) {
@@ -153,5 +106,4 @@ public class Usuario {
 		this.correoTutor=nuevoCorreoTutor;
 	}
 
-	public void setAyuda(String nuevaAyuda){this.ayuda=nuevaAyuda;}
 }

@@ -7,10 +7,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import es.ucm.as_usuario.negocio.suceso.Reto;
+import es.ucm.as_usuario.negocio.suceso.TransferReto;
+import es.ucm.as_usuario.negocio.suceso.TransferTarea;
 import es.ucm.as_usuario.presentacion.Ayuda;
 import es.ucm.as_usuario.presentacion.Contexto;
 import es.ucm.as_usuario.negocio.suceso.Evento;
 import es.ucm.as_usuario.presentacion.VerEventos;
+import es.ucm.as_usuario.presentacion.VerInforme;
 import es.ucm.as_usuario.presentacion.VerReto;
 import es.ucm.as_usuario.presentacion.controlador.Dispatcher;
 import es.ucm.as_usuario.presentacion.controlador.ListaComandos;
@@ -45,25 +48,31 @@ public class DispatcherImp extends Dispatcher{
                 break;
 
             case ListaComandos.VER_RETO:
-                Intent i = new Intent(Contexto.getInstancia().getContext().getApplicationContext(), VerReto.class);
-                Reto r = (Reto)datos;
+                Intent intentR = new Intent(Contexto.getInstancia().getContext().getApplicationContext(), VerReto.class);
+                TransferReto r = (TransferReto)datos;
 
-                i.putExtra("textReto", r.getNombre());
-                i.putExtra("contadorReto", r.getContador());
-                i.putExtra("superadoReto", r.getSuperado());
+                intentR.putExtra("textReto", r.getNombre());
+                intentR.putExtra("contadorReto", r.getContador());
+                intentR.putExtra("superadoReto", r.getSuperado());
 
-                Contexto.getInstancia().getContext().startActivity(i);
+                Contexto.getInstancia().getContext().startActivity(intentR);
                 break;
 
             case ListaComandos.RESPONDER_RETO:
-               //Intent intentReto = new Intent(Contexto.getInstancia().getContext().getApplicationContext(), VerReto.class);
-                //Integer c = (Integer)datos;
-                //intentReto.putExtra("contador", c);
-
-                //intentReto.putExtra("contadorReto", cont);
-                //Contexto.getInstancia().getContext().startActivity(intentReto);
                 break;
-        }
 
+            case ListaComandos.VER_INFORME:
+                Intent intentTareas = new Intent(Contexto.getInstancia().getContext().getApplicationContext(), VerInforme.class);
+                List<TransferTarea> tareasModelo= (List<TransferTarea>) datos;
+                ArrayList<String> listaActividad2 = new ArrayList<String>();
+
+                for(int j=0; j < tareasModelo.size(); j++){
+                    // eventosModelo.get(i).getFechaIni()
+                    String addTarea= tareasModelo.get(j).getTextoPregunta() + " a las " + tareasModelo.get(j).getFechaIni();
+                    listaActividad2.add(addTarea);
+                }
+                intentTareas.putStringArrayListExtra("listaEventos", listaActividad2);
+                Contexto.getInstancia().getContext().startActivity(intentTareas);
+        }
     }
 }

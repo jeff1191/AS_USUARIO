@@ -56,15 +56,11 @@ public class MainActivity extends Activity {
     }
 
     public void verComoVas(View v){
-        //Esto debera llevar al pdf con el informe de actividad
+        Controlador.getInstancia().ejecutaComando(ListaComandos.VER_INFORME, null);
     }
 
     public void verEventos(View v){
-
-       //Intent verEventosUsuario = new Intent (getApplicationContext(), VerEventos.class);
-        //verEventosUsuario.putExtra("tituloEventos", "dsadsadas");//un String a modo de prueba
        Controlador.getInstancia().ejecutaComando(ListaComandos.VER_EVENTOS, null);
-        //startActivity(verEventosUsuario);
     }
 
     public void verReto(View v){

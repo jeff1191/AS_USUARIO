@@ -8,6 +8,9 @@ import com.j256.ormlite.dao.Dao;
 import java.sql.SQLException;
 import java.util.List;
 
+import es.ucm.as_usuario.negocio.suceso.Tarea;
+import es.ucm.as_usuario.negocio.suceso.TransferReto;
+import es.ucm.as_usuario.negocio.suceso.TransferTarea;
 import es.ucm.as_usuario.presentacion.Contexto;
 import es.ucm.as_usuario.integracion.DBHelper;
 import es.ucm.as_usuario.negocio.suceso.Evento;
@@ -31,7 +34,7 @@ public class SASucesoImp implements SASuceso {
 
     @Override
     public List<Evento> consultarEventos() {
-        Log.d("Info", "consultaEventos");
+
         Dao<Evento, Integer> eventos;
         List<Evento> listaEventos = null;
         try {
@@ -56,9 +59,10 @@ public class SASucesoImp implements SASuceso {
 
 
     @Override
-    public Reto verReto() {
+    public TransferReto verReto() {
         Dao<Reto, Integer> dao;
         Reto reto = new Reto();
+        TransferReto tr = new TransferReto();
         try {
             dao = getHelper().getRetoDao();
 
@@ -70,10 +74,15 @@ public class SASucesoImp implements SASuceso {
             dao.create(nuevojiji);
             ///////////////////////////////////////////*/
             reto = (Reto) dao.queryForId(1);
+            tr.setContador(reto.getContador());
+            tr.setId(reto.getId());
+            tr.setNombre(reto.getNombre());
+            tr.setSuperado(reto.getSuperado());
+
         } catch (SQLException e) {
 
         }
-        return reto;
+        return tr;
     }
 
 
@@ -112,5 +121,28 @@ public class SASucesoImp implements SASuceso {
     @Override
     public void sincronizar() {
 
+    }
+
+    @Override
+    public List<TransferTarea> consultarTareas() {
+        Dao<Tarea, Integer> tareas;
+        List<Tarea> listaTareas = null;
+        List<TransferTarea> listaTransfers = null;
+        try {
+            tareas = getHelper().getTareaDao();
+            listaTareas= tareas.queryForAll();
+            for(int i = 0; i < listaTareas.size(); i++){
+                TransferTarea tt = new TransferTarea();
+                tt.setId(listaTareas.get(i).getId());
+                tt.setContador(listaTareas.get(i).getContador());
+                tt.setTextoPregunta(listaTareas.get(i).getTextoPregunta());
+                tt.setTextoAlarma(listaTareas.get(i).getTextoAlarma());
+                //faltan mas campos
+                listaTransfers.add(tt);
+            }
+        } catch (SQLException e) {
+
+        }
+        return listaTransfers;
     }
 }

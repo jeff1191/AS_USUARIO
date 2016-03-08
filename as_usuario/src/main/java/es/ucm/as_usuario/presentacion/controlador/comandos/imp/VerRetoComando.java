@@ -5,6 +5,7 @@ import android.util.Log;
 import es.ucm.as_usuario.negocio.factoria.FactoriaSA;
 import es.ucm.as_usuario.negocio.suceso.Reto;
 import es.ucm.as_usuario.negocio.suceso.SASuceso;
+import es.ucm.as_usuario.negocio.suceso.TransferReto;
 import es.ucm.as_usuario.presentacion.controlador.comandos.Command;
 import es.ucm.as_usuario.presentacion.controlador.comandos.exceptions.commandException;
 
@@ -15,7 +16,7 @@ public class VerRetoComando implements Command {
     @Override
     public Object ejecutaComando(Object datos) throws commandException {
         SASuceso ss= FactoriaSA.getInstancia().nuevoSASuceso();
-        Reto reto = ss.verReto();
+        TransferReto reto = ss.verReto();
         return reto;
     }
 }
