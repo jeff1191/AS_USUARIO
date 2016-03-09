@@ -3,6 +3,7 @@ package es.ucm.as_usuario.presentacion;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -25,16 +26,17 @@ public class VerInforme extends Activity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.eventos);
-        list = (ListView)findViewById(R.id.listViewTareas);
-        TextView userName = (TextView)findViewById(R.id.tituloInforme);
+        setContentView(R.layout.informe);
+        //list = (ListView)findViewById(R.id.listView);
+        TextView titulo = (TextView)findViewById(R.id.tituloInforme);
+        titulo.setText("¿CÓMO VAS?");
         Bundle bundle = getIntent().getExtras();
 
-       /*if(bundle.getStringArrayList("listaTareas") != null){
+       if(!bundle.getStringArrayList("listaTareas").isEmpty()){
             ArrayList<String> listaE = bundle.getStringArrayList("listaTareas");
             ArrayAdapter<String> adaptador = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, listaE);
-            list.setAdapter(adaptador);
-        }*/
+            //list.setAdapter(adaptador);
+        }
     }
 
 

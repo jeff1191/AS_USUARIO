@@ -29,6 +29,10 @@ public class TransferTarea {
 
 	private Integer mejorar;
 
+	private Integer numSi;
+
+	private Integer numNo;
+
 	public Integer getId() {
 		return id;
 	}
@@ -107,5 +111,21 @@ public class TransferTarea {
 
 	public void setMejorar(Integer mejorar) {
 		this.mejorar = mejorar;
+	}
+
+	public Integer getNumSi() {
+		return numSi;
+	}
+
+	public void setNumSi(Integer numSi) {
+		this.numSi = numSi;
+	}
+
+	public Integer getNumNo() {
+		return numNo;
+	}
+
+	public void setNumNo(Integer numNo) {
+		this.numNo = numNo;
 	}
 }

@@ -55,7 +55,7 @@ public class MainActivity extends Activity {
         Controlador.getInstancia().ejecutaComando(ListaComandos.AYUDA, "principal");
     }
 
-    public void verComoVas(View v){
+    public void verInforme(View v){
         Controlador.getInstancia().ejecutaComando(ListaComandos.VER_INFORME, null);
     }
 

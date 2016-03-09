@@ -6,11 +6,14 @@ import com.j256.ormlite.android.apptools.OpenHelperManager;
 import com.j256.ormlite.dao.Dao;
 
 import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.List;
 
 import es.ucm.as_usuario.negocio.suceso.Tarea;
 import es.ucm.as_usuario.negocio.suceso.TransferReto;
 import es.ucm.as_usuario.negocio.suceso.TransferTarea;
+import es.ucm.as_usuario.negocio.utils.Frecuencia;
 import es.ucm.as_usuario.presentacion.Contexto;
 import es.ucm.as_usuario.integracion.DBHelper;
 import es.ucm.as_usuario.negocio.suceso.Evento;
@@ -74,7 +77,7 @@ public class SASucesoImp implements SASuceso {
             dao.create(nuevojiji);
             ///////////////////////////////////////////*/
 
-            if (dao.idExists(1)) {
+            if (dao.idExists(1)) {  // comprueba si hay algun reto en la BBDD
                 reto = (Reto) dao.queryForId(1);
                 tr.setContador(reto.getContador());
                 tr.setId(reto.getId());
@@ -108,7 +111,6 @@ public class SASucesoImp implements SASuceso {
                     reto.setSuperado(true);
                     dao.update(reto);
                 }
-
             }else {
                 reto = new Reto();
                 reto.setNombre("NINGUNO");
@@ -129,24 +131,74 @@ public class SASucesoImp implements SASuceso {
 
     @Override
     public List<TransferTarea> consultarTareas() {
-        Dao<Tarea, Integer> tareas;
-        List<Tarea> listaTareas = null;
-        List<TransferTarea> listaTransfers = null;
+        Log.e("SASuceso", "consulta tareas");
+
+        Dao<Tarea, Integer> tareasDao;
+        List<Tarea> tareas = new ArrayList<Tarea>();
+        List<TransferTarea> transferTareas = new ArrayList<TransferTarea>();
+
         try {
-            tareas = getHelper().getTareaDao();
-            listaTareas= tareas.queryForAll();
-            for(int i = 0; i < listaTareas.size(); i++){
+            Log.e("SASuceso", "consulta tareas");
+
+            tareasDao = getHelper().getTareaDao();
+
+            // Esto no hara falta porque ya lo cogera de la BBDD
+            /*Tarea unaSinMas = new Tarea();
+            unaSinMas.setFrecuenciaTarea(Frecuencia.DIARIA);
+            unaSinMas.setTextoAlarma("Dale los buenos días a mamá");
+            unaSinMas.setTextoPregunta("¿Le has dado los buenos días a mamá?");
+            unaSinMas.setFechaIni(new Timestamp(123345446));
+            unaSinMas.setContador(0);
+            unaSinMas.setHoraAlarma(new Timestamp(2255));
+            unaSinMas.setHoraPregunta(new Timestamp(2266));
+            unaSinMas.setMejorar(30);
+            unaSinMas.setNoSeguidos(2);
+            unaSinMas.setNumNo(3);
+            unaSinMas.setNumSi(1);
+
+            Tarea unaSinMas2 = new Tarea();
+            unaSinMas2.setFrecuenciaTarea(Frecuencia.SEMANAL);
+            unaSinMas2.setTextoAlarma("Meter las cosas de clase en la mochila");
+            unaSinMas2.setTextoPregunta("¿Has metido las cosas de clase en la mochila?");
+            unaSinMas2.setFechaIni(new Timestamp(987654321));
+            unaSinMas2.setContador(0);
+            unaSinMas2.setHoraAlarma(new Timestamp(2255));
+            unaSinMas2.setHoraPregunta(new Timestamp(2266));
+            unaSinMas2.setMejorar(4);
+            unaSinMas2.setNoSeguidos(2);
+            unaSinMas2.setNumNo(3);
+            unaSinMas2.setNumSi(1);
+
+            tareasDao.create(unaSinMas);
+            tareasDao.create(unaSinMas2);
+
+            ////////////////////////////////*/
+            Integer s = tareas.size();
+            Log.e("SASuceso1", s.toString());
+            tareas = tareasDao.queryForAll();
+            Integer s2 = tareas.size();
+            Log.e("SASuceso2", s2.toString());
+            for(int i = 0; i < tareas.size(); i++){
+                Log.e("SASuceso", "Add transfer");
                 TransferTarea tt = new TransferTarea();
-                tt.setId(listaTareas.get(i).getId());
-                tt.setContador(listaTareas.get(i).getContador());
-                tt.setTextoPregunta(listaTareas.get(i).getTextoPregunta());
-                tt.setTextoAlarma(listaTareas.get(i).getTextoAlarma());
-                //faltan mas campos
-                listaTransfers.add(tt);
+                tt.setId(tareas.get(i).getId());
+                tt.setContador(tareas.get(i).getContador());
+                tt.setTextoPregunta(tareas.get(i).getTextoPregunta());
+                tt.setTextoAlarma(tareas.get(i).getTextoAlarma());
+                tt.setHoraPregunta(tareas.get(i).getHoraPregunta());
+                tt.setHoraAlarma(tareas.get(i).getHoraAlarma());
+                tt.setMejorar(tareas.get(i).getMejorar());
+                tt.setFrecuenciaTarea(tareas.get(i).getFrecuenciaTarea());
+                tt.setFechaIni(tareas.get(i).getFechaIni());
+                tt.setNoSeguidos(tareas.get(i).getNoSeguidos());
+                tt.setNumNo(tareas.get(i).getNumNo());
+                tt.setNumSi(tareas.get(i).getNumSi());
+                transferTareas.add(tt);
             }
+
         } catch (SQLException e) {
 
         }
-        return listaTransfers;
+        return transferTareas;
     }
 }

@@ -46,34 +46,109 @@
 
             <LinearLayout
                 android:orientation="vertical"
-                android:layout_weight="1"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
                 android:id="@+id/cuerpo"
                 android:background="@color/white"
-                android:layout_marginTop="70dp"
-                android:gravity="center_horizontal">
+                android:layout_marginTop="70dp">
 
                 <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:text="Próximos eventos"
+                    android:text="¿Cómo vas?"
                     android:id="@+id/tituloInforme"
-                    android:layout_gravity="center_horizontal"
+                    android:gravity="center"
                     android:textStyle="bold"
                     android:textColor="@color/blue"
-                    android:paddingTop="30dp"
-                    android:paddingBottom="30dp"/>
+                    android:textAlignment="center"
+                    android:layout_weight="1" />
 
-                <ListView
-                    android:layout_width="fill_parent"
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_weight="6"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:id="@+id/puntuaciongeneral">
+
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_height="match_parent"
+                        android:layout_width="match_parent"
+                        android:layout_weight="1"
+                        android:id="@+id/antes">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:textAppearance="?android:attr/textAppearanceMedium"
+                            android:text="Antes"
+                            android:gravity="center"
+                            android:textColor="@color/negro"
+                            android:id="@+id/textView" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:textAppearance="?android:attr/textAppearanceLarge"
+                            android:textSize="35dp"
+                            android:text="6"
+                            android:gravity="center"
+                            android:textColor="@color/blue"
+                            android:id="@+id/puntuacionAnterior" />
+
+                        </LinearLayout>
+
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_height="match_parent"
+                        android:layout_width="match_parent"
+                        android:layout_weight="1"
+                        android:layout_gravity="center_horizontal"
+                        android:id="@+id/ahora">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:textAppearance="?android:attr/textAppearanceMedium"
+                            android:text="Ahora"
+                            android:gravity="center"
+                            android:textColor="@color/negro"
+                            android:id="@+id/textView2" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:textAppearance="?android:attr/textAppearanceLarge"
+                            android:textSize="35dp"
+                            android:text="7.5"
+                            android:gravity="center"
+                            android:textColor="@color/blue"
+                            android:id="@+id/puntuacionAhora" />
+
+                    </LinearLayout>
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:id="@+id/imageView2"
+                        android:gravity="center_horizontal"
+                        android:src="@drawable/flechaverde" />
+
+                </LinearLayout>
+
+                <TableLayout
+                    android:layout_width="match_parent"
+                    android:layout_weight="1"
                     android:layout_height="match_parent"
-                    android:id="@+id/listViewTareas"
-                    android:layout_gravity="center_horizontal"
-                    android:isScrollContainer="true"
-                    android:paddingLeft="20dp"
-                    android:paddingRight="20dp" />
+                    android:layout_gravity="center_horizontal"></TableLayout>
+
 
             </LinearLayout>
 </RelativeLayout>

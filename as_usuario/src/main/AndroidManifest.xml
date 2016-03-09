@@ -26,6 +26,7 @@
         <activity android:name=".presentacion.VerReto"></activity>
         <activity android:name=".presentacion.VerEventos"></activity>
         <activity android:name=".presentacion.Ayuda"></activity>
+        <activity android:name=".presentacion.VerInforme"></activity>
 
     </application>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />

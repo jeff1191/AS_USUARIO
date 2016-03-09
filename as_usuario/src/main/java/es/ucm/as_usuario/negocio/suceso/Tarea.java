@@ -21,13 +21,13 @@ public class Tarea {
 	@DatabaseField(columnName = "TEXTO_ALARMA")
 	private String textoAlarma;
 
-	@DatabaseField(columnName = "HORA_PREGUNTA")
+	@DatabaseField(columnName = "HORA_PREGUNTA", dataType = DataType.TIME_STAMP)
 	private Timestamp horaPregunta;
 
-	@DatabaseField(columnName = "HORA_ALARMA")
+	@DatabaseField(columnName = "HORA_ALARMA", dataType = DataType.TIME_STAMP)
 	private Timestamp horaAlarma;
 
-	@DatabaseField(columnName = "FECHA_INI")
+	@DatabaseField(columnName = "FECHA_INI", dataType = DataType.TIME_STAMP)
 	private Timestamp fechaIni;
 
 	@DatabaseField(columnName = "CONTADOR")
@@ -42,6 +42,11 @@ public class Tarea {
 	@DatabaseField(columnName = "MEJORAR")
 	private Integer mejorar;
 
+	@DatabaseField(columnName = "NUM_SI")
+	private Integer numSi;
+
+	@DatabaseField(columnName = "NUM_NO")
+	private Integer numNo;
 
 	public Integer getId() {
 		return id;
@@ -121,5 +126,21 @@ public class Tarea {
 
 	public void setMejorar(Integer mejorar) {
 		this.mejorar = mejorar;
+	}
+
+	public Integer getNumSi() {
+		return numSi;
+	}
+
+	public void setNumSi(Integer numSi) {
+		this.numSi = numSi;
+	}
+
+	public Integer getNumNo() {
+		return numNo;
+	}
+
+	public void setNumNo(Integer numNo) {
+		this.numNo = numNo;
 	}
 }

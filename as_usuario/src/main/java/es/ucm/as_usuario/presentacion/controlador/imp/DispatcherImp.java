@@ -33,7 +33,6 @@ public class DispatcherImp extends Dispatcher{
                 ArrayList<String> listaActividad= new ArrayList<String>();
 
                 for(int i=0; i < eventosModelo.size(); i++){
-                   // eventosModelo.get(i).getFechaIni()
                     String addEvento= eventosModelo.get(i).getTextoPregunta() + " a las " + eventosModelo.get(i).getFechaIni();
                     listaActividad.add(addEvento);
                 }
@@ -63,16 +62,17 @@ public class DispatcherImp extends Dispatcher{
                 break;
 
             case ListaComandos.VER_INFORME:
+
                 Intent intentTareas = new Intent(Contexto.getInstancia().getContext().getApplicationContext(), VerInforme.class);
                 List<TransferTarea> tareasModelo= (List<TransferTarea>) datos;
                 ArrayList<String> listaActividad2 = new ArrayList<String>();
 
                 for(int j=0; j < tareasModelo.size(); j++){
-                    // eventosModelo.get(i).getFechaIni()
-                    String addTarea= tareasModelo.get(j).getTextoPregunta() + " a las " + tareasModelo.get(j).getFechaIni();
+                    String addTarea= tareasModelo.get(j).getTextoPregunta();
+                    Log.d("¿mostrando?", "informe");
                     listaActividad2.add(addTarea);
                 }
-                intentTareas.putStringArrayListExtra("listaEventos", listaActividad2);
+                intentTareas.putStringArrayListExtra("listaTareas", listaActividad2);
                 Contexto.getInstancia().getContext().startActivity(intentTareas);
         }
     }
