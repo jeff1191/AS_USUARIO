@@ -50,10 +50,11 @@ public class DispatcherImp extends Dispatcher{
             case ListaComandos.VER_RETO:
                 Intent intentR = new Intent(Contexto.getInstancia().getContext().getApplicationContext(), VerReto.class);
                 TransferReto r = (TransferReto)datos;
-
-                intentR.putExtra("textReto", r.getNombre());
-                intentR.putExtra("contadorReto", r.getContador());
-                intentR.putExtra("superadoReto", r.getSuperado());
+                if (r != null) {
+                    intentR.putExtra("textReto", r.getNombre());
+                    intentR.putExtra("contadorReto", r.getContador());
+                    intentR.putExtra("superadoReto", r.getSuperado());
+                }
 
                 Contexto.getInstancia().getContext().startActivity(intentR);
                 break;

@@ -22,6 +22,7 @@ public class ControladorImp extends Controlador {
         } catch (commandException e) {
             // TODO Auto-generated catch block
             //AQUI SEGURAMENTE HAGA FALTA OTRO METOODO PARA QUE EL DISPATCHER LANCE ERROREs
+
         }
     }
 

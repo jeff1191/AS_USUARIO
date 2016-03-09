@@ -2,6 +2,7 @@ package es.ucm.as_usuario.presentacion;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -24,46 +25,57 @@ import es.ucm.as_usuario.presentacion.controlador.ListaComandos;
 public class VerReto extends Activity {
 
     private ProgressBar progreso;
-    private Integer contInt;
-    private Integer nuevo;
-    private TextView c;
-    private TextView tv;
+    private Integer contInt;    // contador del reto
+    private Integer nuevo;      // necesario para hacer el efecto de avance de la barra de progreso
+    private TextView c;         // muestra el contador
+    private TextView tv;        // muestra el texto del reto
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.reto);
 
+
         Bundle bundle = getIntent().getExtras();
-        String nombre = bundle.getString("textReto");
 
-        tv = (TextView) findViewById(R.id.textoReto);
-        tv.setText(nombre);
+        if (bundle != null){
+            String nombre = bundle.getString("textReto");
 
-        contInt = bundle.getInt("contadorReto");
-        c = (TextView) findViewById(R.id.cont);
-        c.setText(contInt.toString()+"/30");
+            tv = (TextView) findViewById(R.id.textoReto);
+            tv.setText(nombre);
 
-        progreso = (ProgressBar) findViewById(R.id.progressBar);
-        progreso.setProgress(contInt);
+            contInt = bundle.getInt("contadorReto");
+            c = (TextView) findViewById(R.id.cont);
+            c.setText(contInt.toString()+"/30");
 
-        boolean superado = bundle.getBoolean("superadoReto");
+            progreso = (ProgressBar) findViewById(R.id.progressBar);
+            progreso.setProgress(contInt);
 
-        if (superado) {
+            boolean superado = bundle.getBoolean("superadoReto");
+
+            if (superado) {
+                Button si = (Button) findViewById(R.id.si);
+                si.setEnabled(false);
+                si.setVisibility(View.INVISIBLE);
+                Button no = (Button) findViewById(R.id.no);
+                no.setEnabled(false);
+                no.setVisibility(View.INVISIBLE);
+                TextView sup = (TextView) findViewById(R.id.tituloReto);
+                sup.setText("RETO SUPERADO");
+            }
+        }else {
             Button si = (Button) findViewById(R.id.si);
             si.setEnabled(false);
             si.setVisibility(View.INVISIBLE);
             Button no = (Button) findViewById(R.id.no);
             no.setEnabled(false);
             no.setVisibility(View.INVISIBLE);
+            progreso = (ProgressBar) findViewById(R.id.progressBar);
+            progreso.setVisibility(View.INVISIBLE);
             TextView sup = (TextView) findViewById(R.id.tituloReto);
-            sup.setText("RETO SUPERADO");
+            sup.setText("No tienes ningún reto");
+            sup.setTextColor(Color.GRAY);
         }
-    /*}else {
-        TextView sup = (TextView) findViewById(R.id.tituloReto);
-        sup.setText("NINGUN RETO DISPONIBLE");
-    }*/
-
     }
 
     public void volver(View v){

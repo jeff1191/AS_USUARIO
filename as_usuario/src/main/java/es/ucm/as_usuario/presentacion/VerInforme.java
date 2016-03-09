@@ -30,7 +30,7 @@ public class VerInforme extends Activity{
         TextView userName = (TextView)findViewById(R.id.tituloInforme);
         Bundle bundle = getIntent().getExtras();
 
-       /* if(bundle.getStringArrayList("listaTareas") != null){
+       /*if(bundle.getStringArrayList("listaTareas") != null){
             ArrayList<String> listaE = bundle.getStringArrayList("listaTareas");
             ArrayAdapter<String> adaptador = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, listaE);
             list.setAdapter(adaptador);

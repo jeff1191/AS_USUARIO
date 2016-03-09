@@ -73,11 +73,15 @@ public class SASucesoImp implements SASuceso {
             nuevojiji.setContador(28);
             dao.create(nuevojiji);
             ///////////////////////////////////////////*/
-            reto = (Reto) dao.queryForId(1);
-            tr.setContador(reto.getContador());
-            tr.setId(reto.getId());
-            tr.setNombre(reto.getNombre());
-            tr.setSuperado(reto.getSuperado());
+
+            if (dao.idExists(1)) {
+                reto = (Reto) dao.queryForId(1);
+                tr.setContador(reto.getContador());
+                tr.setId(reto.getId());
+                tr.setNombre(reto.getNombre());
+                tr.setSuperado(reto.getSuperado());
+            }else
+                return null;
 
         } catch (SQLException e) {
 
