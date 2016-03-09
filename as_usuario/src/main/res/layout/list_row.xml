@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:layout_gravity="center_horizontal">
+
+    <!--  listrow  -->
+
+
+    <!-- texto de la tarea -->
+    <TextView
+        android:id="@+id/tarea"
+        android:layout_width="230dp"
+        android:layout_height="wrap_content"
+        android:text="Dar los buenos días a mamá"
+        android:textColor="@color/negro"
+        android:textSize="18dp"
+        android:gravity="left"
+        android:paddingLeft="20dp"
+        android:layout_centerVertical="true"
+        android:layout_alignParentLeft="true"
+         />
+
+
+
+    <!-- numero de veces que se respondio que si-->
+    <TextView
+        android:layout_marginLeft="10dp"
+        android:id="@+id/si"
+        android:layout_width="30dp"
+        android:layout_height="wrap_content"
+        android:text="5"
+        android:textColor="@color/verde"
+        android:textSize="18dp"
+        android:layout_toRightOf="@+id/tarea"
+        android:layout_centerVertical="true"
+        android:gravity="center"
+         />
+
+
+    <!-- numero de veces que se respondio que no-->
+    <TextView
+        android:layout_marginLeft="10dp"
+        android:id="@+id/no"
+        android:layout_width="30dp"
+        android:layout_height="wrap_content"
+        android:text="4"
+        android:textColor="@color/rojo"
+        android:textSize="18dp"
+        android:layout_centerVertical="true"
+        android:layout_toRightOf="@+id/si"
+        android:gravity="center"
+
+        />
+
+
+    <!-- total diferencia-->
+    <TextView
+        android:layout_marginLeft="10dp"
+        android:id="@+id/total"
+        android:layout_width="30dp"
+        android:layout_height="wrap_content"
+        android:text="1"
+        android:textColor="@color/verde"
+        android:textSize="18dp"
+        android:layout_centerVertical="true"
+        android:layout_toRightOf="@+id/no"
+        android:gravity="center"
+        android:paddingRight="10dp"
+
+        />
+    <!-- flecha de progreso que corresponda -->
+    <!--
+    <LinearLayout android:id="@+id/thumbnail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingLeft="20dp"
+        android:orientation="horizontal"
+        android:layout_toRightOf="@+id/no">
+
+        <ImageView
+            android:id="@+id/list_row_image"
+            android:layout_width="30dip"
+            android:layout_height="30dip"
+            android:src="@drawable/flechaverde"/>
+
+    </LinearLayout>-->
+
+
+</RelativeLayout>

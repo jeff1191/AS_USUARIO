@@ -1,12 +1,13 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
+    android:orientation="vertical"
     tools:context=".presentacion.MainActivity">
 
             <LinearLayout
                 android:orientation="horizontal"
-                android:layout_weight="1"
                 android:layout_width="fill_parent"
                 android:layout_height="70dp"
                 android:gravity="center_vertical"
@@ -46,15 +47,16 @@
 
             <LinearLayout
                 android:orientation="vertical"
+                android:gravity="center_horizontal"
                 android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
+                android:layout_height="match_parent"
                 android:id="@+id/cuerpo"
                 android:background="@color/white"
                 android:layout_marginTop="70dp">
 
                 <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
                     android:textAppearance="?android:attr/textAppearanceLarge"
                     android:text="¿Cómo vas?"
                     android:id="@+id/tituloInforme"
@@ -67,15 +69,16 @@
                 <LinearLayout
                     android:orientation="horizontal"
                     android:layout_width="match_parent"
-                    android:layout_weight="6"
-                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_height="0dp"
                     android:layout_gravity="center"
-                    android:id="@+id/puntuaciongeneral">
+                    android:id="@+id/puntuaciongeneral"
+                    android:layout_marginBottom="20dp">
 
                     <LinearLayout
                         android:orientation="vertical"
                         android:layout_height="match_parent"
-                        android:layout_width="match_parent"
+                        android:layout_width="0dp"
                         android:layout_weight="1"
                         android:id="@+id/antes">
 
@@ -94,7 +97,7 @@
                             android:layout_height="match_parent"
                             android:layout_weight="1"
                             android:textAppearance="?android:attr/textAppearanceLarge"
-                            android:textSize="35dp"
+                            android:textSize="30dp"
                             android:text="6"
                             android:gravity="center"
                             android:textColor="@color/blue"
@@ -105,14 +108,14 @@
                     <LinearLayout
                         android:orientation="vertical"
                         android:layout_height="match_parent"
-                        android:layout_width="match_parent"
+                        android:layout_width="0dp"
                         android:layout_weight="1"
                         android:layout_gravity="center_horizontal"
                         android:id="@+id/ahora">
 
                         <TextView
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
+                            android:layout_height="0dp"
                             android:layout_weight="1"
                             android:textAppearance="?android:attr/textAppearanceMedium"
                             android:text="Ahora"
@@ -122,10 +125,10 @@
 
                         <TextView
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
+                            android:layout_height="0dp"
                             android:layout_weight="1"
                             android:textAppearance="?android:attr/textAppearanceLarge"
-                            android:textSize="35dp"
+                            android:textSize="30dp"
                             android:text="7.5"
                             android:gravity="center"
                             android:textColor="@color/blue"
@@ -134,8 +137,8 @@
                     </LinearLayout>
 
                     <ImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:id="@+id/imageView2"
                         android:gravity="center_horizontal"
@@ -143,12 +146,81 @@
 
                 </LinearLayout>
 
-                <TableLayout
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_weight="1"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="center_horizontal"></TableLayout>
+                    android:layout_height="22dp"
+                    android:gravity="bottom"
+                    android:id="@+id/cabeceraLista"
+                    android:background="@color/blue"
+                    android:layout_weight="0.25">
+                    <TextView
+                        android:id="@+id/tarea"
+                        android:layout_width="225dp"
+                        android:layout_height="match_parent"
+                        android:text="TAREA"
+                        android:textStyle="bold"
+                        android:textColor="@color/white"
+                        android:textSize="18dp"
+                        android:layout_centerVertical="true"
+                        android:gravity="center"
+                        />
+
+                    <!-- numero de veces que se respondio que si-->
+                    <TextView
+                        android:id="@+id/si"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text="SI"
+                        android:textStyle="bold"
+                        android:textColor="@color/white"
+                        android:textSize="18dp"
+                        android:layout_centerVertical="true"
+                        android:layout_toRightOf="@+id/thumbnail"
+                        android:paddingLeft="26dp"
+                        android:gravity="center"
+                        />
+
+
+                    <!-- numero de veces que se respondio que no-->
+                    <TextView
+                        android:id="@+id/no"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text="NO"
+                        android:textStyle="bold"
+                        android:textColor="@color/white"
+                        android:textSize="18dp"
+                        android:layout_centerVertical="true"
+                        android:layout_toRightOf="@+id/si"
+                        android:paddingLeft="20dp"
+                        android:gravity="center"
+
+                        />
+
+                    <!-- numero de veces que se respondio que no-->
+                    <TextView
+                        android:id="@+id/total"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text="="
+                        android:textStyle="bold"
+                        android:textColor="@color/white"
+                        android:textSize="18dp"
+                        android:layout_centerVertical="true"
+                        android:layout_toRightOf="@+id/si"
+                        android:gravity="center"
+                        android:paddingLeft="17dp" />
+
+                </LinearLayout>
+                <ListView
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:id="@+id/listView"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_weight="5" />
 
 
             </LinearLayout>
+
 </RelativeLayout>
