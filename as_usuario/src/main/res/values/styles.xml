@@ -1,8 +1,119 @@
-<resources>
+<resources xmlns:android="http://schemas.android.com/tools">
 
-    <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <!-- Customize your theme here. -->
+    <!-- | TEMA AZUL AS |  -->
+    <style name="AS_tema_azul" parent="@android:style/Theme.NoTitleBar" >
+        <item name="android:background">#ffffff</item>
+        <item name="android:textColor">#0755c9</item>
+        <item name="android:editTextColor">#0755c9</item>
+        <item name="android:radioButtonStyle">@style/radioButtonTemaAzul</item>
+        <item name="android:buttonStyle">@style/botonTemaAzul</item>
+        <item name="android:imageButtonStyle">@style/imagenNavegacionAzul</item>
     </style>
+    <style name="botonTemaAzul" parent="android:style/Widget.Button">
+        <item name="android:textColor">#ffffff</item>
+        <item name="android:textSize">20dp</item>
+        <item name="android:background">#0063ed</item>
+    </style>
+    <style name="imagenNavegacionAzul" parent="@android:style/Widget.ImageButton">
+        <item name="android:background">#0063ed</item>
+    </style>
+    <style name="radioButtonTemaAzul" parent="@android:style/Widget.CompoundButton.RadioButton">
+        <item name="android:textColor">#0755c9</item>
+        <item name="android:checkedButton">@android:integer/config_longAnimTime</item>
+    </style>
+    <!-- | FIN TEMA AZUL AS |  -->
+
+<!-- | TEMA ROJO AS |  -->
+    <style name="AS_tema_rojo" parent="@android:style/Theme.NoTitleBar" >
+        <item name="android:background">#ffffff</item>
+        <item name="android:textColor">#c90710</item>
+        <item name="android:editTextColor">#c90710</item>
+        <item name="android:radioButtonStyle">@style/radioButtonTemaRojo</item>
+        <item name="android:buttonStyle">@style/botonTemaRojo</item>
+        <item name="android:imageButtonStyle">@style/imagenNavegacionRojo</item>
+    </style>
+    <style name="botonTemaRojo" parent="android:style/Widget.Button">
+        <item name="android:textColor">#ffffff</item>
+        <item name="android:textSize">20dp</item>
+        <item name="android:background">#ed0000</item>
+    </style>
+    <style name="imagenNavegacionRojo" parent="@android:style/Widget.ImageButton">
+        <item name="android:background">#ed0000</item>
+    </style>
+    <style name="radioButtonTemaRojo" parent="@android:style/Widget.CompoundButton.RadioButton">
+        <item name="android:textColor">#c90710</item>
+        <item name="android:checkedButton">@android:integer/config_longAnimTime</item>
+    </style>
+ <!-- | FIN TEMA ROJO AS |  -->
+
+    <!-- | TEMA ROSA AS |  -->
+    <style name="AS_tema_rosa" parent="@android:style/Theme.NoTitleBar" >
+        <item name="android:background">#ffffff</item>
+        <item name="android:textColor">#c90785</item>
+        <item name="android:editTextColor">#c90785</item>
+        <item name="android:radioButtonStyle">@style/radioButtonTemaRosa</item>
+        <item name="android:buttonStyle">@style/botonTemaRosa</item>
+        <item name="android:imageButtonStyle">@style/imagenNavegacionRosa</item>
+    </style>
+    <style name="botonTemaRosa" parent="android:style/Widget.Button">
+        <item name="android:textColor">#ffffff</item>
+        <item name="android:textSize">20dp</item>
+        <item name="android:background">#ed00a6</item>
+    </style>
+    <style name="imagenNavegacionRosa" parent="@android:style/Widget.ImageButton">
+        <item name="android:background">#ed00a6</item>
+    </style>
+    <style name="radioButtonTemaRosa" parent="@android:style/Widget.CompoundButton.RadioButton">
+        <item name="android:textColor">#c90785</item>
+        <item name="android:checkedButton">@android:integer/config_longAnimTime</item>
+    </style>
+    <!-- | FIN TEMA ROSA AS |  -->
+
+    <!-- | TEMA VERDE AS |  -->
+    <style name="AS_tema_verde" parent="@android:style/Theme.NoTitleBar" >
+        <item name="android:background">#ffffff</item>
+        <item name="android:textColor">#04a928</item>
+        <item name="android:editTextColor">#04a928</item>
+        <item name="android:radioButtonStyle">@style/radioButtonTemaVerde</item>
+        <item name="android:buttonStyle">@style/botonTemaVerde</item>
+        <item name="android:imageButtonStyle">@style/imagenNavegacionVerde</item>
+    </style>
+    <style name="botonTemaVerde" parent="android:style/Widget.Button">
+        <item name="android:textColor">#ffffff</item>
+        <item name="android:textSize">20dp</item>
+        <item name="android:background">#23b601</item>
+    </style>
+    <style name="imagenNavegacionVerde" parent="@android:style/Widget.ImageButton">
+        <item name="android:background">#24bf01</item>
+    </style>
+    <style name="radioButtonTemaVerde" parent="@android:style/Widget.CompoundButton.RadioButton">
+        <item name="android:textColor">#04a928</item>
+        <item name="android:checkedButton">@android:integer/config_longAnimTime</item>
+    </style>
+    <!-- | FIN TEMA VERDE AS |  -->
+
+
+    <!-- | TEMA NEGRO AS |  -->
+    <style name="AS_tema_negro" parent="@android:style/Theme.NoTitleBar" >
+        <item name="android:background">#ffffff</item>
+        <item name="android:textColor">#0b0b0b</item>
+        <item name="android:editTextColor">#0b0b0b</item>
+        <item name="android:radioButtonStyle">@style/radioButtonTemaNegro</item>
+        <item name="android:buttonStyle">@style/botonTemaNegro</item>
+        <item name="android:imageButtonStyle">@style/imagenNavegacionNegro</item>
+    </style>
+    <style name="botonTemaNegro" parent="android:style/Widget.Button">
+        <item name="android:textColor">#ffffff</item>
+        <item name="android:textSize">20dp</item>
+        <item name="android:background">#252323</item>
+    </style>
+    <style name="imagenNavegacionNegro" parent="@android:style/Widget.ImageButton">
+        <item name="android:background">#252323</item>
+    </style>
+    <style name="radioButtonTemaNegro" parent="@android:style/Widget.CompoundButton.RadioButton">
+        <item name="android:textColor">#0b0b0b</item>
+        <item name="android:checkedButton">@android:integer/config_longAnimTime</item>
+    </style>
+    <!-- | FIN TEMA NEGRO AS |  -->
 
 </resources>

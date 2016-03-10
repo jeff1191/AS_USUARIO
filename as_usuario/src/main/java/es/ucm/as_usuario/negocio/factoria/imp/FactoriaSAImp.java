@@ -15,8 +15,7 @@ public class FactoriaSAImp extends FactoriaSA {
 	public SAUsuario nuevoSAUsuario() {
 		return  new SAUsuarioImp();
 	}
-
-
+	
 	public SASuceso nuevoSASuceso() {
 		return new SASucesoImp();
 	}

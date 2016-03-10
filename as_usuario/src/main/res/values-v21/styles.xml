@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Prueba2" parent="ThemeOverlay.AppCompat.Light">
+        <item name="android:colorPrimary">@color/primary_material_light_2</item>
+    </style>
+</resources>

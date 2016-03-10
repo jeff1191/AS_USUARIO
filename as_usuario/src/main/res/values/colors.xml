@@ -1,11 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     
-    <color name="blue">#3074f2</color>
+    <color name="blue" id="colorTema">#3074f2</color>
     <color name="white">#FFFFFF</color>
     <color name="rojo">#ff2825</color>
     <color name="verde">#2fb518</color>
     <color name="negro">#000000</color>
     <color name="rosa">#d507a6</color>
-    
+    <color name="primary_material_light_1">#1d2871</color>
+    <color name="primary_material_light_2">#711616</color>
+    <color name="background_material_light">#ffffff</color>
+    <color name="foreground_material_light">#ff7e7e</color>
+    <color name="primary_material_light">#1d1573</color>
+    <color name="colorBackground">#ffffff</color>
+
 </resources>

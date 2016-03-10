@@ -2,16 +2,12 @@ package es.ucm.as_usuario.presentacion;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
-
 
 import es.ucm.as_usuario.R;
 import es.ucm.as_usuario.presentacion.controlador.Controlador;
@@ -32,6 +28,7 @@ public class VerReto extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        cargarTema();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.reto);
 
@@ -150,4 +147,24 @@ public class VerReto extends Activity {
             }
         };
     };
+
+    public void cargarTema(){
+        switch (Configuracion.temaActual){
+            case "AS_theme_azul":
+                setTheme(R.style.AS_tema_azul);
+                break;
+            case "AS_theme_rojo":
+                setTheme(R.style.AS_tema_rojo);
+                break;
+            case "AS_theme_rosa":
+                setTheme(R.style.AS_tema_rosa);
+                break;
+            case "AS_theme_verde":
+                setTheme(R.style.AS_tema_verde);
+                break;
+            case "AS_theme_negro":
+                setTheme(R.style.AS_tema_negro);
+                break;
+        }
+    }
 }

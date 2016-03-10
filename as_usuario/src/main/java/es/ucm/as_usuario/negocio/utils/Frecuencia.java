@@ -6,5 +6,5 @@ package es.ucm.as_usuario.negocio.utils;
 public enum Frecuencia {
     DIARIA,
     SEMANAL,
-    MENSUAL;
+    MENSUAL
 }

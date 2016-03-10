@@ -11,6 +11,9 @@ public class ListaComandos {
     public static final String VER_INFORME = "verInforme";
     public static final String ACTUALIZAR_PUNTUACION = "actualizarPuntuacion";
     public static final String CREAR_USUARIO = "crearUsuario";
+    public static final String CONFIGURACION = "configuracion";
+    public static final String EDITAR_USUARIO = "editarUsuario";
+    
 
     /*
     .

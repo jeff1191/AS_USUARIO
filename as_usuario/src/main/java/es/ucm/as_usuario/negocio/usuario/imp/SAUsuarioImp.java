@@ -3,7 +3,7 @@
  */
 package es.ucm.as_usuario.negocio.usuario.imp;
 
-import android.util.Log;
+import es.ucm.as_usuario.negocio.usuario.SAUsuario;
 
 import com.j256.ormlite.android.apptools.OpenHelperManager;
 import com.j256.ormlite.dao.Dao;
@@ -11,7 +11,6 @@ import com.j256.ormlite.dao.Dao;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-
 import es.ucm.as_usuario.integracion.DBHelper;
 import es.ucm.as_usuario.negocio.factoria.FactoriaSA;
 import es.ucm.as_usuario.negocio.suceso.SASuceso;
@@ -20,7 +19,6 @@ import es.ucm.as_usuario.negocio.usuario.SAUsuario;
 import es.ucm.as_usuario.negocio.usuario.TransferUsuario;
 import es.ucm.as_usuario.negocio.usuario.Usuario;
 import es.ucm.as_usuario.presentacion.Contexto;
-
 
 public class SAUsuarioImp implements SAUsuario {
 
@@ -32,10 +30,18 @@ public class SAUsuarioImp implements SAUsuario {
 		}
 		return mDBHelper;
 	}
-	public void editarUsuario() {	}
-
+	
+	public TransferUsuario editarUsuario(TransferUsuario datos) {
+		Usuario.getInstancia().setNombre(datos.getNombre());
+		Usuario.getInstancia().setFrecuenciaRecibirInforme(datos.getFrecuenciaRecibirInforme());
+		TransferUsuario ret = new TransferUsuario();
+		ret.setNombre(Usuario.getInstancia().getNombre());
+		ret.setFrecuenciaRecibirInforme(Usuario.getInstancia().getFrecuenciaRecibirInformes());
+		return ret;
+	}
+	
 	public void sincronizar() {
-
+		
 	}
 
 	/*
@@ -65,6 +71,13 @@ public class SAUsuarioImp implements SAUsuario {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+	}
 
+	@Override
+	public TransferUsuario usuarioActivo() {
+		TransferUsuario ret = new TransferUsuario();
+		ret.setNombre(Usuario.getInstancia().getNombre());
+		ret.setFrecuenciaRecibirInforme(Usuario.getInstancia().getFrecuenciaRecibirInformes());
+		return ret;
 	}
 }

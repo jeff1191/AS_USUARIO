@@ -11,6 +11,5 @@ public interface SASuceso {
     public void mostrarAlarma();
     public void responderPregunta();
     public Integer responderReto(Integer respuesta);
-    public void sincronizar();
     public List<TransferTarea> consultarTareas();
 }
