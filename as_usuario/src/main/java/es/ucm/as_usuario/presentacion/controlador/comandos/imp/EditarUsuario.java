@@ -14,8 +14,8 @@ public class EditarUsuario implements Command {
     @Override
     public Object ejecutaComando(Object datos) throws commandException {
         SAUsuario saUsuario = FactoriaSA.getInstancia().nuevoSAUsuario();
-        Usuario editarUsuario = saUsuario.editarUsuario((TransferUsuario) datos);
+        TransferUsuario editarUsuario = saUsuario.editarUsuario((TransferUsuario) datos);
 
-        return null;
+        return editarUsuario;
     }
 }

@@ -84,7 +84,7 @@ public class SASucesoImp implements SASuceso {
             dao.create(nuevojiji);
 
 
-            Reto nuevoReto= (Reto) dao.queryForId(1);
+            Reto nuevoReto= dao.queryForId(1);
             nuevoReto.setContador(nuevoReto.getContador()+respuesta);
             dao.update(nuevoReto);
         } catch (SQLException e) {

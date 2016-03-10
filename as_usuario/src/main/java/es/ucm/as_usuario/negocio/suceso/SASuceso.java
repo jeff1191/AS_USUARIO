@@ -6,13 +6,13 @@ package es.ucm.as_usuario.negocio.suceso;
 import java.util.List;
 
 public interface SASuceso {
-    public void editarUsuario();
-    public void ayudaUsuario();
-    public void consultarInforme();
-    public List<Evento> consultarEventos();
-    public void consultarReto();
-    public void mostrarAlarma();
-    public void responderPregunta();
-    public void responderReto(Integer respuesta);
-    public void sincronizar();
+    void editarUsuario();
+    void ayudaUsuario();
+    void consultarInforme();
+    List<Evento> consultarEventos();
+    void consultarReto();
+    void mostrarAlarma();
+    void responderPregunta();
+    void responderReto(Integer respuesta);
+    void sincronizar();
 }

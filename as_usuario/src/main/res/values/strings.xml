@@ -1,8 +1,17 @@
 <resources>
     <string name="app_name">AS_USUARIO</string>
     <string name="action_settings">Settings</string>
-    <string name="textoReto">Lavarse las manos después de comer</string>
     <string name="contadorReto">10</string>
     <string name="nombreUsuario">User</string>
     <string name="puntuacion">10/10</string>
+    <string name="colorAzul">Azul</string>
+    <string name="colorRojo">Rojo</string>
+    <string name="colorRosa">Rosa</string>
+    <string name="colorVerde">Verde</string>
+    <string name="colorNegro">Negro</string>
+    <string name="tonoUno">Tono 1</string>
+    <string name="tonoDos">Tono 2</string>
+    <string name="tonoTres">Tono 3</string>
+    <string name="tonoCuatro">Tono 4</string>
+    <string name="tonoCinco">Tono 5</string>
 </resources>

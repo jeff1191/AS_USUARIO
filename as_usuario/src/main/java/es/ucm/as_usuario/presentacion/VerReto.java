@@ -18,6 +18,7 @@ public class VerReto extends Activity{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        cargarTema();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.reto);
 
@@ -33,5 +34,24 @@ public class VerReto extends Activity{
     }
     public void responderSiReto(View v){
         Controlador.getInstancia().ejecutaComando(ListaComandos.RESPONDER_SI_RETO,1);
+    }
+    public void cargarTema(){
+        switch (Configuracion.temaActual){
+            case "AS_theme_azul":
+                setTheme(R.style.AS_tema_azul);
+                break;
+            case "AS_theme_rojo":
+                setTheme(R.style.AS_tema_rojo);
+                break;
+            case "AS_theme_rosa":
+                setTheme(R.style.AS_tema_rosa);
+                break;
+            case "AS_theme_verde":
+                setTheme(R.style.AS_tema_verde);
+                break;
+            case "AS_theme_negro":
+                setTheme(R.style.AS_tema_negro);
+                break;
+        }
     }
 }

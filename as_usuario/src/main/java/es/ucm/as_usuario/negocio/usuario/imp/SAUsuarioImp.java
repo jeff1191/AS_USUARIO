@@ -19,10 +19,13 @@ public class SAUsuarioImp implements SAUsuario {
 	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	 * @param datos
 	 */
-	public Usuario editarUsuario(TransferUsuario datos) {
+	public TransferUsuario editarUsuario(TransferUsuario datos) {
 		Usuario.getInstancia().setNombre(datos.getNombre());
-
-		return Usuario.getInstancia();
+		Usuario.getInstancia().setFrecuenciaRecibirInforme(datos.getFrecuenciaRecibirInforme());
+		TransferUsuario ret = new TransferUsuario();
+		ret.setNombre(Usuario.getInstancia().getNombre());
+		ret.setFrecuenciaRecibirInforme(Usuario.getInstancia().getFrecuenciaRecibirInformes());
+		return ret;
 	}
 
 	/** 
@@ -114,7 +117,10 @@ public class SAUsuarioImp implements SAUsuario {
 	}
 
 	@Override
-	public Usuario usuarioActivo() {
-		return Usuario.getInstancia();
+	public TransferUsuario usuarioActivo() {
+		TransferUsuario ret = new TransferUsuario();
+		ret.setNombre(Usuario.getInstancia().getNombre());
+		ret.setFrecuenciaRecibirInforme(Usuario.getInstancia().getFrecuenciaRecibirInformes());
+		return ret;
 	}
 }

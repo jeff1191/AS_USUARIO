@@ -21,6 +21,7 @@ public class VerEventos  extends Activity{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        cargarTema();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.eventos);
         listaEventos = (ListView)findViewById(R.id.listViewEventos);
@@ -45,5 +46,24 @@ public class VerEventos  extends Activity{
 
     public void ayuda(View v){
         //Esto debera llevar al pdf con la ayuda
+    }
+    public void cargarTema(){
+        switch (Configuracion.temaActual){
+            case "AS_theme_azul":
+                setTheme(R.style.AS_tema_azul);
+                break;
+            case "AS_theme_rojo":
+                setTheme(R.style.AS_tema_rojo);
+                break;
+            case "AS_theme_rosa":
+                setTheme(R.style.AS_tema_rosa);
+                break;
+            case "AS_theme_verde":
+                setTheme(R.style.AS_tema_verde);
+                break;
+            case "AS_theme_negro":
+                setTheme(R.style.AS_tema_negro);
+                break;
+        }
     }
 }

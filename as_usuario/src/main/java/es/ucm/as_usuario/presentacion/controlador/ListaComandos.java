@@ -9,6 +9,8 @@ public class ListaComandos {
     public static final String VER_EVENTOS = "verEventos";
     public static final String CONFIGURACION = "configuracion";
     public static final String EDITAR_USUARIO = "editarUsuario";
+    public static final String AYUDA = "ayuda";
+
     /*
     .
     .

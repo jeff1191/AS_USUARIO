@@ -10,33 +10,35 @@
                 android:layout_width="fill_parent"
                 android:layout_height="70dp"
                 android:gravity="center_vertical"
-                android:id="@+id/cabecera"
-                android:background="@color/blue">
+                android:id="@+id/cabecera">
 
-                <ImageView
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
+                <ImageButton
+                    android:layout_width="80dp"
+                    android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:id="@+id/iconoConfig"
                     android:src="@drawable/volver"
                     android:layout_gravity="center"
+                    android:scaleType="fitCenter"
                     android:clickable="true"
                     android:onClick="volver"
                     android:focusableInTouchMode="false" />
 
-                <ImageView
+                <ImageButton
                     android:layout_width="wrap_content"
-                    android:layout_height="70dp"
+                    android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:id="@+id/logo"
+                    android:scaleType="fitCenter"
                     android:src="@drawable/logo"
                     android:layout_gravity="center" />
 
-                <ImageView
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
+                <ImageButton
+                    android:layout_width="80dp"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:id="@+id/iconoAyuda"
+                    android:scaleType="fitCenter"
                     android:src="@drawable/ayuda"
                     android:layout_gravity="center"
                     android:clickable="true"
@@ -50,7 +52,6 @@
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
                 android:id="@+id/cuerpo"
-                android:background="@color/white"
                 android:layout_marginTop="70dp"
                 android:gravity="center_horizontal">
 
@@ -62,7 +63,6 @@
                     android:id="@+id/tituloEventos"
                     android:layout_gravity="center_horizontal"
                     android:textStyle="bold"
-                    android:textColor="@color/blue"
                     android:paddingTop="30dp"
                     android:paddingBottom="30dp"/>
 

@@ -16,63 +16,63 @@ public interface SAUsuario {
 	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	 * @param datos
 	 */
-	public Usuario editarUsuario(TransferUsuario datos);
+	TransferUsuario editarUsuario(TransferUsuario datos);
 
 	/** 
 	 * <!-- begin-UML-doc -->
 	 * <!-- end-UML-doc -->
 	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	 */
-	public void ayudaUsuario();
+	void ayudaUsuario();
 
 	/** 
 	 * <!-- begin-UML-doc -->
 	 * <!-- end-UML-doc -->
 	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	 */
-	public void consultarInforme();
+	void consultarInforme();
 
 	/** 
 	 * <!-- begin-UML-doc -->
 	 * <!-- end-UML-doc -->
 	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	 */
-	public void consultarTareasPuntuales();
+	void consultarTareasPuntuales();
 
 	/** 
 	 * <!-- begin-UML-doc -->
 	 * <!-- end-UML-doc -->
 	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	 */
-	public void consultarReto();
+	void consultarReto();
 
 	/** 
 	 * <!-- begin-UML-doc -->
 	 * <!-- end-UML-doc -->
 	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	 */
-	public void mostrarAlarma();
+	void mostrarAlarma();
 
 	/** 
 	 * <!-- begin-UML-doc -->
 	 * <!-- end-UML-doc -->
 	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	 */
-	public void responderPregunta();
+	void responderPregunta();
 
 	/** 
 	 * <!-- begin-UML-doc -->
 	 * <!-- end-UML-doc -->
 	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	 */
-	public void responderReto();
+	void responderReto();
 
 	/** 
 	 * <!-- begin-UML-doc -->
 	 * <!-- end-UML-doc -->
 	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	 */
-	public void sincronizar();
+	void sincronizar();
 
-	public Usuario usuarioActivo();
+	TransferUsuario usuarioActivo();
 }

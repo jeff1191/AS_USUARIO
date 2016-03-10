@@ -5,7 +5,7 @@
     <application
         android:allowBackup="true"
         android:icon="@drawable/logo"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AS_tema_azul">
         <activity
             android:name=".presentacion.Bienvenido"
             android:label="@string/app_name"
@@ -20,12 +20,6 @@
             android:name=".presentacion.MainActivity"
             android:label="@string/app_name" />
         <activity android:name=".presentacion.Configuracion" />
-        <activity
-            android:name=".presentacion.CambiarColor"
-            android:theme="@android:style/Theme.Holo.Dialog" />
-        <activity
-            android:name=".presentacion.CambiarTono"
-            android:theme="@android:style/Theme.Holo.Dialog" />
         <activity android:name=".presentacion.VerReto" />
         <activity android:name=".presentacion.VerEventos" ></activity>
     </application>

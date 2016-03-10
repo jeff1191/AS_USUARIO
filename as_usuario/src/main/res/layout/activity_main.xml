@@ -10,34 +10,36 @@
         android:layout_width="fill_parent"
         android:layout_height="70dp"
         android:gravity="center_vertical"
-        android:id="@+id/cabecera"
-        android:background="@color/blue">
+        android:id="@+id/cabecera">
 
-        <ImageView
-            android:layout_width="60dp"
-            android:layout_height="60dp"
+        <ImageButton
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
             android:id="@+id/iconoConfig"
             android:src="@drawable/configuracion"
             android:layout_gravity="center"
             android:clickable="true"
+            android:scaleType="fitCenter"
             android:onClick="personalizacion"
             android:focusableInTouchMode="false" />
 
-        <ImageView
+        <ImageButton
             android:layout_width="wrap_content"
-            android:layout_height="70dp"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
             android:id="@+id/logo"
+            android:scaleType="fitCenter"
             android:src="@drawable/logo"
             android:layout_gravity="center" />
 
-        <ImageView
-            android:layout_width="60dp"
-            android:layout_height="60dp"
+        <ImageButton
+            android:layout_width="80dp"
+            android:layout_height="match_parent"
             android:layout_weight="1"
             android:id="@+id/iconoAyuda"
             android:src="@drawable/ayuda"
+            android:scaleType="fitCenter"
             android:layout_gravity="center"
             android:clickable="true"
             android:onClick="ayuda"/>
@@ -50,7 +52,6 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:id="@+id/cuerpo"
-        android:background="@color/white"
         android:layout_marginTop="70dp"
         android:gravity="center_horizontal">
 
@@ -63,7 +64,6 @@
             android:id="@+id/nombreUser"
             android:layout_gravity="center"
             android:textStyle="bold"
-            android:textColor="@color/blue"
             android:paddingTop="20dp" />
 
         <LinearLayout
@@ -72,7 +72,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/imgYPunt"
-            android:background="@color/white"
             android:gravity="center_horizontal"
             android:paddingBottom="20dp">
 
@@ -91,17 +90,16 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/puntuacion"
-                android:background="@color/white"
                 android:layout_gravity="center">
 
-                <ImageView
+                <ImageButton
                     android:layout_width="60dp"
                     android:layout_height="60dp"
                     android:layout_weight="1"
                     android:id="@+id/puntuacionImg"
+                    android:scaleType="fitCenter"
                     android:src="@drawable/puntuacion"
                     android:layout_gravity="center"
-                    android:background="@color/blue"
                     android:clickable="true" />
 
                 <TextView
@@ -111,8 +109,7 @@
                     android:textAppearance="?android:attr/textAppearanceLarge"
                     android:text="@string/puntuacion"
                     android:id="@+id/puntuacionUsuario"
-                    android:layout_gravity="center"
-                    android:textColor="@color/blue" />
+                    android:layout_gravity="center" />
             </LinearLayout>
         </LinearLayout>
 
@@ -123,8 +120,6 @@
             android:textSize="20dp"
             android:id="@+id/informe"
             android:layout_gravity="center_horizontal"
-            android:background="@color/blue"
-            android:textColor="@color/white"
             android:layout_weight="1"
             android:onClick="verComoVas"
             android:layout_marginBottom="1dp" />
@@ -136,8 +131,6 @@
             android:id="@+id/eventos"
             android:textSize="20dp"
             android:layout_gravity="center_horizontal"
-            android:background="@color/blue"
-            android:textColor="@color/white"
             android:layout_weight="1"
             android:onClick="verEventos"
             android:layout_marginBottom="1dp" />
@@ -148,8 +141,6 @@
             android:text="Reto"
             android:id="@+id/reto"
             android:layout_gravity="center_horizontal"
-            android:background="@color/blue"
-            android:textColor="@color/white"
             android:layout_weight="1"
             android:textSize="20dp"
             android:singleLine="false"

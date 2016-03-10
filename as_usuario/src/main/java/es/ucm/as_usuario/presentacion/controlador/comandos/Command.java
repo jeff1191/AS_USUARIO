@@ -8,5 +8,5 @@ import es.ucm.as_usuario.presentacion.controlador.comandos.exceptions.commandExc
 public interface Command {
     //devuelve lo que tenga que poner en los toast o lo que sea, si hay error se manda por excepcion
     //Como seria mejor?¿¿???¿¿¿???
-    public Object ejecutaComando(Object datos) throws commandException;
+    Object ejecutaComando(Object datos) throws commandException;
 }

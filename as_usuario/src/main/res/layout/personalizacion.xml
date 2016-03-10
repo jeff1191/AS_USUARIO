@@ -11,13 +11,12 @@
                 android:layout_width="fill_parent"
                 android:layout_height="70dp"
                 android:gravity="center_vertical"
-                android:id="@+id/cabecera"
-                android:background="@color/blue">
+                android:id="@+id/cabecera">
 
-                <ImageView
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
-                    android:layout_weight="1"
+                <ImageButton
+                    android:layout_width="80dp"
+                    android:layout_height="wrap_content"
+                    android:scaleType="fitCenter"
                     android:id="@+id/iconoConfig"
                     android:src="@drawable/volver"
                     android:layout_gravity="center"
@@ -25,18 +24,20 @@
                     android:clickable="true"
                     android:focusableInTouchMode="false" />
 
-                <ImageView
+                <ImageButton
                     android:layout_width="wrap_content"
-                    android:layout_height="70dp"
+                    android:layout_height="wrap_content"
+                    android:adjustViewBounds="true"
                     android:layout_weight="1"
                     android:id="@+id/logo"
+                    android:scaleType="fitCenter"
                     android:src="@drawable/logo"
                     android:layout_gravity="center" />
 
-                <ImageView
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
-                    android:layout_weight="1"
+                <ImageButton
+                    android:layout_width="80dp"
+                    android:layout_height="match_parent"
+                    android:scaleType="fitCenter"
                     android:id="@+id/iconoAyuda"
                     android:src="@drawable/ayuda"
                     android:layout_gravity="center"
@@ -62,7 +63,6 @@
             android:id="@+id/configuracion"
             android:layout_below="@+id/cabecera"
             android:layout_centerHorizontal="true"
-            android:textColor="@color/blue"
             android:textStyle="bold"
             android:layout_gravity="center_horizontal"
             android:paddingTop="20dp"
@@ -93,7 +93,6 @@
                 android:layout_height="wrap_content"
                 android:inputType="textPersonName"
                 android:text="nombreActual"
-                android:textColor="@color/blue"
                 android:ems="10"
                 android:id="@+id/editarNombre"
                 android:layout_centerVertical="true"
@@ -122,46 +121,22 @@
                 android:id="@+id/Personalizar"
                 android:gravity="center_horizontal"
                 android:layout_centerHorizontal="true"
-                android:textColor="@color/blue"
                 android:textStyle="bold"
                 android:layout_marginBottom="10dp" />
 
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:id="@+id/editColor"
-                android:layout_below="@+id/Personalizar"
-                android:layout_marginTop="10dp"
-                android:layout_alignParentBottom="true">
+            <Spinner
+                android:layout_width="130dp"
+                android:layout_height="55dp"
+                android:id="@+id/cambiarColor"
+                android:layout_alignParentStart="true"
+                android:layout_alignTop="@+id/cambiarTono" />
 
-                <Button
-                    android:layout_width="130dp"
-                    android:layout_height="55dp"
-                    android:text="Color"
-                    android:background="@color/blue"
-                    android:textColor="@color/white"
-                    android:id="@+id/cambiarColor"
-                    android:paddingLeft="20dp"
-                    android:paddingRight="20dp"
-                    android:onClick="cambiarColorApp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="20dp" />
-
-                <Button
-                    android:layout_width="130dp"
-                    android:layout_height="55dp"
-                    android:text="Tono"
-                    android:background="@color/blue"
-                    android:textColor="@color/white"
-                    android:id="@+id/cambiarTono"
-                    android:paddingLeft="20dp"
-                    android:paddingRight="20dp"
-                    android:onClick="cambiarTonoApp"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginRight="20dp" />
-
-            </LinearLayout>
+            <Spinner
+                android:layout_width="130dp"
+                android:layout_height="55dp"
+                android:id="@+id/cambiarTono"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentEnd="true" />
 
         </RelativeLayout>
 
@@ -180,7 +155,6 @@
                 android:text="Enviar informe a mi correo"
                 android:id="@+id/tituloEnvio"
                 android:gravity="center_horizontal"
-                android:textColor="@color/blue"
                 android:textStyle="bold"
                 android:layout_marginBottom="10dp" />
 
@@ -194,7 +168,8 @@
                     <RadioGroup
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:orientation="horizontal">
+                        android:orientation="horizontal"
+                        android:id="@+id/rdgGrupo">
 
                         <RadioButton
                             android:layout_width="wrap_content"
@@ -205,8 +180,8 @@
                             android:layout_alignBottom="@+id/semanal"
                             android:layout_alignStart="@+id/editarNombre"
                             android:layout_weight="1"
-                            android:textColor="@color/blue"
                             android:layout_gravity="center_horizontal"
+                            android:button="@drawable/custom_radio_button"
                             android:gravity="center_vertical" />
 
                         <RadioButton
@@ -216,8 +191,8 @@
                             android:id="@+id/semanal"
                             android:layout_above="@+id/envioNuevaConfig"
                             android:layout_alignEnd="@+id/envioNuevaConfig"
+                            android:button="@drawable/custom_radio_button"
                             android:layout_weight="1"
-                            android:textColor="@color/blue"
                             android:layout_gravity="center_horizontal"
                             android:gravity="center_vertical" />
 
@@ -227,8 +202,8 @@
                             android:text="Mensual"
                             android:id="@+id/mensual"
                             android:layout_alignTop="@+id/diario"
+                            android:button="@drawable/custom_radio_button"
                             android:layout_alignParentEnd="true"
-                            android:textColor="@color/blue"
                             android:layout_weight="1"
                             android:gravity="center_vertical" />
                     </RadioGroup>
@@ -242,8 +217,6 @@
             android:layout_height="40dp"
             android:text="Aceptar"
             android:id="@+id/envioNuevaConfig"
-            android:background="@color/blue"
-            android:textColor="@color/white"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
             android:paddingLeft="20dp"

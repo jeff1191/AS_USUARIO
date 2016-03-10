@@ -1,11 +1,14 @@
 package es.ucm.as_usuario.presentacion.controlador.imp;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.util.Log;
+import android.view.View;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import es.ucm.as_usuario.negocio.usuario.TransferUsuario;
 import es.ucm.as_usuario.negocio.usuario.Usuario;
 import es.ucm.as_usuario.presentacion.Configuracion;
 import es.ucm.as_usuario.presentacion.Contexto;
@@ -39,14 +42,15 @@ public class DispatcherImp extends Dispatcher{
                 break;
             case ListaComandos.CONFIGURACION:
                 Intent intentConfiguracion = new Intent(Contexto.getInstancia().getContext().getApplicationContext(), Configuracion.class);
-                Usuario conf = (Usuario) datos;
-                intentConfiguracion.putExtra("nombreConfiguracion",conf.getNombre());
+                TransferUsuario conf = (TransferUsuario) datos;
+                intentConfiguracion.putExtra("nombreConfiguracion", conf.getNombre());
+                intentConfiguracion.putExtra("frecuenciaInformeConfiguracion", conf.getFrecuenciaRecibirInforme());
                 Contexto.getInstancia().getContext().startActivity(intentConfiguracion);
                 break;
             case ListaComandos.EDITAR_USUARIO:
                 Intent intentEditarUsuario = new Intent(Contexto.getInstancia().getContext().getApplicationContext(), MainActivity.class);
-                Usuario editarUsuario = (Usuario) datos;
-                intentEditarUsuario.putExtra("editarUsuario",editarUsuario.getNombre());
+                TransferUsuario editarUsuario = (TransferUsuario) datos;
+                intentEditarUsuario.putExtra("editarUsuario", editarUsuario.getNombre());
                 Contexto.getInstancia().getContext().startActivity(intentEditarUsuario);
                 break;
         }
