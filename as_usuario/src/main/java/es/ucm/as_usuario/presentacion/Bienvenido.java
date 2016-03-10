@@ -11,6 +11,9 @@ import android.view.Window;
 import android.widget.Toast;
 
 import es.ucm.as_usuario.R;
+import es.ucm.as_usuario.negocio.usuario.TransferUsuario;
+import es.ucm.as_usuario.presentacion.controlador.Controlador;
+import es.ucm.as_usuario.presentacion.controlador.ListaComandos;
 
 public class Bienvenido extends Activity {
     private static final long DELAY = 2000;
@@ -24,9 +27,11 @@ public class Bienvenido extends Activity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
 
         setContentView(R.layout.activity_bienvenido);
+
+
         Toast toast1 =
                 Toast.makeText(getApplicationContext(),
-                        "Bienvenido Alberto Spiderman", Toast.LENGTH_SHORT);
+                        "Bienvenido", Toast.LENGTH_SHORT);
 
         toast1.show();
         TimerTask task = new TimerTask() {
@@ -40,5 +45,11 @@ public class Bienvenido extends Activity {
         };
         Timer timer = new Timer();
         timer.schedule(task, DELAY);
+
+        TransferUsuario transferUsuario = new TransferUsuario();
+        transferUsuario.setPuntuacion(5);
+        transferUsuario.setPuntuacionAnterior(8);
+        transferUsuario.setNombre("Jeff");
+        Controlador.getInstancia().ejecutaComando(ListaComandos.CREAR_USUARIO, transferUsuario);
     }
 }

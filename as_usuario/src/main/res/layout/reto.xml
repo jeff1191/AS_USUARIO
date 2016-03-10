@@ -88,7 +88,7 @@
 
             <Button
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="50dp"
                 android:layout_weight="1"
                 android:text="SI"
                 android:id="@+id/si"
@@ -99,7 +99,7 @@
                 android:onClick="responderRetoSI" />
             <Button
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="50dp"
                 android:layout_weight="1"
                 android:text="NO"
                 android:id="@+id/no"

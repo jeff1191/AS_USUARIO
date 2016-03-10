@@ -40,13 +40,14 @@ public class VerInforme extends Activity{
         TextView titulo = (TextView)findViewById(R.id.tituloInforme);
         titulo.setText("¿CÓMO VAS?");
 
-        //Esto debe suceder la primera vez:
+        // Esto es lo que hay que descomentar para que funcione pero crea un usuario cada vez que lo lanzas
         TransferUsuario transferUsuario = new TransferUsuario();
         transferUsuario.setPuntuacion(5);
         transferUsuario.setPuntuacionAnterior(8);
         transferUsuario.setNombre("Jeff");
         Controlador.getInstancia().ejecutaComando(ListaComandos.CREAR_USUARIO, transferUsuario);
         ///*/
+
 
         TextView ahora = (TextView)findViewById(R.id.puntuacionAhora);
         ahora.setText(Usuario.getInstancia().getPuntuacion().toString());
