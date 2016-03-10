@@ -3,6 +3,8 @@ package es.ucm.as_usuario.presentacion.controlador.comandos.factoria.imp;
 import es.ucm.as_usuario.presentacion.controlador.ListaComandos;
 import es.ucm.as_usuario.presentacion.controlador.comandos.Command;
 import es.ucm.as_usuario.presentacion.controlador.comandos.factoria.FactoriaComandos;
+import es.ucm.as_usuario.presentacion.controlador.comandos.imp.ActualizaPuntuacionComando;
+import es.ucm.as_usuario.presentacion.controlador.comandos.imp.CrearUsuarioComando;
 import es.ucm.as_usuario.presentacion.controlador.comandos.imp.ResponderRetoComando;
 import es.ucm.as_usuario.presentacion.controlador.comandos.imp.VerAyudaComando;
 import es.ucm.as_usuario.presentacion.controlador.comandos.imp.VerEventosComando;
@@ -31,6 +33,13 @@ public class FactoriaComandosImp extends FactoriaComandos {
                 break;
             case ListaComandos.VER_INFORME:
                 ret = new VerInformeComando();
+                break;
+            case ListaComandos.ACTUALIZAR_PUNTUACION:
+                ret = new ActualizaPuntuacionComando();
+                break;
+            case ListaComandos.CREAR_USUARIO:
+                ret = new CrearUsuarioComando();
+                break;
         }
 
         return ret;

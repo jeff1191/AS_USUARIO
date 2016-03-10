@@ -12,6 +12,7 @@ import es.ucm.as_usuario.negocio.suceso.TransferTarea;
 import es.ucm.as_usuario.presentacion.Ayuda;
 import es.ucm.as_usuario.presentacion.Contexto;
 import es.ucm.as_usuario.negocio.suceso.Evento;
+import es.ucm.as_usuario.presentacion.MainActivity;
 import es.ucm.as_usuario.presentacion.VerEventos;
 import es.ucm.as_usuario.presentacion.VerInforme;
 import es.ucm.as_usuario.presentacion.VerReto;
@@ -64,16 +65,30 @@ public class DispatcherImp extends Dispatcher{
             case ListaComandos.VER_INFORME:
 
                 Intent intentTareas = new Intent(Contexto.getInstancia().getContext().getApplicationContext(), VerInforme.class);
-                List<TransferTarea> tareasModelo= (List<TransferTarea>) datos;
-                ArrayList<String> listaActividad2 = new ArrayList<String>();
+                ArrayList<TransferTarea> tareasModelo= (ArrayList<TransferTarea>) datos;
+                ArrayList<String> titulos = new ArrayList<String>();
+                ArrayList<Integer> si = new ArrayList<Integer>();
+                ArrayList<Integer> no = new ArrayList<Integer>();
 
                 for(int j=0; j < tareasModelo.size(); j++){
-                    String addTarea= tareasModelo.get(j).getTextoPregunta();
-                    Log.d("¿mostrando?", "informe");
-                    listaActividad2.add(addTarea);
+                    titulos.add(tareasModelo.get(j).getTextoAlarma());
+                    no.add(tareasModelo.get(j).getNumNo());
+                    si.add(tareasModelo.get(j).getNumSi());
                 }
-                intentTareas.putStringArrayListExtra("listaTareas", listaActividad2);
+
+                intentTareas.putStringArrayListExtra("titulos", titulos);
+                intentTareas.putIntegerArrayListExtra("no", no);
+                intentTareas.putIntegerArrayListExtra("si", si);
                 Contexto.getInstancia().getContext().startActivity(intentTareas);
+                break;
+
+            case ListaComandos.ACTUALIZAR_PUNTUACION:
+                Intent iPuntuacon = new Intent(Contexto.getInstancia().getContext().getApplicationContext(), MainActivity.class);
+                iPuntuacon.putExtra("puntuacion", (Integer)datos);
+                break;
+
+            case ListaComandos.CREAR_USUARIO:
+                break;
         }
     }
 }

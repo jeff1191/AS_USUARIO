@@ -8,6 +8,7 @@ import com.j256.ormlite.dao.Dao;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import es.ucm.as_usuario.negocio.suceso.Tarea;
@@ -131,7 +132,6 @@ public class SASucesoImp implements SASuceso {
 
     @Override
     public List<TransferTarea> consultarTareas() {
-        Log.e("SASuceso", "consulta tareas");
 
         Dao<Tarea, Integer> tareasDao;
         List<Tarea> tareas = new ArrayList<Tarea>();
@@ -143,14 +143,15 @@ public class SASucesoImp implements SASuceso {
             tareasDao = getHelper().getTareaDao();
 
             // Esto no hara falta porque ya lo cogera de la BBDD
-            /*Tarea unaSinMas = new Tarea();
+/*
+            Tarea unaSinMas = new Tarea();
             unaSinMas.setFrecuenciaTarea(Frecuencia.DIARIA);
             unaSinMas.setTextoAlarma("Dale los buenos días a mamá");
             unaSinMas.setTextoPregunta("¿Le has dado los buenos días a mamá?");
-            unaSinMas.setFechaIni(new Timestamp(123345446));
+            unaSinMas.setFechaIni(new Date());
             unaSinMas.setContador(0);
-            unaSinMas.setHoraAlarma(new Timestamp(2255));
-            unaSinMas.setHoraPregunta(new Timestamp(2266));
+            unaSinMas.setHoraAlarma(new Date());
+            unaSinMas.setHoraPregunta(new Date());
             unaSinMas.setMejorar(30);
             unaSinMas.setNoSeguidos(2);
             unaSinMas.setNumNo(3);
@@ -160,10 +161,10 @@ public class SASucesoImp implements SASuceso {
             unaSinMas2.setFrecuenciaTarea(Frecuencia.SEMANAL);
             unaSinMas2.setTextoAlarma("Meter las cosas de clase en la mochila");
             unaSinMas2.setTextoPregunta("¿Has metido las cosas de clase en la mochila?");
-            unaSinMas2.setFechaIni(new Timestamp(987654321));
+            unaSinMas2.setFechaIni(new Date());
             unaSinMas2.setContador(0);
-            unaSinMas2.setHoraAlarma(new Timestamp(2255));
-            unaSinMas2.setHoraPregunta(new Timestamp(2266));
+            unaSinMas2.setHoraAlarma(new Date());
+            unaSinMas2.setHoraPregunta(new Date());
             unaSinMas2.setMejorar(4);
             unaSinMas2.setNoSeguidos(2);
             unaSinMas2.setNumNo(3);
@@ -173,13 +174,10 @@ public class SASucesoImp implements SASuceso {
             tareasDao.create(unaSinMas2);
 
             ////////////////////////////////*/
-            Integer s = tareas.size();
-            Log.e("SASuceso1", s.toString());
+
             tareas = tareasDao.queryForAll();
-            Integer s2 = tareas.size();
-            Log.e("SASuceso2", s2.toString());
             for(int i = 0; i < tareas.size(); i++){
-                Log.e("SASuceso", "Add transfer");
+
                 TransferTarea tt = new TransferTarea();
                 tt.setId(tareas.get(i).getId());
                 tt.setContador(tareas.get(i).getContador());

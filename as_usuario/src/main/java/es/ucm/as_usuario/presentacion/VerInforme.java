@@ -6,12 +6,19 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import com.j256.ormlite.dao.Dao;
 
 import java.util.ArrayList;
 
 import es.ucm.as_usuario.R;
+import es.ucm.as_usuario.integracion.DBHelper;
+import es.ucm.as_usuario.negocio.suceso.TransferTarea;
+import es.ucm.as_usuario.negocio.usuario.TransferUsuario;
+import es.ucm.as_usuario.negocio.usuario.Usuario;
 import es.ucm.as_usuario.presentacion.controlador.Controlador;
 import es.ucm.as_usuario.presentacion.controlador.ListaComandos;
 
@@ -24,52 +31,48 @@ public class VerInforme extends Activity{
 
     ListViewAdapter adapter;
 
-    String[] titulo = new String[]{
-            "Dar los buenos días a mamá",
-            "Ducharse",
-            "titulo3",
-            "titulo4",
-            "haz un dibujo",
-            "cosquillas a Jeff",
-    };
-
-    Integer[] si = new Integer[]{
-            1,
-            2,
-            3,
-            4,
-            1,
-            12,
-    };
-    Integer[] no = new Integer[]{
-            1,
-            2,
-            3,
-            10,
-            9,
-            2,
-    };
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.informe);
-        final ListView lista = (ListView) findViewById(R.id.listView);
-        adapter = new ListViewAdapter(this, titulo, si, no);
-        lista.setAdapter(adapter);
 
-        //list = (ListView)findViewById(R.id.listView);
         TextView titulo = (TextView)findViewById(R.id.tituloInforme);
         titulo.setText("¿CÓMO VAS?");
-        Bundle bundle = getIntent().getExtras();
 
-       /*if(!bundle.getStringArrayList("listaTareas").isEmpty()){
-            ArrayList<String> listaE = bundle.getStringArrayList("listaTareas");
-            ArrayAdapter<String> adaptador = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, listaE);
-            //list.setAdapter(adaptador);
-        }*/
+        //Esto debe suceder la primera vez:
+       /* TransferUsuario transferUsuario = new TransferUsuario();
+        transferUsuario.setPuntuacion(5);
+        transferUsuario.setPuntuacionAnterior(8);
+        transferUsuario.setNombre("Jeff");
+        Controlador.getInstancia().ejecutaComando(ListaComandos.CREAR_USUARIO, transferUsuario);
+        ///*/
+
+        TextView ahora = (TextView)findViewById(R.id.puntuacionAhora);
+        ahora.setText(Usuario.getInstancia().getPuntuacion().toString());
+        TextView antes = (TextView)findViewById(R.id.puntuacionAnterior );
+        antes.setText(Usuario.getInstancia().getPuntuacionAnterior().toString());
+
+        ImageView img = (ImageView)findViewById(R.id.imageView2);
+
+        Integer puntAntes = Usuario.getInstancia().getPuntuacionAnterior();
+        Integer puntAhora = Usuario.getInstancia().getPuntuacion();
+        if (puntAhora > puntAntes)
+            img.setImageResource(R.drawable.flechaverde);
+        else
+            img.setImageResource(R.drawable.flecharoja);
+
+        final ListView lista = (ListView) findViewById(R.id.listView);
+
+        ArrayList<String> t = getIntent().getStringArrayListExtra("titulos");
+        ArrayList<Integer> s = getIntent().getIntegerArrayListExtra("si");
+        ArrayList<Integer> n = getIntent().getIntegerArrayListExtra("no");
+
+        Integer st = s.size();
+        if(t.size()!= 0){
+            adapter = new ListViewAdapter(t, s, n);
+            lista.setAdapter(adapter);
+        }
     }
-
 
     public void volver(View v){
         Intent pantallaPrincipal = new Intent (getApplicationContext(), MainActivity.class);

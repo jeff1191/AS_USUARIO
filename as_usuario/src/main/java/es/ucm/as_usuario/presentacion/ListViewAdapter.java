@@ -2,25 +2,26 @@ package es.ucm.as_usuario.presentacion;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
+
+import java.util.ArrayList;
 
 import es.ucm.as_usuario.R;
 
 public class ListViewAdapter extends BaseAdapter {
-    // Declare Variables
-    Context context;
-    String[] titulos;
-    Integer[] si;
-    Integer[] no;
+
+    ArrayList<String> titulos;
+    ArrayList<Integer> si;
+    ArrayList<Integer> no;
     LayoutInflater inflater;
 
-    public ListViewAdapter(Context context, String[] titulos, Integer[] si, Integer[] no) {
-        this.context = context;
+    public ListViewAdapter(ArrayList<String> titulos, ArrayList<Integer> si,
+                           ArrayList<Integer> no) {
         this.titulos = titulos;
         this.si = si;
         this.no = no;
@@ -28,12 +29,12 @@ public class ListViewAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return titulos.length;
+        return titulos.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return titulos[position];
+        return titulos.get(position);
     }
 
     @Override
@@ -43,30 +44,29 @@ public class ListViewAdapter extends BaseAdapter {
 
     public View getView(int position, View convertView, ViewGroup parent) {
 
-        // Declare Variables
-        TextView txtTitle;
-        TextView sit;
-        TextView not;
-        TextView total;
-        //ImageView imgImg;
+        TextView txtTitle;  // texto alarma
+        TextView sit;       // numero de si
+        TextView not;       // numero de no
+        TextView total;     // balance del progreso (si - no = total)
 
-        //http://developer.android.com/intl/es/reference/android/view/LayoutInflater.html
-        inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        inflater = (LayoutInflater) Contexto.getInstancia().getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
         View itemView = inflater.inflate(R.layout.list_row, parent, false);
 
-        // Locate the TextViews in listview_item.xml
+        // Locacalizar en el listview_item.xml
         txtTitle = (TextView) itemView.findViewById(R.id.tarea);
         sit = (TextView) itemView.findViewById(R.id.si);
         not = (TextView) itemView.findViewById(R.id.no);
         total = (TextView) itemView.findViewById(R.id.total);
-        //imgImg = (ImageView) itemView.findViewById(R.id.list_row_image);
 
-        // Capture position and set to the TextViews
-        txtTitle.setText(titulos[position]);
-        sit.setText(si[position].toString());
-        not.setText(no[position].toString());
-        Integer t = si[position]-no[position];
+        // Dar valores a los TextView
+        txtTitle.setText(titulos.get(position));
+       Log.e("Titulo", titulos.get(position));
+        String ss = si.get(position).toString();
+        sit.setText(ss);
+        String sn = no.get(position).toString();
+        not.setText(sn);
+        Integer t = si.get(position)-no.get(position);
         if(t >= 0)
             total.setTextColor(Color.GREEN);
         else

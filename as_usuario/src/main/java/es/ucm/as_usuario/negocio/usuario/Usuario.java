@@ -3,6 +3,9 @@
  */
 package es.ucm.as_usuario.negocio.usuario;
 
+import com.j256.ormlite.field.DataType;
+import com.j256.ormlite.field.DatabaseField;
+
 import java.util.List;
 
 import es.ucm.as_usuario.negocio.suceso.Reto;
@@ -14,24 +17,37 @@ public class Usuario {
 
 	public static Usuario instancia= new Usuario();
 
+	@DatabaseField(columnName = "ID")
 	private Integer id;
 
+	@DatabaseField(columnName = "NOMBRE")
 	private String nombre;
 
+	@DatabaseField(columnName = "CORREO")
 	private String correo;
 
+	@DatabaseField(columnName = "AVATAR")
 	private String avatar;
 
+	@DatabaseField(columnName = "PUNTUACION")
 	private Integer puntuacion;
 
+	@DatabaseField(columnName = "PUNTUACION_ANTERIOR")
+	private Integer puntuacionAnterior;
+
+	@DatabaseField(columnName = "COLOR")
 	private String color;
 
+	@DatabaseField(columnName = "TONO")
 	private String tono;
 
+	@DatabaseField(columnName = "FRECUENCIA", dataType = DataType.ENUM_STRING)
 	private Frecuencia frecuenciaRecibirInforme;
 
+	@DatabaseField(columnName = "NOMBRE_TUTOR")
 	private String nombreTutor;
 
+	@DatabaseField(columnName = "CORREO_TUTOR")
 	private String correoTutor;
 
 	private Usuario(){	}
@@ -55,7 +71,27 @@ public class Usuario {
 	public Integer getPuntuacion() {
 		return this.puntuacion;
 	}
-	
+
+	public static void setInstancia(Usuario instancia) {
+		Usuario.instancia = instancia;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public Integer getPuntuacionAnterior() {
+		return puntuacionAnterior;
+	}
+
+	public void setPuntuacionAnterior(Integer puntuacionAnterior) {
+		this.puntuacionAnterior = puntuacionAnterior;
+	}
+
+	public Frecuencia getFrecuenciaRecibirInforme() {
+		return frecuenciaRecibirInforme;
+	}
+
 	public String getColor() {
 		return this.color;
 	}

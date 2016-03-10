@@ -39,6 +39,8 @@ public class TransferUsuario {
 
 	private String ayuda;
 
+	private Integer puntuacionAnterior;
+
 	public Integer getId() {
 		return id;
 	}
@@ -149,5 +151,13 @@ public class TransferUsuario {
 
 	public void setAyuda(String ayuda) {
 		this.ayuda = ayuda;
+	}
+
+	public Integer getPuntuacionAnterior() {
+		return puntuacionAnterior;
+	}
+
+	public void setPuntuacionAnterior(Integer puntuacionAnterior) {
+		this.puntuacionAnterior = puntuacionAnterior;
 	}
 }

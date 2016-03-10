@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import es.ucm.as_usuario.negocio.suceso.Reto;
 import es.ucm.as_usuario.negocio.suceso.Evento;
 import es.ucm.as_usuario.negocio.suceso.Tarea;
+import es.ucm.as_usuario.negocio.usuario.Usuario;
 
 import com.j256.ormlite.android.apptools.OrmLiteSqliteOpenHelper;
 import com.j256.ormlite.dao.Dao;
@@ -25,6 +26,7 @@ public class DBHelper extends OrmLiteSqliteOpenHelper {
     private Dao<Evento, Integer> eventoDao;
     private Dao<Reto, Integer> retoDao;
     private Dao<Tarea, Integer> tareaDao;
+    private Dao<Usuario, Integer> usuarioDao;
 
     public DBHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -36,6 +38,7 @@ public class DBHelper extends OrmLiteSqliteOpenHelper {
             TableUtils.createTable(connectionSource, Evento.class);
             TableUtils.createTable(connectionSource, Reto.class);
             TableUtils.createTable(connectionSource, Tarea.class);
+            TableUtils.createTable(connectionSource, Usuario.class);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -64,13 +67,20 @@ public class DBHelper extends OrmLiteSqliteOpenHelper {
         }
         return tareaDao;
     }
+    public Dao<Usuario, Integer> getUsuarioDao() throws SQLException {
+        if (usuarioDao == null) {
+            usuarioDao = getDao(Usuario.class);
+        }
+        return usuarioDao;
+    }
 
     @Override
     public void close() {
         super.close();
         eventoDao = null;
         retoDao = null;
-        tareaDao=null;
+        tareaDao = null;
+        usuarioDao = null;
     }
 }
 
