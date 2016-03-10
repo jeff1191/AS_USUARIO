@@ -11,13 +11,13 @@
                 android:layout_width="fill_parent"
                 android:layout_height="70dp"
                 android:gravity="center_vertical"
-                android:id="@+id/cabecera"
-                android:background="@color/blue">
+                android:id="@+id/cabecera">
 
-                <ImageView
+                <ImageButton
                     android:layout_width="60dp"
-                    android:layout_height="60dp"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
+                    android:scaleType="fitCenter"
                     android:id="@+id/iconoConfig"
                     android:src="@drawable/volver"
                     android:layout_gravity="center"
@@ -25,17 +25,18 @@
                     android:focusableInTouchMode="false"
                     android:onClick="volver" />
 
-                <ImageView
+                <ImageButton
                     android:layout_width="wrap_content"
-                    android:layout_height="70dp"
+                    android:scaleType="fitCenter"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:id="@+id/logo"
                     android:src="@drawable/logo"
                     android:layout_gravity="center" />
 
-                <TextView
+                <ImageButton
                     android:layout_width="60dp"
-                    android:layout_height="60dp"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:id="@+id/iconoAyuda"
                     android:layout_gravity="center" />
@@ -48,16 +49,8 @@
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
                 android:id="@+id/cuerpo"
-                android:background="#FFFFFF"
                 android:layout_marginTop="70dp"
                 android:gravity="center_horizontal">
-
-                <!--<WebView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:id="@+id/webView"
-                    android:layout_gravity="center_horizontal" />-->
-
 
                 <ImageView
                     android:layout_width="match_parent"

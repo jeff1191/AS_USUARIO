@@ -123,10 +123,6 @@ public class SASucesoImp implements SASuceso {
         return reto.getContador();
     }
 
-    @Override
-    public void sincronizar() {
-
-    }
 
     @Override
     public List<TransferTarea> consultarTareas() {

@@ -10,10 +10,8 @@ import es.ucm.as_usuario.presentacion.controlador.comandos.imp.VerAyudaComando;
 import es.ucm.as_usuario.presentacion.controlador.comandos.imp.VerEventosComando;
 import es.ucm.as_usuario.presentacion.controlador.comandos.imp.VerInformeComando;
 import es.ucm.as_usuario.presentacion.controlador.comandos.imp.VerRetoComando;
-import es.ucm.as_usuario.presentacion.controlador.comandos.imp.ConfiguracionCommand;
-import es.ucm.as_usuario.presentacion.controlador.comandos.imp.EditarUsuario;
-import es.ucm.as_usuario.presentacion.controlador.comandos.imp.ResponderReto;
-import es.ucm.as_usuario.presentacion.controlador.comandos.imp.verEventosCommand;
+import es.ucm.as_usuario.presentacion.controlador.comandos.imp.ConfiguracionComando;
+import es.ucm.as_usuario.presentacion.controlador.comandos.imp.EditarUsuarioComando;
 
 /**
  * Created by Jeffer on 02/03/2016.
@@ -30,16 +28,14 @@ public class FactoriaComandosImp extends FactoriaComandos {
                 ret = new VerRetoComando();
                 break;
             case ListaComandos.VER_EVENTOS:
-                ret= new verEventosCommand();
+                ret= new VerEventosComando();
             break;
             case ListaComandos.CONFIGURACION:
-                ret= new ConfiguracionCommand();
+                ret= new ConfiguracionComando();
             break;
             case ListaComandos.EDITAR_USUARIO:
-                ret= new EditarUsuario();
+                ret= new EditarUsuarioComando();
             break;
-                ret = new VerEventosComando();
-                break;
             case ListaComandos.AYUDA:
                 ret = new VerAyudaComando();
                 break;

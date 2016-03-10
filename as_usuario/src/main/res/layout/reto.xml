@@ -71,7 +71,6 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="@string/textoReto"
             android:id="@+id/textoReto"
             android:textAlignment="gravity"
             android:textStyle="normal"

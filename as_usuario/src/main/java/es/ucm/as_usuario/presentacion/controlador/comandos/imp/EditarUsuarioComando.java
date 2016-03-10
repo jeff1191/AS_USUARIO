@@ -10,7 +10,7 @@ import es.ucm.as_usuario.presentacion.controlador.comandos.exceptions.commandExc
 /**
  * Created by Jeffer on 07/03/2016.
  */
-public class EditarUsuario implements Command {
+public class EditarUsuarioComando implements Command {
     @Override
     public Object ejecutaComando(Object datos) throws commandException {
         SAUsuario saUsuario = FactoriaSA.getInstancia().nuevoSAUsuario();

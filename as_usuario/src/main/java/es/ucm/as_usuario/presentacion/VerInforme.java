@@ -33,6 +33,7 @@ public class VerInforme extends Activity{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        cargarTema();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.informe);
 
@@ -40,7 +41,7 @@ public class VerInforme extends Activity{
         titulo.setText("¿CÓMO VAS?");
 
         //Esto debe suceder la primera vez:
-       /* TransferUsuario transferUsuario = new TransferUsuario();
+        TransferUsuario transferUsuario = new TransferUsuario();
         transferUsuario.setPuntuacion(5);
         transferUsuario.setPuntuacionAnterior(8);
         transferUsuario.setNombre("Jeff");
@@ -81,5 +82,24 @@ public class VerInforme extends Activity{
 
     public void ayuda(View v){
         Controlador.getInstancia().ejecutaComando(ListaComandos.AYUDA, "informe");
+    }
+    public void cargarTema(){
+        switch (Configuracion.temaActual){
+            case "AS_theme_azul":
+                setTheme(R.style.AS_tema_azul);
+                break;
+            case "AS_theme_rojo":
+                setTheme(R.style.AS_tema_rojo);
+                break;
+            case "AS_theme_rosa":
+                setTheme(R.style.AS_tema_rosa);
+                break;
+            case "AS_theme_verde":
+                setTheme(R.style.AS_tema_verde);
+                break;
+            case "AS_theme_negro":
+                setTheme(R.style.AS_tema_negro);
+                break;
+        }
     }
 }

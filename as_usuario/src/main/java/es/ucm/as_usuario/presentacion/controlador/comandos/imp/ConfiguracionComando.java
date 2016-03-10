@@ -11,7 +11,7 @@ import es.ucm.as_usuario.presentacion.controlador.comandos.exceptions.commandExc
 /**
  * Created by Jeffer on 07/03/2016.
  */
-public class ConfiguracionCommand implements Command{
+public class ConfiguracionComando implements Command{
     @Override
     public Object ejecutaComando(Object datos) throws commandException {
         SAUsuario saUsuario = FactoriaSA.getInstancia().nuevoSAUsuario();
