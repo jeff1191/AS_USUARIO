@@ -192,6 +192,7 @@ public class SASucesoImp implements SASuceso {
         int respuesta = Integer.parseInt(sol[0]);
         //sol[1] tiene el id de la tarea a buscar
         int idTarea = Integer.parseInt(sol[1]);
+        /*
         try {
             dao = getHelper().getTareaDao();
             Log.e("prueba", "Se busca en la database con el id " + idTarea);
@@ -212,7 +213,7 @@ public class SASucesoImp implements SASuceso {
             }
         } catch (SQLException e) {
 
-        }
+        }*/
     }
 
 }
