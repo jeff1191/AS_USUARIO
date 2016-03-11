@@ -2,7 +2,6 @@ package es.ucm.as_usuario.presentacion.notificaciones;
 
 import android.app.Service;
 import android.content.Intent;
-import android.os.Bundle;
 import android.os.IBinder;
 import android.util.Log;
 
@@ -25,7 +24,7 @@ public class ServicioNotificaciones extends Service{
     @Override
     public int onStartCommand(Intent intent, int flags, int startId)
     {
-        Bundle bundle = intent.getExtras();
+        /*Bundle bundle = intent.getExtras();
         Integer horaAlarma = bundle.getInt("horaAlarma");
         Integer minutosAlarma = bundle.getInt("minutosAlarma");
         Integer horaPregunta = bundle.getInt("horaPregunta");
@@ -34,11 +33,11 @@ public class ServicioNotificaciones extends Service{
         String textoAlarma = bundle.getString("textoAlarma");
         String textoPregunta = bundle.getString("textoPregunta");
         Integer idTarea = bundle.getInt("idTarea");
-
+*/
         Log.e("prueba", "Servicio lanzado...");
 
-        alarma.lanzarAlarma(this, 2, 34, "holaa", "Esto es una pruebaaa");
-        pregunta.lanzarPregunta(this, 2, 35, "holaa", "Esto es una pruebaaa con botones", 1);
+        alarma.lanzarAlarma(this, 4, 6, "holaa", "Esto es una pruebaaa");
+        pregunta.lanzarPregunta(this, 4, 7, "holaa", "Esto es una pruebaaa con botones", 1);
         //alarma.lanzarAlarma(this, 1, 36);
         //pregunta.lanzarPregunta(this, 1, 35);
         //pregunta.lanzarPregunta(this, 8, 36);

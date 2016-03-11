@@ -201,19 +201,11 @@ public class SASucesoImp implements SASuceso {
                 if((tarea.getContador() == 0 && respuesta != -1) ||
                         (tarea.getContador() > 0 && tarea.getContador() <= 30))
                     tarea.setContador(tarea.getContador() + respuesta);
+                    dao.update(tarea);
                 if(tarea.getContador() == 30){
                     // cambiar frecuencia
+                    dao.update(tarea);
                 }
-                //Si el reto no esta superado y se puede incrementar o decrementar aun se modifica
-                /*if (!reto.getSuperado() && respuesta == -1 && reto.getContador() > 0 ||
-                        !reto.getSuperado() && respuesta == 1 && reto.getContador() <= 30) {
-                    reto.setContador(reto.getContador() + respuesta);
-                    dao.update(reto);
-                }
-                if (reto.getContador() == 30) {
-                    reto.setSuperado(true);
-                    dao.update(reto);
-                }*/
 
             }else {
                 Log.e("prueba", "No hay tareas en la database o ha pasado otra cosa");
