@@ -3,18 +3,17 @@ package es.ucm.as_usuario.presentacion;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
 import es.ucm.as_usuario.R;
-import es.ucm.as_usuario.integracion.DBHelper;
 import es.ucm.as_usuario.negocio.usuario.Usuario;
 import es.ucm.as_usuario.negocio.utils.Frecuencia;
 import es.ucm.as_usuario.presentacion.controlador.Controlador;
 import es.ucm.as_usuario.presentacion.controlador.ListaComandos;
+import es.ucm.as_usuario.presentacion.notificaciones.ServicioNotificaciones;
 
 
 public class MainActivity extends Activity {
@@ -30,13 +29,14 @@ public class MainActivity extends Activity {
         cargarTema();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         //MODIFICARR!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        /*Usuario.getInstancia().setNombre("Albertin");
+        Usuario.getInstancia().setNombre("Albertin");
         Usuario.getInstancia().setAvatar("imagen1.jpg");
         Usuario.getInstancia().setColor("blue");
         Usuario.getInstancia().setTono("Ringtone 1");
         Usuario.getInstancia().setFrecuenciaRecibirInforme(Frecuencia.SEMANAL);
-        Usuario.getInstancia().setPuntuacion(6);*/
+        Usuario.getInstancia().setPuntuacion(6);
         //////////////////////////////////////////////////////////////////////
         nombrePrincipal=(TextView)findViewById(R.id.nombreUser);
         nombrePrincipal.setText(Usuario.getInstancia().getNombre());
@@ -50,8 +50,12 @@ public class MainActivity extends Activity {
             }
         }
 
-
         Contexto.getInstancia().setContext(this);
+
+        //MODIFICARR2!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        //Lanza el servicio de las notificaciones
+        startService(new Intent(Contexto.getInstancia().getContext(), ServicioNotificaciones.class));
+        //////////////////////////////////////////////////////////////////////
     }
 
     @Override

@@ -7,18 +7,16 @@ import com.j256.ormlite.dao.Dao;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
-import es.ucm.as_usuario.negocio.suceso.Tarea;
-import es.ucm.as_usuario.negocio.suceso.TransferReto;
-import es.ucm.as_usuario.negocio.suceso.TransferTarea;
-import es.ucm.as_usuario.negocio.utils.Frecuencia;
-import es.ucm.as_usuario.presentacion.Contexto;
 import es.ucm.as_usuario.integracion.DBHelper;
 import es.ucm.as_usuario.negocio.suceso.Evento;
 import es.ucm.as_usuario.negocio.suceso.Reto;
 import es.ucm.as_usuario.negocio.suceso.SASuceso;
+import es.ucm.as_usuario.negocio.suceso.Tarea;
+import es.ucm.as_usuario.negocio.suceso.TransferReto;
+import es.ucm.as_usuario.negocio.suceso.TransferTarea;
+import es.ucm.as_usuario.presentacion.Contexto;
 
 /**
  * Created by Jeffer on 02/03/2016.
@@ -48,16 +46,6 @@ public class SASucesoImp implements SASuceso {
 
         }
         return listaEventos;
-    }
-
-    @Override
-    public void mostrarAlarma() {
-
-    }
-
-    @Override
-    public void responderPregunta() {
-
     }
 
     @Override
@@ -193,4 +181,38 @@ public class SASucesoImp implements SASuceso {
         }
         return transferTareas;
     }
+
+    @Override
+    public void responderTarea(Integer respuesta) {
+        Dao<Tarea, Integer> dao;
+        Tarea tarea = new Tarea();
+        try {
+            Log.e("prueba", "Añadiendo en la database");
+            dao = getHelper().getTareaDao();
+            //tarea.setTextoPregunta("¿Te cepillaste los dientes Alfredo?");
+            //tarea.setTextoAlarma("A cepillarse");
+            //TERMINAR DE CREAR LA TAREA
+            dao.create(tarea);
+            /*
+            tarea = (Tarea) dao.queryForId(1);
+            if (!tarea.equals(null)) {
+                //Si el reto no esta superado y se puede incrementar o decrementar aun se modifica
+                if (!reto.getSuperado() && respuesta == -1 && reto.getContador() > 0 ||
+                        !reto.getSuperado() && respuesta == 1 && reto.getContador() <= 30) {
+                    reto.setContador(reto.getContador() + respuesta);
+                    dao.update(reto);
+                }
+                if (reto.getContador() == 30) {
+                    reto.setSuperado(true);
+                    dao.update(reto);
+                }
+
+            }else {
+                Log.e("prueba", "No hay nada en la database");
+            }*/
+        } catch (SQLException e) {
+
+        }
+    }
+
 }

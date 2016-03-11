@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="es.ucm.as_usuario">
 
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+
     <application
         android:allowBackup="true"
         android:icon="@drawable/logo"
@@ -24,5 +26,16 @@
         <activity android:name=".presentacion.VerEventos" />
         <activity android:name=".presentacion.Ayuda"/>
         <activity android:name=".presentacion.VerInforme"/>
+
+        <service
+            android:name=".presentacion.notificaciones.ServicioNotificaciones"
+            android:enabled="true"
+            android:exported="true"
+            android:process=":servicio_notificaciones" />
+
+        <receiver android:name=".presentacion.notificaciones.NotificacionAlarma" />
+        <receiver android:name=".presentacion.notificaciones.NotificacionPregunta" />
+        <receiver android:name=".presentacion.notificaciones.GestorRespuestas" />
+
     </application>
 </manifest>
