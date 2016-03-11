@@ -54,6 +54,12 @@ public class MainActivity extends Activity {
 
         //MODIFICARR2!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         //Lanza el servicio de las notificaciones
+
+        //Crear un Intent y pasarle un array de tareas
+        //En verdad solo nos interesa la hora/minutos de alarma, texto alarma,
+        //hora/minutos pregunta, texto pregunta y titulo pregunta/alarma(inventar)
+
+        //Le pasas un intent
         startService(new Intent(Contexto.getInstancia().getContext(), ServicioNotificaciones.class));
         //////////////////////////////////////////////////////////////////////
     }

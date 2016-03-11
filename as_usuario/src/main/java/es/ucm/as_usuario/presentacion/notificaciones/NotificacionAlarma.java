@@ -7,6 +7,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
+import android.os.Bundle;
 import android.os.PowerManager;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
@@ -33,14 +34,15 @@ public class NotificacionAlarma extends BroadcastReceiver {
         PowerManager pm = (PowerManager) context.getSystemService(Context.POWER_SERVICE);
         PowerManager.WakeLock wl = pm.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "AlarmaNotificacion");
         wl.acquire();
-/*
+
         Bundle bundle = intent.getExtras();
 
         String titulo = bundle.getString("titulo");
         String texto = bundle.getString("texto");
-*/
-        //Hay que mirar lo del sonido
-        //Sustituir el titulo y el texto por las variables
+
+        //Hay que mirar lo del SONIDO y la VIBRACION
+        //Encontrar una foto mas pequeña para el logo en las notificaciones o poner otra imagen
+        //Si los ids dan problemas, generarlos de otra manera y pasarselos aqui
 
         Log.e("prueba", "Empieza a crear la notificacion alarma...");
 
@@ -58,13 +60,11 @@ public class NotificacionAlarma extends BroadcastReceiver {
 
         PendingIntent aux = PendingIntent.getBroadcast(context, 0, new Intent(), PendingIntent.FLAG_UPDATE_CURRENT);
 
-        //Encontrar una foto mas pequeña para el logo en las notificaciones
-        //O poner otra imagen
         NotificationCompat.Builder n =
                 new NotificationCompat.Builder(context)
                         .setSmallIcon(R.drawable.logo)
-                        .setContentTitle("holaa")
-                        .setContentText("Esto es una pruebaaa")
+                        .setContentTitle(titulo)
+                        .setContentText(texto)
                         .setAutoCancel(true)
                         .setPriority(NotificationCompat.PRIORITY_MAX)
                         .setLargeIcon(BitmapFactory.decodeResource(context.getResources(), R.drawable.logo))
@@ -78,15 +78,14 @@ public class NotificacionAlarma extends BroadcastReceiver {
         wl.release();
     }
 
-    public void lanzarAlarma(Context context, Integer hora, Integer minutos)
+    public void lanzarAlarma(Context context, Integer hora, Integer minutos, String titulo, String texto)
     {
         Log.e("prueba", "Guarda la notificacion alarma...");
 
         AlarmManager am =( AlarmManager)context.getSystemService(Context.ALARM_SERVICE);
         Intent i = new Intent(context, NotificacionAlarma.class);
-        //Para que el intent no inicie una nueva actividad
-        i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP |
-                Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        i.putExtra("titulo", titulo);
+        i.putExtra("texto", texto);
         PendingIntent pi = PendingIntent.getBroadcast(context, 0, i, 0);
 
         Log.e("prueba", "La hora es..." + hora + ":" + minutos);

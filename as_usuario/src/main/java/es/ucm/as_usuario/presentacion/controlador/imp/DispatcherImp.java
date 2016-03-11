@@ -1,22 +1,18 @@
 package es.ucm.as_usuario.presentacion.controlador.imp;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.util.Log;
-import android.view.View;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import es.ucm.as_usuario.negocio.suceso.Reto;
+import es.ucm.as_usuario.negocio.suceso.Evento;
 import es.ucm.as_usuario.negocio.suceso.TransferReto;
 import es.ucm.as_usuario.negocio.suceso.TransferTarea;
-import es.ucm.as_usuario.presentacion.Ayuda;
 import es.ucm.as_usuario.negocio.usuario.TransferUsuario;
-import es.ucm.as_usuario.negocio.usuario.Usuario;
+import es.ucm.as_usuario.presentacion.Ayuda;
 import es.ucm.as_usuario.presentacion.Configuracion;
 import es.ucm.as_usuario.presentacion.Contexto;
-import es.ucm.as_usuario.negocio.suceso.Evento;
 import es.ucm.as_usuario.presentacion.MainActivity;
 import es.ucm.as_usuario.presentacion.VerEventos;
 import es.ucm.as_usuario.presentacion.VerInforme;
@@ -107,6 +103,9 @@ public class DispatcherImp extends Dispatcher{
                 break;
 
             case ListaComandos.CREAR_USUARIO:
+                break;
+
+            case ListaComandos.RESPONDER_TAREA:
                 break;
         }
     }

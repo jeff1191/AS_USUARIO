@@ -12,7 +12,7 @@ public class ResponderTareaComando implements Command {
     @Override
     public Object ejecutaComando(Object datos) throws commandException {
         SASuceso ss = FactoriaSA.getInstancia().nuevoSASuceso();
-        ss.responderTarea((Integer) datos);
+        ss.responderTarea((String) datos);
         return datos;
     }
 }

@@ -8,6 +8,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
+import android.os.Bundle;
 import android.os.PowerManager;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
@@ -27,14 +28,17 @@ public class NotificacionPregunta extends BroadcastReceiver {
         PowerManager pm = (PowerManager) context.getSystemService(Context.POWER_SERVICE);
         PowerManager.WakeLock wl = pm.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "preguntaNotificacion");
         wl.acquire();
-/*
+
         Bundle bundle = intent.getExtras();
 
         String titulo = bundle.getString("titulo");
         String texto = bundle.getString("texto");
-*/
-        //Hay que mirar lo del sonido
-        //Sustituir el titulo y el texto por las variables
+        Integer idTarea = bundle.getInt("tarea");
+
+        //Hay que mirar lo del SONIDO y la VIBRACION
+        //Encontrar una foto mas pequeña para el logo en las notificaciones o poner otra imagen
+        //Si los ids dan problemas, generarlos de otra manera y pasarselos aqui
+        //Tambien generar los ids de los pending intents??¿¿
 
         Log.e("prueba", "Empieza a crear la notificacion pregunta...");
         /*
@@ -50,13 +54,15 @@ public class NotificacionPregunta extends BroadcastReceiver {
         Log.e("prueba", "Con el ID..." + notificationId);
 
         Intent resSi = new Intent(context, GestorRespuestas.class);
-        resSi.putExtra("Respuesta", 1);
-        resSi.putExtra("IDNotificacion", notificationId);
+        resSi.putExtra("respuesta", 1);
+        resSi.putExtra("idNotificacion", notificationId);
+        resSi.putExtra("idTarea", idTarea);
         PendingIntent contestaSi = PendingIntent.getBroadcast(context, 1, resSi, PendingIntent.FLAG_UPDATE_CURRENT);
 
         Intent resNo = new Intent(context, GestorRespuestas.class);
-        resNo.putExtra("Respuesta", -1);
-        resNo.putExtra("IDNotificacion", notificationId);
+        resNo.putExtra("respuesta", -1);
+        resNo.putExtra("idNotificacion", notificationId);
+        resNo.putExtra("idTarea", idTarea);
         PendingIntent contestaNo = PendingIntent.getBroadcast(context, 2, resNo, PendingIntent.FLAG_UPDATE_CURRENT);
 
         //Encontrar una foto mas pequeña para el logo en las notificaciones
@@ -64,8 +70,8 @@ public class NotificacionPregunta extends BroadcastReceiver {
         NotificationCompat.Builder n =
                 new NotificationCompat.Builder(context)
                         .setSmallIcon(R.drawable.logo)
-                        .setContentTitle("holaa")
-                        .setContentText("Esto es una pruebaaa con botones")
+                        .setContentTitle(titulo)
+                        .setContentText(texto)
                         .setLargeIcon(BitmapFactory.decodeResource(context.getResources(), R.drawable.logo))
                         .addAction(R.drawable.ic_done_white, "Si", contestaSi)
                         .addAction(R.drawable.ic_clear_white, "No", contestaNo)
@@ -81,12 +87,15 @@ public class NotificacionPregunta extends BroadcastReceiver {
         wl.release();
     }
 
-    public void lanzarPregunta(Context context, Integer hora, Integer minutos)
+    public void lanzarPregunta(Context context, Integer hora, Integer minutos, String titulo, String texto, Integer idTarea)
     {
         Log.e("prueba", "Guarda la notificacion pregunta...");
 
         AlarmManager am =( AlarmManager)context.getSystemService(Context.ALARM_SERVICE);
         Intent i = new Intent(context, NotificacionPregunta.class);
+        i.putExtra("titulo", titulo);
+        i.putExtra("texto", texto);
+        i.putExtra("tarea", idTarea);
         PendingIntent pi = PendingIntent.getBroadcast(context, 0, i, PendingIntent.FLAG_UPDATE_CURRENT);
 
         Log.e("prueba", "La hora es..." + hora + ":" + minutos);

@@ -183,21 +183,29 @@ public class SASucesoImp implements SASuceso {
     }
 
     @Override
-    public void responderTarea(Integer respuesta) {
+    public void responderTarea(String respuestaTarea) {
         Dao<Tarea, Integer> dao;
         Tarea tarea = new Tarea();
+        Log.e("prueba", "Lo que llega es ..." + respuestaTarea);
+        String[] sol = respuestaTarea.split("_");
+        //sol[0] tiene la respuesta
+        int respuesta = Integer.parseInt(sol[0]);
+        //sol[1] tiene el id de la tarea a buscar
+        int idTarea = Integer.parseInt(sol[1]);
         try {
-            Log.e("prueba", "Añadiendo en la database");
             dao = getHelper().getTareaDao();
-            //tarea.setTextoPregunta("¿Te cepillaste los dientes Alfredo?");
-            //tarea.setTextoAlarma("A cepillarse");
-            //TERMINAR DE CREAR LA TAREA
-            dao.create(tarea);
-            /*
-            tarea = (Tarea) dao.queryForId(1);
+            Log.e("prueba", "Se busca en la database con el id " + idTarea);
+            tarea = (Tarea) dao.queryForId(idTarea);
             if (!tarea.equals(null)) {
+                //Si la tarea llega al maximo contador se tiene que cambiar la frecuencia de la tarea
+                if((tarea.getContador() == 0 && respuesta != -1) ||
+                        (tarea.getContador() > 0 && tarea.getContador() <= 30))
+                    tarea.setContador(tarea.getContador() + respuesta);
+                if(tarea.getContador() == 30){
+                    // cambiar frecuencia
+                }
                 //Si el reto no esta superado y se puede incrementar o decrementar aun se modifica
-                if (!reto.getSuperado() && respuesta == -1 && reto.getContador() > 0 ||
+                /*if (!reto.getSuperado() && respuesta == -1 && reto.getContador() > 0 ||
                         !reto.getSuperado() && respuesta == 1 && reto.getContador() <= 30) {
                     reto.setContador(reto.getContador() + respuesta);
                     dao.update(reto);
@@ -205,11 +213,11 @@ public class SASucesoImp implements SASuceso {
                 if (reto.getContador() == 30) {
                     reto.setSuperado(true);
                     dao.update(reto);
-                }
+                }*/
 
             }else {
-                Log.e("prueba", "No hay nada en la database");
-            }*/
+                Log.e("prueba", "No hay tareas en la database o ha pasado otra cosa");
+            }
         } catch (SQLException e) {
 
         }
