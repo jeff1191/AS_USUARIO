@@ -1,8 +1,5 @@
 package es.ucm.as_usuario.presentacion;
 
-import java.util.Timer;
-import java.util.TimerTask;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
@@ -10,11 +7,15 @@ import android.os.Bundle;
 import android.view.Window;
 import android.widget.Toast;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 import es.ucm.as_usuario.R;
 import es.ucm.as_usuario.negocio.usuario.TransferUsuario;
 import es.ucm.as_usuario.negocio.usuario.Usuario;
 import es.ucm.as_usuario.presentacion.controlador.Controlador;
 import es.ucm.as_usuario.presentacion.controlador.ListaComandos;
+import es.ucm.as_usuario.presentacion.notificaciones.ServicioNotificaciones;
 
 public class Bienvenido extends Activity {
     private static final long DELAY = 2000;
@@ -28,7 +29,6 @@ public class Bienvenido extends Activity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
 
         setContentView(R.layout.activity_bienvenido);
-
 
         Toast toast1 =
                 Toast.makeText(getApplicationContext(),
@@ -46,6 +46,8 @@ public class Bienvenido extends Activity {
         };
         Timer timer = new Timer();
         timer.schedule(task, DELAY);
+
+        startService(new Intent(this, ServicioNotificaciones.class));
 
 
         Usuario.getInstancia().setAvatar(""); //Aqui se cargarian los datos del usuairo, no va así.

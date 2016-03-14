@@ -6,7 +6,6 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -18,7 +17,6 @@ import java.io.FileNotFoundException;
 import java.io.InputStream;
 
 import es.ucm.as_usuario.R;
-import es.ucm.as_usuario.integracion.DBHelper;
 import es.ucm.as_usuario.negocio.usuario.Usuario;
 import es.ucm.as_usuario.negocio.utils.Frecuencia;
 import es.ucm.as_usuario.presentacion.controlador.Controlador;
@@ -38,13 +36,14 @@ public class MainActivity extends Activity {
         cargarTema();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         //MODIFICARR!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        /*Usuario.getInstancia().setNombre("Albertin");
+        Usuario.getInstancia().setNombre("Albertin");
         Usuario.getInstancia().setAvatar("imagen1.jpg");
         Usuario.getInstancia().setColor("blue");
         Usuario.getInstancia().setTono("Ringtone 1");
         Usuario.getInstancia().setFrecuenciaRecibirInforme(Frecuencia.SEMANAL);
-        Usuario.getInstancia().setPuntuacion(6);*/
+        Usuario.getInstancia().setPuntuacion(6);
         //////////////////////////////////////////////////////////////////////
         nombrePrincipal=(TextView)findViewById(R.id.nombreUser);
         nombrePrincipal.setText(Usuario.getInstancia().getNombre());
@@ -75,8 +74,18 @@ public class MainActivity extends Activity {
 
         }
 
-
         Contexto.getInstancia().setContext(this);
+
+        //MODIFICARR2!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        //Lanza el servicio de las notificaciones
+
+        //Crear un Intent y pasarle un array de tareas
+        //En verdad solo nos interesa la hora/minutos de alarma, texto alarma,
+        //titulo alarma(inventar), hora/minutos pregunta, texto pregunta y titulo pregunta/alarma(inventar)
+
+        //Le pasas un intent
+        //startService(new Intent(Contexto.getInstancia().getContext(), ServicioNotificaciones.class));
+        //////////////////////////////////////////////////////////////////////
     }
 
     @Override
