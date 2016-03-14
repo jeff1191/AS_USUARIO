@@ -11,4 +11,5 @@ public interface SASuceso {
     public Integer responderReto(Integer respuesta);
     public List<TransferTarea> consultarTareas();
     public void responderTarea(String respuestaTarea);
+    public void cargarTareasBBDD();
 }

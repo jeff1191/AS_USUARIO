@@ -11,6 +11,7 @@ import java.util.Date;
 import java.util.List;
 
 import es.ucm.as_usuario.integracion.DBHelper;
+import es.ucm.as_usuario.integracion.Parser;
 import es.ucm.as_usuario.negocio.suceso.Evento;
 import es.ucm.as_usuario.negocio.suceso.Reto;
 import es.ucm.as_usuario.negocio.suceso.SASuceso;
@@ -127,7 +128,7 @@ public class SASucesoImp implements SASuceso {
             tareasDao = getHelper().getTareaDao();
 
             // Esto no hara falta porque ya lo cogera de la BBDD
-
+/*
             Tarea unaSinMas = new Tarea();
             unaSinMas.setFrecuenciaTarea(Frecuencia.DIARIA);
             unaSinMas.setTextoAlarma("Dale los buenos días a mamá");
@@ -216,6 +217,12 @@ public class SASucesoImp implements SASuceso {
         } catch (SQLException e) {
 
         }*/
+    }
+
+    @Override
+    public void cargarTareasBBDD() {
+        Parser p = new Parser();
+
     }
 
 }
