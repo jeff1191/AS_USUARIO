@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import es.ucm.as_usuario.R;
 import es.ucm.as_usuario.negocio.usuario.TransferUsuario;
+import es.ucm.as_usuario.negocio.utils.Frecuencia;
 import es.ucm.as_usuario.presentacion.controlador.Controlador;
 import es.ucm.as_usuario.presentacion.controlador.ListaComandos;
 
@@ -40,12 +41,17 @@ public class Bienvenido extends Activity {
                 Intent mainIntent = new Intent().setClass(
                         Bienvenido.this, MainActivity.class);
                 startActivity(mainIntent);
+
                 finish();
             }
         };
         Timer timer = new Timer();
         timer.schedule(task, DELAY);
 
-        Controlador.getInstancia().ejecutaComando(ListaComandos.CONSULTAR_USUARIO, null);
+     /**   Contexto.getInstancia().setContext(getApplicationContext());
+        Controlador.getInstancia().ejecutaComando(ListaComandos.CONSULTAR_USUARIO, null);*/
+/*
+        Contexto.getInstancia().setContext(getApplicationContext());
+        Controlador.getInstancia().ejecutaComando(ListaComandos.CONSULTAR_USUARIO, null);*/
     }
 }

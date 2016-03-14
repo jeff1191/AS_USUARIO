@@ -28,19 +28,32 @@ public class MainActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        Contexto.getInstancia().setContext(this);
+        /*TransferUsuario crearUsuario = new TransferUsuario();
+        crearUsuario.setNombre("Jiji");
+        crearUsuario.setAvatar("");
+        crearUsuario.setPuntuacion(6);
+        crearUsuario.setPuntuacionAnterior(4);
+        crearUsuario.setFrecuenciaRecibirInforme(Frecuencia.DIARIA);
+        Controlador.getInstancia().ejecutaComando(ListaComandos.CREAR_USUARIO, crearUsuario);*/
+
+
+
         cargarTema();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         Bundle bundle = getIntent().getExtras();
         if(bundle != null) {
+            Log.e("ww", "tiene algo");
             String name = bundle.getString("nombre");
-            String punt = bundle.getString("puntuacion");
+            Integer punt = bundle.getInt("puntuacion");
 
             nombrePrincipal=(TextView)findViewById(R.id.nombreUser);
             nombrePrincipal.setText(name);
             puntuacion = (TextView)findViewById(R.id.puntuacionUsuario);
-            puntuacion.setText(punt +"/10");
+            puntuacion.setText(punt.toString() +"/10");
 
             /*if (bundle.getString("editarUsuario") != null) {
                 //Falta rellenar los demás campos...imagen tono color
@@ -49,7 +62,7 @@ public class MainActivity extends Activity {
         }
 
 
-        Contexto.getInstancia().setContext(this);
+
     }
 
     @Override

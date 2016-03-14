@@ -69,7 +69,7 @@ public class SASucesoImp implements SASuceso {
             dao = getHelper().getRetoDao();
 
             // esto se omitira porque se coge de la BBDD
-            /*Reto nuevojiji= new Reto();
+           Reto nuevojiji= new Reto();
             nuevojiji.setNombre("DUCHARSE POR LAS MAÑANAS");
             nuevojiji.setSuperado(false);
             nuevojiji.setContador(28);
@@ -138,7 +138,7 @@ public class SASucesoImp implements SASuceso {
 
             // Esto no hara falta porque ya lo cogera de la BBDD
 
-            /*Tarea unaSinMas = new Tarea();
+            Tarea unaSinMas = new Tarea();
             unaSinMas.setFrecuenciaTarea(Frecuencia.DIARIA);
             unaSinMas.setTextoAlarma("Dale los buenos días a mamá");
             unaSinMas.setTextoPregunta("¿Le has dado los buenos días a mamá?");

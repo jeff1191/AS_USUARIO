@@ -19,6 +19,7 @@ import es.ucm.as_usuario.integracion.DBHelper;
 import es.ucm.as_usuario.negocio.suceso.TransferTarea;
 import es.ucm.as_usuario.negocio.usuario.TransferUsuario;
 import es.ucm.as_usuario.negocio.usuario.Usuario;
+import es.ucm.as_usuario.negocio.utils.Frecuencia;
 import es.ucm.as_usuario.presentacion.controlador.Controlador;
 import es.ucm.as_usuario.presentacion.controlador.ListaComandos;
 
@@ -36,6 +37,14 @@ public class VerInforme extends Activity{
         cargarTema();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.informe);
+
+        /*TransferUsuario crearUsuario = new TransferUsuario();
+        crearUsuario.setNombre("Jiji");
+        crearUsuario.setAvatar("");
+        crearUsuario.setPuntuacion(6);
+        crearUsuario.setPuntuacionAnterior(4);
+        crearUsuario.setFrecuenciaRecibirInforme(Frecuencia.DIARIA);
+        Controlador.getInstancia().ejecutaComando(ListaComandos.CREAR_USUARIO, crearUsuario);*/
 
         TextView titulo = (TextView)findViewById(R.id.tituloInforme);
         titulo.setText("¿CÓMO VAS?");

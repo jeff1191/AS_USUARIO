@@ -74,54 +74,51 @@ public class SAUsuarioImp implements SAUsuario {
 		Dao<Usuario, Integer> daoUsuario;
 		try {
 			daoUsuario = getHelper().getUsuarioDao();
-			if (!daoUsuario.idExists(1)) {
 
-				Usuario usuario = new Usuario();
+			Usuario usuario = new Usuario();
 
-				usuario.setId(1);
+			usuario.setId(1);
 
-				// actualizamos los valores del nuevo usuario con los introducidos o por defecto
-				if (transferUsuario.getNombre() != null)
-					usuario.setNombre(transferUsuario.getNombre());
-				else
-					usuario.setNombre("Usuario");
+			// actualizamos los valores del nuevo usuario con los introducidos o por defecto
+			if (transferUsuario.getNombre() != null)
+				usuario.setNombre(transferUsuario.getNombre());
+			else
+				usuario.setNombre("Usuario");
 
-				if (transferUsuario.getCorreo() != null)
-					usuario.setCorreo(transferUsuario.getCorreo());
+			if (transferUsuario.getCorreo() != null)
+				usuario.setCorreo(transferUsuario.getCorreo());
 
-				if (transferUsuario.getAvatar() != null)
-					usuario.setAvatar(transferUsuario.getAvatar());
+			if (transferUsuario.getAvatar() != null)
+				usuario.setAvatar(transferUsuario.getAvatar());
 
-				if (transferUsuario.getPuntuacion() != null)
-					usuario.setPuntuacion(transferUsuario.getPuntuacion());
-				else
-					usuario.setPuntuacion(0);
+			if (transferUsuario.getPuntuacion() != null)
+				usuario.setPuntuacion(transferUsuario.getPuntuacion());
+			else
+				usuario.setPuntuacion(0);
 
-				if (transferUsuario.getPuntuacionAnterior() != null)
-					usuario.setPuntuacionAnterior(transferUsuario.getPuntuacionAnterior());
-				else
-					usuario.setPuntuacionAnterior(0);
+			if (transferUsuario.getPuntuacionAnterior() != null)
+				usuario.setPuntuacionAnterior(transferUsuario.getPuntuacionAnterior());
+			else
+				usuario.setPuntuacionAnterior(0);
 
-				if (transferUsuario.getColor() != null)
-					usuario.setColor(transferUsuario.getColor());
+			if (transferUsuario.getColor() != null)
+				usuario.setColor(transferUsuario.getColor());
 
-				if (transferUsuario.getTono() != null)
-					usuario.setTono(transferUsuario.getTono());
+			if (transferUsuario.getTono() != null)
+				usuario.setTono(transferUsuario.getTono());
 
-				if (transferUsuario.getFrecuenciaRecibirInforme() != null)
-					usuario.setFrecuenciaRecibirInforme(transferUsuario.getFrecuenciaRecibirInforme());
+			if (transferUsuario.getFrecuenciaRecibirInforme() != null)
+				usuario.setFrecuenciaRecibirInforme(transferUsuario.getFrecuenciaRecibirInforme());
 
-				if (transferUsuario.getNombreTutor() != null)
-					usuario.setNombreTutor(transferUsuario.getNombreTutor());
+			if (transferUsuario.getNombreTutor() != null)
+				usuario.setNombreTutor(transferUsuario.getNombreTutor());
 
-				if (transferUsuario.getCorreoTutor() != null)
-					usuario.setCorreoTutor(transferUsuario.getCorreoTutor());
+			if (transferUsuario.getCorreoTutor() != null)
+				usuario.setCorreoTutor(transferUsuario.getCorreoTutor());
 
-				// se crea la fila en la tabla de la BBDD
-				daoUsuario.create(usuario);
-			}else{
-				// hay que evitar que se cree un nuevo usuario otra vez, habría que hacer algo para que se modifique el que ya hay con id 1
-			}
+			// se crea la fila en la tabla de la BBDD
+			daoUsuario.create(usuario);
+
 
 		} catch (SQLException e) {
 			e.printStackTrace();

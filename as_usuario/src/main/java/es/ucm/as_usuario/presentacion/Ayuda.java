@@ -7,6 +7,8 @@ import android.view.View;
 import android.widget.ImageView;
 
 import es.ucm.as_usuario.R;
+import es.ucm.as_usuario.presentacion.controlador.Controlador;
+import es.ucm.as_usuario.presentacion.controlador.ListaComandos;
 
 /**
  * Created by msalitu on 08/03/2016.
@@ -39,6 +41,8 @@ public class Ayuda extends Activity{
 
     public void volver(View v){
         Intent pantallaPrincipal = new Intent (getApplicationContext(), MainActivity.class);
+
+        //Controlador.getInstancia().ejecutaComando(ListaComandos.CONSULTAR_USUARIO, null);
         startActivity(pantallaPrincipal);
     }
     public void cargarTema(){

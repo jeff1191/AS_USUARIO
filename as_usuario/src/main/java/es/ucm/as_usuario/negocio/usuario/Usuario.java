@@ -15,7 +15,7 @@ import es.ucm.as_usuario.negocio.utils.Frecuencia;
 
 public class Usuario {
 
-	@DatabaseField(columnName = "ID")
+	@DatabaseField(generatedId = true, columnName = "ID")
 	private Integer id;
 
 	@DatabaseField(columnName = "NOMBRE")

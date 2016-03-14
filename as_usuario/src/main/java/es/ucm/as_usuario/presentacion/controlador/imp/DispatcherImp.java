@@ -130,7 +130,8 @@ public class DispatcherImp extends Dispatcher{
                     iUsuario.putExtra("nombre tutor", transferUsuario.getNombreTutor());
                     iUsuario.putExtra("correo tutor", transferUsuario.getCorreoTutor());
                 }
-                Contexto.getInstancia().getContext().startActivity(iUsuario);
+              // Contexto.getInstancia().getContext().startActivity(iUsuario.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+              //  Contexto.getInstancia().getContext().startActivity(iUsuario);
                 break;
         }
     }
