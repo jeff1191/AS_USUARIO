@@ -51,12 +51,14 @@ public class DispatcherImp extends Dispatcher{
                 TransferUsuario conf = (TransferUsuario) datos;
                 intentConfiguracion.putExtra("nombreConfiguracion", conf.getNombre());
                 intentConfiguracion.putExtra("frecuenciaInformeConfiguracion", conf.getFrecuenciaRecibirInforme());
+                intentConfiguracion.putExtra("imagenConfiguracion", conf.getAvatar());
                 Contexto.getInstancia().getContext().startActivity(intentConfiguracion);
                 break;
             case ListaComandos.EDITAR_USUARIO:
                 Intent intentEditarUsuario = new Intent(Contexto.getInstancia().getContext().getApplicationContext(), MainActivity.class);
                 TransferUsuario editarUsuario = (TransferUsuario) datos;
-                intentEditarUsuario.putExtra("editarUsuario", editarUsuario.getNombre());
+                intentEditarUsuario.putExtra("editarNombre", editarUsuario.getNombre());
+                intentEditarUsuario.putExtra("editarAvatar", editarUsuario.getAvatar());
                 Contexto.getInstancia().getContext().startActivity(intentEditarUsuario);
                 break;
 

@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import es.ucm.as_usuario.R;
 import es.ucm.as_usuario.negocio.usuario.TransferUsuario;
+import es.ucm.as_usuario.negocio.usuario.Usuario;
 import es.ucm.as_usuario.presentacion.controlador.Controlador;
 import es.ucm.as_usuario.presentacion.controlador.ListaComandos;
 
@@ -46,10 +47,13 @@ public class Bienvenido extends Activity {
         Timer timer = new Timer();
         timer.schedule(task, DELAY);
 
+
+        Usuario.getInstancia().setAvatar(""); //Aqui se cargarian los datos del usuairo, no va así.
+/*
         TransferUsuario transferUsuario = new TransferUsuario();
         transferUsuario.setPuntuacion(5);
         transferUsuario.setPuntuacionAnterior(8);
         transferUsuario.setNombre("Jeff");
-        Controlador.getInstancia().ejecutaComando(ListaComandos.CREAR_USUARIO, transferUsuario);
+        Controlador.getInstancia().ejecutaComando(ListaComandos.CREAR_USUARIO, transferUsuario);*/
     }
 }

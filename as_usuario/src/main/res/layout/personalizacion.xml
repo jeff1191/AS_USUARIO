@@ -129,6 +129,7 @@
                 android:layout_height="55dp"
                 android:id="@+id/cambiarColor"
                 android:layout_alignParentStart="true"
+                style="@style/spinnerItemStyle"
                 android:layout_alignTop="@+id/cambiarTono" />
 
             <Spinner
@@ -136,6 +137,7 @@
                 android:layout_height="55dp"
                 android:id="@+id/cambiarTono"
                 android:layout_alignParentBottom="true"
+                style="@style/spinnerItemStyle"
                 android:layout_alignParentEnd="true" />
 
         </RelativeLayout>

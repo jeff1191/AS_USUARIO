@@ -2,12 +2,20 @@ package es.ucm.as_usuario.presentacion;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import java.io.BufferedInputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 
 import es.ucm.as_usuario.R;
 import es.ucm.as_usuario.integracion.DBHelper;
@@ -21,7 +29,7 @@ public class MainActivity extends Activity {
 
     private TextView nombrePrincipal;
     private TextView puntuacion;
-
+    private ImageView imagenPerfil;
 
     private int request_code;
 
@@ -41,13 +49,30 @@ public class MainActivity extends Activity {
         nombrePrincipal=(TextView)findViewById(R.id.nombreUser);
         nombrePrincipal.setText(Usuario.getInstancia().getNombre());
         puntuacion = (TextView)findViewById(R.id.puntuacionUsuario);
-        puntuacion.setText(Usuario.getInstancia().getPuntuacion()+"/10");
+        imagenPerfil= (ImageView) findViewById(R.id.avatar);
+        if(Usuario.getInstancia().getAvatar() != null && !Usuario.getInstancia().getAvatar().equals(""))
+            imagenPerfil.setImageBitmap(BitmapFactory.decodeFile(Usuario.getInstancia().getAvatar()));
+        else
+            imagenPerfil.setImageResource(R.drawable.avatar);
+        puntuacion.setText(Usuario.getInstancia().getPuntuacion() + "/10");
         Bundle bundle = getIntent().getExtras();
         if(bundle != null) {
-            if (bundle.getString("editarUsuario") != null) {
+            if (bundle.getString("editarNombre") != null) {
                 //Falta rellenar los demás campos...imagen tono color
                 nombrePrincipal.setText(bundle.getString("editarUsuario"));
             }
+            if (bundle.getString("editarAvatar") != null) {
+             /*   InputStream is;
+                try {
+                    is = getContentResolver().openInputStream(Uri.parse(bundle.getString("editarAvatar")));
+                    BufferedInputStream bis = new BufferedInputStream(is);
+                    Bitmap bitmap = BitmapFactory.decodeStream(bis);
+                    imagenPerfil.setImageBitmap(bitmap);
+                } catch (FileNotFoundException e) {e.printStackTrace();}*/
+
+                imagenPerfil.setImageBitmap(BitmapFactory.decodeFile(bundle.getString("editarAvatar")));
+            }
+
         }
 
 

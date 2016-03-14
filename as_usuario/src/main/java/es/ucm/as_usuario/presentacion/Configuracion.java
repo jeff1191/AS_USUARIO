@@ -2,28 +2,32 @@ package es.ucm.as_usuario.presentacion;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.Application;
+import android.content.CursorLoader;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
+import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
-import android.util.Log;
-import android.view.ContextMenu;
-import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
+import android.os.Environment;
+import android.provider.MediaStore;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import java.util.ArrayList;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 
 import es.ucm.as_usuario.R;
 import es.ucm.as_usuario.negocio.usuario.TransferUsuario;
@@ -38,8 +42,9 @@ import es.ucm.as_usuario.presentacion.controlador.ListaComandos;
  */
 public class Configuracion extends Activity {
 
-    static final int REQUEST_IMAGE_CAPTURE = 1;
-    static final int SELECT_FILE = 1;
+    private static final int REQUEST_IMAGE_CAPTURE =3;
+    private static final int SELECT_FILE = 2;
+    private static final int REQUEST_CAMERA = 1;
     private EditText editarNombre;
     private Button aceptar;
     private Button color;
@@ -59,7 +64,8 @@ public class Configuracion extends Activity {
     private Spinner spinnerTono;
     private String temaParcial;
     private String tonoParcial;
-
+    private ImageView imagenConfiguracion;
+    private String rutaImagen;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         cargarTema();
@@ -74,13 +80,14 @@ public class Configuracion extends Activity {
         rdgGrupo = (RadioGroup)findViewById(R.id.rdgGrupo);
         spinnerColors = (Spinner) findViewById(R.id.cambiarColor);
         spinnerTono = (Spinner) findViewById(R.id.cambiarTono);
+        imagenConfiguracion = (ImageView) findViewById(R.id.editarAvatar);
         tonoParcial=tonoActual;
         temaParcial=temaActual;
 
         ////////Spinner color ///////
         nombresColoresSistema();
         ArrayAdapter<String> adapter_colores= new ArrayAdapter<String>(this,
-                android.R.layout.simple_spinner_item, nombresColores);
+                android.R.layout.simple_spinner_item,nombresColores);
         adapter_colores
                 .setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerColors.setAdapter(adapter_colores);
@@ -157,7 +164,10 @@ public class Configuracion extends Activity {
             }
         });
         ////////////////////////////////////////////////////
-
+        if(!bundle.getString("imagenConfiguracion").equals(""))
+            imagenConfiguracion.setImageBitmap(BitmapFactory.decodeFile(bundle.getString("imagenConfiguracion")));
+        else
+            imagenConfiguracion.setImageResource(R.drawable.avatar);
 
         editarNombre.setText(bundle.getString("nombreConfiguracion"));
         frecActual=(Frecuencia)bundle.getSerializable("frecuenciaInformeConfiguracion");
@@ -206,11 +216,11 @@ public class Configuracion extends Activity {
                     temaActual = temaParcial;
                     tonoActual = tonoParcial;
                     editarUsuario.setColor(temaActual);
+                    if(!rutaImagen.equals(""))
+                         editarUsuario.setAvatar(rutaImagen);
+                    rutaImagen="";
                     Controlador.getInstancia().ejecutaComando(ListaComandos.EDITAR_USUARIO, editarUsuario);
-                    //Intent data = new Intent();
-                    //data.putExtra("nombreNuevo",editarUsuario.getNombre());
-                    //setResult(RESULT_OK, data);
-                    // finish();
+
                 }else{
                     Toast errorNombre =
                             Toast.makeText(getApplicationContext(),
@@ -319,4 +329,56 @@ public class Configuracion extends Activity {
         });
         builder.show();
     }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK) {
+            if (requestCode == REQUEST_CAMERA) {
+                Bitmap thumbnail = (Bitmap) data.getExtras().get("data");
+                ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+                thumbnail.compress(Bitmap.CompressFormat.JPEG, 90, bytes);
+                File destination = new File(Environment.getExternalStorageDirectory(),
+                        System.currentTimeMillis() + ".jpg");
+                FileOutputStream fo;
+                try {
+                    destination.createNewFile();
+                    fo = new FileOutputStream(destination);
+                    fo.write(bytes.toByteArray());
+                    fo.close();
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                imagenConfiguracion.setImageBitmap(thumbnail);
+                rutaImagen = destination.getAbsolutePath();
+            } else if (requestCode == SELECT_FILE) {
+                Uri selectedImageUri = data.getData();
+                String[] projection = {MediaStore.MediaColumns.DATA};
+                CursorLoader cursorLoader = new CursorLoader(this, selectedImageUri, projection, null, null,
+                        null);
+                Cursor cursor = cursorLoader.loadInBackground();
+                int column_index = cursor.getColumnIndexOrThrow(MediaStore.MediaColumns.DATA);
+                cursor.moveToFirst();
+                String selectedImagePath = cursor.getString(column_index);
+                Bitmap bm;
+                BitmapFactory.Options options = new BitmapFactory.Options();
+                options.inJustDecodeBounds = true;
+                BitmapFactory.decodeFile(selectedImagePath, options);
+                final int REQUIRED_SIZE = 200;
+                int scale = 1;
+                while (options.outWidth / scale / 2 >= REQUIRED_SIZE
+                        && options.outHeight / scale / 2 >= REQUIRED_SIZE)
+                    scale *= 2;
+                options.inSampleSize = scale;
+                options.inJustDecodeBounds = false;
+                bm = BitmapFactory.decodeFile(selectedImagePath, options);
+                imagenConfiguracion.setImageBitmap(bm);
+                rutaImagen=selectedImagePath;
+            }
+        }
+
+
+        }
 }

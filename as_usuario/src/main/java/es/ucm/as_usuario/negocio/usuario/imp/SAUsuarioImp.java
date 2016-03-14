@@ -34,10 +34,8 @@ public class SAUsuarioImp implements SAUsuario {
 	public TransferUsuario editarUsuario(TransferUsuario datos) {
 		Usuario.getInstancia().setNombre(datos.getNombre());
 		Usuario.getInstancia().setFrecuenciaRecibirInforme(datos.getFrecuenciaRecibirInforme());
-		TransferUsuario ret = new TransferUsuario();
-		ret.setNombre(Usuario.getInstancia().getNombre());
-		ret.setFrecuenciaRecibirInforme(Usuario.getInstancia().getFrecuenciaRecibirInformes());
-		return ret;
+		Usuario.getInstancia().setAvatar(datos.getAvatar());
+		return datos;
 	}
 	
 	public void sincronizar() {
@@ -67,6 +65,7 @@ public class SAUsuarioImp implements SAUsuario {
 			Usuario.getInstancia().setNombre(transferUsuario.getNombre());
 			Usuario.getInstancia().setPuntuacion(transferUsuario.getPuntuacion());
 			Usuario.getInstancia().setPuntuacionAnterior(transferUsuario.getPuntuacionAnterior());
+			Usuario.getInstancia().setAvatar(transferUsuario.getAvatar());
 			daoUsuario.create(Usuario.getInstancia());
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -78,6 +77,7 @@ public class SAUsuarioImp implements SAUsuario {
 		TransferUsuario ret = new TransferUsuario();
 		ret.setNombre(Usuario.getInstancia().getNombre());
 		ret.setFrecuenciaRecibirInforme(Usuario.getInstancia().getFrecuenciaRecibirInformes());
+		ret.setAvatar(Usuario.getInstancia().getAvatar());
 		return ret;
 	}
 }

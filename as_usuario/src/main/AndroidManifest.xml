@@ -25,4 +25,5 @@
         <activity android:name=".presentacion.Ayuda"/>
         <activity android:name=".presentacion.VerInforme"/>
     </application>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 </manifest>
