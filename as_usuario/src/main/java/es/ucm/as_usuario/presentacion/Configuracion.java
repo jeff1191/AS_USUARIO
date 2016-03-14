@@ -43,8 +43,8 @@ import es.ucm.as_usuario.presentacion.controlador.ListaComandos;
 public class Configuracion extends Activity {
 
     private static final int REQUEST_IMAGE_CAPTURE =3;
-    private static final int SELECT_FILE = 2;
-    private static final int REQUEST_CAMERA = 1;
+    private static final int SELECCIONAR_GALERIA = 2;
+    private static final int CAMARA = 1;
     private EditText editarNombre;
     private Button aceptar;
     private Button color;
@@ -321,7 +321,7 @@ public class Configuracion extends Activity {
                     intent.setType("image/*");
                     startActivityForResult(
                             Intent.createChooser(intent, "Select File"),
-                            SELECT_FILE);
+                            SELECCIONAR_GALERIA);
                 } else if (items[item].equals("Salir")) {
                     dialog.dismiss();
                 }
@@ -334,10 +334,10 @@ public class Configuracion extends Activity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK) {
-            if (requestCode == REQUEST_CAMERA) {
-                Bitmap thumbnail = (Bitmap) data.getExtras().get("data");
+            if (requestCode == CAMARA) {
+                Bitmap imagen = (Bitmap) data.getExtras().get("data");
                 ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-                thumbnail.compress(Bitmap.CompressFormat.JPEG, 90, bytes);
+                imagen.compress(Bitmap.CompressFormat.JPEG, 90, bytes);
                 File destination = new File(Environment.getExternalStorageDirectory(),
                         System.currentTimeMillis() + ".jpg");
                 FileOutputStream fo;
@@ -351,9 +351,9 @@ public class Configuracion extends Activity {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-                imagenConfiguracion.setImageBitmap(thumbnail);
+                imagenConfiguracion.setImageBitmap(imagen);
                 rutaImagen = destination.getAbsolutePath();
-            } else if (requestCode == SELECT_FILE) {
+            } else if (requestCode == SELECCIONAR_GALERIA) {
                 Uri selectedImageUri = data.getData();
                 String[] projection = {MediaStore.MediaColumns.DATA};
                 CursorLoader cursorLoader = new CursorLoader(this, selectedImageUri, projection, null, null,
