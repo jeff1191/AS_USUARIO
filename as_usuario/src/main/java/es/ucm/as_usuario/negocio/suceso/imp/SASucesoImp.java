@@ -172,7 +172,6 @@ public class SASucesoImp implements SASuceso {
             tareas = tareasDao.queryForAll();
             for(int i = 0; i < tareas.size(); i++){
 
-
                 TransferTarea tt = new TransferTarea();
                 tt.setId(tareas.get(i).getId());
                 tt.setContador(tareas.get(i).getContador());
