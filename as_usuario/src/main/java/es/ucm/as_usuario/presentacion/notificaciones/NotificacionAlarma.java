@@ -86,7 +86,16 @@ public class NotificacionAlarma extends BroadcastReceiver {
         Intent i = new Intent(context, NotificacionAlarma.class);
         i.putExtra("titulo", titulo);
         i.putExtra("texto", texto);
-        PendingIntent pi = PendingIntent.getBroadcast(context, 0, i, 0);
+         /*
+        It gets current system time. Then I'm reading only last 4 digits from it.
+         I'm using it to create unique id every time notification is displayed.
+         So the probability of getting same or reset of notification id will be avoided.
+         */
+        long time = new Date().getTime();
+        String tmpStr = String.valueOf(time);
+        String last4Str = tmpStr.substring(tmpStr.length() - 5);
+        int notificationId = Integer.valueOf(last4Str);
+        PendingIntent pi = PendingIntent.getBroadcast(context, notificationId, i, PendingIntent.FLAG_ONE_SHOT);
 
         Log.e("prueba", "La hora es..." + hora + ":" + minutos);
 
@@ -95,6 +104,6 @@ public class NotificacionAlarma extends BroadcastReceiver {
         horaNotificacion.set(Calendar.MINUTE, minutos);
         horaNotificacion.set(Calendar.SECOND, 00);
 
-        am.setRepeating(AlarmManager.RTC_WAKEUP, horaNotificacion.getTimeInMillis(), 24 * 60 * 60 * 1000, pi);
+        am.setRepeating(AlarmManager.RTC_WAKEUP, horaNotificacion.getTimeInMillis(), 24*60*60*1000, pi);
     }
 }

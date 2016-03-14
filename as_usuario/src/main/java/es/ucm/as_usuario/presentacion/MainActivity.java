@@ -13,7 +13,6 @@ import es.ucm.as_usuario.negocio.usuario.Usuario;
 import es.ucm.as_usuario.negocio.utils.Frecuencia;
 import es.ucm.as_usuario.presentacion.controlador.Controlador;
 import es.ucm.as_usuario.presentacion.controlador.ListaComandos;
-import es.ucm.as_usuario.presentacion.notificaciones.ServicioNotificaciones;
 
 
 public class MainActivity extends Activity {
@@ -60,7 +59,7 @@ public class MainActivity extends Activity {
         //titulo alarma(inventar), hora/minutos pregunta, texto pregunta y titulo pregunta/alarma(inventar)
 
         //Le pasas un intent
-        startService(new Intent(Contexto.getInstancia().getContext(), ServicioNotificaciones.class));
+        //startService(new Intent(Contexto.getInstancia().getContext(), ServicioNotificaciones.class));
         //////////////////////////////////////////////////////////////////////
     }
 

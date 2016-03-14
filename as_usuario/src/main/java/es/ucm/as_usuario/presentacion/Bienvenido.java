@@ -12,6 +12,7 @@ import java.util.TimerTask;
 
 import es.ucm.as_usuario.R;
 import es.ucm.as_usuario.negocio.usuario.TransferUsuario;
+import es.ucm.as_usuario.presentacion.notificaciones.ServicioNotificaciones;
 
 public class Bienvenido extends Activity {
     private static final long DELAY = 2000;
@@ -25,7 +26,6 @@ public class Bienvenido extends Activity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
 
         setContentView(R.layout.activity_bienvenido);
-
 
         Toast toast1 =
                 Toast.makeText(getApplicationContext(),
@@ -43,6 +43,8 @@ public class Bienvenido extends Activity {
         };
         Timer timer = new Timer();
         timer.schedule(task, DELAY);
+
+        startService(new Intent(this, ServicioNotificaciones.class));
 
         TransferUsuario transferUsuario = new TransferUsuario();
         transferUsuario.setPuntuacion(5);

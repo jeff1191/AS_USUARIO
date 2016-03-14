@@ -36,8 +36,8 @@ public class ServicioNotificaciones extends Service{
 */
         Log.e("prueba", "Servicio lanzado...");
 
-        alarma.lanzarAlarma(this, 4, 6, "holaa", "Esto es una pruebaaa");
-        pregunta.lanzarPregunta(this, 4, 7, "holaa", "Esto es una pruebaaa con botones", 1);
+        alarma.lanzarAlarma(this, 3, 44, "holaa", "Esto es una pruebaaa");
+        pregunta.lanzarPregunta(this, 3, 45, "holaa", "Esto es una pruebaaa con botones", 1);
         //alarma.lanzarAlarma(this, 1, 36);
         //pregunta.lanzarPregunta(this, 1, 35);
         //pregunta.lanzarPregunta(this, 8, 36);
