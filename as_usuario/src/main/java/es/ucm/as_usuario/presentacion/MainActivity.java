@@ -75,6 +75,7 @@ public class MainActivity extends Activity {
             puntuacion = (TextView) findViewById(R.id.puntuacionUsuario);
             puntuacion.setText(punt.toString() + "/10");
 
+
             /*if (bundle.getString("editarUsuario") != null) {
                 //Falta rellenar los demás campos...imagen tono color
                 nombrePrincipal.setText(bundle.getString("editarUsuario"));
