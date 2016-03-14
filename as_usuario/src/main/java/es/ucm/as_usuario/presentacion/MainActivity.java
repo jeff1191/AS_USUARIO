@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import es.ucm.as_usuario.R;
 import es.ucm.as_usuario.integracion.DBHelper;
+import es.ucm.as_usuario.negocio.usuario.TransferUsuario;
 import es.ucm.as_usuario.negocio.usuario.Usuario;
 import es.ucm.as_usuario.negocio.utils.Frecuencia;
 import es.ucm.as_usuario.presentacion.controlador.Controlador;
@@ -30,24 +31,21 @@ public class MainActivity extends Activity {
         cargarTema();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        //MODIFICARR!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        /*Usuario.getInstancia().setNombre("Albertin");
-        Usuario.getInstancia().setAvatar("imagen1.jpg");
-        Usuario.getInstancia().setColor("blue");
-        Usuario.getInstancia().setTono("Ringtone 1");
-        Usuario.getInstancia().setFrecuenciaRecibirInforme(Frecuencia.SEMANAL);
-        Usuario.getInstancia().setPuntuacion(6);*/
-        //////////////////////////////////////////////////////////////////////
-        nombrePrincipal=(TextView)findViewById(R.id.nombreUser);
-        nombrePrincipal.setText(Usuario.getInstancia().getNombre());
-        puntuacion = (TextView)findViewById(R.id.puntuacionUsuario);
-        puntuacion.setText(Usuario.getInstancia().getPuntuacion()+"/10");
+
         Bundle bundle = getIntent().getExtras();
         if(bundle != null) {
-            if (bundle.getString("editarUsuario") != null) {
+            String name = bundle.getString("nombre");
+            String punt = bundle.getString("puntuacion");
+
+            nombrePrincipal=(TextView)findViewById(R.id.nombreUser);
+            nombrePrincipal.setText(name);
+            puntuacion = (TextView)findViewById(R.id.puntuacionUsuario);
+            puntuacion.setText(punt +"/10");
+
+            /*if (bundle.getString("editarUsuario") != null) {
                 //Falta rellenar los demás campos...imagen tono color
                 nombrePrincipal.setText(bundle.getString("editarUsuario"));
-            }
+            }*/
         }
 
 
@@ -77,11 +75,7 @@ public class MainActivity extends Activity {
     }
 
     public void personalizacion(View v){
-        //Intent cambiosUsuario = new Intent (getApplicationContext(), Configuracion.class);
-
-       // startActivity(cambiosUsuario);
         Controlador.getInstancia().ejecutaComando(ListaComandos.CONFIGURACION, null);
-       // startActivityForResult(intentConfiguracion, request_code);
     }
 
     public void ayuda(View v) {

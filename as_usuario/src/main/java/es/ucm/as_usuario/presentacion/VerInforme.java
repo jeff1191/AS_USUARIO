@@ -40,28 +40,22 @@ public class VerInforme extends Activity{
         TextView titulo = (TextView)findViewById(R.id.tituloInforme);
         titulo.setText("¿CÓMO VAS?");
 
-        // Esto es lo que hay que descomentar para que funcione pero crea un usuario cada vez que lo lanzas
-        TransferUsuario transferUsuario = new TransferUsuario();
-        transferUsuario.setPuntuacion(5);
-        transferUsuario.setPuntuacionAnterior(8);
-        transferUsuario.setNombre("Jeff");
-        Controlador.getInstancia().ejecutaComando(ListaComandos.CREAR_USUARIO, transferUsuario);
-        ///*/
-
-
-        TextView ahora = (TextView)findViewById(R.id.puntuacionAhora);
-        ahora.setText(Usuario.getInstancia().getPuntuacion().toString());
-        TextView antes = (TextView)findViewById(R.id.puntuacionAnterior );
-        antes.setText(Usuario.getInstancia().getPuntuacionAnterior().toString());
+        Bundle bundle = getIntent().getExtras();
 
         ImageView img = (ImageView)findViewById(R.id.imageView2);
 
-        Integer puntAntes = Usuario.getInstancia().getPuntuacionAnterior();
-        Integer puntAhora = Usuario.getInstancia().getPuntuacion();
+        Integer puntAntes = bundle.getInt("puntuacion anterior");
+        Integer puntAhora = bundle.getInt("puntuacion actual");
         if (puntAhora > puntAntes)
             img.setImageResource(R.drawable.flechaverde);
         else
             img.setImageResource(R.drawable.flecharoja);
+
+        TextView ahora = (TextView)findViewById(R.id.puntuacionAhora);
+        ahora.setText(puntAhora.toString());
+        TextView antes = (TextView)findViewById(R.id.puntuacionAnterior );
+        antes.setText(puntAntes.toString());
+
 
         final ListView lista = (ListView) findViewById(R.id.listView);
 
@@ -84,6 +78,7 @@ public class VerInforme extends Activity{
     public void ayuda(View v){
         Controlador.getInstancia().ejecutaComando(ListaComandos.AYUDA, "informe");
     }
+
     public void cargarTema(){
         switch (Configuracion.temaActual){
             case "AS_theme_azul":

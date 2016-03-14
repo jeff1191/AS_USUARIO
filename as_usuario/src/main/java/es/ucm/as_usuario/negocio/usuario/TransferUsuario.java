@@ -37,9 +37,23 @@ public class TransferUsuario {
 
 	private String correoTutor;
 
-	private String ayuda;
-
 	private Integer puntuacionAnterior;
+
+	public TransferUsuario(){	}
+
+	public TransferUsuario(Usuario usuario){
+		this.id = usuario.getId();
+		this.nombre = usuario.getNombre();
+		this.correo = usuario.getCorreo();
+		this.avatar = usuario.getAvatar();
+		this.puntuacion = usuario.getPuntuacion();
+		this.color = usuario.getColor();
+		this.tono = usuario.getTono();
+		this.frecuenciaRecibirInforme = usuario.getFrecuenciaRecibirInforme();
+		this.nombreTutor = usuario.getNombreTutor();
+		this.correoTutor = usuario.getCorreoTutor();
+		this.puntuacionAnterior = usuario.getPuntuacionAnterior();
+	}
 
 	public Integer getId() {
 		return id;
@@ -143,14 +157,6 @@ public class TransferUsuario {
 
 	public void setCorreoTutor(String correoTutor) {
 		this.correoTutor = correoTutor;
-	}
-
-	public String getAyuda() {
-		return ayuda;
-	}
-
-	public void setAyuda(String ayuda) {
-		this.ayuda = ayuda;
 	}
 
 	public Integer getPuntuacionAnterior() {

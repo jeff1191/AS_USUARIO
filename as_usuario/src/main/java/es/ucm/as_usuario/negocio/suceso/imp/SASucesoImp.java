@@ -137,8 +137,8 @@ public class SASucesoImp implements SASuceso {
             tareasDao = getHelper().getTareaDao();
 
             // Esto no hara falta porque ya lo cogera de la BBDD
-/*
-            Tarea unaSinMas = new Tarea();
+
+            /*Tarea unaSinMas = new Tarea();
             unaSinMas.setFrecuenciaTarea(Frecuencia.DIARIA);
             unaSinMas.setTextoAlarma("Dale los buenos días a mamá");
             unaSinMas.setTextoPregunta("¿Le has dado los buenos días a mamá?");

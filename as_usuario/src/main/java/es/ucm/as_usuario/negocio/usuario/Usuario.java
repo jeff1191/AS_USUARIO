@@ -15,8 +15,6 @@ import es.ucm.as_usuario.negocio.utils.Frecuencia;
 
 public class Usuario {
 
-	public static Usuario instancia= new Usuario();
-
 	@DatabaseField(columnName = "ID")
 	private Integer id;
 
@@ -50,12 +48,6 @@ public class Usuario {
 	@DatabaseField(columnName = "CORREO_TUTOR")
 	private String correoTutor;
 
-	private Usuario(){	}
-
-	public static Usuario getInstancia() {
-		return instancia;
-	}
-
 	public Integer getId() {		return this.id;	}
 
 	public String getNombre() {		return this.nombre;	}
@@ -70,10 +62,6 @@ public class Usuario {
 
 	public Integer getPuntuacion() {
 		return this.puntuacion;
-	}
-
-	public static void setInstancia(Usuario instancia) {
-		Usuario.instancia = instancia;
 	}
 
 	public void setId(Integer id) {
@@ -141,5 +129,6 @@ public class Usuario {
 	public void setCorreoTutor(String nuevoCorreoTutor) {
 		this.correoTutor=nuevoCorreoTutor;
 	}
+
 
 }

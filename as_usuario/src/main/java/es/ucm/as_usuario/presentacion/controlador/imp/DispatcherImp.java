@@ -7,6 +7,7 @@ import android.view.View;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import es.ucm.as_usuario.negocio.suceso.Reto;
 import es.ucm.as_usuario.negocio.suceso.TransferReto;
@@ -84,17 +85,22 @@ public class DispatcherImp extends Dispatcher{
             case ListaComandos.VER_INFORME:
 
                 Intent intentTareas = new Intent(Contexto.getInstancia().getContext().getApplicationContext(), VerInforme.class);
-                ArrayList<TransferTarea> tareasModelo= (ArrayList<TransferTarea>) datos;
+                ArrayList<Object> a = (ArrayList<Object>)datos;
+                TransferUsuario tu = (TransferUsuario) a.get(0);
+
                 ArrayList<String> titulos = new ArrayList<String>();
                 ArrayList<Integer> si = new ArrayList<Integer>();
                 ArrayList<Integer> no = new ArrayList<Integer>();
 
-                for(int j=0; j < tareasModelo.size(); j++){
-                    titulos.add(tareasModelo.get(j).getTextoAlarma());
-                    no.add(tareasModelo.get(j).getNumNo());
-                    si.add(tareasModelo.get(j).getNumSi());
+                for(int j = 1; j < a.size(); j++){
+                    TransferTarea tt = (TransferTarea)a.get(j);
+                    titulos.add(tt.getTextoAlarma());
+                    no.add(tt.getNumNo());
+                    si.add(tt.getNumSi());
                 }
 
+                intentTareas.putExtra("puntuacion actual",tu.getPuntuacion() );
+                intentTareas.putExtra("puntuacion anterior", tu.getPuntuacionAnterior());
                 intentTareas.putStringArrayListExtra("titulos", titulos);
                 intentTareas.putIntegerArrayListExtra("no", no);
                 intentTareas.putIntegerArrayListExtra("si", si);
@@ -102,11 +108,29 @@ public class DispatcherImp extends Dispatcher{
                 break;
 
             case ListaComandos.ACTUALIZAR_PUNTUACION:
-                Intent iPuntuacon = new Intent(Contexto.getInstancia().getContext().getApplicationContext(), MainActivity.class);
-                iPuntuacon.putExtra("puntuacion", (Integer)datos);
+                Intent iPuntuacion = new Intent(Contexto.getInstancia().getContext().getApplicationContext(), MainActivity.class);
+                iPuntuacion.putExtra("puntuacion", (Integer)datos);
                 break;
 
             case ListaComandos.CREAR_USUARIO:
+                break;
+
+            case ListaComandos.CONSULTAR_USUARIO:
+                Intent iUsuario = new Intent(Contexto.getInstancia().getContext().getApplicationContext(), MainActivity.class);
+                TransferUsuario transferUsuario = (TransferUsuario)datos;
+                if (transferUsuario!= null) {
+                    iUsuario.putExtra("nombre", transferUsuario.getNombre());
+                    iUsuario.putExtra("correo", transferUsuario.getCorreo());
+                    iUsuario.putExtra("avatar", transferUsuario.getAvatar());
+                    iUsuario.putExtra("puntuacion", transferUsuario.getPuntuacion());
+                    iUsuario.putExtra("puntuacion anterior", transferUsuario.getPuntuacionAnterior());
+                    iUsuario.putExtra("color", transferUsuario.getColor());
+                    iUsuario.putExtra("tono", transferUsuario.getTono());
+                    iUsuario.putExtra("frecuencia", transferUsuario.getFrecuenciaRecibirInforme());
+                    iUsuario.putExtra("nombre tutor", transferUsuario.getNombreTutor());
+                    iUsuario.putExtra("correo tutor", transferUsuario.getCorreoTutor());
+                }
+                Contexto.getInstancia().getContext().startActivity(iUsuario);
                 break;
         }
     }

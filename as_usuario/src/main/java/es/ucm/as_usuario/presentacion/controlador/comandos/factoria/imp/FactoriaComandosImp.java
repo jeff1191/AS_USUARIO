@@ -4,6 +4,7 @@ import es.ucm.as_usuario.presentacion.controlador.ListaComandos;
 import es.ucm.as_usuario.presentacion.controlador.comandos.Command;
 import es.ucm.as_usuario.presentacion.controlador.comandos.factoria.FactoriaComandos;
 import es.ucm.as_usuario.presentacion.controlador.comandos.imp.ActualizaPuntuacionComando;
+import es.ucm.as_usuario.presentacion.controlador.comandos.imp.ConsultarUsuarioComando;
 import es.ucm.as_usuario.presentacion.controlador.comandos.imp.CrearUsuarioComando;
 import es.ucm.as_usuario.presentacion.controlador.comandos.imp.ResponderRetoComando;
 import es.ucm.as_usuario.presentacion.controlador.comandos.imp.VerAyudaComando;
@@ -47,6 +48,9 @@ public class FactoriaComandosImp extends FactoriaComandos {
                 break;
             case ListaComandos.CREAR_USUARIO:
                 ret = new CrearUsuarioComando();
+                break;
+            case ListaComandos.CONSULTAR_USUARIO:
+                ret = new ConsultarUsuarioComando();
                 break;
         }
 

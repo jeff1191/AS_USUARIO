@@ -159,8 +159,8 @@ public class Configuracion extends Activity {
         ////////////////////////////////////////////////////
 
 
-        editarNombre.setText(bundle.getString("nombreConfiguracion"));
-        frecActual=(Frecuencia)bundle.getSerializable("frecuenciaInformeConfiguracion");
+        editarNombre.setText(bundle.getString("nombre"));
+        frecActual=(Frecuencia)bundle.getSerializable("frecuencia");
         if(frecActual == Frecuencia.DIARIA){
             diaria.setChecked(true);
             semanal.setChecked(false);

@@ -3,6 +3,8 @@
  */
 package es.ucm.as_usuario.negocio.usuario.imp;
 
+import android.util.Log;
+
 import es.ucm.as_usuario.negocio.usuario.SAUsuario;
 
 import com.j256.ormlite.android.apptools.OpenHelperManager;
@@ -32,11 +34,21 @@ public class SAUsuarioImp implements SAUsuario {
 	}
 	
 	public TransferUsuario editarUsuario(TransferUsuario datos) {
-		Usuario.getInstancia().setNombre(datos.getNombre());
-		Usuario.getInstancia().setFrecuenciaRecibirInforme(datos.getFrecuenciaRecibirInforme());
+		Dao<Usuario, Integer> daoUsuario;
 		TransferUsuario ret = new TransferUsuario();
-		ret.setNombre(Usuario.getInstancia().getNombre());
-		ret.setFrecuenciaRecibirInforme(Usuario.getInstancia().getFrecuenciaRecibirInformes());
+		try {
+			daoUsuario = getHelper().getUsuarioDao();
+			if (daoUsuario.idExists(1)) {
+				Usuario usuario = daoUsuario.queryForId(1);
+				usuario.setNombre(datos.getNombre());
+				usuario.setFrecuenciaRecibirInforme(datos.getFrecuenciaRecibirInforme());
+				ret.setNombre(usuario.getNombre());
+				ret.setFrecuenciaRecibirInforme(usuario.getFrecuenciaRecibirInformes());
+			}else
+				return null;
+		}catch (SQLException e) {
+			e.printStackTrace();
+		}
 		return ret;
 	}
 	
@@ -44,9 +56,7 @@ public class SAUsuarioImp implements SAUsuario {
 		
 	}
 
-	/*
-	puntuacion = (10 * nºtareas positivas / nº tareas totales
-	* */
+	//puntuacion = (10 * nºtareas positivas / nº tareas totales
 	@Override
 	public Integer calcularPuntuacion() {
 		SASuceso ss = FactoriaSA.getInstancia().nuevoSASuceso();
@@ -64,20 +74,99 @@ public class SAUsuarioImp implements SAUsuario {
 		Dao<Usuario, Integer> daoUsuario;
 		try {
 			daoUsuario = getHelper().getUsuarioDao();
-			Usuario.getInstancia().setNombre(transferUsuario.getNombre());
-			Usuario.getInstancia().setPuntuacion(transferUsuario.getPuntuacion());
-			Usuario.getInstancia().setPuntuacionAnterior(transferUsuario.getPuntuacionAnterior());
-			daoUsuario.create(Usuario.getInstancia());
+			if (!daoUsuario.idExists(1)) {
+
+				Usuario usuario = new Usuario();
+
+				usuario.setId(1);
+
+				// actualizamos los valores del nuevo usuario con los introducidos o por defecto
+				if (transferUsuario.getNombre() != null)
+					usuario.setNombre(transferUsuario.getNombre());
+				else
+					usuario.setNombre("Usuario");
+
+				if (transferUsuario.getCorreo() != null)
+					usuario.setCorreo(transferUsuario.getCorreo());
+
+				if (transferUsuario.getAvatar() != null)
+					usuario.setAvatar(transferUsuario.getAvatar());
+
+				if (transferUsuario.getPuntuacion() != null)
+					usuario.setPuntuacion(transferUsuario.getPuntuacion());
+				else
+					usuario.setPuntuacion(0);
+
+				if (transferUsuario.getPuntuacionAnterior() != null)
+					usuario.setPuntuacionAnterior(transferUsuario.getPuntuacionAnterior());
+				else
+					usuario.setPuntuacionAnterior(0);
+
+				if (transferUsuario.getColor() != null)
+					usuario.setColor(transferUsuario.getColor());
+
+				if (transferUsuario.getTono() != null)
+					usuario.setTono(transferUsuario.getTono());
+
+				if (transferUsuario.getFrecuenciaRecibirInforme() != null)
+					usuario.setFrecuenciaRecibirInforme(transferUsuario.getFrecuenciaRecibirInforme());
+
+				if (transferUsuario.getNombreTutor() != null)
+					usuario.setNombreTutor(transferUsuario.getNombreTutor());
+
+				if (transferUsuario.getCorreoTutor() != null)
+					usuario.setCorreoTutor(transferUsuario.getCorreoTutor());
+
+				// se crea la fila en la tabla de la BBDD
+				daoUsuario.create(usuario);
+			}else{
+				// hay que evitar que se cree un nuevo usuario otra vez, habría que hacer algo para que se modifique el que ya hay con id 1
+			}
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 	}
 
+
 	@Override
-	public TransferUsuario usuarioActivo() {
-		TransferUsuario ret = new TransferUsuario();
-		ret.setNombre(Usuario.getInstancia().getNombre());
-		ret.setFrecuenciaRecibirInforme(Usuario.getInstancia().getFrecuenciaRecibirInformes());
-		return ret;
+	public TransferUsuario consultarUsuario() {
+		Dao<Usuario, Integer> daoUsuario;
+		TransferUsuario transferUsuario = new TransferUsuario();
+		try {
+
+			daoUsuario = getHelper().getUsuarioDao();
+			Log.e("transfer", "antes de coger del dao");
+
+			Usuario u = daoUsuario.queryForId(1);
+
+				// metemos los datos en un transfer
+				transferUsuario.setId(u.getId());
+				if (u.getNombre() !=  null)
+					transferUsuario.setNombre(u.getNombre());
+				if (u.getCorreo() !=  null)
+					transferUsuario.setCorreo(u.getCorreo());
+				if (u.getAvatar() !=  null)
+					transferUsuario.setAvatar(u.getAvatar());
+				if (u.getPuntuacion() !=  null)
+					transferUsuario.setPuntuacion(u.getPuntuacion());
+				if (u.getColor() !=  null)
+					transferUsuario.setColor(u.getColor());
+				if (u.getTono() !=  null)
+					transferUsuario.setTono(u.getTono());
+				if (u.getFrecuenciaRecibirInforme() !=  null)
+					transferUsuario.setFrecuenciaRecibirInforme(u.getFrecuenciaRecibirInforme());
+				if (u.getNombreTutor() !=  null)
+					transferUsuario.setNombreTutor(u.getNombreTutor());
+				if (u.getCorreoTutor() !=  null)
+					transferUsuario.setCorreoTutor(u.getCorreoTutor());
+
+Log.e("transfer", transferUsuario.getNombre());
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return transferUsuario;
 	}
+
 }

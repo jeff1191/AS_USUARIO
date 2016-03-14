@@ -46,10 +46,6 @@ public class Bienvenido extends Activity {
         Timer timer = new Timer();
         timer.schedule(task, DELAY);
 
-        TransferUsuario transferUsuario = new TransferUsuario();
-        transferUsuario.setPuntuacion(5);
-        transferUsuario.setPuntuacionAnterior(8);
-        transferUsuario.setNombre("Jeff");
-        Controlador.getInstancia().ejecutaComando(ListaComandos.CREAR_USUARIO, transferUsuario);
+        Controlador.getInstancia().ejecutaComando(ListaComandos.CONSULTAR_USUARIO, null);
     }
 }
