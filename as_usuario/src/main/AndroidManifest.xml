@@ -3,6 +3,7 @@
     package="es.ucm.as_usuario">
 
     <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 
     <application
         android:allowBackup="true"
@@ -38,5 +39,5 @@
         <receiver android:name=".presentacion.notificaciones.GestorRespuestas" />
 
     </application>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+
 </manifest>

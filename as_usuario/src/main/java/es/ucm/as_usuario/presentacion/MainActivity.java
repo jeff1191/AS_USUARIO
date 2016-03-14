@@ -21,6 +21,7 @@ import es.ucm.as_usuario.negocio.usuario.Usuario;
 import es.ucm.as_usuario.negocio.utils.Frecuencia;
 import es.ucm.as_usuario.presentacion.controlador.Controlador;
 import es.ucm.as_usuario.presentacion.controlador.ListaComandos;
+import es.ucm.as_usuario.presentacion.notificaciones.ServicioNotificaciones;
 
 
 public class MainActivity extends Activity {
@@ -37,14 +38,7 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //MODIFICARR!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        Usuario.getInstancia().setNombre("Albertin");
-        Usuario.getInstancia().setAvatar("imagen1.jpg");
-        Usuario.getInstancia().setColor("blue");
-        Usuario.getInstancia().setTono("Ringtone 1");
-        Usuario.getInstancia().setFrecuenciaRecibirInforme(Frecuencia.SEMANAL);
-        Usuario.getInstancia().setPuntuacion(6);
-        //////////////////////////////////////////////////////////////////////
+
         nombrePrincipal=(TextView)findViewById(R.id.nombreUser);
         nombrePrincipal.setText(Usuario.getInstancia().getNombre());
         puntuacion = (TextView)findViewById(R.id.puntuacionUsuario);
@@ -84,7 +78,7 @@ public class MainActivity extends Activity {
         //titulo alarma(inventar), hora/minutos pregunta, texto pregunta y titulo pregunta/alarma(inventar)
 
         //Le pasas un intent
-        //startService(new Intent(Contexto.getInstancia().getContext(), ServicioNotificaciones.class));
+      //  startService(new Intent(Contexto.getInstancia().getContext(), ServicioNotificaciones.class));
         //////////////////////////////////////////////////////////////////////
     }
 

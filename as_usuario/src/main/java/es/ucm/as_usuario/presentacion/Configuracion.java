@@ -116,11 +116,8 @@ public class Configuracion extends Activity {
                     case "Negro":
                         temaParcial="AS_theme_negro";
                         break;
-
                 }
-
             }
-
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
 

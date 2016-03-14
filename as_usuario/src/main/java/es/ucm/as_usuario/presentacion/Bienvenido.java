@@ -13,6 +13,7 @@ import java.util.TimerTask;
 import es.ucm.as_usuario.R;
 import es.ucm.as_usuario.negocio.usuario.TransferUsuario;
 import es.ucm.as_usuario.negocio.usuario.Usuario;
+import es.ucm.as_usuario.negocio.utils.Frecuencia;
 import es.ucm.as_usuario.presentacion.controlador.Controlador;
 import es.ucm.as_usuario.presentacion.controlador.ListaComandos;
 import es.ucm.as_usuario.presentacion.notificaciones.ServicioNotificaciones;
@@ -50,7 +51,14 @@ public class Bienvenido extends Activity {
         startService(new Intent(this, ServicioNotificaciones.class));
 
 
-        Usuario.getInstancia().setAvatar(""); //Aqui se cargarian los datos del usuairo, no va así.
+        //MODIFICARR!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        Usuario.getInstancia().setNombre("Albertin");
+        Usuario.getInstancia().setAvatar("");
+        Usuario.getInstancia().setColor("blue");
+        Usuario.getInstancia().setTono("Ringtone 1");
+        Usuario.getInstancia().setFrecuenciaRecibirInforme(Frecuencia.SEMANAL);
+        Usuario.getInstancia().setPuntuacion(6);
+        //////////////////////////////////////////////////////////////////////
 /*
         TransferUsuario transferUsuario = new TransferUsuario();
         transferUsuario.setPuntuacion(5);
