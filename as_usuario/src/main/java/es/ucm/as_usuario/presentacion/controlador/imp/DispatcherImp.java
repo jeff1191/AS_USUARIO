@@ -1,23 +1,19 @@
 package es.ucm.as_usuario.presentacion.controlador.imp;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.util.Log;
-import android.view.View;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-import es.ucm.as_usuario.negocio.suceso.Reto;
+import es.ucm.as_usuario.negocio.suceso.Evento;
 import es.ucm.as_usuario.negocio.suceso.TransferReto;
 import es.ucm.as_usuario.negocio.suceso.TransferTarea;
-import es.ucm.as_usuario.presentacion.Ayuda;
 import es.ucm.as_usuario.negocio.usuario.TransferUsuario;
 import es.ucm.as_usuario.negocio.usuario.Usuario;
 import es.ucm.as_usuario.presentacion.Configuracion;
 import es.ucm.as_usuario.presentacion.Contexto;
-import es.ucm.as_usuario.negocio.suceso.Evento;
 import es.ucm.as_usuario.presentacion.MainActivity;
 import es.ucm.as_usuario.presentacion.VerEventos;
 import es.ucm.as_usuario.presentacion.VerInforme;
@@ -52,12 +48,14 @@ public class DispatcherImp extends Dispatcher{
                 TransferUsuario conf = (TransferUsuario) datos;
                 intentConfiguracion.putExtra("nombreConfiguracion", conf.getNombre());
                 intentConfiguracion.putExtra("frecuenciaInformeConfiguracion", conf.getFrecuenciaRecibirInforme());
+                intentConfiguracion.putExtra("imagenConfiguracion", conf.getAvatar());
                 Contexto.getInstancia().getContext().startActivity(intentConfiguracion);
                 break;
             case ListaComandos.EDITAR_USUARIO:
                 Intent intentEditarUsuario = new Intent(Contexto.getInstancia().getContext().getApplicationContext(), MainActivity.class);
                 TransferUsuario editarUsuario = (TransferUsuario) datos;
-                intentEditarUsuario.putExtra("editarUsuario", editarUsuario.getNombre());
+                intentEditarUsuario.putExtra("editarNombre", editarUsuario.getNombre());
+                intentEditarUsuario.putExtra("editarAvatar", editarUsuario.getAvatar());
                 Contexto.getInstancia().getContext().startActivity(intentEditarUsuario);
                 break;
 
@@ -113,6 +111,9 @@ public class DispatcherImp extends Dispatcher{
                 break;
 
             case ListaComandos.CREAR_USUARIO:
+                break;
+
+            case ListaComandos.RESPONDER_TAREA:
                 break;
 
             case ListaComandos.CONSULTAR_USUARIO:

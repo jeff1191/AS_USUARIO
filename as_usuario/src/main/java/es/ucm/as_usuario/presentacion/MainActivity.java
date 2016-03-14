@@ -2,12 +2,19 @@ package es.ucm.as_usuario.presentacion;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import java.io.BufferedInputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 
 import es.ucm.as_usuario.R;
 import es.ucm.as_usuario.integracion.DBHelper;
@@ -16,13 +23,14 @@ import es.ucm.as_usuario.negocio.usuario.Usuario;
 import es.ucm.as_usuario.negocio.utils.Frecuencia;
 import es.ucm.as_usuario.presentacion.controlador.Controlador;
 import es.ucm.as_usuario.presentacion.controlador.ListaComandos;
+import es.ucm.as_usuario.presentacion.notificaciones.ServicioNotificaciones;
 
 
 public class MainActivity extends Activity {
 
     private TextView nombrePrincipal;
     private TextView puntuacion;
-
+    private ImageView imagenPerfil;
 
     private int request_code;
 
@@ -39,30 +47,49 @@ public class MainActivity extends Activity {
         Controlador.getInstancia().ejecutaComando(ListaComandos.CREAR_USUARIO, crearUsuario);*/
 
 
-
         cargarTema();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
+
+        /*nombrePrincipal=(TextView)findViewById(R.id.nombreUser);
+        nombrePrincipal.setText(Usuario.getInstancia().getNombre());
+        puntuacion = (TextView)findViewById(R.id.puntuacionUsuario);
+        imagenPerfil= (ImageView) findViewById(R.id.avatar);
+        if(Usuario.getInstancia().getAvatar() != null && !Usuario.getInstancia().getAvatar().equals(""))
+            imagenPerfil.setImageBitmap(BitmapFactory.decodeFile(Usuario.getInstancia().getAvatar()));
+        else
+            imagenPerfil.setImageResource(R.drawable.avatar);
+        puntuacion.setText(Usuario.getInstancia().getPuntuacion() + "/10");
+        */
         Bundle bundle = getIntent().getExtras();
-        if(bundle != null) {
+        if (bundle != null) {
             Log.e("ww", "tiene algo");
             String name = bundle.getString("nombre");
             Integer punt = bundle.getInt("puntuacion");
 
-            nombrePrincipal=(TextView)findViewById(R.id.nombreUser);
+            nombrePrincipal = (TextView) findViewById(R.id.nombreUser);
             nombrePrincipal.setText(name);
-            puntuacion = (TextView)findViewById(R.id.puntuacionUsuario);
-            puntuacion.setText(punt.toString() +"/10");
+            puntuacion = (TextView) findViewById(R.id.puntuacionUsuario);
+            puntuacion.setText(punt.toString() + "/10");
 
             /*if (bundle.getString("editarUsuario") != null) {
                 //Falta rellenar los demás campos...imagen tono color
                 nombrePrincipal.setText(bundle.getString("editarUsuario"));
-            }*/
+            }
+            if (bundle.getString("editarAvatar") != null) {
+             /*   InputStream is;
+                try {
+                    is = getContentResolver().openInputStream(Uri.parse(bundle.getString("editarAvatar")));
+                    BufferedInputStream bis = new BufferedInputStream(is);
+                    Bitmap bitmap = BitmapFactory.decodeStream(bis);
+                    imagenPerfil.setImageBitmap(bitmap);
+                } catch (FileNotFoundException e) {e.printStackTrace();}*/
         }
 
 
-
+        imagenPerfil.setImageBitmap(BitmapFactory.decodeFile(bundle.getString("editarAvatar")));
     }
 
     @Override
@@ -89,6 +116,7 @@ public class MainActivity extends Activity {
 
     public void personalizacion(View v){
         Controlador.getInstancia().ejecutaComando(ListaComandos.CONFIGURACION, null);
+       // startActivityForResult(intentConfiguracion, request_code);
     }
 
     public void ayuda(View v) {

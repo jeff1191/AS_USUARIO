@@ -15,6 +15,7 @@ public class ListaComandos {
     public static final String EDITAR_USUARIO = "editarUsuario";
     public static final String CONSULTAR_USUARIO = "cargarUsuario";
     
+    public static final String RESPONDER_TAREA = "responderTarea";
 
     /*
     .

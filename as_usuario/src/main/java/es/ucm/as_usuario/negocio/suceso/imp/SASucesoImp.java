@@ -7,18 +7,16 @@ import com.j256.ormlite.dao.Dao;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
-import es.ucm.as_usuario.negocio.suceso.Tarea;
-import es.ucm.as_usuario.negocio.suceso.TransferReto;
-import es.ucm.as_usuario.negocio.suceso.TransferTarea;
-import es.ucm.as_usuario.negocio.utils.Frecuencia;
-import es.ucm.as_usuario.presentacion.Contexto;
 import es.ucm.as_usuario.integracion.DBHelper;
 import es.ucm.as_usuario.negocio.suceso.Evento;
 import es.ucm.as_usuario.negocio.suceso.Reto;
 import es.ucm.as_usuario.negocio.suceso.SASuceso;
+import es.ucm.as_usuario.negocio.suceso.Tarea;
+import es.ucm.as_usuario.negocio.suceso.TransferReto;
+import es.ucm.as_usuario.negocio.suceso.TransferTarea;
+import es.ucm.as_usuario.presentacion.Contexto;
 
 /**
  * Created by Jeffer on 02/03/2016.
@@ -48,16 +46,6 @@ public class SASucesoImp implements SASuceso {
 
         }
         return listaEventos;
-    }
-
-    @Override
-    public void mostrarAlarma() {
-
-    }
-
-    @Override
-    public void responderPregunta() {
-
     }
 
     @Override
@@ -193,4 +181,39 @@ public class SASucesoImp implements SASuceso {
         }
         return transferTareas;
     }
+
+    @Override
+    public void responderTarea(String respuestaTarea) {
+        Dao<Tarea, Integer> dao;
+        Tarea tarea = new Tarea();
+        Log.e("prueba", "Lo que llega es ..." + respuestaTarea);
+        String[] sol = respuestaTarea.split("_");
+        //sol[0] tiene la respuesta
+        int respuesta = Integer.parseInt(sol[0]);
+        //sol[1] tiene el id de la tarea a buscar
+        int idTarea = Integer.parseInt(sol[1]);
+        /*
+        try {
+            dao = getHelper().getTareaDao();
+            Log.e("prueba", "Se busca en la database con el id " + idTarea);
+            tarea = (Tarea) dao.queryForId(idTarea);
+            if (!tarea.equals(null)) {
+                //Si la tarea llega al maximo contador se tiene que cambiar la frecuencia de la tarea
+                if((tarea.getContador() == 0 && respuesta != -1) ||
+                        (tarea.getContador() > 0 && tarea.getContador() <= 30))
+                    tarea.setContador(tarea.getContador() + respuesta);
+                    dao.update(tarea);
+                if(tarea.getContador() == 30){
+                    // cambiar frecuencia
+                    dao.update(tarea);
+                }
+
+            }else {
+                Log.e("prueba", "No hay tareas en la database o ha pasado otra cosa");
+            }
+        } catch (SQLException e) {
+
+        }*/
+    }
+
 }

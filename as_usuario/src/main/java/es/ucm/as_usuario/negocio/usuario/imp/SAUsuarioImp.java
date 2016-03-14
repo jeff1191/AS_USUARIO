@@ -56,7 +56,9 @@ public class SAUsuarioImp implements SAUsuario {
 		
 	}
 
-	//puntuacion = (10 * nºtareas positivas / nº tareas totales
+	/*
+	puntuacion = (10 * nºtareas positivas / nº tareas totales
+	* */
 	@Override
 	public Integer calcularPuntuacion() {
 		SASuceso ss = FactoriaSA.getInstancia().nuevoSASuceso();
@@ -125,7 +127,6 @@ public class SAUsuarioImp implements SAUsuario {
 		}
 	}
 
-
 	@Override
 	public TransferUsuario consultarUsuario() {
 		Dao<Usuario, Integer> daoUsuario;
@@ -165,5 +166,4 @@ Log.e("transfer", transferUsuario.getNombre());
 		}
 		return transferUsuario;
 	}
-
 }

@@ -5,14 +5,15 @@ import es.ucm.as_usuario.presentacion.controlador.comandos.Command;
 import es.ucm.as_usuario.presentacion.controlador.comandos.factoria.FactoriaComandos;
 import es.ucm.as_usuario.presentacion.controlador.comandos.imp.ActualizaPuntuacionComando;
 import es.ucm.as_usuario.presentacion.controlador.comandos.imp.ConsultarUsuarioComando;
+import es.ucm.as_usuario.presentacion.controlador.comandos.imp.ConfiguracionComando;
 import es.ucm.as_usuario.presentacion.controlador.comandos.imp.CrearUsuarioComando;
+import es.ucm.as_usuario.presentacion.controlador.comandos.imp.EditarUsuarioComando;
 import es.ucm.as_usuario.presentacion.controlador.comandos.imp.ResponderRetoComando;
+import es.ucm.as_usuario.presentacion.controlador.comandos.imp.ResponderTareaComando;
 import es.ucm.as_usuario.presentacion.controlador.comandos.imp.VerAyudaComando;
 import es.ucm.as_usuario.presentacion.controlador.comandos.imp.VerEventosComando;
 import es.ucm.as_usuario.presentacion.controlador.comandos.imp.VerInformeComando;
 import es.ucm.as_usuario.presentacion.controlador.comandos.imp.VerRetoComando;
-import es.ucm.as_usuario.presentacion.controlador.comandos.imp.ConfiguracionComando;
-import es.ucm.as_usuario.presentacion.controlador.comandos.imp.EditarUsuarioComando;
 
 /**
  * Created by Jeffer on 02/03/2016.
@@ -51,6 +52,9 @@ public class FactoriaComandosImp extends FactoriaComandos {
                 break;
             case ListaComandos.CONSULTAR_USUARIO:
                 ret = new ConsultarUsuarioComando();
+                break;
+            case ListaComandos.RESPONDER_TAREA:
+                ret = new ResponderTareaComando();
                 break;
         }
 
