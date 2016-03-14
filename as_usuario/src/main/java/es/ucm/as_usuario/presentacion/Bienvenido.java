@@ -53,12 +53,12 @@ public class Bienvenido extends Activity {
 
 
         //MODIFICARR!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        Usuario.getInstancia().setNombre("Albertin");
+        /*Usuario.getInstancia().setNombre("Albertin");
         Usuario.getInstancia().setAvatar("");
         Usuario.getInstancia().setColor("blue");
         Usuario.getInstancia().setTono("Ringtone 1");
         Usuario.getInstancia().setFrecuenciaRecibirInforme(Frecuencia.SEMANAL);
-        Usuario.getInstancia().setPuntuacion(6);
+        Usuario.getInstancia().setPuntuacion(6);*/
         //////////////////////////////////////////////////////////////////////
 /*
         TransferUsuario transferUsuario = new TransferUsuario();

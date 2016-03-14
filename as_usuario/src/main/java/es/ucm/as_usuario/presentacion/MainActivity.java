@@ -6,6 +6,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -80,6 +81,8 @@ public class MainActivity extends Activity {
             }
             if (bundle.getString("editarAvatar") != null) {
              /*   InputStream is;
+             imagenPerfil.setImageBitmap(BitmapFactory.decodeFile(bundle.getString("editarAvatar")));
+
                 try {
                     is = getContentResolver().openInputStream(Uri.parse(bundle.getString("editarAvatar")));
                     BufferedInputStream bis = new BufferedInputStream(is);
@@ -88,8 +91,6 @@ public class MainActivity extends Activity {
                 } catch (FileNotFoundException e) {e.printStackTrace();}*/
         }
 
-
-        imagenPerfil.setImageBitmap(BitmapFactory.decodeFile(bundle.getString("editarAvatar")));
     }
 
     @Override

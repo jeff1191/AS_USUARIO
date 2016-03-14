@@ -12,6 +12,7 @@ import es.ucm.as_usuario.negocio.suceso.TransferReto;
 import es.ucm.as_usuario.negocio.suceso.TransferTarea;
 import es.ucm.as_usuario.negocio.usuario.TransferUsuario;
 import es.ucm.as_usuario.negocio.usuario.Usuario;
+import es.ucm.as_usuario.presentacion.Ayuda;
 import es.ucm.as_usuario.presentacion.Configuracion;
 import es.ucm.as_usuario.presentacion.Contexto;
 import es.ucm.as_usuario.presentacion.MainActivity;
