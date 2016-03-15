@@ -15,6 +15,7 @@ public class CargarBBDDComando implements Command {
     public Object ejecutaComando(Object datos) throws commandException {
         SASuceso saSuceso = FactoriaSA.getInstancia().nuevoSASuceso();
         saSuceso.cargarTareasBBDD();
+        saSuceso.cargarRetoBBDD();
         return null;
     }
 }

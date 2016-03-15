@@ -8,6 +8,8 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 
 import es.ucm.as_usuario.R;
+import es.ucm.as_usuario.negocio.suceso.Evento;
+import es.ucm.as_usuario.negocio.suceso.Reto;
 import es.ucm.as_usuario.negocio.suceso.Tarea;
 import es.ucm.as_usuario.negocio.utils.Frecuencia;
 import es.ucm.as_usuario.presentacion.Contexto;
@@ -28,7 +30,7 @@ public class Parser {
     }
 
     /* Lee de fichero y transforma en tareas que almacena en el ArrayList atributo de esta clase*/
-    public void read() {
+    public void readTareas() {
         String alarma = "";
         String pregunta = "";
         try {
@@ -40,7 +42,8 @@ public class Parser {
             while(alarma != null){
                 alarma = brin.readLine();
                 pregunta = brin.readLine();
-                tareas.add(toTarea(alarma, pregunta));
+                if (alarma != null && pregunta != null)
+                    tareas.add(toTarea(alarma, pregunta));
             }
             fraw.close();
 
@@ -49,11 +52,41 @@ public class Parser {
         }
     }
 
+    public String readReto() {
+        String texto = null;
+        try {
+            InputStream fraw = Contexto.getInstancia().getContext().getResources().openRawResource(R.raw.reto);
+            BufferedReader brin =
+                    new BufferedReader(new InputStreamReader(fraw));
+            texto = brin.readLine();
+            fraw.close();
+        } catch (Exception ex) {
+            Log.e("Ficheros", "Error al leer fichero desde recurso raw");
+        }
+        return texto;
+    }
+
     /*A partir de dos Strings crea una pregunta con esos textos de alarma y pregunta*/
     public Tarea toTarea(String textoAlarma, String textoPregunta){
         Tarea ret = new Tarea();
         ret.setTextoAlarma(textoAlarma);
         ret.setTextoPregunta(textoPregunta);
+        return ret;
+    }
+
+    public Reto toReto(String texto){
+        if (texto != null){
+            Reto ret = new Reto();
+            ret.setNombre(texto);
+            return ret;
+        } else
+            return null;
+    }
+
+    public Evento toEvento(String alarma, String pregunta){
+        Evento ret = new Evento();
+        ret.setTextoAlarma(alarma);
+        ret.setTextoPregunta(pregunta);
         return ret;
     }
 }
