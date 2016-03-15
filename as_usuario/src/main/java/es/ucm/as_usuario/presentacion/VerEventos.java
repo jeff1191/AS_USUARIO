@@ -2,10 +2,12 @@ package es.ucm.as_usuario.presentacion;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
@@ -18,6 +20,7 @@ import es.ucm.as_usuario.R;
  */
 public class VerEventos  extends Activity{
     private ListView listaEventos;
+    private TextView titulo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +28,7 @@ public class VerEventos  extends Activity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.eventos);
         listaEventos = (ListView)findViewById(R.id.listViewEventos);
+        titulo = (TextView)findViewById(R.id.tituloEventos);
         Bundle bundle = getIntent().getExtras();
 
        /*if(bundle.getString("hola")!= null)
@@ -34,8 +38,16 @@ public class VerEventos  extends Activity{
         }*/
         if(bundle.getStringArrayList("listaEventos") != null){
             ArrayList<String> listaE = bundle.getStringArrayList("listaEventos");
-            ArrayAdapter<String> adaptador = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, listaE);
-            listaEventos.setAdapter(adaptador);
+            if(listaE.isEmpty()){
+                titulo.setText("No tienes ningún evento");
+                titulo.setTextColor(Color.GRAY);
+            }
+            else{
+                titulo.setText("Próximos eventos");
+                ArrayAdapter<String> adaptador = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, listaE);
+                listaEventos.setAdapter(adaptador);
+            }
+
         }
     }
 

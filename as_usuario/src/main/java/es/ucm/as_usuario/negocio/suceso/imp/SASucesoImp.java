@@ -15,6 +15,7 @@ import es.ucm.as_usuario.negocio.suceso.Evento;
 import es.ucm.as_usuario.negocio.suceso.Reto;
 import es.ucm.as_usuario.negocio.suceso.SASuceso;
 import es.ucm.as_usuario.negocio.suceso.Tarea;
+import es.ucm.as_usuario.negocio.suceso.TransferEvento;
 import es.ucm.as_usuario.negocio.suceso.TransferReto;
 import es.ucm.as_usuario.negocio.suceso.TransferTarea;
 import es.ucm.as_usuario.negocio.utils.Frecuencia;
@@ -36,18 +37,32 @@ public class SASucesoImp implements SASuceso {
 
 
     @Override
-    public List<Evento> consultarEventos() {
+    public List<TransferEvento> consultarEventos() {
 
         Dao<Evento, Integer> eventos;
+        List<TransferEvento> listaEventosT = new ArrayList<TransferEvento>();
         List<Evento> listaEventos = null;
         try {
+
             eventos = getHelper().getEventoDao();
-
             listaEventos= eventos.queryForAll();
+            for(int i=0; i < listaEventos.size();i++){
+                TransferEvento e = new TransferEvento();
+                e.setId(listaEventos.get(i).getId());
+                e.setContador(listaEventos.get(i).getContador());
+                e.setFechaIni(listaEventos.get(i).getFechaIni());
+                e.setFrecuenciaTarea(listaEventos.get(i).getFrecuenciaTarea());
+                e.setHoraAlarma(listaEventos.get(i).getHoraAlarma());
+                e.setHoraPregunta(listaEventos.get(i).getHoraPregunta());
+                e.setNoSeguidos(listaEventos.get(i).getNoSeguidos());
+                e.setTextoAlarma(listaEventos.get(i).getTextoAlarma());
+                e.setTextoPregunta(listaEventos.get(i).getTextoPregunta());
+                listaEventosT.add(e);
+            }
         } catch (SQLException e) {
-
+                e.printStackTrace();
         }
-        return listaEventos;
+        return listaEventosT;
     }
 
     @Override
@@ -59,6 +74,7 @@ public class SASucesoImp implements SASuceso {
             dao = getHelper().getRetoDao();
 
             // esto se omitira porque se coge de la BBDD
+            /*
            Reto nuevojiji= new Reto();
             nuevojiji.setNombre("DUCHARSE POR LAS MAÑANAS");
             nuevojiji.setSuperado(false);
@@ -76,7 +92,7 @@ public class SASucesoImp implements SASuceso {
                 return null;
 
         } catch (SQLException e) {
-
+            e.printStackTrace();
         }
         return tr;
     }
@@ -108,7 +124,7 @@ public class SASucesoImp implements SASuceso {
                 dao.update(reto);
             }
         } catch (SQLException e) {
-
+            e.printStackTrace();
         }
         return reto.getContador();
     }
@@ -127,7 +143,7 @@ public class SASucesoImp implements SASuceso {
             tareasDao = getHelper().getTareaDao();
 
             // Esto no hara falta porque ya lo cogera de la BBDD
-
+/*
             Tarea unaSinMas = new Tarea();
             unaSinMas.setFrecuenciaTarea(Frecuencia.DIARIA);
             unaSinMas.setTextoAlarma("Dale los buenos días a mamá");
@@ -179,7 +195,7 @@ public class SASucesoImp implements SASuceso {
             }
 
         } catch (SQLException e) {
-
+            e.printStackTrace();
         }
         return transferTareas;
     }

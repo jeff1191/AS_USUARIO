@@ -65,7 +65,7 @@ public class Configuracion extends Activity {
     private String temaParcial;
     private String tonoParcial;
     private ImageView imagenConfiguracion;
-    private String rutaImagen;
+    private String rutaImagen="";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         cargarTema();
@@ -83,7 +83,7 @@ public class Configuracion extends Activity {
         imagenConfiguracion = (ImageView) findViewById(R.id.editarAvatar);
         tonoParcial=tonoActual;
         temaParcial=temaActual;
-
+        rutaImagen=bundle.getString("imagenConfiguracion");
         ////////Spinner color ///////
         nombresColoresSistema();
         ArrayAdapter<String> adapter_colores= new ArrayAdapter<String>(this,
@@ -166,8 +166,8 @@ public class Configuracion extends Activity {
         else
             imagenConfiguracion.setImageResource(R.drawable.avatar);
 
-        editarNombre.setText(bundle.getString("nombre"));
-        frecActual=(Frecuencia)bundle.getSerializable("frecuencia");
+        editarNombre.setText(bundle.getString("nombreConfiguracion"));
+        frecActual=(Frecuencia)bundle.getSerializable("frecuenciaInformeConfiguracion");
         if(frecActual == Frecuencia.DIARIA){
             diaria.setChecked(true);
             semanal.setChecked(false);
@@ -213,9 +213,8 @@ public class Configuracion extends Activity {
                     temaActual = temaParcial;
                     tonoActual = tonoParcial;
                     editarUsuario.setColor(temaActual);
-                    if(!rutaImagen.equals(""))
-                         editarUsuario.setAvatar(rutaImagen);
-                    rutaImagen="";
+                    editarUsuario.setAvatar(rutaImagen);
+
                     Controlador.getInstancia().ejecutaComando(ListaComandos.EDITAR_USUARIO, editarUsuario);
 
                 }else{
@@ -303,7 +302,7 @@ public class Configuracion extends Activity {
     }
 
     public void cambiarImagenPerfil(View v) {
-        final CharSequence[] items = { "Hacer foto", "Elegir de la galeria", "Salir" };
+        final CharSequence[] items = { "Hacer foto", "Elegir de la galeria", "Imagen por defecto" };
         AlertDialog.Builder builder = new AlertDialog.Builder(Configuracion.this);
         builder.setItems(items, new DialogInterface.OnClickListener() {
             @Override
@@ -319,7 +318,9 @@ public class Configuracion extends Activity {
                     startActivityForResult(
                             Intent.createChooser(intent, "Select File"),
                             SELECCIONAR_GALERIA);
-                } else if (items[item].equals("Salir")) {
+                } else if (items[item].equals("Imagen por defecto")) {
+                    imagenConfiguracion.setImageResource(R.drawable.avatar);
+                    rutaImagen="";
                     dialog.dismiss();
                 }
             }
@@ -349,7 +350,7 @@ public class Configuracion extends Activity {
                     e.printStackTrace();
                 }
                 imagenConfiguracion.setImageBitmap(imagen);
-                rutaImagen = destination.getAbsolutePath();
+                rutaImagen = destination.getPath();
             } else if (requestCode == SELECCIONAR_GALERIA) {
                 Uri selectedImageUri = data.getData();
                 String[] projection = {MediaStore.MediaColumns.DATA};

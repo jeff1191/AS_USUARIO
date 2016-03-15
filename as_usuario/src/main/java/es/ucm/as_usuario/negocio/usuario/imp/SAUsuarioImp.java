@@ -42,8 +42,11 @@ public class SAUsuarioImp implements SAUsuario {
 				Usuario usuario = daoUsuario.queryForId(1);
 				usuario.setNombre(datos.getNombre());
 				usuario.setFrecuenciaRecibirInforme(datos.getFrecuenciaRecibirInforme());
+				usuario.setAvatar(datos.getAvatar());
 				ret.setNombre(usuario.getNombre());
 				ret.setFrecuenciaRecibirInforme(usuario.getFrecuenciaRecibirInformes());
+				ret.setAvatar(usuario.getAvatar());
+				daoUsuario.update(usuario);
 			}else
 				return null;
 		}catch (SQLException e) {
@@ -78,8 +81,6 @@ public class SAUsuarioImp implements SAUsuario {
 			daoUsuario = getHelper().getUsuarioDao();
 
 			Usuario usuario = new Usuario();
-
-			usuario.setId(1);
 
 			// actualizamos los valores del nuevo usuario con los introducidos o por defecto
 			if (transferUsuario.getNombre() != null)
