@@ -135,6 +135,9 @@ public class DispatcherImp extends Dispatcher{
               // Contexto.getInstancia().getContext().startActivity(iUsuario.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
               //  Contexto.getInstancia().getContext().startActivity(iUsuario);
                 break;
+
+            case ListaComandos.CARGAR_BBDD:
+                break;
         }
     }
 }

@@ -133,7 +133,6 @@ public class SASucesoImp implements SASuceso {
             unaSinMas.setFrecuenciaTarea(Frecuencia.DIARIA);
             unaSinMas.setTextoAlarma("Dale los buenos días a mamá");
             unaSinMas.setTextoPregunta("¿Le has dado los buenos días a mamá?");
-            unaSinMas.setFechaIni(new Date());
             unaSinMas.setContador(0);
             unaSinMas.setHoraAlarma(new Date());
             unaSinMas.setHoraPregunta(new Date());
@@ -146,7 +145,6 @@ public class SASucesoImp implements SASuceso {
             unaSinMas2.setFrecuenciaTarea(Frecuencia.SEMANAL);
             unaSinMas2.setTextoAlarma("Meter las cosas de clase en la mochila");
             unaSinMas2.setTextoPregunta("¿Has metido las cosas de clase en la mochila?");
-            unaSinMas2.setFechaIni(new Date());
             unaSinMas2.setContador(0);
             unaSinMas2.setHoraAlarma(new Date());
             unaSinMas2.setHoraPregunta(new Date());
@@ -172,7 +170,6 @@ public class SASucesoImp implements SASuceso {
                 tt.setHoraAlarma(tareas.get(i).getHoraAlarma());
                 tt.setMejorar(tareas.get(i).getMejorar());
                 tt.setFrecuenciaTarea(tareas.get(i).getFrecuenciaTarea());
-                tt.setFechaIni(tareas.get(i).getFechaIni());
                 tt.setNoSeguidos(tareas.get(i).getNoSeguidos());
                 tt.setNumNo(tareas.get(i).getNumNo());
                 tt.setNumSi(tareas.get(i).getNumSi());
@@ -210,19 +207,26 @@ public class SASucesoImp implements SASuceso {
                     // cambiar frecuencia
                     dao.update(tarea);
                 }
-
             }else {
                 Log.e("prueba", "No hay tareas en la database o ha pasado otra cosa");
             }
         } catch (SQLException e) {
-
         }*/
     }
 
     @Override
     public void cargarTareasBBDD() {
         Parser p = new Parser();
-
+        Dao<Tarea, Integer> tareaDao;
+        p.read();   // lee del fichero y obtiene un ArrayList de tareas
+        ArrayList<Tarea> tareasBBDD = p.getTareas();
+        for (int i = 0; i < tareasBBDD.size(); i++){
+            try {
+                tareaDao = getHelper().getTareaDao();
+                tareaDao.create(tareasBBDD.get(i));
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
     }
-
 }
