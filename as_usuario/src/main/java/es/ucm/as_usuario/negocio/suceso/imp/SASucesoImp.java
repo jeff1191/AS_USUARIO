@@ -184,7 +184,10 @@ public class SASucesoImp implements SASuceso {
         for (int i = 0; i < tareasBBDD.size(); i++){
             try {
                 tareaDao = getHelper().getTareaDao();
-                tareaDao.create(tareasBBDD.get(i));
+                if (tareaDao.queryForEq("TEXTO_ALARMA", tareasBBDD.get(i).getTextoAlarma()).size() == 0)
+                    tareaDao.create(tareasBBDD.get(i));
+                else
+                    Log.e("IMPOSIBLE CARGAR TAREA", "Ya hay una igual");
             } catch (SQLException e) {
                 e.printStackTrace();
             }

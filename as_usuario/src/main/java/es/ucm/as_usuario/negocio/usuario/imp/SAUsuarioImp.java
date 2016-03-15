@@ -159,8 +159,6 @@ public class SAUsuarioImp implements SAUsuario {
 				if (u.getCorreoTutor() !=  null)
 					transferUsuario.setCorreoTutor(u.getCorreoTutor());
 
-Log.e("transfer", transferUsuario.getNombre());
-
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
