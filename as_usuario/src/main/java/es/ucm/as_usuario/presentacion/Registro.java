@@ -2,7 +2,6 @@ package es.ucm.as_usuario.presentacion;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -42,6 +41,6 @@ public class Registro extends Activity {
                         " y la clave " + clave + "con tu tutor asignado. No estas sincronizado, como estamos en " +
                         "testing pasamos directamente a la Main Activity").show();
 
-        startActivity(new Intent(this, MainActivity.class));
+        //startActivity(new Intent(this, MainActivity.class));
     }
 }

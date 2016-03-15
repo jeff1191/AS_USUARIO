@@ -11,6 +11,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import es.ucm.as_usuario.R;
+import es.ucm.as_usuario.presentacion.notificaciones.ServicioNotificaciones;
 
 public class Bienvenido extends Activity {
     private static final long DELAY = 2000;
@@ -33,34 +34,21 @@ public class Bienvenido extends Activity {
 
         toast1.show();
 
-       //if(!sincronizacion) {
-           TimerTask task = new TimerTask() {
-               @Override
-               public void run() {
-                   Intent registroIntent = new Intent().setClass(
-                           Bienvenido.this, Registro.class);
-                   startActivity(registroIntent);
-                   finish();
-               }
-           };
-           Timer timer = new Timer();
-           timer.schedule(task, DELAY);
-       //}
-        /*else{
-           TimerTask task = new TimerTask() {
-               @Override
-               public void run() {
-                   Intent mainIntent = new Intent().setClass(
-                           Bienvenido.this, MainActivity.class);
-                   startActivity(mainIntent);
-                   finish();
-               }
-           };
-           Timer timer = new Timer();
-           timer.schedule(task, DELAY);
 
-           startService(new Intent(this, ServicioNotificaciones.class));
-       }*/
+       TimerTask task = new TimerTask() {
+           @Override
+           public void run() {
+               Intent mainIntent = new Intent().setClass(
+                       Bienvenido.this, MainActivity.class);
+               startActivity(mainIntent);
+               finish();
+           }
+       };
+       Timer timer = new Timer();
+       timer.schedule(task, DELAY);
+
+       startService(new Intent(this, ServicioNotificaciones.class));
+
 
 
 
