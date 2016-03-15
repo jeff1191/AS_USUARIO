@@ -1,4 +1,4 @@
-Buenos días... ¡Hay que levantarse!
+Conseguido princesas
 ¿Te has levantado a la hora prevista?
 ¡Vamos a desayunar!
 ¿Has desayunado? ¿Has dejado todo recogido?
@@ -10,7 +10,7 @@ Buenos días... ¡Hay que levantarse!
 ¿Te has puesto desodorante y colonia?
 ¡Es la hora del aseo! Tienes que peinarte
 ¿Te has peinado?
-¡Ahora hay que vestirse! Ten en cuenta el clima que hace y la actividad que vayas a haer hoy
+¡Ahora hay que vestirse! Ten en cuenta el clima que hace y la actividad que vayas a hacer hoy
 ¿Te has vestido adecuadamente? ¿La ropa que has elegido es la adecuada para la época del año en la que estás? ¿La ropa que has elegido es la adecuada para la actividad que vas a hacer?
 Mírate en el espejo y comprueba que te ves bien
 ¿Te has mirado en el espejo?
