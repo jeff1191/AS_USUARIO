@@ -18,7 +18,7 @@ public class VerEventosComando implements Command {
     @Override
      public Object ejecutaComando(Object datos) throws commandException {
         SASuceso saSuceso= FactoriaSA.getInstancia().nuevoSASuceso();
-        List<TransferEvento> eventosList= saSuceso.consultarEventos();
+        List<Evento> eventosList= saSuceso.consultarEventos();
         return eventosList;
     }
 }

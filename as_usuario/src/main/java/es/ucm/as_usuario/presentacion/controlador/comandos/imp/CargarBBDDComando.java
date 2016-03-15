@@ -2,24 +2,21 @@ package es.ucm.as_usuario.presentacion.controlador.comandos.imp;
 
 import android.util.Log;
 
-import java.sql.Timestamp;
-import java.util.ArrayList;
-import java.util.List;
-
 import es.ucm.as_usuario.negocio.factoria.FactoriaSA;
-import es.ucm.as_usuario.negocio.suceso.Evento;
 import es.ucm.as_usuario.negocio.suceso.SASuceso;
 import es.ucm.as_usuario.presentacion.controlador.comandos.Command;
 import es.ucm.as_usuario.presentacion.controlador.comandos.exceptions.commandException;
 
 /**
- * Created by Jeffer on 05/03/2016.
+ * Created by msalitu on 14/03/2016.
  */
-public class verTareasComando implements Command {
+public class CargarBBDDComando implements Command {
     @Override
     public Object ejecutaComando(Object datos) throws commandException {
-        SASuceso saSuceso= FactoriaSA.getInstancia().nuevoSASuceso();
-        List<Evento> eventosList= saSuceso.consultarEventos();
-        return eventosList;
+        SASuceso saSuceso = FactoriaSA.getInstancia().nuevoSASuceso();
+        saSuceso.cargarTareasBBDD();
+        saSuceso.cargarRetoBBDD();
+        saSuceso.cargarEventosBBDD();
+        return null;
     }
 }

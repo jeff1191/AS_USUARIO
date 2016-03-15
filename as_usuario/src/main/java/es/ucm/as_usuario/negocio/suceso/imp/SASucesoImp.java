@@ -19,7 +19,6 @@ import es.ucm.as_usuario.negocio.suceso.Tarea;
 import es.ucm.as_usuario.negocio.suceso.TransferEvento;
 import es.ucm.as_usuario.negocio.suceso.TransferReto;
 import es.ucm.as_usuario.negocio.suceso.TransferTarea;
-import es.ucm.as_usuario.negocio.utils.Frecuencia;
 import es.ucm.as_usuario.presentacion.Contexto;
 
 /**
@@ -38,16 +37,14 @@ public class SASucesoImp implements SASuceso {
 
 
     @Override
-    public List<TransferEvento> consultarEventos() {
+    public List<Evento> consultarEventos() {
 
         Dao<Evento, Integer> eventos;
-        List<TransferEvento> listaEventosT = new ArrayList<TransferEvento>();
         List<Evento> listaEventos = null;
         try {
-
             eventos = getHelper().getEventoDao();
             listaEventos= eventos.queryForAll();
-            for(int i=0; i < listaEventos.size();i++){
+            /*for(int i=0; i < listaEventos.size();i++){
                 TransferEvento e = new TransferEvento();
                 e.setId(listaEventos.get(i).getId());
                 e.setContador(listaEventos.get(i).getContador());
@@ -59,11 +56,11 @@ public class SASucesoImp implements SASuceso {
                 e.setTextoAlarma(listaEventos.get(i).getTextoAlarma());
                 e.setTextoPregunta(listaEventos.get(i).getTextoPregunta());
                 listaEventosT.add(e);
-            }
+            }*/
         } catch (SQLException e) {
                 e.printStackTrace();
         }
-        return listaEventosT;
+        return listaEventos;
     }
 
     @Override
@@ -73,15 +70,6 @@ public class SASucesoImp implements SASuceso {
         TransferReto tr = new TransferReto();
         try {
             dao = getHelper().getRetoDao();
-
-            // esto se omitira porque se coge de la BBDD
-            /*
-           Reto nuevojiji= new Reto();
-            nuevojiji.setNombre("DUCHARSE POR LAS MAÑANAS");
-            nuevojiji.setSuperado(false);
-            nuevojiji.setContador(28);
-            dao.create(nuevojiji);
-            ///////////////////////////////////////////*/
 
             if (dao.idExists(1)) {  // comprueba si hay algun reto en la BBDD
                 reto = (Reto) dao.queryForId(1);
@@ -117,12 +105,6 @@ public class SASucesoImp implements SASuceso {
                     reto.setSuperado(true);
                     dao.update(reto);
                 }
-            }else {
-                reto = new Reto();
-                reto.setNombre("NINGUNO");
-                reto.setContador(0);
-                reto.setSuperado(false);
-                dao.update(reto);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -143,39 +125,6 @@ public class SASucesoImp implements SASuceso {
 
             tareasDao = getHelper().getTareaDao();
 
-            // Esto no hara falta porque ya lo cogera de la BBDD
-/*
-            Tarea unaSinMas = new Tarea();
-            unaSinMas.setFrecuenciaTarea(Frecuencia.DIARIA);
-            unaSinMas.setTextoAlarma("Dale los buenos días a mamá");
-            unaSinMas.setTextoPregunta("¿Le has dado los buenos días a mamá?");
-            unaSinMas.setFechaIni(new Date());
-            unaSinMas.setContador(0);
-            unaSinMas.setHoraAlarma(new Date());
-            unaSinMas.setHoraPregunta(new Date());
-            unaSinMas.setMejorar(30);
-            unaSinMas.setNoSeguidos(2);
-            unaSinMas.setNumNo(3);
-            unaSinMas.setNumSi(1);
-
-            Tarea unaSinMas2 = new Tarea();
-            unaSinMas2.setFrecuenciaTarea(Frecuencia.SEMANAL);
-            unaSinMas2.setTextoAlarma("Meter las cosas de clase en la mochila");
-            unaSinMas2.setTextoPregunta("¿Has metido las cosas de clase en la mochila?");
-            unaSinMas2.setFechaIni(new Date());
-            unaSinMas2.setContador(0);
-            unaSinMas2.setHoraAlarma(new Date());
-            unaSinMas2.setHoraPregunta(new Date());
-            unaSinMas2.setMejorar(4);
-            unaSinMas2.setNoSeguidos(2);
-            unaSinMas2.setNumNo(3);
-            unaSinMas2.setNumSi(1);
-
-            tareasDao.create(unaSinMas);
-            tareasDao.create(unaSinMas2);
-
-            ////////////////////////////////*/
-
             tareas = tareasDao.queryForAll();
             for(int i = 0; i < tareas.size(); i++){
 
@@ -188,7 +137,6 @@ public class SASucesoImp implements SASuceso {
                 tt.setHoraAlarma(tareas.get(i).getHoraAlarma());
                 tt.setMejorar(tareas.get(i).getMejorar());
                 tt.setFrecuenciaTarea(tareas.get(i).getFrecuenciaTarea());
-                tt.setFechaIni(tareas.get(i).getFechaIni());
                 tt.setNoSeguidos(tareas.get(i).getNoSeguidos());
                 tt.setNumNo(tareas.get(i).getNumNo());
                 tt.setNumSi(tareas.get(i).getNumSi());
@@ -226,19 +174,64 @@ public class SASucesoImp implements SASuceso {
                     // cambiar frecuencia
                     dao.update(tarea);
                 }
-
             }else {
                 Log.e("prueba", "No hay tareas en la database o ha pasado otra cosa");
             }
         } catch (SQLException e) {
-
         }*/
     }
 
     @Override
     public void cargarTareasBBDD() {
         Parser p = new Parser();
-
+        Dao<Tarea, Integer> tareaDao;
+        p.readTareas();   // lee del fichero y obtiene un ArrayList de tareas
+        ArrayList<Tarea> tareasBBDD = p.getTareas();
+        for (int i = 0; i < tareasBBDD.size(); i++){
+            try {
+                tareaDao = getHelper().getTareaDao();
+                if (tareaDao.queryForEq("TEXTO_ALARMA", tareasBBDD.get(i).getTextoAlarma()).size() == 0)
+                    tareaDao.create(tareasBBDD.get(i));
+                else
+                    Log.e("IMPOSIBLE CARGAR TAREA", "Ya hay una igual");
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
+    public void cargarRetoBBDD() {
+        Parser p = new Parser();
+        Dao<Reto, Integer> retoDao;
+        String texto = p.readReto();   // lee del fichero y obtiene el texto del reto
+        try {
+            retoDao = getHelper().getRetoDao();
+            Reto reto = p.toReto(texto);
+            if (reto != null && !retoDao.idExists(1))
+                retoDao.create(reto);
+            else
+                Log.e("IMPOSIBLE CARGAR RETO", "Ya hay uno");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void cargarEventosBBDD() {
+        Parser p = new Parser();
+        Dao<Evento, Integer> eventoDao;
+        p.readEventos();   // lee del fichero y obtiene un ArrayList de eventos
+        ArrayList<Evento> eventosBBDD = p.getEventos();
+        for (int i = 0; i < eventosBBDD.size(); i++){
+            try {
+                eventoDao = getHelper().getEventoDao();
+                if (eventoDao.queryForEq("TEXTO_ALARMA", eventosBBDD.get(i).getTextoAlarma()).size() == 0)
+                    eventoDao.create(eventosBBDD.get(i));
+                else
+                    Log.e("IMPOSIBLE CARGAR EVENTO", "Ya hay uno igual");
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
 }

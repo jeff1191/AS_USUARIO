@@ -34,16 +34,16 @@ public class DispatcherImp extends Dispatcher{
         switch(accion){
             case ListaComandos.VER_EVENTOS:
                 Intent intent = new Intent(Contexto.getInstancia().getContext().getApplicationContext(), VerEventos.class);
-                List<TransferEvento> eventosModelo= (List<TransferEvento>) datos;
+                List<Evento> eventosModelo= (List<Evento>) datos;
                 ArrayList<String> listaActividad= new ArrayList<String>();
-
                 for(int i=0; i < eventosModelo.size(); i++){
-                    String addEvento= eventosModelo.get(i).getTextoPregunta() + " a las " + eventosModelo.get(i).getFechaIni();
+                    String addEvento= eventosModelo.get(i).getTextoAlarma() + " el " + eventosModelo.get(i).getTextoFecha();
                     listaActividad.add(addEvento);
                 }
                 intent.putStringArrayListExtra("listaEventos", listaActividad);
                 Contexto.getInstancia().getContext().startActivity(intent);
                 break;
+
             case ListaComandos.CONFIGURACION:
                 Intent intentConfiguracion = new Intent(Contexto.getInstancia().getContext().getApplicationContext(), Configuracion.class);
                 TransferUsuario conf = (TransferUsuario) datos;
@@ -56,7 +56,6 @@ public class DispatcherImp extends Dispatcher{
                 Intent intentEditarUsuario = new Intent(Contexto.getInstancia().getContext().getApplicationContext(), MainActivity.class);
                 TransferUsuario editarUsuario = (TransferUsuario) datos;
                 intentEditarUsuario.putExtra("editarNombre", editarUsuario.getNombre());
-                Log.e("EDIT: ",editarUsuario.getAvatar());
                 intentEditarUsuario.putExtra("editarAvatar", editarUsuario.getAvatar());
                 Contexto.getInstancia().getContext().startActivity(intentEditarUsuario);
                 break;
@@ -132,8 +131,11 @@ public class DispatcherImp extends Dispatcher{
                     iUsuario.putExtra("frecuencia", transferUsuario.getFrecuenciaRecibirInforme());
                     iUsuario.putExtra("nombre tutor", transferUsuario.getNombreTutor());
                     iUsuario.putExtra("correo tutor", transferUsuario.getCorreoTutor());
-                }
-              Contexto.getInstancia().getContext().startActivity(iUsuario);
+                }             
+                Contexto.getInstancia().getContext().startActivity(iUsuario);
+                break;
+
+            case ListaComandos.CARGAR_BBDD:
                 break;
         }
     }

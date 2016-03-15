@@ -28,9 +28,6 @@ public class Tarea {
 	@DatabaseField(columnName = "HORA_ALARMA", dataType = DataType.DATE_STRING, format = "dd-MM-yyyy HH:mm:ss")
 	private Date horaAlarma;
 
-	@DatabaseField(columnName = "FECHA_INI", dataType = DataType.DATE_STRING, format = "dd-MM-yyyy HH:mm:ss")
-	private Date fechaIni;
-
 	@DatabaseField(columnName = "CONTADOR")
 	private Integer contador;
 
@@ -48,6 +45,15 @@ public class Tarea {
 
 	@DatabaseField(columnName = "NUM_NO")
 	private Integer numNo;
+
+	public Tarea(){
+		this.contador = 0;
+		this.noSeguidos = 0;
+		this.numNo = 0;
+		this.numSi = 0;
+		this.frecuenciaTarea = Frecuencia.DIARIA;
+		this.mejorar = 30;
+	}
 
 	public Integer getId() {
 		return id;
@@ -87,14 +93,6 @@ public class Tarea {
 
 	public void setHoraAlarma(Date horaAlarma) {
 		this.horaAlarma = horaAlarma;
-	}
-
-	public Date getFechaIni() {
-		return fechaIni;
-	}
-
-	public void setFechaIni(Date fechaIni) {
-		this.fechaIni = fechaIni;
 	}
 
 	public Integer getContador() {

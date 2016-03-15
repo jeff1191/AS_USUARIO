@@ -21,6 +21,11 @@ public class Reto {
 	@DatabaseField(columnName = "SUPERADO")
 	private boolean superado;
 
+	public Reto(){
+		this.contador = 0;
+		this.superado = false;
+	}
+
 	public Integer getId() {
 		return id;
 	}

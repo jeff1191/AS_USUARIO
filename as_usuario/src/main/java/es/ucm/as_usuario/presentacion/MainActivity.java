@@ -125,7 +125,8 @@ public class MainActivity extends Activity {
     }
 
     public void ayuda(View v) {
-        Controlador.getInstancia().ejecutaComando(ListaComandos.AYUDA, "principal");
+        Controlador.getInstancia().ejecutaComando(ListaComandos.CARGAR_BBDD, null);
+       // Controlador.getInstancia().ejecutaComando(ListaComandos.AYUDA, "principal");
     }
 
     public void verInforme(View v){

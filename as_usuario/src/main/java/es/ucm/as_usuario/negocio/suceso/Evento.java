@@ -15,29 +15,14 @@ public class Evento {
 	@DatabaseField(generatedId = true, columnName = "ID")
 	private Integer id;
 
-	@DatabaseField(columnName = "TEXTO_PREGUNTA")
-	private String textoPregunta;
-
 	@DatabaseField(columnName = "TEXTO_ALARMA")
 	private String textoAlarma;
 
-	@DatabaseField(columnName = "HORA_PREGUNTA", dataType = DataType.DATE_STRING, format = "dd-MM-yyyy HH:mm:ss")
-	private Date horaPregunta;
+	@DatabaseField(columnName = "TEXTO_FECHA")
+	private String textoFecha;
 
-	@DatabaseField(columnName = "HORA_ALARMA", dataType = DataType.DATE_STRING, format = "dd-MM-yyyy HH:mm:ss")
+	@DatabaseField(columnName = "HORA_ALARMA" ,dataType = DataType.DATE_STRING, format = "dd-MM-yyyy HH:mm:ss")
 	private Date horaAlarma;
-
-	@DatabaseField(columnName = "FECHA_INI", dataType = DataType.DATE_STRING, format = "dd-MM-yyyy HH:mm:ss")
-	private Date fechaIni;
-
-	@DatabaseField(columnName = "CONTADOR")
-	private Integer contador;
-
-	@DatabaseField(columnName = "NO_SEGUIDOS")
-	private Integer noSeguidos;
-
-	@DatabaseField(columnName = "FREC_TAREA", dataType = DataType.ENUM_STRING)
-	private Frecuencia frecuenciaTarea;
 
 	public Integer getId() {
 		return id;
@@ -45,14 +30,6 @@ public class Evento {
 
 	public void setId(Integer id) {
 		this.id = id;
-	}
-
-	public String getTextoPregunta() {
-		return textoPregunta;
-	}
-
-	public void setTextoPregunta(String textoPregunta) {
-		this.textoPregunta = textoPregunta;
 	}
 
 	public String getTextoAlarma() {
@@ -63,14 +40,6 @@ public class Evento {
 		this.textoAlarma = textoAlarma;
 	}
 
-	public Date getHoraPregunta() {
-		return horaPregunta;
-	}
-
-	public void setHoraPregunta(Date horaPregunta) {
-		this.horaPregunta = horaPregunta;
-	}
-
 	public Date getHoraAlarma() {
 		return horaAlarma;
 	}
@@ -79,35 +48,13 @@ public class Evento {
 		this.horaAlarma = horaAlarma;
 	}
 
-	public Date getFechaIni() {
-		return fechaIni;
+	public String getTextoFecha() {
+		return textoFecha;
 	}
 
-	public void setFechaIni(Date fechaIni) {
-		this.fechaIni = fechaIni;
+	public void setTextoFecha(String textoFecha) {
+		this.textoFecha = textoFecha;
 	}
 
-	public Integer getContador() {
-		return contador;
-	}
 
-	public Integer getNoSeguidos() {
-		return noSeguidos;
-	}
-
-	public void setNoSeguidos(Integer noSeguidos) {
-		this.noSeguidos = noSeguidos;
-	}
-
-	public Frecuencia getFrecuenciaTarea() {
-		return frecuenciaTarea;
-	}
-
-	public void setFrecuenciaTarea(Frecuencia frecuenciaTarea) {
-		this.frecuenciaTarea = frecuenciaTarea;
-	}
-
-	public void setContador(Integer contador) {
-		this.contador = contador;
-	}
 }
