@@ -7,6 +7,7 @@ import com.j256.ormlite.field.DataType;
 import com.j256.ormlite.field.DatabaseField;
 
 import java.sql.Timestamp;
+import java.util.Date;
 
 import es.ucm.as_usuario.negocio.utils.Frecuencia;
 
@@ -20,14 +21,14 @@ public class Evento {
 	@DatabaseField(columnName = "TEXTO_ALARMA")
 	private String textoAlarma;
 
-	@DatabaseField(columnName = "HORA_PREGUNTA")
-	private Timestamp horaPregunta;
+	@DatabaseField(columnName = "HORA_PREGUNTA", dataType = DataType.DATE_STRING, format = "dd-MM-yyyy HH:mm:ss")
+	private Date horaPregunta;
 
-	@DatabaseField(columnName = "HORA_ALARMA")
-	private Timestamp horaAlarma;
+	@DatabaseField(columnName = "HORA_ALARMA", dataType = DataType.DATE_STRING, format = "dd-MM-yyyy HH:mm:ss")
+	private Date horaAlarma;
 
-	@DatabaseField(columnName = "FECHA_INI")
-	private Timestamp fechaIni;
+	@DatabaseField(columnName = "FECHA_INI", dataType = DataType.DATE_STRING, format = "dd-MM-yyyy HH:mm:ss")
+	private Date fechaIni;
 
 	@DatabaseField(columnName = "CONTADOR")
 	private Integer contador;
@@ -62,27 +63,27 @@ public class Evento {
 		this.textoAlarma = textoAlarma;
 	}
 
-	public Timestamp getHoraPregunta() {
+	public Date getHoraPregunta() {
 		return horaPregunta;
 	}
 
-	public void setHoraPregunta(Timestamp horaPregunta) {
+	public void setHoraPregunta(Date horaPregunta) {
 		this.horaPregunta = horaPregunta;
 	}
 
-	public Timestamp getHoraAlarma() {
+	public Date getHoraAlarma() {
 		return horaAlarma;
 	}
 
-	public void setHoraAlarma(Timestamp horaAlarma) {
+	public void setHoraAlarma(Date horaAlarma) {
 		this.horaAlarma = horaAlarma;
 	}
 
-	public Timestamp getFechaIni() {
+	public Date getFechaIni() {
 		return fechaIni;
 	}
 
-	public void setFechaIni(Timestamp fechaIni) {
+	public void setFechaIni(Date fechaIni) {
 		this.fechaIni = fechaIni;
 	}
 

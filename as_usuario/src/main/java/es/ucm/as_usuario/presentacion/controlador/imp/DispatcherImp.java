@@ -3,11 +3,13 @@ package es.ucm.as_usuario.presentacion.controlador.imp;
 import android.content.Intent;
 import android.util.Log;
 
+import java.nio.charset.MalformedInputException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 import es.ucm.as_usuario.negocio.suceso.Evento;
+import es.ucm.as_usuario.negocio.suceso.TransferEvento;
 import es.ucm.as_usuario.negocio.suceso.TransferReto;
 import es.ucm.as_usuario.negocio.suceso.TransferTarea;
 import es.ucm.as_usuario.negocio.usuario.TransferUsuario;
@@ -32,12 +34,10 @@ public class DispatcherImp extends Dispatcher{
         switch(accion){
             case ListaComandos.VER_EVENTOS:
                 Intent intent = new Intent(Contexto.getInstancia().getContext().getApplicationContext(), VerEventos.class);
-                List<Evento> eventosModelo= (List<Evento>) datos;
-                Log.d("Info", "LLEGA: " + eventosModelo.get(0).getTextoPregunta());
+                List<TransferEvento> eventosModelo= (List<TransferEvento>) datos;
                 ArrayList<String> listaActividad= new ArrayList<String>();
 
                 for(int i=0; i < eventosModelo.size(); i++){
-                   // eventosModelo.get(i).getFechaIni()
                     String addEvento= eventosModelo.get(i).getTextoPregunta() + " a las " + eventosModelo.get(i).getFechaIni();
                     listaActividad.add(addEvento);
                 }
@@ -56,6 +56,7 @@ public class DispatcherImp extends Dispatcher{
                 Intent intentEditarUsuario = new Intent(Contexto.getInstancia().getContext().getApplicationContext(), MainActivity.class);
                 TransferUsuario editarUsuario = (TransferUsuario) datos;
                 intentEditarUsuario.putExtra("editarNombre", editarUsuario.getNombre());
+                Log.e("EDIT: ",editarUsuario.getAvatar());
                 intentEditarUsuario.putExtra("editarAvatar", editarUsuario.getAvatar());
                 Contexto.getInstancia().getContext().startActivity(intentEditarUsuario);
                 break;
@@ -132,8 +133,7 @@ public class DispatcherImp extends Dispatcher{
                     iUsuario.putExtra("nombre tutor", transferUsuario.getNombreTutor());
                     iUsuario.putExtra("correo tutor", transferUsuario.getCorreoTutor());
                 }
-              // Contexto.getInstancia().getContext().startActivity(iUsuario.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
-              //  Contexto.getInstancia().getContext().startActivity(iUsuario);
+              Contexto.getInstancia().getContext().startActivity(iUsuario);
                 break;
         }
     }

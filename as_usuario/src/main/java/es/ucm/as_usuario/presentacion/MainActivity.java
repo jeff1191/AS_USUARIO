@@ -24,6 +24,9 @@ import es.ucm.as_usuario.negocio.usuario.Usuario;
 import es.ucm.as_usuario.negocio.utils.Frecuencia;
 import es.ucm.as_usuario.presentacion.controlador.Controlador;
 import es.ucm.as_usuario.presentacion.controlador.ListaComandos;
+import es.ucm.as_usuario.presentacion.controlador.comandos.Command;
+import es.ucm.as_usuario.presentacion.controlador.comandos.exceptions.commandException;
+import es.ucm.as_usuario.presentacion.controlador.comandos.factoria.FactoriaComandos;
 import es.ucm.as_usuario.presentacion.notificaciones.ServicioNotificaciones;
 
 
@@ -32,57 +35,56 @@ public class MainActivity extends Activity {
     private TextView nombrePrincipal;
     private TextView puntuacion;
     private ImageView imagenPerfil;
-
     private int request_code;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         Contexto.getInstancia().setContext(this);
-        /*TransferUsuario crearUsuario = new TransferUsuario();
+        TransferUsuario crearUsuario = new TransferUsuario();
         crearUsuario.setNombre("Jiji");
         crearUsuario.setAvatar("");
         crearUsuario.setPuntuacion(6);
         crearUsuario.setPuntuacionAnterior(4);
         crearUsuario.setFrecuenciaRecibirInforme(Frecuencia.DIARIA);
-        Controlador.getInstancia().ejecutaComando(ListaComandos.CREAR_USUARIO, crearUsuario);*/
+        Controlador.getInstancia().ejecutaComando(ListaComandos.CREAR_USUARIO, crearUsuario);
 
-
+        Command c = FactoriaComandos.getInstancia().getCommand(ListaComandos.CONSULTAR_USUARIO);
+        TransferUsuario cargarUsuario = new TransferUsuario();
+        try {
+            cargarUsuario = (TransferUsuario) c.ejecutaComando(null);
+        } catch (commandException e) {
+            e.printStackTrace();
+        }
         cargarTema();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-
-
-        /*nombrePrincipal=(TextView)findViewById(R.id.nombreUser);
-        nombrePrincipal.setText(Usuario.getInstancia().getNombre());
+        nombrePrincipal=(TextView)findViewById(R.id.nombreUser);
         puntuacion = (TextView)findViewById(R.id.puntuacionUsuario);
         imagenPerfil= (ImageView) findViewById(R.id.avatar);
-        if(Usuario.getInstancia().getAvatar() != null && !Usuario.getInstancia().getAvatar().equals(""))
-            imagenPerfil.setImageBitmap(BitmapFactory.decodeFile(Usuario.getInstancia().getAvatar()));
+        if(cargarUsuario.getAvatar() != null && !cargarUsuario.getAvatar().equals(""))
+            imagenPerfil.setImageBitmap(BitmapFactory.decodeFile(cargarUsuario.getAvatar()));
         else
             imagenPerfil.setImageResource(R.drawable.avatar);
-        puntuacion.setText(Usuario.getInstancia().getPuntuacion() + "/10");
-        */
+        puntuacion.setText(cargarUsuario.getPuntuacion() + "/10");
+        nombrePrincipal.setText(cargarUsuario.getNombre());
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
-            Log.e("ww", "tiene algo");
-            String name = bundle.getString("nombre");
+          /*  String name = bundle.getString("nombre");
             Integer punt = bundle.getInt("puntuacion");
 
             nombrePrincipal = (TextView) findViewById(R.id.nombreUser);
             nombrePrincipal.setText(name);
             puntuacion = (TextView) findViewById(R.id.puntuacionUsuario);
-            puntuacion.setText(punt.toString() + "/10");
+            puntuacion.setText(punt.toString() + "/10");*/
 
-
-            /*if (bundle.getString("editarUsuario") != null) {
+            if (bundle.getString("editarUsuario") != null) {
                 //Falta rellenar los demás campos...imagen tono color
                 nombrePrincipal.setText(bundle.getString("editarUsuario"));
             }
-            if (bundle.getString("editarAvatar") != null) {
-             /*   InputStream is;
-             imagenPerfil.setImageBitmap(BitmapFactory.decodeFile(bundle.getString("editarAvatar")));
+            if (bundle.getString("editarAvatar") != null && !bundle.getString("editarAvatar").equals("")) {
+             /*  InputStream is;
+
 
                 try {
                     is = getContentResolver().openInputStream(Uri.parse(bundle.getString("editarAvatar")));
@@ -90,6 +92,8 @@ public class MainActivity extends Activity {
                     Bitmap bitmap = BitmapFactory.decodeStream(bis);
                     imagenPerfil.setImageBitmap(bitmap);
                 } catch (FileNotFoundException e) {e.printStackTrace();}*/
+                imagenPerfil.setImageBitmap(BitmapFactory.decodeFile(bundle.getString("editarAvatar")));
+            }
         }
 
     }
@@ -118,7 +122,6 @@ public class MainActivity extends Activity {
 
     public void personalizacion(View v){
         Controlador.getInstancia().ejecutaComando(ListaComandos.CONFIGURACION, null);
-       // startActivityForResult(intentConfiguracion, request_code);
     }
 
     public void ayuda(View v) {

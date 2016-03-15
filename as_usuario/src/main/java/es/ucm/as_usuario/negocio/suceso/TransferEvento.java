@@ -1,6 +1,7 @@
 package es.ucm.as_usuario.negocio.suceso;
 
 import java.sql.Timestamp;
+import java.util.Date;
 
 import es.ucm.as_usuario.negocio.utils.Frecuencia;
 
@@ -14,11 +15,11 @@ public class TransferEvento {
 
     private String textoAlarma;
 
-    private Timestamp horaPregunta;
+    private Date horaPregunta;
 
-    private Timestamp horaAlarma;
+    private Date horaAlarma;
 
-    private Timestamp fechaIni;
+    private Date fechaIni;
 
     private Integer contador;
 
@@ -50,27 +51,27 @@ public class TransferEvento {
         this.textoAlarma = textoAlarma;
     }
 
-    public Timestamp getHoraPregunta() {
+    public Date getHoraPregunta() {
         return horaPregunta;
     }
 
-    public void setHoraPregunta(Timestamp horaPregunta) {
+    public void setHoraPregunta(Date horaPregunta) {
         this.horaPregunta = horaPregunta;
     }
 
-    public Timestamp getHoraAlarma() {
+    public Date getHoraAlarma() {
         return horaAlarma;
     }
 
-    public void setHoraAlarma(Timestamp horaAlarma) {
+    public void setHoraAlarma(Date horaAlarma) {
         this.horaAlarma = horaAlarma;
     }
 
-    public Timestamp getFechaIni() {
+    public Date getFechaIni() {
         return fechaIni;
     }
 
-    public void setFechaIni(Timestamp fechaIni) {
+    public void setFechaIni(Date fechaIni) {
         this.fechaIni = fechaIni;
     }
 
