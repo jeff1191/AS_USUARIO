@@ -13,4 +13,5 @@ public interface SASuceso {
     public void responderTarea(String respuestaTarea);
     public void cargarTareasBBDD();
     public void cargarRetoBBDD();
+    public void cargarEventosBBDD();
 }

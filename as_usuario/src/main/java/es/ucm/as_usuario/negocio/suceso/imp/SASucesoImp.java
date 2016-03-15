@@ -7,7 +7,6 @@ import com.j256.ormlite.dao.Dao;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import es.ucm.as_usuario.integracion.DBHelper;
@@ -18,7 +17,6 @@ import es.ucm.as_usuario.negocio.suceso.SASuceso;
 import es.ucm.as_usuario.negocio.suceso.Tarea;
 import es.ucm.as_usuario.negocio.suceso.TransferReto;
 import es.ucm.as_usuario.negocio.suceso.TransferTarea;
-import es.ucm.as_usuario.negocio.utils.Frecuencia;
 import es.ucm.as_usuario.presentacion.Contexto;
 
 /**
@@ -43,7 +41,6 @@ public class SASucesoImp implements SASuceso {
         List<Evento> listaEventos = null;
         try {
             eventos = getHelper().getEventoDao();
-
             listaEventos= eventos.queryForAll();
         } catch (SQLException e) {
 
@@ -93,12 +90,6 @@ public class SASucesoImp implements SASuceso {
                     reto.setSuperado(true);
                     dao.update(reto);
                 }
-            }else {
-                reto = new Reto();
-                reto.setNombre("NINGUNO");
-                reto.setContador(0);
-                reto.setSuperado(false);
-                dao.update(reto);
             }
         } catch (SQLException e) {
 
@@ -207,6 +198,25 @@ public class SASucesoImp implements SASuceso {
                 Log.e("IMPOSIBLE CARGAR RETO", "Ya hay uno");
         } catch (SQLException e) {
             e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void cargarEventosBBDD() {
+        Parser p = new Parser();
+        Dao<Evento, Integer> eventoDao;
+        p.readEventos();   // lee del fichero y obtiene un ArrayList de eventos
+        ArrayList<Evento> eventosBBDD = p.getEventos();
+        for (int i = 0; i < eventosBBDD.size(); i++){
+            try {
+                eventoDao = getHelper().getEventoDao();
+                if (eventoDao.queryForEq("TEXTO_ALARMA", eventosBBDD.get(i).getTextoAlarma()).size() == 0)
+                    eventoDao.create(eventosBBDD.get(i));
+                else
+                    Log.e("IMPOSIBLE CARGAR EVENTO", "Ya hay uno igual");
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
     }
 }

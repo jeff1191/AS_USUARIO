@@ -33,17 +33,15 @@ public class DispatcherImp extends Dispatcher{
             case ListaComandos.VER_EVENTOS:
                 Intent intent = new Intent(Contexto.getInstancia().getContext().getApplicationContext(), VerEventos.class);
                 List<Evento> eventosModelo= (List<Evento>) datos;
-                Log.d("Info", "LLEGA: " + eventosModelo.get(0).getTextoPregunta());
                 ArrayList<String> listaActividad= new ArrayList<String>();
-
                 for(int i=0; i < eventosModelo.size(); i++){
-                   // eventosModelo.get(i).getFechaIni()
-                    String addEvento= eventosModelo.get(i).getTextoPregunta() + " a las " + eventosModelo.get(i).getFechaIni();
+                    String addEvento= eventosModelo.get(i).getTextoAlarma() + " el " + eventosModelo.get(i).getTextoFecha();
                     listaActividad.add(addEvento);
                 }
                 intent.putStringArrayListExtra("listaEventos", listaActividad);
                 Contexto.getInstancia().getContext().startActivity(intent);
                 break;
+
             case ListaComandos.CONFIGURACION:
                 Intent intentConfiguracion = new Intent(Contexto.getInstancia().getContext().getApplicationContext(), Configuracion.class);
                 TransferUsuario conf = (TransferUsuario) datos;

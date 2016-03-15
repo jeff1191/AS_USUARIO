@@ -17,16 +17,7 @@ public class VerEventosComando implements Command {
     @Override
      public Object ejecutaComando(Object datos) throws commandException {
         SASuceso saSuceso= FactoriaSA.getInstancia().nuevoSASuceso();
-        //List<Evento> eventosList= saSuceso.consultarEventos();
-        List<Evento> eventosList = new ArrayList<>();
-        Evento unoSinMas = new Evento();
-        unoSinMas.setTextoPregunta("Ir al sitio A");
-        unoSinMas.setFechaIni(new Timestamp(123345446));
-        Evento unoSinMas2 = new Evento();
-        unoSinMas2.setTextoPregunta("Ir al sitio B");
-        unoSinMas2.setFechaIni(new Timestamp(987654321));
-        eventosList.add(unoSinMas);
-        eventosList.add(unoSinMas2);
+        List<Evento> eventosList= saSuceso.consultarEventos();
         return eventosList;
     }
 }
