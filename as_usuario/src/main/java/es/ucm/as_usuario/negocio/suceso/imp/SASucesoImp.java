@@ -1,13 +1,10 @@
 package es.ucm.as_usuario.negocio.suceso.imp;
 
-import android.util.Log;
-
 import com.j256.ormlite.android.apptools.OpenHelperManager;
 import com.j256.ormlite.dao.Dao;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import es.ucm.as_usuario.integracion.DBHelper;
@@ -37,30 +34,21 @@ public class SASucesoImp implements SASuceso {
 
 
     @Override
-    public List<Evento> consultarEventos() {
+    public List<TransferEvento> consultarEventos() {
 
         Dao<Evento, Integer> eventos;
         List<Evento> listaEventos = null;
+        List<TransferEvento> transferEventos = new ArrayList<TransferEvento>();
         try {
             eventos = getHelper().getEventoDao();
             listaEventos= eventos.queryForAll();
-            /*for(int i=0; i < listaEventos.size();i++){
-                TransferEvento e = new TransferEvento();
-                e.setId(listaEventos.get(i).getId());
-                e.setContador(listaEventos.get(i).getContador());
-                e.setFechaIni(listaEventos.get(i).getFechaIni());
-                e.setFrecuenciaTarea(listaEventos.get(i).getFrecuenciaTarea());
-                e.setHoraAlarma(listaEventos.get(i).getHoraAlarma());
-                e.setHoraPregunta(listaEventos.get(i).getHoraPregunta());
-                e.setNoSeguidos(listaEventos.get(i).getNoSeguidos());
-                e.setTextoAlarma(listaEventos.get(i).getTextoAlarma());
-                e.setTextoPregunta(listaEventos.get(i).getTextoPregunta());
-                listaEventosT.add(e);
-            }*/
+            for(int i = 0; i < listaEventos.size(); i++)
+                transferEventos.add(new TransferEvento(listaEventos.get(i)));
+
         } catch (SQLException e) {
-                e.printStackTrace();
+
         }
-        return listaEventos;
+        return transferEventos;
     }
 
     @Override
@@ -81,7 +69,7 @@ public class SASucesoImp implements SASuceso {
                 return null;
 
         } catch (SQLException e) {
-            e.printStackTrace();
+
         }
         return tr;
     }
@@ -107,7 +95,7 @@ public class SASucesoImp implements SASuceso {
                 }
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+
         }
         return reto.getContador();
     }
@@ -121,7 +109,6 @@ public class SASucesoImp implements SASuceso {
         List<TransferTarea> transferTareas = new ArrayList<TransferTarea>();
 
         try {
-            Log.e("SASuceso", "consulta tareas");
 
             tareasDao = getHelper().getTareaDao();
 
@@ -144,7 +131,7 @@ public class SASucesoImp implements SASuceso {
             }
 
         } catch (SQLException e) {
-            e.printStackTrace();
+
         }
         return transferTareas;
     }
@@ -153,7 +140,6 @@ public class SASucesoImp implements SASuceso {
     public void responderTarea(String respuestaTarea) {
         Dao<Tarea, Integer> dao;
         Tarea tarea = new Tarea();
-        Log.e("prueba", "Lo que llega es ..." + respuestaTarea);
         String[] sol = respuestaTarea.split("_");
         //sol[0] tiene la respuesta
         int respuesta = Integer.parseInt(sol[0]);
@@ -185,19 +171,33 @@ public class SASucesoImp implements SASuceso {
     public void cargarTareasBBDD() {
         Parser p = new Parser();
         Dao<Tarea, Integer> tareaDao;
-        p.readTareas();   // lee del fichero y obtiene un ArrayList de tareas
+        p.readTareas();   // lee del fichero y convierte en tareas
+
+        // crea las nuevas tareas en BBDD si hubiera
         ArrayList<Tarea> tareasBBDD = p.getTareas();
         for (int i = 0; i < tareasBBDD.size(); i++){
             try {
                 tareaDao = getHelper().getTareaDao();
                 if (tareaDao.queryForEq("TEXTO_ALARMA", tareasBBDD.get(i).getTextoAlarma()).size() == 0)
                     tareaDao.create(tareasBBDD.get(i));
-                else
-                    Log.e("IMPOSIBLE CARGAR TAREA", "Ya hay una igual");
             } catch (SQLException e) {
                 e.printStackTrace();
             }
         }
+
+        // elimina las tareas que el tutor ha deshabilitado o borrado
+        ArrayList<Tarea> tareasObsoletas = p.getTareasObsoletas();
+        for (int i = 0; i < tareasObsoletas.size(); i++){
+            try {
+                tareaDao = getHelper().getTareaDao();
+                if (tareaDao.queryForEq("TEXTO_ALARMA", tareasObsoletas.get(i).getTextoAlarma()).size() != 0)
+                    tareaDao.delete(tareaDao.queryForEq("TEXTO_ALARMA", tareasObsoletas.get(i).getTextoAlarma()));
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+
+
     }
 
     public void cargarRetoBBDD() {
@@ -209,8 +209,6 @@ public class SASucesoImp implements SASuceso {
             Reto reto = p.toReto(texto);
             if (reto != null && !retoDao.idExists(1))
                 retoDao.create(reto);
-            else
-                Log.e("IMPOSIBLE CARGAR RETO", "Ya hay uno");
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -220,15 +218,28 @@ public class SASucesoImp implements SASuceso {
     public void cargarEventosBBDD() {
         Parser p = new Parser();
         Dao<Evento, Integer> eventoDao;
-        p.readEventos();   // lee del fichero y obtiene un ArrayList de eventos
+        p.readEventos();   // lee del fichero y convierte en eventos
+
+        // crea las nuevas tareas en BBDD si hubiera
         ArrayList<Evento> eventosBBDD = p.getEventos();
         for (int i = 0; i < eventosBBDD.size(); i++){
             try {
                 eventoDao = getHelper().getEventoDao();
                 if (eventoDao.queryForEq("TEXTO_ALARMA", eventosBBDD.get(i).getTextoAlarma()).size() == 0)
                     eventoDao.create(eventosBBDD.get(i));
-                else
-                    Log.e("IMPOSIBLE CARGAR EVENTO", "Ya hay uno igual");
+
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+
+        // elimina las tareas que el tutor ha deshabilitado o borrado
+        ArrayList<Evento> eventosObsoletos = p.getEventosObsoletos();
+        for (int i = 0; i < eventosObsoletos.size(); i++){
+            try {
+                eventoDao = getHelper().getEventoDao();
+                if (eventoDao.queryForEq("TEXTO_ALARMA", eventosObsoletos.get(i).getTextoAlarma()).size() != 0)
+                    eventoDao.delete(eventoDao.queryForEq("TEXTO_ALARMA", eventosObsoletos.get(i).getTextoAlarma()));
             } catch (SQLException e) {
                 e.printStackTrace();
             }

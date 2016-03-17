@@ -2,32 +2,23 @@ package es.ucm.as_usuario.presentacion;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import java.io.BufferedInputStream;
-import java.io.FileNotFoundException;
-import java.io.InputStream;
 
 import es.ucm.as_usuario.R;
-import es.ucm.as_usuario.integracion.DBHelper;
 import es.ucm.as_usuario.negocio.usuario.TransferUsuario;
-import es.ucm.as_usuario.negocio.usuario.Usuario;
 import es.ucm.as_usuario.negocio.utils.Frecuencia;
 import es.ucm.as_usuario.presentacion.controlador.Controlador;
 import es.ucm.as_usuario.presentacion.controlador.ListaComandos;
 import es.ucm.as_usuario.presentacion.controlador.comandos.Command;
 import es.ucm.as_usuario.presentacion.controlador.comandos.exceptions.commandException;
 import es.ucm.as_usuario.presentacion.controlador.comandos.factoria.FactoriaComandos;
-import es.ucm.as_usuario.presentacion.notificaciones.ServicioNotificaciones;
 
 
 public class MainActivity extends Activity {

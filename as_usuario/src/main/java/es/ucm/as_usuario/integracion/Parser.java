@@ -1,6 +1,5 @@
 package es.ucm.as_usuario.integracion;
 
-import android.util.Log;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
@@ -12,7 +11,6 @@ import es.ucm.as_usuario.R;
 import es.ucm.as_usuario.negocio.suceso.Evento;
 import es.ucm.as_usuario.negocio.suceso.Reto;
 import es.ucm.as_usuario.negocio.suceso.Tarea;
-import es.ucm.as_usuario.negocio.utils.Frecuencia;
 import es.ucm.as_usuario.presentacion.Contexto;
 
 /**
@@ -21,11 +19,15 @@ import es.ucm.as_usuario.presentacion.Contexto;
 public class Parser {
 
     private ArrayList<Tarea> tareas;
+    private ArrayList<Tarea> tareasObsoletas;
     private ArrayList<Evento> eventos;
+    private ArrayList<Evento> eventosObsoletos;
 
     public Parser(){
         tareas = new ArrayList<Tarea>();
         eventos = new ArrayList<Evento>();
+        tareasObsoletas = new ArrayList<Tarea>();
+        eventosObsoletos = new ArrayList<Evento>();
     }
 
     public ArrayList<Tarea> getTareas(){
@@ -36,10 +38,18 @@ public class Parser {
         return this.eventos;
     }
 
+    public ArrayList<Tarea> getTareasObsoletas() {return this.tareasObsoletas;}
+
+    public ArrayList<Evento> getEventosObsoletos(){
+        return this.eventosObsoletos;
+    }
+
+
     /* Lee de fichero y transforma en tareas que almacena en el ArrayList atributo de esta clase*/
     public void readTareas() {
         String alarma = "";
         String pregunta = "";
+        String habilitada = "";
         try {
             InputStream fraw = Contexto.getInstancia().getContext().getResources().openRawResource(R.raw.perfil_a);
 
@@ -49,13 +59,18 @@ public class Parser {
             while(alarma != null){
                 alarma = brin.readLine();
                 pregunta = brin.readLine();
-                if (alarma != null && pregunta != null)
-                    tareas.add(toTarea(alarma, pregunta));
+                habilitada = brin.readLine();
+                if (alarma != null && pregunta != null) {
+                    if (habilitada.equals("true"))
+                        tareas.add(toTarea(alarma, pregunta));
+                    else
+                        tareasObsoletas.add(toTarea(alarma, pregunta));
+                }
             }
             fraw.close();
 
         } catch (Exception ex) {
-            Log.e("Ficheros", "Error al leer fichero desde recurso raw");
+
         }
     }
 
@@ -68,7 +83,7 @@ public class Parser {
             texto = brin.readLine();
             fraw.close();
         } catch (Exception ex) {
-            Log.e("Ficheros", "Error al leer fichero desde recurso raw");
+
         }
         return texto;
     }
@@ -77,6 +92,7 @@ public class Parser {
     public void readEventos() {
         String alarma = "";
         String fecha = "";
+        String habilitado = "";
         try {
             InputStream fraw = Contexto.getInstancia().getContext().getResources().openRawResource(R.raw.eventos);
 
@@ -86,13 +102,19 @@ public class Parser {
             while(alarma != null){
                 alarma = brin.readLine();
                 fecha = brin.readLine();
-                if (alarma != null && fecha != null)
-                    eventos.add(toEvento(alarma, fecha));
+                habilitado = brin.readLine();
+
+                if (alarma != null && fecha != null) {
+                    if (habilitado.equals("true"))
+                        eventos.add(toEvento(alarma, fecha));
+                    else
+                        eventosObsoletos.add(toEvento(alarma, fecha));
+                }
             }
             fraw.close();
 
         } catch (Exception ex) {
-            Log.e("Ficheros", "Error al leer fichero desde recurso raw");
+
         }
     }
 

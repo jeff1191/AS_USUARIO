@@ -9,6 +9,8 @@ import java.util.List;
 import es.ucm.as_usuario.negocio.factoria.FactoriaSA;
 import es.ucm.as_usuario.negocio.suceso.Evento;
 import es.ucm.as_usuario.negocio.suceso.SASuceso;
+import es.ucm.as_usuario.negocio.suceso.TransferEvento;
+import es.ucm.as_usuario.negocio.suceso.TransferTarea;
 import es.ucm.as_usuario.presentacion.controlador.comandos.Command;
 import es.ucm.as_usuario.presentacion.controlador.comandos.exceptions.commandException;
 
@@ -19,7 +21,7 @@ public class verTareasComando implements Command {
     @Override
     public Object ejecutaComando(Object datos) throws commandException {
         SASuceso saSuceso= FactoriaSA.getInstancia().nuevoSASuceso();
-        List<Evento> eventosList= saSuceso.consultarEventos();
-        return eventosList;
+        List<TransferTarea> tareaList= saSuceso.consultarTareas();
+        return tareaList;
     }
 }

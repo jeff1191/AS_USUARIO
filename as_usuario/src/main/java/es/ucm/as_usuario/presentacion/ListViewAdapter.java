@@ -2,7 +2,6 @@ package es.ucm.as_usuario.presentacion;
 
 import android.content.Context;
 import android.graphics.Color;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -61,7 +60,6 @@ public class ListViewAdapter extends BaseAdapter {
 
         // Dar valores a los TextView
         txtTitle.setText(titulos.get(position));
-       Log.e("Titulo", titulos.get(position));
         String ss = si.get(position).toString();
         sit.setText(ss);
         String sn = no.get(position).toString();
