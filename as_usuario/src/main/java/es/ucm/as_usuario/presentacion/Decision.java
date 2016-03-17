@@ -27,7 +27,7 @@ public class Decision extends Activity {
         try {
             cargarUsuario = (TransferUsuario) c.ejecutaComando(null);
 
-            if (cargarUsuario==null)
+            if (cargarUsuario == null)
                 nuevoUsuario = true;
             else
                 nuevoUsuario = false;
