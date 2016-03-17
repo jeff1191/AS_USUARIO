@@ -17,6 +17,9 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    packagingOptions {
+        exclude 'META-INF/LICENSE.txt'
+    }
 }
 
 dependencies {
@@ -24,12 +27,13 @@ dependencies {
     compile 'com.android.support:appcompat-v7:22.2.0'
     compile 'com.j256.ormlite:ormlite-core:4.48'
     compile 'com.j256.ormlite:ormlite-android:4.48'
+    compile 'javax.mail:mail:1.4.7'
 }
 buildscript{
 
 	repositories{
 		jcenter()
-	}
+    }
 	dependencies{
 		classpath 'com.android.tools.build:gradle:1.2.3'
 	}
