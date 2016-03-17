@@ -116,7 +116,7 @@ public class VerReto extends Activity {
             tv.setText(nuevo.toString() + "/30");
         }
         if (nuevo == 30){
-            Toast toast = Toast.makeText(Contexto.getInstancia().getContext(),
+            Toast toast = Toast.makeText(getApplicationContext(),
                     "¡Enhorabuena! Has superado tu reto", Toast.LENGTH_LONG);
             toast.show();
             Button si = (Button) findViewById(R.id.si);

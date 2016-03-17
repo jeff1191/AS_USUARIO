@@ -30,16 +30,6 @@ public class MainActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
-        Contexto.getInstancia().setContext(this);
-        TransferUsuario crearUsuario = new TransferUsuario();
-        crearUsuario.setNombre("Jiji");
-        crearUsuario.setAvatar("");
-        crearUsuario.setPuntuacion(6);
-        crearUsuario.setPuntuacionAnterior(4);
-        crearUsuario.setFrecuenciaRecibirInforme(Frecuencia.DIARIA);
-        Controlador.getInstancia().ejecutaComando(ListaComandos.CREAR_USUARIO, crearUsuario);
-
         Command c = FactoriaComandos.getInstancia().getCommand(ListaComandos.CONSULTAR_USUARIO);
         TransferUsuario cargarUsuario = new TransferUsuario();
         try {
@@ -116,8 +106,7 @@ public class MainActivity extends Activity {
     }
 
     public void ayuda(View v) {
-        Controlador.getInstancia().ejecutaComando(ListaComandos.CARGAR_BBDD, null);
-       // Controlador.getInstancia().ejecutaComando(ListaComandos.AYUDA, "principal");
+        Controlador.getInstancia().ejecutaComando(ListaComandos.AYUDA, "principal");
     }
 
     public void verInforme(View v){
