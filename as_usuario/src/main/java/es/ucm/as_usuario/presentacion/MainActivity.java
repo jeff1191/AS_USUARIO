@@ -117,7 +117,7 @@ public class MainActivity extends Activity {
     public void ayuda(View v) {
         Controlador.getInstancia().ejecutaComando(ListaComandos.CARGAR_BBDD, null);
         //Envio datos para el correo
-        Intent correo = new Intent (getApplicationContext(), EnviarCorreo.class);
+        Intent correo = new Intent (getApplicationContext(), Correo.class);
         //correo.putExtra("destinatario", "juanluar@ucm.es");
         //correo.putExtra("titulo", "Primera prueba");
         //correo.putExtra("texto", "Bueno parece que esto ya marcha... o al menos una parte ;)");
