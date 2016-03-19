@@ -27,7 +27,7 @@
         <activity android:name=".presentacion.Ayuda"/>
         <activity android:name=".presentacion.VerInforme"/>
         <activity android:name=".presentacion.Registro"/>
-        <activity android:name=".presentacion.EnviarCorreo"/>
+        <activity android:name=".presentacion.Correo"/>
 
         <service
             android:name=".presentacion.notificaciones.ServicioNotificaciones"
