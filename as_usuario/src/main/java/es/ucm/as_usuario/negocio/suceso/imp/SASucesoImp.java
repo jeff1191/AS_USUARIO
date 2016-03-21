@@ -1,12 +1,34 @@
 package es.ucm.as_usuario.negocio.suceso.imp;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Color;
+import android.os.Environment;
+import android.util.Log;
+
+import com.itextpdf.text.Chunk;
+import com.itextpdf.text.Image;
+import com.itextpdf.text.pdf.PdfPTable;
 import com.j256.ormlite.android.apptools.OpenHelperManager;
 import com.j256.ormlite.dao.Dao;
 
+import com.itextpdf.text.Chapter;
+import com.itextpdf.text.Chunk;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Font;
+import com.itextpdf.text.FontFactory;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.PdfWriter;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import es.ucm.as_usuario.R;
 import es.ucm.as_usuario.integracion.DBHelper;
 import es.ucm.as_usuario.integracion.Parser;
 import es.ucm.as_usuario.negocio.suceso.Evento;
@@ -17,12 +39,13 @@ import es.ucm.as_usuario.negocio.suceso.TransferEvento;
 import es.ucm.as_usuario.negocio.suceso.TransferReto;
 import es.ucm.as_usuario.negocio.suceso.TransferTarea;
 import es.ucm.as_usuario.presentacion.Contexto;
-
 /**
  * Created by Jeffer on 02/03/2016.
  */
 public class SASucesoImp implements SASuceso {
 
+    private final static String NOMBRE_DOCUMENTO = "Informe.pdf";
+    private final static String NOMBRE_DIRECTORIO = "AS";
     private DBHelper mDBHelper;
 
     private DBHelper getHelper() {
@@ -245,4 +268,67 @@ public class SASucesoImp implements SASuceso {
             }
         }
     }
+
+    public static File crearFichero(String nombreFichero) throws IOException {
+        File ruta = getRuta();
+        File fichero = null;
+        if (ruta != null)
+            fichero = new File(ruta, nombreFichero);
+        return fichero;
+    }
+
+    public static File getRuta() {
+        // El fichero será almacenado en un directorio dentro del directorio Descargas
+        File ruta = null;
+        if (Environment.MEDIA_MOUNTED.equals(Environment
+                .getExternalStorageState())) {
+            ruta = new File(
+                    Environment
+                            .getExternalStoragePublicDirectory(
+                                    Environment.DIRECTORY_DOWNLOADS),
+                    NOMBRE_DIRECTORIO);
+
+            if (ruta != null) {
+                if (!ruta.mkdirs()) {
+                    if (!ruta.exists()) {
+                        return null;
+                    }
+                }
+            }
+        }
+        return ruta;
+    }
+
+    @Override
+    public String generarPDF() throws IOException, DocumentException{
+        Document document = new Document();
+        File f = crearFichero(NOMBRE_DOCUMENTO);
+        PdfWriter.getInstance(document, new FileOutputStream(f.getAbsolutePath()));
+        document.open();
+        Font chapterFont = FontFactory.getFont(FontFactory.HELVETICA, 16, Font.BOLDITALIC);
+        Font paragraphFont = FontFactory.getFont(FontFactory.HELVETICA, 12, Font.NORMAL);
+        Chunk chunk = new Chunk("Informe AS", chapterFont);
+        Chapter chapter = new Chapter(new Paragraph(chunk), 1);
+        chapter.setNumberDepth(0);
+        chapter.add(new Paragraph("María Salgado", paragraphFont));
+        document.add(chapter);
+
+        // Insertamos una imagen que se encuentra en los recursos de la aplicación.
+        Bitmap bitmap = BitmapFactory.decodeResource(Contexto.getInstancia().getContext().getResources(), R.drawable.logo);
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 50, stream);
+        Image imagen = Image.getInstance(stream.toByteArray());
+        document.add(imagen);
+
+        // Insertamos una tabla.
+        PdfPTable tabla = new PdfPTable(5);
+        for (int i = 0; i < 15; i++) {
+            tabla.addCell("Celda " + i);
+        }
+        document.add(tabla);
+
+        document.close();
+        return f.getAbsolutePath();
+    }
+
 }

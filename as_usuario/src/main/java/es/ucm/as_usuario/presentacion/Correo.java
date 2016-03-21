@@ -48,7 +48,7 @@ public class Correo extends Activity{
 
         Session sesionEmail = createSesionObject();
         try {
-            Message message = createMessage("juanluar@ucm.es", "PrimeraPrueba", "Parece que esto marcha", sesionEmail);
+            Message message = createMessage("marsal03@ucm.es", "PrimeraPrueba", "Parece que esto marcha", sesionEmail);
             // En un ejemplo lo ejecutaba en otro hilo a traves del ASYNCTASK
             //new SendMailTask().execute(message);
             Transport.send(message);
@@ -84,7 +84,7 @@ public class Correo extends Activity{
         message.setFrom(new InternetAddress("noreplyASUsuario@gmail.com", "Princesas cerveceras"));
         message.addRecipient(Message.RecipientType.TO, new InternetAddress(email, email));
         message.setSubject(subject);
-        message.setText(messageBody);
+        //message.setText(messageBody);
         return message;
     }
 

@@ -9,6 +9,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 import es.ucm.as_usuario.R;
@@ -102,18 +103,23 @@ public class MainActivity extends Activity {
     }
 
     public void personalizacion(View v){
-        Controlador.getInstancia().ejecutaComando(ListaComandos.CONFIGURACION, null);
+        //Controlador.getInstancia().ejecutaComando(ListaComandos.CONFIGURACION, null);
+
+        // Enviar el correo
+        Controlador.getInstancia().ejecutaComando(ListaComandos.ENVIAR_CORREO, null);
     }
 
     public void ayuda(View v) {
-        Controlador.getInstancia().ejecutaComando(ListaComandos.AYUDA, "principal");
+        //Controlador.getInstancia().ejecutaComando(ListaComandos.AYUDA, "principal");
 
+        // Generar el PDF con el informe
+        Controlador.getInstancia().ejecutaComando(ListaComandos.GENERAR_PDF, null);
+
+
+        /*//Juanlu
         //Envio datos para el correo
-       // Intent correo = new Intent (getApplicationContext(), EnviarCorreo.class);
-        //correo.putExtra("destinatario", "juanluar@ucm.es");
-        //correo.putExtra("titulo", "Primera prueba");
-        //correo.putExtra("texto", "Bueno parece que esto ya marcha... o al menos una parte ;)");
-       // startActivity(correo);
+        Intent correo = new Intent (getApplicationContext(), Correo.class);
+         startActivity(correo);*/
     }
 
     public void verInforme(View v){

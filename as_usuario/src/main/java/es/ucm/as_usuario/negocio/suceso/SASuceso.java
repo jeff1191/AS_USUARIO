@@ -3,6 +3,9 @@
  */
 package es.ucm.as_usuario.negocio.suceso;
 
+import com.itextpdf.text.DocumentException;
+
+import java.io.IOException;
 import java.util.List;
 
 public interface SASuceso {
@@ -14,4 +17,5 @@ public interface SASuceso {
     public void cargarTareasBBDD();
     public void cargarRetoBBDD();
     public void cargarEventosBBDD();
+    public String generarPDF() throws IOException, DocumentException;
 }

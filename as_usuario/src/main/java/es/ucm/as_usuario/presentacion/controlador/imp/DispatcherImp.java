@@ -133,6 +133,12 @@ public class DispatcherImp extends Dispatcher{
 
             case ListaComandos.CARGAR_BBDD:
                 break;
+
+            case ListaComandos.GENERAR_PDF:
+                break;
+
+            case ListaComandos.ENVIAR_CORREO:
+                break;
         }
     }
 }
