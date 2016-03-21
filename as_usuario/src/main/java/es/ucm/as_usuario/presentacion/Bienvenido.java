@@ -47,10 +47,7 @@ public class Bienvenido extends Activity {
        Timer timer = new Timer();
        timer.schedule(task, DELAY);
 
-       startService(new Intent(this, ServicioNotificaciones.class));
-
-
-
+        startService(new Intent(this, ServicioNotificaciones.class));
 
         //MODIFICARR!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         /*Usuario.getInstancia().setNombre("Albertin");

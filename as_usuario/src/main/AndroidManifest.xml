@@ -30,6 +30,7 @@
         <activity android:name=".presentacion.VerInforme"/>
         <activity android:name=".presentacion.Registro"/>
         <activity android:name=".presentacion.Correo"/>
+        <activity android:name=".presentacion.notificaciones.GestorRespuestas"/>
 
         <service
             android:name=".presentacion.notificaciones.ServicioNotificaciones"
@@ -39,7 +40,6 @@
 
         <receiver android:name=".presentacion.notificaciones.NotificacionAlarma" />
         <receiver android:name=".presentacion.notificaciones.NotificacionPregunta" />
-        <receiver android:name=".presentacion.notificaciones.GestorRespuestas" />
 
     </application>
 

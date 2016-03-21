@@ -38,7 +38,7 @@ public class NotificacionAlarma extends BroadcastReceiver {
         Bundle bundle = intent.getExtras();
 
         String titulo = bundle.getString("titulo");
-        String texto = bundle.getString("texto");
+        String texto = "Clica encima de esta notificacion";
 
         //Hay que mirar lo del SONIDO y la VIBRACION
         //Encontrar una foto mas pequeña para el logo en las notificaciones o poner otra imagen
@@ -58,7 +58,13 @@ public class NotificacionAlarma extends BroadcastReceiver {
 
         Log.e("prueba", "Con el ID..." + notificationId);
 
-        PendingIntent aux = PendingIntent.getBroadcast(context, 0, new Intent(), PendingIntent.FLAG_UPDATE_CURRENT);
+        Intent mostrarAlarma = new Intent(context, GestorRespuestas.class);
+        mostrarAlarma.putExtra("titulo", titulo);
+        mostrarAlarma.putExtra("texto", bundle.getString("texto"));
+        mostrarAlarma.putExtra("idNotificacion", notificationId);
+        mostrarAlarma.putExtra("respuesta", 0);
+        mostrarAlarma.putExtra("idTarea", 0);
+        PendingIntent aux = PendingIntent.getActivity(context, notificationId+4,  mostrarAlarma, PendingIntent.FLAG_UPDATE_CURRENT);
 
         NotificationCompat.Builder n =
                 new NotificationCompat.Builder(context)
@@ -102,7 +108,9 @@ public class NotificacionAlarma extends BroadcastReceiver {
         Calendar horaNotificacion = Calendar.getInstance();
         horaNotificacion.set(Calendar.HOUR_OF_DAY, hora);
         horaNotificacion.set(Calendar.MINUTE, minutos);
-        horaNotificacion.set(Calendar.SECOND, 00);
+        horaNotificacion.set(Calendar.SECOND, 0);
+        horaNotificacion.set(Calendar.MILLISECOND, 0);
+
 
         am.setRepeating(AlarmManager.RTC_WAKEUP, horaNotificacion.getTimeInMillis(), 24*60*60*1000, pi);
     }
