@@ -155,6 +155,8 @@ public class SAUsuarioImp implements SAUsuario {
 					transferUsuario.setAvatar(u.getAvatar());
 				if (u.getPuntuacion() != null)
 					transferUsuario.setPuntuacion(u.getPuntuacion());
+				if (u.getPuntuacionAnterior() != null)
+					transferUsuario.setPuntuacionAnterior(u.getPuntuacionAnterior());
 				if (u.getColor() != null)
 					transferUsuario.setColor(u.getColor());
 				if (u.getTono() != null)

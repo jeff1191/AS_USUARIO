@@ -103,18 +103,14 @@ public class MainActivity extends Activity {
     }
 
     public void personalizacion(View v){
-        //Controlador.getInstancia().ejecutaComando(ListaComandos.CONFIGURACION, null);
-
-        // Enviar el correo
-        Controlador.getInstancia().ejecutaComando(ListaComandos.ENVIAR_CORREO, null);
+        Controlador.getInstancia().ejecutaComando(ListaComandos.CONFIGURACION, null);
     }
 
     public void ayuda(View v) {
         //Controlador.getInstancia().ejecutaComando(ListaComandos.AYUDA, "principal");
 
-        // Generar el PDF con el informe
-        Controlador.getInstancia().ejecutaComando(ListaComandos.GENERAR_PDF, null);
-
+        // Enviar el correo
+        Controlador.getInstancia().ejecutaComando(ListaComandos.ENVIAR_CORREO, null);
 
         /*//Juanlu
         //Envio datos para el correo
@@ -123,6 +119,9 @@ public class MainActivity extends Activity {
     }
 
     public void verInforme(View v){
+        // Generar el PDF con el informe
+        Controlador.getInstancia().ejecutaComando(ListaComandos.GENERAR_PDF, null);
+        // Mostrar la vista del informe
         Controlador.getInstancia().ejecutaComando(ListaComandos.VER_INFORME, null);
     }
 
