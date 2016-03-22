@@ -37,6 +37,7 @@ public class MainActivity extends Activity {
         } catch (commandException e) {
             e.printStackTrace();
         }
+        Configuracion.temaActual=cargarUsuario.getColor();
         cargarTema();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);

@@ -82,6 +82,7 @@ public class Configuracion extends Activity {
         spinnerTono = (Spinner) findViewById(R.id.cambiarTono);
         imagenConfiguracion = (ImageView) findViewById(R.id.editarAvatar);
         tonoParcial=tonoActual;
+        temaActual=bundle.getString("temaConfiguracion");
         temaParcial=temaActual;
         rutaImagen=bundle.getString("imagenConfiguracion");
         ////////Spinner color ///////
@@ -309,7 +310,7 @@ public class Configuracion extends Activity {
             public void onClick(DialogInterface dialog, int item) {
                 if (items[item].equals("Hacer foto")) {
                     Intent intent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
-                    startActivityForResult(intent, REQUEST_IMAGE_CAPTURE);
+                    startActivityForResult(intent, CAMARA);
                 } else if (items[item].equals("Elegir de la galeria")) {
                     Intent intent = new Intent(
                             Intent.ACTION_PICK,
@@ -376,7 +377,5 @@ public class Configuracion extends Activity {
                 rutaImagen=selectedImagePath;
             }
         }
-
-
-        }
+    }
 }

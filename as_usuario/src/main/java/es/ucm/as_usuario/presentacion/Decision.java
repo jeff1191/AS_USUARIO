@@ -15,34 +15,27 @@ import es.ucm.as_usuario.presentacion.controlador.comandos.factoria.FactoriaComa
  */
 public class Decision extends Activity {
 
-    boolean nuevoUsuario;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Contexto.getInstancia().setContext(this);
 
         Command c = FactoriaComandos.getInstancia().getCommand(ListaComandos.CONSULTAR_USUARIO);
-        TransferUsuario cargarUsuario = new TransferUsuario();
+        TransferUsuario cargarUsuario;
         try {
             cargarUsuario = (TransferUsuario) c.ejecutaComando(null);
 
-            if (cargarUsuario == null)
-                nuevoUsuario = true;
-            else
-                nuevoUsuario = false;
+            if (cargarUsuario == null){
+                Intent intent = new Intent().setClass(Decision.this, Registro.class);
+                startActivity(intent);
+            }
+            else{
+                Intent intent = new Intent().setClass(Decision.this, MainActivity.class);
+                startActivity(intent);
+            }
 
         } catch (commandException e) {
             e.printStackTrace();
-        }
-
-        if (nuevoUsuario) {
-            Intent intent = new Intent().setClass(Decision.this, Registro.class);
-            startActivity(intent);
-        }
-        else{
-            Intent intent = new Intent().setClass(Decision.this, MainActivity.class);
-            startActivity(intent);
         }
         finish();
     }

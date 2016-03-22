@@ -46,6 +46,7 @@ public class DispatcherImp extends Dispatcher{
                 intentConfiguracion.putExtra("nombreConfiguracion", conf.getNombre());
                 intentConfiguracion.putExtra("frecuenciaInformeConfiguracion", conf.getFrecuenciaRecibirInforme());
                 intentConfiguracion.putExtra("imagenConfiguracion", conf.getAvatar());
+                intentConfiguracion.putExtra("temaConfiguracion", conf.getColor());
                 Contexto.getInstancia().getContext().startActivity(intentConfiguracion);
                 break;
 
@@ -76,6 +77,7 @@ public class DispatcherImp extends Dispatcher{
                 break;
 
             case ListaComandos.RESPONDER_RETO:
+
                 break;
 
             case ListaComandos.VER_INFORME:

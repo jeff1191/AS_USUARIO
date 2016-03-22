@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import es.ucm.as_usuario.R;
 import es.ucm.as_usuario.negocio.usuario.TransferUsuario;
@@ -21,7 +22,10 @@ public class Registro extends Activity {
     private EditText nombreUsuario;
     private EditText correoUsuario;
     private EditText claveUsuario;
+    private static final String PATRON_EMAIL = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
+            + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
 
+    private static final String PATRON_GMAIL = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@gmail.com";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,20 +43,21 @@ public class Registro extends Activity {
         String correo = String.valueOf(correoUsuario.getText());
         String clave = String.valueOf(claveUsuario.getText());
 
+
+
+    if(datosValidos(nombre,correo,clave)){
         TransferUsuario crearUsuario = new TransferUsuario();
         crearUsuario.setNombre(nombre);
         crearUsuario.setAvatar("");
+        crearUsuario.setColor("AS_theme_azul");
         crearUsuario.setPuntuacion(0);
         crearUsuario.setPuntuacionAnterior(0);
         crearUsuario.setCorreo(correo);
         crearUsuario.setFrecuenciaRecibirInforme(Frecuencia.DIARIA);
-
         Controlador.getInstancia().ejecutaComando(ListaComandos.CREAR_USUARIO, crearUsuario);
-
         Controlador.getInstancia().ejecutaComando(ListaComandos.CARGAR_BBDD, null);
-
         startActivity(new Intent(this, MainActivity.class));
-
+    }
         /*
         //De momento va a sacar un mensaje y pasara a la main activity
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -61,6 +66,33 @@ public class Registro extends Activity {
                         " y la clave " + clave + "con tu tutor asignado. No estas sincronizado, como estamos en " +
                         "testing pasamos directamente a la Main Activity").show();*/
 
+
+    }
+
+    private boolean datosValidos(String nombre, String correo, String clave) {
+        ////////////////////FALTARIA VALIDAR EL CÓDIGO //////////////////////////
+        if(!nombre.toString().matches("") &&
+                !correo.toString().matches("")&&
+                !clave.toString().matches("")) {
+
+            if(correo.toString().matches(PATRON_EMAIL)){
+                if(correo.toString().matches(PATRON_GMAIL))
+                    return true;
+                else
+                    mostrarMensajeError("El campo email debe ser gmail");
+            }else
+                mostrarMensajeError("Campo email inválido");
+        }else
+            mostrarMensajeError("Algún campo es vacío");
+
+        return false;
+    }
+
+    private void mostrarMensajeError(String msg){
+        Toast errorNombre =
+                Toast.makeText(getApplicationContext(),
+                        msg, Toast.LENGTH_SHORT);
+        errorNombre.show();
 
     }
 }

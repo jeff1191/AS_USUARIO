@@ -42,16 +42,15 @@ public class SAUsuarioImp implements SAUsuario {
 				usuario.setNombre(datos.getNombre());
 				usuario.setFrecuenciaRecibirInforme(datos.getFrecuenciaRecibirInforme());
 				usuario.setAvatar(datos.getAvatar());
-				ret.setNombre(usuario.getNombre());
-				ret.setFrecuenciaRecibirInforme(usuario.getFrecuenciaRecibirInformes());
-				ret.setAvatar(usuario.getAvatar());
+				usuario.setColor(datos.getColor());
+				usuario.setTono(datos.getTono());
 				daoUsuario.update(usuario);
 			}else
 				return null;
 		}catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return ret;
+		return datos;
 	}
 	
 	public void sincronizar() {
