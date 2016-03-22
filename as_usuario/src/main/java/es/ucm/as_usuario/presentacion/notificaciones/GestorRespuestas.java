@@ -12,7 +12,6 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import es.ucm.as_usuario.R;
-import es.ucm.as_usuario.presentacion.Contexto;
 
 /**
  * Created by Juan Lu on 10/03/2016.
@@ -30,14 +29,10 @@ public class GestorRespuestas extends Activity {
 
         String tituloAlarma = getIntent().getExtras().getString("titulo");
         String texto = getIntent().getExtras().getString("texto");
-        Integer respuesta = getIntent().getExtras().getInt("respuesta");
         Integer idNot = getIntent().getExtras().getInt("idNotificacion");
-        Integer idTarea = getIntent().getExtras().getInt("idTarea");
 
         NotificationManager notificationManager =
-                (NotificationManager) Contexto.getInstancia().getContext().getApplicationContext()
-                        .getSystemService(Contexto.getInstancia().getContext().
-                                getApplicationContext().NOTIFICATION_SERVICE);
+                (NotificationManager) getApplicationContext().getSystemService(NOTIFICATION_SERVICE);
 
         Log.e("prueba", "Va a cerrar la notifiacion ..." + idNot);
 

@@ -38,27 +38,25 @@ public class ServicioNotificaciones extends Service{
 
         //Le tienes que pasar el titulo(tipo de las preguntas) y un array de id's de tareas
 
-        alarma.lanzarAlarma(this, 19, 34, "Desayunar", "Vamos a desayunar!");
-        alarma.lanzarAlarma(this, 19, 35, "Aseo personal", "Es la hora del aseo... tienes que... " +
+      alarma.lanzarAlarma(this, 3, 42, "Desayunar", "Vamos a desayunar!");
+         /* alarma.lanzarAlarma(this, 1, 53, "Aseo personal", "Es la hora del aseo... tienes que... " +
                 "/Lavarte la cara, las axilas, etc..." +
                 "/Lavarte los dientes" +
                 "/Ponerte desodorante" +
                 "/Ponerte colonia" +
                 "/Peinarte");
-      /*  pregunta.lanzarPregunta(Contexto.getInstancia().getContext().getApplicationContext()
-                , 16, 51, "Desayunar", "¿Has desayunado?/¿Has dejado todo recogido?", 1);
-        pregunta.lanzarPregunta(Contexto.getInstancia().getContext().getApplicationContext()
-                , 16, 54, "Aseo personal", "¿Te has lavado antes de vestirte? Cara, Axilas..." +
+        pregunta.lanzarPregunta(this, 1, 50, "Desayunar", "¿Has desayunado?/¿Has dejado todo recogido?");
+        pregunta.lanzarPregunta(this, 2, 47, "Aseo personal", "¿Te has lavado antes de vestirte? Cara, Axilas..." +
                 "/¿Te has lavado los dientes?" +
                 "/¿Te has puesto desodorante y colonia?" +
-                "/¿Te has peinado?", 2);
-
+                "/¿Te has peinado?");
 */
+
         //La idea es que solo esten estas dos, ya que para cada tarea se necesitan una de cada
         //alarma.lanzarAlarma(this, horaAlarma, minutosAlarma, titulo, textoAlarma);
         //pregunta.lanzarPregunta(this, horaPregunta, minutosPregunta, titulo, textoPregunta, idTarea);
 
-        return START_STICKY;
+        return START_REDELIVER_INTENT;
     }
 
     @Override
@@ -70,6 +68,7 @@ public class ServicioNotificaciones extends Service{
     @Override
     public void onDestroy()
     {
+        Log.d("prueba", "Servicio destruido...");
         super.onDestroy();
     }
 }
