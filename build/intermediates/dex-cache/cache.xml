@@ -2,18 +2,11 @@
 <items version="2" >
 
     <item
-        jar="C:\Users\msalitu\.gradle\caches\modules-2\files-2.1\javax.activation\activation\1.1\e6cb541461c2834bdea3eb920f1884d1eb508b50\activation-1.1.jar"
+        jar="C:\Users\Juan Lu\git\AS_USUARIO\as_usuario\build\intermediates\exploded-aar\it.sephiroth.android.library.imagezoom\imagezoom\2.2.5\jars\classes.jar"
         jumboMode="false"
         revision="22.0.1"
-        sha1="e6cb541461c2834bdea3eb920f1884d1eb508b50">
-        <dex dex="C:\Users\msalitu\.AndroidStudio1.5\AS_USUARIO\as_usuario\build\intermediates\pre-dexed\debug\activation-1.1-8c7fa8f5dd0252f0caf97d4880ad4ab06871cea1.jar" />
-    </item>
-    <item
-        jar="C:\Users\msalitu\.gradle\caches\modules-2\files-2.1\javax.mail\mail\1.4.7\9add058589d5d85adeb625859bf2c5eeaaedf12d\mail-1.4.7.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="9add058589d5d85adeb625859bf2c5eeaaedf12d">
-        <dex dex="C:\Users\msalitu\.AndroidStudio1.5\AS_USUARIO\as_usuario\build\intermediates\pre-dexed\debug\mail-1.4.7-6c24c5c025d7726a7ee036505cf5d2e6c978b190.jar" />
+        sha1="406557a6f4369568e5515f8a3c66c97b23f21534">
+        <dex dex="C:\Users\Juan Lu\git\AS_USUARIO\as_usuario\build\intermediates\pre-dexed\debug\classes-155afe867a8902b3bf2a371cd62facb84f19123b.jar" />
     </item>
 
 </items>

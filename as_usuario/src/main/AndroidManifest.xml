@@ -30,12 +30,6 @@
         <activity android:name=".presentacion.Correo"/>
         <activity android:name=".presentacion.notificaciones.GestorRespuestas"/>
 
-        <service
-            android:name=".presentacion.notificaciones.ServicioNotificaciones"
-            android:enabled="true"
-            android:exported="true"
-            android:process=":servicio_notificaciones" />
-
         <receiver android:name=".presentacion.notificaciones.NotificacionAlarma" />
         <receiver android:name=".presentacion.notificaciones.NotificacionPregunta" />
 

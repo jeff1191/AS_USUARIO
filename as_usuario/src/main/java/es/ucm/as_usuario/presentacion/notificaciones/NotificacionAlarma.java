@@ -108,7 +108,7 @@ public class NotificacionAlarma extends BroadcastReceiver {
         //se pone que empieze a partir de mañana
         if(horaNotificacion < horaActual){
             horaNotificacionCal.add(Calendar.DAY_OF_MONTH, 1);
-            Log.e("prueba", "La hora de la alarma se pasa al dia ..." + horaActualCal.getTime().toString());
+            Log.e("prueba", "La hora de la alarma se pasa al dia ..." + horaNotificacionCal.getTime().toString());
             horaNotificacion = horaNotificacionCal.getTimeInMillis();
         }
 

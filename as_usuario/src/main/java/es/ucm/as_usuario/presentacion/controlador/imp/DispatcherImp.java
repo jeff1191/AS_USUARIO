@@ -110,9 +110,6 @@ public class DispatcherImp extends Dispatcher{
             case ListaComandos.CREAR_USUARIO:
                 break;
 
-            case ListaComandos.RESPONDER_TAREA:
-                break;
-
             case ListaComandos.CONSULTAR_USUARIO:
                 Intent iUsuario = new Intent(Contexto.getInstancia().getContext().getApplicationContext(), MainActivity.class);
                 TransferUsuario transferUsuario = (TransferUsuario)datos;
@@ -132,6 +129,9 @@ public class DispatcherImp extends Dispatcher{
                 break;
 
             case ListaComandos.CARGAR_BBDD:
+                break;
+
+            case ListaComandos.CARGAR_NOTIFICACIONES:
                 break;
         }
     }

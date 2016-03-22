@@ -6,13 +6,14 @@ import es.ucm.as_usuario.presentacion.controlador.comandos.Command;
 import es.ucm.as_usuario.presentacion.controlador.comandos.exceptions.commandException;
 
 /**
- * Created by Juan Lu on 11/03/2016.
+ * Created by msalitu on 14/03/2016.
  */
-public class ResponderTareaComando implements Command {
+public class CargarNotificaciones implements Command {
     @Override
     public Object ejecutaComando(Object datos) throws commandException {
-        SASuceso ss = FactoriaSA.getInstancia().nuevoSASuceso();
-        ss.responderTarea((String) datos);
-        return datos;
+        SASuceso saSuceso = FactoriaSA.getInstancia().nuevoSASuceso();
+        saSuceso.cargarNotificaciones();
+
+        return null;
     }
 }
