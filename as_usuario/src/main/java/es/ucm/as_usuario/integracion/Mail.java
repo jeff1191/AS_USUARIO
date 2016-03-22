@@ -26,6 +26,11 @@ import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 
+/**
+ * Clase para el envio email
+ *
+ */
+
 public class Mail extends javax.mail.Authenticator {
     private String _user;
     private String _pass;
@@ -118,37 +123,8 @@ public class Mail extends javax.mail.Authenticator {
 
     public void addAttachment(String filename) throws Exception {
 
-        // Antes de adjuntar el fichero se comprime en zip
-        String outputFilename = filename+".zip";
-        File outputFile = new File(outputFilename);
-        FileOutputStream fos = new FileOutputStream(outputFile);
-        File inputFile = new File(filename);
-        BufferedInputStream fis =  new BufferedInputStream(new FileInputStream(inputFile));
-
-        ZipOutputStream zos = new ZipOutputStream(new BufferedOutputStream(fos));
-        try {
-
-            byte[] buffer = new byte[1024];
-            ByteArrayOutputStream stream = new ByteArrayOutputStream();
-            int len1 = 0;
-            while ((len1 = fis.read(buffer)) != -1) {
-                stream.write(buffer, 0, len1);
-            }
-
-            byte[] bytes = stream.toByteArray();
-            ZipEntry entry = new ZipEntry(outputFilename);
-            zos.putNextEntry(entry);
-            zos.write(bytes);
-            zos.closeEntry();
-        } finally {
-            zos.close();
-            fos.close();
-            fis.close();
-        }
-
-        // Se adjunta el zip
         BodyPart messageBodyPart = new MimeBodyPart();
-        DataSource source = new FileDataSource(outputFilename);
+        DataSource source = new FileDataSource(filename);
         messageBodyPart.setDataHandler(new DataHandler(source));
         messageBodyPart.setFileName(filename);
 

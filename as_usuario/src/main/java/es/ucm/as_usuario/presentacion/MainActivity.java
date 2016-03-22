@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -41,6 +42,12 @@ public class MainActivity extends Activity {
         Configuracion.temaActual=cargarUsuario.getColor();
         cargarTema();
         super.onCreate(savedInstanceState);
+
+        // Esto es para solventar un error al enviar el correo
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
+
+
         setContentView(R.layout.activity_main);
         nombrePrincipal=(TextView)findViewById(R.id.nombreUser);
         puntuacion = (TextView)findViewById(R.id.puntuacionUsuario);
