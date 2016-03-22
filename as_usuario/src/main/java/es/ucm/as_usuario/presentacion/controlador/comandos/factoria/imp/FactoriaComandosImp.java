@@ -9,6 +9,8 @@ import es.ucm.as_usuario.presentacion.controlador.comandos.imp.ConsultarUsuarioC
 import es.ucm.as_usuario.presentacion.controlador.comandos.imp.ConfiguracionComando;
 import es.ucm.as_usuario.presentacion.controlador.comandos.imp.CrearUsuarioComando;
 import es.ucm.as_usuario.presentacion.controlador.comandos.imp.EditarUsuarioComando;
+import es.ucm.as_usuario.presentacion.controlador.comandos.imp.EnviarCorreoComando;
+import es.ucm.as_usuario.presentacion.controlador.comandos.imp.GenerarPDFComando;
 import es.ucm.as_usuario.presentacion.controlador.comandos.imp.ResponderRetoComando;
 import es.ucm.as_usuario.presentacion.controlador.comandos.imp.ResponderTareaComando;
 import es.ucm.as_usuario.presentacion.controlador.comandos.imp.VerAyudaComando;
@@ -59,6 +61,12 @@ public class FactoriaComandosImp extends FactoriaComandos {
                 break;
             case ListaComandos.CARGAR_BBDD:
                 ret = new CargarBBDDComando();
+                break;
+            case ListaComandos.GENERAR_PDF:
+                ret = new GenerarPDFComando();
+                break;
+            case ListaComandos.ENVIAR_CORREO:
+                ret = new EnviarCorreoComando();
         }
 
         return ret;
