@@ -40,9 +40,9 @@ public class Correo extends Activity{
         super.onCreate(bundle);
         //Aqui es desde donde se tiene que lanzar el correo
         //El intent q llega debe tener las cosas para enviarlo
-        //String destinatario = bundle.getString("destinatario");
-        //String titulo = bundle.getString("titulo");
-        //String texto = bundle.getString("texto");
+        String destinatario = bundle.getString("destinatario");
+        String titulo = bundle.getString("titulo");
+        String texto = bundle.getString("texto");
         user = "noreplyASUsuario@gmail.com"; // nuestro correo
         pass = "prinCERV"; // nuestro email
 

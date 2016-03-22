@@ -6,8 +6,6 @@ package es.ucm.as_usuario.negocio.usuario.imp;
 
 import android.content.Intent;
 import android.net.Uri;
-import android.os.Environment;
-import android.widget.Toast;
 
 import es.ucm.as_usuario.negocio.usuario.SAUsuario;
 
@@ -25,7 +23,9 @@ import es.ucm.as_usuario.negocio.suceso.TransferTarea;
 import es.ucm.as_usuario.negocio.usuario.SAUsuario;
 import es.ucm.as_usuario.negocio.usuario.TransferUsuario;
 import es.ucm.as_usuario.negocio.usuario.Usuario;
+import es.ucm.as_usuario.negocio.utils.Frecuencia;
 import es.ucm.as_usuario.presentacion.Contexto;
+import es.ucm.as_usuario.presentacion.Correo;
 
 public class SAUsuarioImp implements SAUsuario {
 
@@ -116,6 +116,8 @@ public class SAUsuarioImp implements SAUsuario {
 
 			if (transferUsuario.getFrecuenciaRecibirInforme() != null)
 				usuario.setFrecuenciaRecibirInforme(transferUsuario.getFrecuenciaRecibirInforme());
+			else
+				usuario.setFrecuenciaRecibirInforme(Frecuencia.SEMANAL);
 
 			if (transferUsuario.getNombreTutor() != null)
 				usuario.setNombreTutor(transferUsuario.getNombreTutor());
@@ -188,7 +190,7 @@ public class SAUsuarioImp implements SAUsuario {
 			e.printStackTrace();
 		}
 
-		///* Enviar correo abriendo aplicación/////////////////////////////////////////////////////
+		/* Enviar correo abriendo aplicación/////////////////////////////////////////////////////
 
 		//Instanciamos un Intent del tipo ACTION_SEND
 		Intent emailIntent = new Intent(android.content.Intent.ACTION_SEND);
@@ -212,5 +214,17 @@ public class SAUsuarioImp implements SAUsuario {
 		Contexto.getInstancia().getContext().startActivity(emailIntent);
 
 		//*/////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+		Intent correo = new Intent (Contexto.getInstancia().getContext().getApplicationContext(), Correo.class);
+		correo.putExtra("destinatario", mail);
+		correo.putExtra("titulo", "Informe AS");
+		correo.putExtra("nombre", name);
+		correo.putExtra("texto", "¡Hola " + name + "!\n " +
+				"Este es tu progreso hasta el momento. Sigue esforzándote para continuar mejorando."
+				+ "\n¡Ánimo!" + "\n\nEnviado desde AS");
+		Contexto.getInstancia().getContext().startActivity(correo);
 	}
 }

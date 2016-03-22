@@ -112,17 +112,10 @@ public class MainActivity extends Activity {
 
         // Enviar el correo
         Controlador.getInstancia().ejecutaComando(ListaComandos.ENVIAR_CORREO, null);
-
-        /*//Juanlu
-        //Envio datos para el correo
-        Intent correo = new Intent (getApplicationContext(), Correo.class);
-         startActivity(correo);*/
     }
 
     public void verInforme(View v){
-        // Generar el PDF con el informe
         Controlador.getInstancia().ejecutaComando(ListaComandos.GENERAR_PDF, null);
-        // Mostrar la vista del informe
         Controlador.getInstancia().ejecutaComando(ListaComandos.VER_INFORME, null);
     }
 
@@ -133,14 +126,15 @@ public class MainActivity extends Activity {
     public void verReto(View v){
         Controlador.getInstancia().ejecutaComando(ListaComandos.VER_RETO, null);
     }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        // TODO Auto-generated method stub
         if ((requestCode == request_code) && (resultCode == RESULT_OK)){
             Bundle bundle = data.getExtras();
             nombrePrincipal.setText(bundle.getString("nombreNuevo"));
         }
     }
+
     public void cargarTema(){
         switch (Configuracion.temaActual){
             case "AS_theme_azul":
