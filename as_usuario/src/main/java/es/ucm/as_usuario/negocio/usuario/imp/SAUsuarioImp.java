@@ -236,7 +236,7 @@ public class SAUsuarioImp implements SAUsuario {
 				}
 			} catch (Exception e) {
 				//Toast.makeText(MailApp.this, "There was a problem sending the email.", Toast.LENGTH_LONG).show();
-				Toast.makeText(Contexto.getInstancia().getContext().getApplicationContext(), "Exception: Email was not sent.", Toast.LENGTH_LONG).show();
+				Toast.makeText(Contexto.getInstancia().getContext().getApplicationContext(), "Exception autenticación u otra cosa " , Toast.LENGTH_LONG).show();
 				Log.e("MailApp", "Could not send email", e);
 			}
 
