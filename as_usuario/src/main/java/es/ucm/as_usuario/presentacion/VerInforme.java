@@ -3,23 +3,16 @@ package es.ucm.as_usuario.presentacion;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
+
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.j256.ormlite.dao.Dao;
 
 import java.util.ArrayList;
 
 import es.ucm.as_usuario.R;
-import es.ucm.as_usuario.integracion.DBHelper;
-import es.ucm.as_usuario.negocio.suceso.TransferTarea;
-import es.ucm.as_usuario.negocio.usuario.TransferUsuario;
-import es.ucm.as_usuario.negocio.usuario.Usuario;
-import es.ucm.as_usuario.negocio.utils.Frecuencia;
 import es.ucm.as_usuario.presentacion.controlador.Controlador;
 import es.ucm.as_usuario.presentacion.controlador.ListaComandos;
 
@@ -37,14 +30,6 @@ public class VerInforme extends Activity{
         cargarTema();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.informe);
-
-        /*TransferUsuario crearUsuario = new TransferUsuario();
-        crearUsuario.setNombre("Jiji");
-        crearUsuario.setAvatar("");
-        crearUsuario.setPuntuacion(6);
-        crearUsuario.setPuntuacionAnterior(4);
-        crearUsuario.setFrecuenciaRecibirInforme(Frecuencia.DIARIA);
-        Controlador.getInstancia().ejecutaComando(ListaComandos.CREAR_USUARIO, crearUsuario);*/
 
         TextView titulo = (TextView)findViewById(R.id.tituloInforme);
         titulo.setText("¿CÓMO VAS?");

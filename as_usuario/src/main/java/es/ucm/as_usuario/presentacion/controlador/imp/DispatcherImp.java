@@ -1,19 +1,14 @@
 package es.ucm.as_usuario.presentacion.controlador.imp;
 
 import android.content.Intent;
-import android.util.Log;
 
-import java.nio.charset.MalformedInputException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
-import es.ucm.as_usuario.negocio.suceso.Evento;
 import es.ucm.as_usuario.negocio.suceso.TransferEvento;
 import es.ucm.as_usuario.negocio.suceso.TransferReto;
 import es.ucm.as_usuario.negocio.suceso.TransferTarea;
 import es.ucm.as_usuario.negocio.usuario.TransferUsuario;
-import es.ucm.as_usuario.negocio.usuario.Usuario;
 import es.ucm.as_usuario.presentacion.Ayuda;
 import es.ucm.as_usuario.presentacion.Configuracion;
 import es.ucm.as_usuario.presentacion.Contexto;
@@ -32,9 +27,10 @@ public class DispatcherImp extends Dispatcher{
     public void dispatch(String accion, Object datos) {
 
         switch(accion){
+
             case ListaComandos.VER_EVENTOS:
                 Intent intent = new Intent(Contexto.getInstancia().getContext().getApplicationContext(), VerEventos.class);
-                List<Evento> eventosModelo= (List<Evento>) datos;
+                List<TransferEvento> eventosModelo= (List<TransferEvento>) datos;
                 ArrayList<String> listaActividad= new ArrayList<String>();
                 for(int i=0; i < eventosModelo.size(); i++){
                     String addEvento= eventosModelo.get(i).getTextoAlarma() + " el " + eventosModelo.get(i).getTextoFecha();
@@ -52,6 +48,7 @@ public class DispatcherImp extends Dispatcher{
                 intentConfiguracion.putExtra("imagenConfiguracion", conf.getAvatar());
                 Contexto.getInstancia().getContext().startActivity(intentConfiguracion);
                 break;
+
             case ListaComandos.EDITAR_USUARIO:
                 Intent intentEditarUsuario = new Intent(Contexto.getInstancia().getContext().getApplicationContext(), MainActivity.class);
                 TransferUsuario editarUsuario = (TransferUsuario) datos;
@@ -82,7 +79,6 @@ public class DispatcherImp extends Dispatcher{
                 break;
 
             case ListaComandos.VER_INFORME:
-
                 Intent intentTareas = new Intent(Contexto.getInstancia().getContext().getApplicationContext(), VerInforme.class);
                 ArrayList<Object> a = (ArrayList<Object>)datos;
                 TransferUsuario tu = (TransferUsuario) a.get(0);

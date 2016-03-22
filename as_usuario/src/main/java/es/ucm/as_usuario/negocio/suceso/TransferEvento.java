@@ -1,5 +1,8 @@
 package es.ucm.as_usuario.negocio.suceso;
 
+import com.j256.ormlite.field.DataType;
+import com.j256.ormlite.field.DatabaseField;
+
 import java.sql.Timestamp;
 import java.util.Date;
 
@@ -9,23 +12,20 @@ import es.ucm.as_usuario.negocio.utils.Frecuencia;
  * Created by Jeffer on 04/03/2016.
  */
 public class TransferEvento {
+
     private Integer id;
-
-    private String textoPregunta;
-
     private String textoAlarma;
-
-    private Date horaPregunta;
-
+    private String textoFecha;
     private Date horaAlarma;
 
-    private Date fechaIni;
+    public TransferEvento(){    }
 
-    private Integer contador;
-
-    private Integer noSeguidos;
-
-    private Frecuencia frecuenciaTarea;
+    public TransferEvento(Evento evento){
+        this.id = evento.getId();
+        this.textoAlarma = evento.getTextoAlarma();
+        this.textoFecha = evento.getTextoFecha();
+        this.horaAlarma = evento.getHoraAlarma();
+    }
 
     public Integer getId() {
         return id;
@@ -33,14 +33,6 @@ public class TransferEvento {
 
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    public String getTextoPregunta() {
-        return textoPregunta;
-    }
-
-    public void setTextoPregunta(String textoPregunta) {
-        this.textoPregunta = textoPregunta;
     }
 
     public String getTextoAlarma() {
@@ -51,14 +43,6 @@ public class TransferEvento {
         this.textoAlarma = textoAlarma;
     }
 
-    public Date getHoraPregunta() {
-        return horaPregunta;
-    }
-
-    public void setHoraPregunta(Date horaPregunta) {
-        this.horaPregunta = horaPregunta;
-    }
-
     public Date getHoraAlarma() {
         return horaAlarma;
     }
@@ -67,36 +51,12 @@ public class TransferEvento {
         this.horaAlarma = horaAlarma;
     }
 
-    public Date getFechaIni() {
-        return fechaIni;
+    public String getTextoFecha() {
+        return textoFecha;
     }
 
-    public void setFechaIni(Date fechaIni) {
-        this.fechaIni = fechaIni;
-    }
-
-    public Integer getContador() {
-        return contador;
-    }
-
-    public void setContador(Integer contador) {
-        this.contador = contador;
-    }
-
-    public Integer getNoSeguidos() {
-        return noSeguidos;
-    }
-
-    public void setNoSeguidos(Integer noSeguidos) {
-        this.noSeguidos = noSeguidos;
-    }
-
-    public Frecuencia getFrecuenciaTarea() {
-        return frecuenciaTarea;
-    }
-
-    public void setFrecuenciaTarea(Frecuencia frecuenciaTarea) {
-        this.frecuenciaTarea = frecuenciaTarea;
+    public void setTextoFecha(String textoFecha) {
+        this.textoFecha = textoFecha;
     }
 }
 

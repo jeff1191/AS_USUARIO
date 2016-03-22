@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+
 import es.ucm.as_usuario.R;
 import es.ucm.as_usuario.negocio.usuario.TransferUsuario;
 import es.ucm.as_usuario.negocio.utils.Frecuencia;
@@ -30,16 +31,6 @@ public class MainActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
-        Contexto.getInstancia().setContext(this);
-        TransferUsuario crearUsuario = new TransferUsuario();
-        crearUsuario.setNombre("Jiji");
-        crearUsuario.setAvatar("");
-        crearUsuario.setPuntuacion(6);
-        crearUsuario.setPuntuacionAnterior(4);
-        crearUsuario.setFrecuenciaRecibirInforme(Frecuencia.DIARIA);
-        Controlador.getInstancia().ejecutaComando(ListaComandos.CREAR_USUARIO, crearUsuario);
-
         Command c = FactoriaComandos.getInstancia().getCommand(ListaComandos.CONSULTAR_USUARIO);
         TransferUsuario cargarUsuario = new TransferUsuario();
         try {
@@ -116,14 +107,14 @@ public class MainActivity extends Activity {
     }
 
     public void ayuda(View v) {
-        Controlador.getInstancia().ejecutaComando(ListaComandos.CARGAR_BBDD, null);
+        Controlador.getInstancia().ejecutaComando(ListaComandos.AYUDA, "principal");
+
         //Envio datos para el correo
-        Intent correo = new Intent (getApplicationContext(), Correo.class);
+       // Intent correo = new Intent (getApplicationContext(), EnviarCorreo.class);
         //correo.putExtra("destinatario", "juanluar@ucm.es");
         //correo.putExtra("titulo", "Primera prueba");
         //correo.putExtra("texto", "Bueno parece que esto ya marcha... o al menos una parte ;)");
-        startActivity(correo);
-       // Controlador.getInstancia().ejecutaComando(ListaComandos.AYUDA, "principal");
+       // startActivity(correo);
     }
 
     public void verInforme(View v){

@@ -39,7 +39,7 @@ public class Bienvenido extends Activity {
            @Override
            public void run() {
                Intent mainIntent = new Intent().setClass(
-                       Bienvenido.this, MainActivity.class);
+                       Bienvenido.this, Decision.class);
                startActivity(mainIntent);
                finish();
            }
@@ -47,21 +47,7 @@ public class Bienvenido extends Activity {
        Timer timer = new Timer();
        timer.schedule(task, DELAY);
 
-        startService(new Intent(this, ServicioNotificaciones.class));
+       startService(new Intent(this, ServicioNotificaciones.class));
 
-        //MODIFICARR!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        /*Usuario.getInstancia().setNombre("Albertin");
-        Usuario.getInstancia().setAvatar("");
-        Usuario.getInstancia().setColor("blue");
-        Usuario.getInstancia().setTono("Ringtone 1");
-        Usuario.getInstancia().setFrecuenciaRecibirInforme(Frecuencia.SEMANAL);
-        Usuario.getInstancia().setPuntuacion(6);*/
-        //////////////////////////////////////////////////////////////////////
-/*
-        TransferUsuario transferUsuario = new TransferUsuario();
-        transferUsuario.setPuntuacion(5);
-        transferUsuario.setPuntuacionAnterior(8);
-        transferUsuario.setNombre("Jeff");
-        Controlador.getInstancia().ejecutaComando(ListaComandos.CREAR_USUARIO, transferUsuario);*/
     }
 }

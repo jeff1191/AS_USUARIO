@@ -3,7 +3,6 @@
  */
 package es.ucm.as_usuario.negocio.usuario.imp;
 
-import android.util.Log;
 
 import es.ucm.as_usuario.negocio.usuario.SAUsuario;
 
@@ -135,31 +134,32 @@ public class SAUsuarioImp implements SAUsuario {
 		try {
 
 			daoUsuario = getHelper().getUsuarioDao();
-			Log.e("transfer", "antes de coger del dao");
 
-			Usuario u = daoUsuario.queryForId(1);
-
+			if (!daoUsuario.idExists(1))
+				return null;
+			else {
+				Usuario u = daoUsuario.queryForId(1);
 				// metemos los datos en un transfer
 				transferUsuario.setId(u.getId());
-				if (u.getNombre() !=  null)
+				if (u.getNombre() != null)
 					transferUsuario.setNombre(u.getNombre());
-				if (u.getCorreo() !=  null)
+				if (u.getCorreo() != null)
 					transferUsuario.setCorreo(u.getCorreo());
-				if (u.getAvatar() !=  null)
+				if (u.getAvatar() != null)
 					transferUsuario.setAvatar(u.getAvatar());
-				if (u.getPuntuacion() !=  null)
+				if (u.getPuntuacion() != null)
 					transferUsuario.setPuntuacion(u.getPuntuacion());
-				if (u.getColor() !=  null)
+				if (u.getColor() != null)
 					transferUsuario.setColor(u.getColor());
-				if (u.getTono() !=  null)
+				if (u.getTono() != null)
 					transferUsuario.setTono(u.getTono());
-				if (u.getFrecuenciaRecibirInforme() !=  null)
+				if (u.getFrecuenciaRecibirInforme() != null)
 					transferUsuario.setFrecuenciaRecibirInforme(u.getFrecuenciaRecibirInforme());
-				if (u.getNombreTutor() !=  null)
+				if (u.getNombreTutor() != null)
 					transferUsuario.setNombreTutor(u.getNombreTutor());
-				if (u.getCorreoTutor() !=  null)
+				if (u.getCorreoTutor() != null)
 					transferUsuario.setCorreoTutor(u.getCorreoTutor());
-
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

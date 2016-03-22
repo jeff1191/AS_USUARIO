@@ -1,24 +1,36 @@
 Conseguido princesas
 ¿Te has levantado a la hora prevista?
+false
 ¡Vamos a desayunar!
 ¿Has desayunado? ¿Has dejado todo recogido?
+true
 ¡Es la hora del aseo! Tienes que: lavarte la cara, las axilas, etc.
 ¿Te has lavado antes de vestirte? Cara, Axilas...
+true
 ¡Es la hora del aseo! Tienes que: cepillarte los dientes
 ¿Te has lavado los dientes?
+true
 ¡Es la hora del aseo! Tienes que: ponerte desodorante y colonia
 ¿Te has puesto desodorante y colonia?
+true
 ¡Es la hora del aseo! Tienes que peinarte
 ¿Te has peinado?
+true
 ¡Ahora hay que vestirse! Ten en cuenta el clima que hace y la actividad que vayas a hacer hoy
 ¿Te has vestido adecuadamente? ¿La ropa que has elegido es la adecuada para la época del año en la que estás? ¿La ropa que has elegido es la adecuada para la actividad que vas a hacer?
+true
 Mírate en el espejo y comprueba que te ves bien
 ¿Te has mirado en el espejo?
+true
 ¡Revisa la mochila! Comprueba que tienes todos los libros y los materiales necesarios
 ¿Has comprobado que en la mochila tengas todo lo necesario para el colegio? ¿Has repasado todas las asignaturas que tienes hoy? ¿Está todo el material?
+true
 ¡Revisa la mochila! Mete la agenda
 ¿Tienes la agenda?
+true
 Coges el almuerzo y lo metes en la mochila
 ¿Has cogido el almuerzo y lo has metido en la mochila?
+true
 ¡Hay que salir de casa!.. Y coger el transporte adecuado
 ¿Has salido a la hora prevista?
+true

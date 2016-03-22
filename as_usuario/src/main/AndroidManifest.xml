@@ -16,13 +16,11 @@
             android:theme="@android:style/Theme.NoTitleBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".presentacion.MainActivity"
-            android:label="@string/app_name" />
+        <activity android:name=".presentacion.Decision" />
+        <activity android:name=".presentacion.MainActivity" />
         <activity android:name=".presentacion.Configuracion" />
         <activity android:name=".presentacion.VerReto" />
         <activity android:name=".presentacion.VerEventos" />
