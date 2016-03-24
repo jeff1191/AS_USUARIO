@@ -228,7 +228,7 @@ public class SASucesoImp implements SASuceso {
         alarma.lanzarAlarma(Contexto.getInstancia().getContext().getApplicationContext(),
                 14, 19, "Desayunar", "Vamos a desayunar!");
         pregunta.lanzarPregunta(Contexto.getInstancia().getContext().getApplicationContext(),
-                14, 20, "Desayunar", "¿Has desayunado?/¿Has dejado todo recogido?");
+                14, 20 , "Desayunar", "¿Has desayunado?/¿Has dejado todo recogido?");
         /*alarma.lanzarAlarma(Contexto.getInstancia().getContext().getApplicationContext(),
                 21, 5, "Aseo personal", "Es la hora del aseo... tienes que... " +
                         "/Lavarte la cara, las axilas, etc..." +
