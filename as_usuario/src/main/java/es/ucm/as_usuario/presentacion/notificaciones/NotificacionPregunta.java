@@ -8,6 +8,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
@@ -46,7 +47,7 @@ public class NotificacionPregunta extends BroadcastReceiver {
         String last4Str = tmpStr.substring(tmpStr.length() - 5);
         int notificationId = Integer.valueOf(last4Str);
 
-        Log.e("prueba", "Con el ID..." + notificationId);
+        Log.e("prueba", "Notificacion con el ID..." + notificationId);
 
         Intent mostrarPregunta = new Intent(context, GestorRespuestas.class);
         mostrarPregunta.putExtra("titulo", intent.getExtras().getString("titulo"));
@@ -64,7 +65,9 @@ public class NotificacionPregunta extends BroadcastReceiver {
                         .setAutoCancel(true)
                         .setLargeIcon(BitmapFactory.decodeResource(context.getResources(), R.drawable.logo))
                         .setContentIntent(aux)
-                        .setPriority(Notification.PRIORITY_MAX);
+                        .setPriority(Notification.PRIORITY_MAX)
+                        .setVibrate(new long[]{200, 300, 200, 300, 200})
+                        .setLights(Color.YELLOW, 3000, 3000);
 
         NotificationManager notificationManager =
                 (NotificationManager) context.getSystemService(context.NOTIFICATION_SERVICE);
@@ -89,11 +92,11 @@ public class NotificacionPregunta extends BroadcastReceiver {
         long time = new Date().getTime();
         String tmpStr = String.valueOf(time);
         String last4Str = tmpStr.substring(tmpStr.length() - 5);
-        int notificationId = Integer.valueOf(last4Str);
+        int pendingId = Integer.valueOf(last4Str);
 
-        Log.e("prueba", "Con el ID..." + notificationId);
+        Log.e("prueba", "Pending con el ID..." + pendingId);
 
-        PendingIntent pi = PendingIntent.getBroadcast(context, notificationId, i, PendingIntent.FLAG_ONE_SHOT);
+        PendingIntent pi = PendingIntent.getBroadcast(context, pendingId, i, PendingIntent.FLAG_ONE_SHOT);
 
         Log.e("prueba", "La hora es..." + hora + ":" + minutos);
 
@@ -115,6 +118,7 @@ public class NotificacionPregunta extends BroadcastReceiver {
             horaNotificacion = horaNotificacionCal.getTimeInMillis();
         }
 
-        am.setRepeating(AlarmManager.RTC_WAKEUP, horaNotificacion, AlarmManager.INTERVAL_DAY, pi);
+        am.set(AlarmManager.RTC_WAKEUP, horaNotificacion, pi);
+        // am.setRepeating(AlarmManager.RTC_WAKEUP, horaNotificacion, AlarmManager.INTERVAL_DAY, pi);
     }
 }

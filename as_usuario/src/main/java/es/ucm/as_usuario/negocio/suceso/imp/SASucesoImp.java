@@ -226,22 +226,22 @@ public class SASucesoImp implements SASuceso {
         Log.e("prueba", "Variables inicializadas...");
         Log.e("prueba", "Vamos a ello...");
         alarma.lanzarAlarma(Contexto.getInstancia().getContext().getApplicationContext(),
-                14, 40, "Desayunar", "Vamos a desayunar!");
-        alarma.lanzarAlarma(Contexto.getInstancia().getContext().getApplicationContext(),
-                14, 40, "Aseo personal", "Es la hora del aseo... tienes que... " +
-                "/Lavarte la cara, las axilas, etc..." +
-                "/Lavarte los dientes" +
-                "/Ponerte desodorante" +
-                "/Ponerte colonia" +
-                "/Peinarte");
+                14, 19, "Desayunar", "Vamos a desayunar!");
         pregunta.lanzarPregunta(Contexto.getInstancia().getContext().getApplicationContext(),
-                14, 40, "Desayunar", "¿Has desayunado?/¿Has dejado todo recogido?");
+                14, 20, "Desayunar", "¿Has desayunado?/¿Has dejado todo recogido?");
+        /*alarma.lanzarAlarma(Contexto.getInstancia().getContext().getApplicationContext(),
+                21, 5, "Aseo personal", "Es la hora del aseo... tienes que... " +
+                        "/Lavarte la cara, las axilas, etc..." +
+                        "/Lavarte los dientes" +
+                        "/Ponerte desodorante" +
+                        "/Ponerte colonia" +
+                        "/Peinarte");
         pregunta.lanzarPregunta(Contexto.getInstancia().getContext().getApplicationContext(),
-                14, 40, "Aseo personal", "¿Te has lavado antes de vestirte? Cara, Axilas..." +
+                21, 5, "Aseo personal", "¿Te has lavado antes de vestirte? Cara, Axilas..." +
                 "/¿Te has lavado los dientes?" +
                 "/¿Te has puesto desodorante y colonia?" +
                 "/¿Te has peinado?");
-
+        */
        /* Parser p = new Parser();
         Dao<Tarea, Integer> tareaDao;
         p.readTareas();   // lee del fichero y convierte en tareas
