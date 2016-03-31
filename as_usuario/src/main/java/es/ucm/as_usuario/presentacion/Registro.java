@@ -87,6 +87,7 @@ public class Registro extends Activity {
         return false;
     }
 
+
     private void mostrarMensajeError(String msg){
         Toast errorNombre =
                 Toast.makeText(getApplicationContext(),
