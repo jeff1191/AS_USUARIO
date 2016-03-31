@@ -127,7 +127,8 @@ public class DispatcherImp extends Dispatcher{
                     iUsuario.putExtra("tono", transferUsuario.getTono());
                     iUsuario.putExtra("nombre tutor", transferUsuario.getNombreTutor());
                     iUsuario.putExtra("correo tutor", transferUsuario.getCorreoTutor());
-                }             
+                }
+
                 Contexto.getInstancia().getContext().startActivity(iUsuario);
                 break;
 
