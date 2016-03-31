@@ -11,6 +11,8 @@ import com.itextpdf.text.Phrase;
 import com.itextpdf.text.pdf.GrayColor;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
+import android.util.Log;
+
 import com.j256.ormlite.android.apptools.OpenHelperManager;
 import com.j256.ormlite.dao.Dao;
 
@@ -42,6 +44,7 @@ import es.ucm.as_usuario.negocio.suceso.TransferTarea;
 import es.ucm.as_usuario.negocio.usuario.SAUsuario;
 import es.ucm.as_usuario.negocio.usuario.TransferUsuario;
 import es.ucm.as_usuario.presentacion.Contexto;
+
 /**
  * Created by Jeffer on 02/03/2016.
  */
@@ -163,37 +166,6 @@ public class SASucesoImp implements SASuceso {
     }
 
     @Override
-    public void responderTarea(String respuestaTarea) {
-        Dao<Tarea, Integer> dao;
-        Tarea tarea = new Tarea();
-        String[] sol = respuestaTarea.split("_");
-        //sol[0] tiene la respuesta
-        int respuesta = Integer.parseInt(sol[0]);
-        //sol[1] tiene el id de la tarea a buscar
-        int idTarea = Integer.parseInt(sol[1]);
-        /*
-        try {
-            dao = getHelper().getTareaDao();
-            Log.e("prueba", "Se busca en la database con el id " + idTarea);
-            tarea = (Tarea) dao.queryForId(idTarea);
-            if (!tarea.equals(null)) {
-                //Si la tarea llega al maximo contador se tiene que cambiar la frecuencia de la tarea
-                if((tarea.getContador() == 0 && respuesta != -1) ||
-                        (tarea.getContador() > 0 && tarea.getContador() <= 30))
-                    tarea.setContador(tarea.getContador() + respuesta);
-                    dao.update(tarea);
-                if(tarea.getContador() == 30){
-                    // cambiar frecuencia
-                    dao.update(tarea);
-                }
-            }else {
-                Log.e("prueba", "No hay tareas en la database o ha pasado otra cosa");
-            }
-        } catch (SQLException e) {
-        }*/
-    }
-
-    @Override
     public void cargarTareasBBDD() {
         Parser p = new Parser();
         Dao<Tarea, Integer> tareaDao;
@@ -270,6 +242,58 @@ public class SASucesoImp implements SASuceso {
                 e.printStackTrace();
             }
         }
+    }
+
+    public void cargarNotificaciones() {
+
+        NotificacionAlarma alarma = new NotificacionAlarma();
+        NotificacionPregunta pregunta = new NotificacionPregunta();
+        Log.e("prueba", "Variables inicializadas...");
+        Log.e("prueba", "Vamos a ello...");
+        alarma.lanzarAlarma(Contexto.getInstancia().getContext().getApplicationContext(),
+                14, 19, "Desayunar", "Vamos a desayunar!");
+        pregunta.lanzarPregunta(Contexto.getInstancia().getContext().getApplicationContext(),
+                14, 20 , "Desayunar", "¿Has desayunado?/¿Has dejado todo recogido?");
+        /*alarma.lanzarAlarma(Contexto.getInstancia().getContext().getApplicationContext(),
+                21, 5, "Aseo personal", "Es la hora del aseo... tienes que... " +
+                        "/Lavarte la cara, las axilas, etc..." +
+                        "/Lavarte los dientes" +
+                        "/Ponerte desodorante" +
+                        "/Ponerte colonia" +
+                        "/Peinarte");
+        pregunta.lanzarPregunta(Contexto.getInstancia().getContext().getApplicationContext(),
+                21, 5, "Aseo personal", "¿Te has lavado antes de vestirte? Cara, Axilas..." +
+                "/¿Te has lavado los dientes?" +
+                "/¿Te has puesto desodorante y colonia?" +
+                "/¿Te has peinado?");
+        */
+       /* Parser p = new Parser();
+        Dao<Tarea, Integer> tareaDao;
+        p.readTareas();   // lee del fichero y convierte en tareas
+
+        // crea las nuevas tareas en BBDD si hubiera
+        ArrayList<Tarea> tareasBBDD = p.getTareas();
+        for (int i = 0; i < tareasBBDD.size(); i++){
+            try {
+                tareaDao = getHelper().getTareaDao();
+                if (tareaDao.queryForEq("TEXTO_ALARMA", tareasBBDD.get(i).getTextoAlarma()).size() == 0)
+                    tareaDao.create(tareasBBDD.get(i));
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+
+        // elimina las tareas que el tutor ha deshabilitado o borrado
+        ArrayList<Tarea> tareasObsoletas = p.getTareasObsoletas();
+        for (int i = 0; i < tareasObsoletas.size(); i++){
+            try {
+                tareaDao = getHelper().getTareaDao();
+                if (tareaDao.queryForEq("TEXTO_ALARMA", tareasObsoletas.get(i).getTextoAlarma()).size() != 0)
+                    tareaDao.delete(tareaDao.queryForEq("TEXTO_ALARMA", tareasObsoletas.get(i).getTextoAlarma()));
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }*/
     }
 
     public static File crearFichero(String nombreFichero) throws IOException {

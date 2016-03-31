@@ -12,16 +12,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-
 import es.ucm.as_usuario.R;
 import es.ucm.as_usuario.negocio.usuario.TransferUsuario;
-import es.ucm.as_usuario.negocio.utils.Frecuencia;
 import es.ucm.as_usuario.presentacion.controlador.Controlador;
 import es.ucm.as_usuario.presentacion.controlador.ListaComandos;
 import es.ucm.as_usuario.presentacion.controlador.comandos.Command;
 import es.ucm.as_usuario.presentacion.controlador.comandos.exceptions.commandException;
 import es.ucm.as_usuario.presentacion.controlador.comandos.factoria.FactoriaComandos;
-import es.ucm.as_usuario.presentacion.notificaciones.ServicioNotificaciones;
 
 
 public class MainActivity extends Activity {

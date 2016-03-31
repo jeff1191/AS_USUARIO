@@ -7,6 +7,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
@@ -45,7 +46,7 @@ public class NotificacionAlarma extends BroadcastReceiver {
         String last4Str = tmpStr.substring(tmpStr.length() - 5);
         int notificationId = Integer.valueOf(last4Str);
 
-        Log.e("prueba", "Con el ID..." + notificationId);
+        Log.e("prueba", "Notificacion con el ID..." + notificationId);
 
         Intent mostrarAlarma = new Intent(context, GestorRespuestas.class);
         mostrarAlarma.putExtra("titulo", intent.getExtras().getString("titulo"));
@@ -61,7 +62,9 @@ public class NotificacionAlarma extends BroadcastReceiver {
                         .setAutoCancel(true)
                         .setPriority(NotificationCompat.PRIORITY_MAX)
                         .setLargeIcon(BitmapFactory.decodeResource(context.getResources(), R.drawable.logo))
-                        .setContentIntent(aux);
+                        .setContentIntent(aux)
+                        .setVibrate(new long[]{200, 300, 200, 300, 200})
+                        .setLights(Color.YELLOW, 3000, 3000);
 
         NotificationManager notificationManager =
                 (NotificationManager) context.getSystemService(context.NOTIFICATION_SERVICE);
@@ -86,11 +89,11 @@ public class NotificacionAlarma extends BroadcastReceiver {
         long time = new Date().getTime();
         String tmpStr = String.valueOf(time);
         String last4Str = tmpStr.substring(tmpStr.length() - 5);
-        int notificationId = Integer.valueOf(last4Str);
+        int pendingId = Integer.valueOf(last4Str);
 
-        Log.e("prueba", "Con el ID..." + notificationId);
+        Log.e("prueba", "Pending con el ID..." + pendingId);
 
-        PendingIntent pi = PendingIntent.getBroadcast(context, notificationId, i, PendingIntent.FLAG_ONE_SHOT);
+        PendingIntent pi = PendingIntent.getBroadcast(context, pendingId, i, PendingIntent.FLAG_UPDATE_CURRENT);
 
         Log.e("prueba", "La hora es..." + hora + ":" + minutos);
 
@@ -108,11 +111,12 @@ public class NotificacionAlarma extends BroadcastReceiver {
         //se pone que empieze a partir de mañana
         if(horaNotificacion < horaActual){
             horaNotificacionCal.add(Calendar.DAY_OF_MONTH, 1);
-            Log.e("prueba", "La hora de la alarma se pasa al dia ..." + horaActualCal.getTime().toString());
+            Log.e("prueba", "La hora de la alarma se pasa al dia ..." + horaNotificacionCal.getTime().toString());
             horaNotificacion = horaNotificacionCal.getTimeInMillis();
         }
 
-        am.setRepeating(AlarmManager.RTC_WAKEUP, horaNotificacion, 24 * 60 * 60 * 1000, pi);
+        am.set(AlarmManager.RTC_WAKEUP, horaNotificacion, pi);
+       // am.setRepeating(AlarmManager.RTC_WAKEUP, horaNotificacion, 24 * 60 * 60 * 1000, pi);
 
     }
 }

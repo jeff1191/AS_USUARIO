@@ -5,6 +5,7 @@ import android.app.NotificationManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -25,6 +26,11 @@ public class GestorRespuestas extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        this.getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON
+                | WindowManager.LayoutParams.FLAG_FULLSCREEN
+                | WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON
+                | WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED
+                | WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD);
         setContentView(R.layout.alarmas);
 
         String tituloAlarma = getIntent().getExtras().getString("titulo");
@@ -37,7 +43,6 @@ public class GestorRespuestas extends Activity {
         Log.e("prueba", "Va a cerrar la notifiacion ..." + idNot);
 
         notificationManager.cancel(idNot);
-
 
         listaPreguntas = (ListView)findViewById(R.id.listViewAlarma);
         titulo = (TextView)findViewById(R.id.tituloAlarma);
@@ -53,19 +58,6 @@ public class GestorRespuestas extends Activity {
         titulo.setText(tituloAlarma);
         listaPreguntas.setAdapter(adaptador);
 
-        //String respuestaTarea = respuesta + "_" + idTarea;
-
-        //Log.e("prueba", "Lo que se le pasa al programa es ..." + respuestaTarea);
-
-       // Controlador.getInstancia().ejecutaComando(ListaComandos.RESPONDER_TAREA, respuestaTarea);
-
-        //Toast de feedback (Poner esto igual al final de comando??)
-       // String texto;
-        //if(respuesta == 1) texto = "Has contestado SI a la tarea";
-        //else texto = "Has contestado NO a la tarea";
-
-        //Toast toastFeedbackRespuesta = Toast.makeText(Contexto.getInstancia().getContext(),texto, Toast.LENGTH_LONG);
-        //toastFeedbackRespuesta.show();
     }
 
     public void cerrar(View v){

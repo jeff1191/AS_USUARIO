@@ -1,7 +1,6 @@
 package es.ucm.as_usuario.presentacion;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -51,8 +50,11 @@ public class Registro extends Activity {
             crearUsuario.setPuntuacion(0);
             crearUsuario.setPuntuacionAnterior(0);
             crearUsuario.setCorreo(correo);
+            
             Controlador.getInstancia().ejecutaComando(ListaComandos.CREAR_USUARIO, crearUsuario);
             Controlador.getInstancia().ejecutaComando(ListaComandos.CARGAR_BBDD, null);
+            Controlador.getInstancia().ejecutaComando(ListaComandos.CARGAR_NOTIFICACIONES, null);
+            
             startActivity(new Intent(this, MainActivity.class));
     }
         /*
