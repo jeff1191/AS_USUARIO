@@ -44,7 +44,6 @@ public class DispatcherImp extends Dispatcher{
                 Intent intentConfiguracion = new Intent(Contexto.getInstancia().getContext().getApplicationContext(), Configuracion.class);
                 TransferUsuario conf = (TransferUsuario) datos;
                 intentConfiguracion.putExtra("nombreConfiguracion", conf.getNombre());
-                intentConfiguracion.putExtra("frecuenciaInformeConfiguracion", conf.getFrecuenciaRecibirInforme());
                 intentConfiguracion.putExtra("imagenConfiguracion", conf.getAvatar());
                 intentConfiguracion.putExtra("temaConfiguracion", conf.getColor());
                 Contexto.getInstancia().getContext().startActivity(intentConfiguracion);

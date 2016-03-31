@@ -62,7 +62,6 @@ public class FactoriaComandosImp extends FactoriaComandos {
             case ListaComandos.CARGAR_NOTIFICACIONES:
                 ret = new CargarNotificaciones();
                 break;
-                break;
             case ListaComandos.GENERAR_PDF:
                 ret = new GenerarPDFComando();
                 break;
