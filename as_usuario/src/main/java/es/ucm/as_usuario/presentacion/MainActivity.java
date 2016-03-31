@@ -21,6 +21,7 @@ import es.ucm.as_usuario.presentacion.controlador.ListaComandos;
 import es.ucm.as_usuario.presentacion.controlador.comandos.Command;
 import es.ucm.as_usuario.presentacion.controlador.comandos.exceptions.commandException;
 import es.ucm.as_usuario.presentacion.controlador.comandos.factoria.FactoriaComandos;
+import es.ucm.as_usuario.presentacion.notificaciones.ServicioNotificaciones;
 
 
 public class MainActivity extends Activity {

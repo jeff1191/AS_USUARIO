@@ -36,17 +36,27 @@ public class ServicioNotificaciones extends Service{
 */
         Log.e("prueba", "Servicio lanzado...");
 
-       // alarma.lanzarAlarma(this, 3, 44, "holaa", "Esto es una pruebaaa");
-       // pregunta.lanzarPregunta(this, 3, 45, "holaa", "Esto es una pruebaaa con botones", 1);
-        //alarma.lanzarAlarma(this, 1, 36);
-        //pregunta.lanzarPregunta(this, 1, 35);
-        //pregunta.lanzarPregunta(this, 8, 36);
+        //Le tienes que pasar el titulo(tipo de las preguntas) y un array de id's de tareas
+
+      alarma.lanzarAlarma(this, 3, 42, "Desayunar", "Vamos a desayunar!");
+         /* alarma.lanzarAlarma(this, 1, 53, "Aseo personal", "Es la hora del aseo... tienes que... " +
+                "/Lavarte la cara, las axilas, etc..." +
+                "/Lavarte los dientes" +
+                "/Ponerte desodorante" +
+                "/Ponerte colonia" +
+                "/Peinarte");
+        pregunta.lanzarPregunta(this, 1, 50, "Desayunar", "¿Has desayunado?/¿Has dejado todo recogido?");
+        pregunta.lanzarPregunta(this, 2, 47, "Aseo personal", "¿Te has lavado antes de vestirte? Cara, Axilas..." +
+                "/¿Te has lavado los dientes?" +
+                "/¿Te has puesto desodorante y colonia?" +
+                "/¿Te has peinado?");
+*/
 
         //La idea es que solo esten estas dos, ya que para cada tarea se necesitan una de cada
         //alarma.lanzarAlarma(this, horaAlarma, minutosAlarma, titulo, textoAlarma);
         //pregunta.lanzarPregunta(this, horaPregunta, minutosPregunta, titulo, textoPregunta, idTarea);
 
-        return START_STICKY;
+        return START_REDELIVER_INTENT;
     }
 
     @Override
@@ -58,6 +68,7 @@ public class ServicioNotificaciones extends Service{
     @Override
     public void onDestroy()
     {
+        Log.d("prueba", "Servicio destruido...");
         super.onDestroy();
     }
 }

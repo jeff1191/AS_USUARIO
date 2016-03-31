@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="es.ucm.as_usuario">
-
+    
     <application
         android:allowBackup="true"
         android:icon="@drawable/logo"
@@ -25,6 +25,7 @@
         <activity android:name=".presentacion.VerInforme"/>
         <activity android:name=".presentacion.Registro"/>
         <activity android:name=".presentacion.Correo"/>
+        <activity android:name=".presentacion.notificaciones.GestorRespuestas"/>
 
         <service
             android:name=".presentacion.notificaciones.ServicioNotificaciones"
@@ -34,7 +35,7 @@
 
         <receiver android:name=".presentacion.notificaciones.NotificacionAlarma" />
         <receiver android:name=".presentacion.notificaciones.NotificacionPregunta" />
-        <receiver android:name=".presentacion.notificaciones.GestorRespuestas" />
+
     </application>
 
     <!-- Permisos requeridos-->
@@ -42,6 +43,9 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-feature android:name="android.hardware.camera" android:required="false"></uses-feature>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.VIBRATE"/>
     <uses-feature android:name="android.hardware.camera" android:required="false"></uses-feature>
     <!-- Final permisos requeridos-->
 
