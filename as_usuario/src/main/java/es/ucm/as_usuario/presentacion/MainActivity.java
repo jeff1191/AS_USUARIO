@@ -64,6 +64,7 @@ public class MainActivity extends Activity {
                 imagenPerfil.setImageBitmap(BitmapFactory.decodeFile(bundle.getString("editarAvatar")));
         }
 
+
         // Esto es para solventar un error al enviar el correo
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
