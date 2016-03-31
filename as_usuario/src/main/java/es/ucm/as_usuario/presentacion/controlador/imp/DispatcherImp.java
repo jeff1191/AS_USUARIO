@@ -44,7 +44,6 @@ public class DispatcherImp extends Dispatcher{
                 Intent intentConfiguracion = new Intent(Contexto.getInstancia().getContext().getApplicationContext(), Configuracion.class);
                 TransferUsuario conf = (TransferUsuario) datos;
                 intentConfiguracion.putExtra("nombreConfiguracion", conf.getNombre());
-                intentConfiguracion.putExtra("frecuenciaInformeConfiguracion", conf.getFrecuenciaRecibirInforme());
                 intentConfiguracion.putExtra("imagenConfiguracion", conf.getAvatar());
                 intentConfiguracion.putExtra("temaConfiguracion", conf.getColor());
                 Contexto.getInstancia().getContext().startActivity(intentConfiguracion);
@@ -126,7 +125,6 @@ public class DispatcherImp extends Dispatcher{
                     iUsuario.putExtra("puntuacion anterior", transferUsuario.getPuntuacionAnterior());
                     iUsuario.putExtra("color", transferUsuario.getColor());
                     iUsuario.putExtra("tono", transferUsuario.getTono());
-                    iUsuario.putExtra("frecuencia", transferUsuario.getFrecuenciaRecibirInforme());
                     iUsuario.putExtra("nombre tutor", transferUsuario.getNombreTutor());
                     iUsuario.putExtra("correo tutor", transferUsuario.getCorreoTutor());
                 }             

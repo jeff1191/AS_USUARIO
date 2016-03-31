@@ -4,11 +4,10 @@
 package es.ucm.as_usuario.negocio.usuario.imp;
 
 
-import android.os.StrictMode;
 import android.util.Log;
 import android.widget.Toast;
 
-import es.ucm.as_usuario.integracion.Mail;
+import es.ucm.as_usuario.negocio.utils.Mail;
 import es.ucm.as_usuario.negocio.usuario.SAUsuario;
 
 import com.j256.ormlite.android.apptools.OpenHelperManager;
@@ -44,7 +43,6 @@ public class SAUsuarioImp implements SAUsuario {
 			if (daoUsuario.idExists(1)) {
 				Usuario usuario = daoUsuario.queryForId(1);
 				usuario.setNombre(datos.getNombre());
-				usuario.setFrecuenciaRecibirInforme(datos.getFrecuenciaRecibirInforme());
 				usuario.setAvatar(datos.getAvatar());
 				usuario.setColor(datos.getColor());
 				usuario.setTono(datos.getTono());
@@ -112,11 +110,6 @@ public class SAUsuarioImp implements SAUsuario {
 			if (transferUsuario.getTono() != null)
 				usuario.setTono(transferUsuario.getTono());
 
-			if (transferUsuario.getFrecuenciaRecibirInforme() != null)
-				usuario.setFrecuenciaRecibirInforme(transferUsuario.getFrecuenciaRecibirInforme());
-			else
-				usuario.setFrecuenciaRecibirInforme(Frecuencia.SEMANAL);
-
 			if (transferUsuario.getNombreTutor() != null)
 				usuario.setNombreTutor(transferUsuario.getNombreTutor());
 
@@ -160,8 +153,6 @@ public class SAUsuarioImp implements SAUsuario {
 					transferUsuario.setColor(u.getColor());
 				if (u.getTono() != null)
 					transferUsuario.setTono(u.getTono());
-				if (u.getFrecuenciaRecibirInforme() != null)
-					transferUsuario.setFrecuenciaRecibirInforme(u.getFrecuenciaRecibirInforme());
 				if (u.getNombreTutor() != null)
 					transferUsuario.setNombreTutor(u.getNombreTutor());
 				if (u.getCorreoTutor() != null)

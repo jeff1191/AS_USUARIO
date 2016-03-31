@@ -53,7 +53,6 @@ public class Registro extends Activity {
         crearUsuario.setPuntuacion(0);
         crearUsuario.setPuntuacionAnterior(0);
         crearUsuario.setCorreo(correo);
-        crearUsuario.setFrecuenciaRecibirInforme(Frecuencia.DIARIA);
         Controlador.getInstancia().ejecutaComando(ListaComandos.CREAR_USUARIO, crearUsuario);
         Controlador.getInstancia().ejecutaComando(ListaComandos.CARGAR_BBDD, null);
         startActivity(new Intent(this, MainActivity.class));

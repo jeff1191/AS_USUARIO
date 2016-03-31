@@ -210,7 +210,6 @@ public class Configuracion extends Activity {
                 if(!editarNombre.getText().toString().matches("")) {
                     TransferUsuario editarUsuario = new TransferUsuario();
                     editarUsuario.setNombre(String.valueOf(editarNombre.getText()));
-                    editarUsuario.setFrecuenciaRecibirInforme(frecActual);
                     temaActual = temaParcial;
                     tonoActual = tonoParcial;
                     editarUsuario.setColor(temaActual);

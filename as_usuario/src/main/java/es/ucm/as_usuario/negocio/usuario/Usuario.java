@@ -39,9 +39,6 @@ public class Usuario {
 	@DatabaseField(columnName = "TONO")
 	private String tono;
 
-	@DatabaseField(columnName = "FRECUENCIA", dataType = DataType.ENUM_STRING)
-	private Frecuencia frecuenciaRecibirInforme;
-
 	@DatabaseField(columnName = "NOMBRE_TUTOR")
 	private String nombreTutor;
 
@@ -76,20 +73,12 @@ public class Usuario {
 		this.puntuacionAnterior = puntuacionAnterior;
 	}
 
-	public Frecuencia getFrecuenciaRecibirInforme() {
-		return frecuenciaRecibirInforme;
-	}
-
 	public String getColor() {
 		return this.color;
 	}
 
 	public String getTono() {
 		return this.tono;
-	}
-
-	public Frecuencia getFrecuenciaRecibirInformes() {
-		return this.frecuenciaRecibirInforme;
 	}
 
 	public String getNombreTutor() {
@@ -116,10 +105,6 @@ public class Usuario {
 
 	public void setColor(String nuevoColor) {
 		this.color=nuevoColor;
-	}
-
-	public void setFrecuenciaRecibirInforme(Frecuencia nuevaFrecuencia) {
-		this.frecuenciaRecibirInforme=nuevaFrecuencia;
 	}
 
 	public void setNombreTutor(String nuevoNombreTutor) {
