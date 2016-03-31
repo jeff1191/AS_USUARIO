@@ -100,10 +100,7 @@ public class MainActivity extends Activity {
     }
 
     public void ayuda(View v) {
-        //Controlador.getInstancia().ejecutaComando(ListaComandos.AYUDA, "principal");
-
-        // Enviar el correo
-        Controlador.getInstancia().ejecutaComando(ListaComandos.ENVIAR_CORREO, null);
+        Controlador.getInstancia().ejecutaComando(ListaComandos.AYUDA, "principal");
     }
 
     public void verInforme(View v){
@@ -117,6 +114,11 @@ public class MainActivity extends Activity {
 
     public void verReto(View v){
         Controlador.getInstancia().ejecutaComando(ListaComandos.VER_RETO, null);
+    }
+
+    public void enviarCorreo(View v){
+        Controlador.getInstancia().ejecutaComando(ListaComandos.GENERAR_PDF, null);
+        Controlador.getInstancia().ejecutaComando(ListaComandos.ENVIAR_CORREO, null);
     }
 
     @Override
