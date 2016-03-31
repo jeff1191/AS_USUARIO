@@ -33,59 +33,42 @@ public class MainActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        // Se accede a los datos del usuario de la BBDD
         Command c = FactoriaComandos.getInstancia().getCommand(ListaComandos.CONSULTAR_USUARIO);
-        TransferUsuario cargarUsuario = new TransferUsuario();
+        TransferUsuario usuario = new TransferUsuario();
         try {
-            cargarUsuario = (TransferUsuario) c.ejecutaComando(null);
+            usuario = (TransferUsuario) c.ejecutaComando(null);
         } catch (commandException e) {
             e.printStackTrace();
         }
-        Configuracion.temaActual=cargarUsuario.getColor();
+
+        // Completa los datos del usuario que se muestran en esta pantalla
+        Configuracion.temaActual = usuario.getColor();
         cargarTema();
-        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        nombrePrincipal=(TextView)findViewById(R.id.nombreUser);
+        puntuacion = (TextView)findViewById(R.id.puntuacionUsuario);
+        imagenPerfil= (ImageView) findViewById(R.id.avatar);
+        if(usuario.getAvatar() != null && !usuario.getAvatar().equals(""))
+            imagenPerfil.setImageBitmap(BitmapFactory.decodeFile(usuario.getAvatar()));
+        else
+            imagenPerfil.setImageResource(R.drawable.avatar);
+        puntuacion.setText(usuario.getPuntuacion() + "/10");
+        nombrePrincipal.setText(usuario.getNombre());
+        Bundle bundle = getIntent().getExtras();
+        if (bundle != null) {
+            if (bundle.getString("editarUsuario") != null)
+                nombrePrincipal.setText(bundle.getString("editarUsuario"));
+            if (bundle.getString("editarAvatar") != null && !bundle.getString("editarAvatar").equals(""))
+                imagenPerfil.setImageBitmap(BitmapFactory.decodeFile(bundle.getString("editarAvatar")));
+        }
 
         // Esto es para solventar un error al enviar el correo
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
 
-
-        setContentView(R.layout.activity_main);
-        nombrePrincipal=(TextView)findViewById(R.id.nombreUser);
-        puntuacion = (TextView)findViewById(R.id.puntuacionUsuario);
-        imagenPerfil= (ImageView) findViewById(R.id.avatar);
-        if(cargarUsuario.getAvatar() != null && !cargarUsuario.getAvatar().equals(""))
-            imagenPerfil.setImageBitmap(BitmapFactory.decodeFile(cargarUsuario.getAvatar()));
-        else
-            imagenPerfil.setImageResource(R.drawable.avatar);
-        puntuacion.setText(cargarUsuario.getPuntuacion() + "/10");
-        nombrePrincipal.setText(cargarUsuario.getNombre());
-        Bundle bundle = getIntent().getExtras();
-        if (bundle != null) {
-          /*  String name = bundle.getString("nombre");
-            Integer punt = bundle.getInt("puntuacion");
-
-            nombrePrincipal = (TextView) findViewById(R.id.nombreUser);
-            nombrePrincipal.setText(name);
-            puntuacion = (TextView) findViewById(R.id.puntuacionUsuario);
-            puntuacion.setText(punt.toString() + "/10");*/
-
-            if (bundle.getString("editarUsuario") != null) {
-                //Falta rellenar los demás campos...imagen tono color
-                nombrePrincipal.setText(bundle.getString("editarUsuario"));
-            }
-            if (bundle.getString("editarAvatar") != null && !bundle.getString("editarAvatar").equals("")) {
-             /*  InputStream is;
-
-
-                try {
-                    is = getContentResolver().openInputStream(Uri.parse(bundle.getString("editarAvatar")));
-                    BufferedInputStream bis = new BufferedInputStream(is);
-                    Bitmap bitmap = BitmapFactory.decodeStream(bis);
-                    imagenPerfil.setImageBitmap(bitmap);
-                } catch (FileNotFoundException e) {e.printStackTrace();}*/
-                imagenPerfil.setImageBitmap(BitmapFactory.decodeFile(bundle.getString("editarAvatar")));
-            }
-        }
+        super.onCreate(savedInstanceState);
 
     }
 

@@ -19,7 +19,6 @@ public class Decision extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Contexto.getInstancia().setContext(this);
-
         Command c = FactoriaComandos.getInstancia().getCommand(ListaComandos.CONSULTAR_USUARIO);
         TransferUsuario cargarUsuario;
         try {
