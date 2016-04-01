@@ -74,10 +74,6 @@ public class Configuracion extends Activity {
         Bundle bundle = getIntent().getExtras();
         editarNombre = (EditText)findViewById(R.id.editarNombre);
         aceptar = (Button)findViewById(R.id.envioNuevaConfig);
-        diaria =(RadioButton)findViewById(R.id.diario);
-        semanal =(RadioButton)findViewById(R.id.semanal);
-        mensual =(RadioButton)findViewById(R.id.mensual);
-        rdgGrupo = (RadioGroup)findViewById(R.id.rdgGrupo);
         spinnerColors = (Spinner) findViewById(R.id.cambiarColor);
         spinnerTono = (Spinner) findViewById(R.id.cambiarTono);
         imagenConfiguracion = (ImageView) findViewById(R.id.editarAvatar);
@@ -187,30 +183,13 @@ public class Configuracion extends Activity {
                     mensual.setChecked(true);
                 }
 
-        rdgGrupo.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
 
-            @Override
-            public void onCheckedChanged(RadioGroup group, int checkedId) {
-
-                // TODO Auto-generated method stub
-                if (checkedId == R.id.diario)
-                     frecActual= Frecuencia.DIARIA;
-                 else
-                    if (checkedId == R.id.semanal)
-                        frecActual= Frecuencia.SEMANAL;
-                    else
-                        if (checkedId == R.id.mensual)
-                             frecActual= Frecuencia.MENSUAL;
-            }
-
-        });
         aceptar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(!editarNombre.getText().toString().matches("")) {
                     TransferUsuario editarUsuario = new TransferUsuario();
                     editarUsuario.setNombre(String.valueOf(editarNombre.getText()));
-                    editarUsuario.setFrecuenciaRecibirInforme(frecActual);
                     temaActual = temaParcial;
                     tonoActual = tonoParcial;
                     editarUsuario.setColor(temaActual);

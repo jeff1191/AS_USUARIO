@@ -29,8 +29,6 @@ public class TransferUsuario {
 
 	private String tono;
 
-	private Frecuencia frecuenciaRecibirInforme;
-
 	private List<Evento> tareas;
 
 	private String nombreTutor;
@@ -49,7 +47,6 @@ public class TransferUsuario {
 		this.puntuacion = usuario.getPuntuacion();
 		this.color = usuario.getColor();
 		this.tono = usuario.getTono();
-		this.frecuenciaRecibirInforme = usuario.getFrecuenciaRecibirInforme();
 		this.nombreTutor = usuario.getNombreTutor();
 		this.correoTutor = usuario.getCorreoTutor();
 		this.puntuacionAnterior = usuario.getPuntuacionAnterior();
@@ -125,14 +122,6 @@ public class TransferUsuario {
 
 	public void setTono(String tono) {
 		this.tono = tono;
-	}
-
-	public Frecuencia getFrecuenciaRecibirInforme() {
-		return frecuenciaRecibirInforme;
-	}
-
-	public void setFrecuenciaRecibirInforme(Frecuencia frecuenciaRecibirInforme) {
-		this.frecuenciaRecibirInforme = frecuenciaRecibirInforme;
 	}
 
 	public List<Evento> getTareas() {

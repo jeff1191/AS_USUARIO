@@ -57,8 +57,8 @@
 
         <TextView
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.75"
+            android:layout_height="0dp"
+            android:layout_weight="1"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:id="@+id/nombreUser"
             android:layout_gravity="center"
@@ -67,29 +67,32 @@
 
         <LinearLayout
             android:orientation="horizontal"
-            android:layout_weight="2.5"
+            android:layout_weight="4"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:id="@+id/imgYPunt"
             android:gravity="center_horizontal"
-            android:paddingBottom="20dp">
+            android:paddingBottom="10dp">
 
             <ImageView
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="5"
                 android:id="@+id/avatar"
                 android:src="@drawable/avatar"
-                android:layout_gravity="center_horizontal"
-                android:paddingLeft="20dp" />
+                android:layout_marginLeft="20dp"
+                android:layout_gravity="center"
+                android:layout_marginRight="10dp" />
 
             <LinearLayout
                 android:orientation="vertical"
-                android:layout_weight="1"
-                android:layout_width="wrap_content"
+                android:layout_weight="1.5"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:id="@+id/puntuacion"
-                android:layout_gravity="center">
+                android:layout_gravity="center"
+                android:layout_marginRight="20dp"
+                android:layout_marginLeft="10dp">
 
                 <ImageButton
                     android:layout_width="60dp"
@@ -99,7 +102,7 @@
                     android:scaleType="fitCenter"
                     android:src="@drawable/puntuacion"
                     android:layout_gravity="center"
-                    android:clickable="true" />
+                    android:clickable="false" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -113,7 +116,7 @@
 
         <Button
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:text="¿Cómo vas?"
             android:textSize="20dp"
             android:id="@+id/informe"
@@ -124,7 +127,7 @@
 
         <Button
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:text="Próximos eventos"
             android:id="@+id/eventos"
             android:textSize="20dp"
@@ -135,7 +138,7 @@
 
         <Button
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:text="Reto"
             android:id="@+id/reto"
             android:layout_gravity="center_horizontal"
@@ -143,6 +146,17 @@
             android:textSize="20dp"
             android:singleLine="false"
             android:onClick="verReto"
+            android:layout_marginBottom="1dp" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:text="Enviar informe por correo"
+            android:textSize="20dp"
+            android:id="@+id/correo"
+            android:layout_gravity="center_horizontal"
+            android:layout_weight="1"
+            android:onClick="enviarCorreo"
             android:layout_marginBottom="1dp" />
 
     </LinearLayout>

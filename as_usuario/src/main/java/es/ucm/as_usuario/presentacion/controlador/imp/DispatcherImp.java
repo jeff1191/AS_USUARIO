@@ -44,7 +44,6 @@ public class DispatcherImp extends Dispatcher{
                 Intent intentConfiguracion = new Intent(Contexto.getInstancia().getContext().getApplicationContext(), Configuracion.class);
                 TransferUsuario conf = (TransferUsuario) datos;
                 intentConfiguracion.putExtra("nombreConfiguracion", conf.getNombre());
-                intentConfiguracion.putExtra("frecuenciaInformeConfiguracion", conf.getFrecuenciaRecibirInforme());
                 intentConfiguracion.putExtra("imagenConfiguracion", conf.getAvatar());
                 intentConfiguracion.putExtra("temaConfiguracion", conf.getColor());
                 Contexto.getInstancia().getContext().startActivity(intentConfiguracion);
@@ -77,7 +76,6 @@ public class DispatcherImp extends Dispatcher{
                 break;
 
             case ListaComandos.RESPONDER_RETO:
-
                 break;
 
             case ListaComandos.VER_INFORME:
@@ -112,9 +110,6 @@ public class DispatcherImp extends Dispatcher{
             case ListaComandos.CREAR_USUARIO:
                 break;
 
-            case ListaComandos.RESPONDER_TAREA:
-                break;
-
             case ListaComandos.CONSULTAR_USUARIO:
                 Intent iUsuario = new Intent(Contexto.getInstancia().getContext().getApplicationContext(), MainActivity.class);
                 TransferUsuario transferUsuario = (TransferUsuario)datos;
@@ -126,7 +121,6 @@ public class DispatcherImp extends Dispatcher{
                     iUsuario.putExtra("puntuacion anterior", transferUsuario.getPuntuacionAnterior());
                     iUsuario.putExtra("color", transferUsuario.getColor());
                     iUsuario.putExtra("tono", transferUsuario.getTono());
-                    iUsuario.putExtra("frecuencia", transferUsuario.getFrecuenciaRecibirInforme());
                     iUsuario.putExtra("nombre tutor", transferUsuario.getNombreTutor());
                     iUsuario.putExtra("correo tutor", transferUsuario.getCorreoTutor());
                 }             
@@ -140,6 +134,9 @@ public class DispatcherImp extends Dispatcher{
                 break;
 
             case ListaComandos.ENVIAR_CORREO:
+                break;
+
+            case ListaComandos.CARGAR_NOTIFICACIONES:
                 break;
         }
     }

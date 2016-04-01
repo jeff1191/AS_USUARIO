@@ -1,4 +1,4 @@
-package es.ucm.as_usuario.integracion;
+package es.ucm.as_usuario.negocio.utils;
 
 
 import java.io.BufferedReader;

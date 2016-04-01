@@ -4,16 +4,15 @@
 package es.ucm.as_usuario.negocio.usuario.imp;
 
 
-import android.os.StrictMode;
-import android.util.Log;
-import android.widget.Toast;
+import android.content.Intent;
+import android.net.Uri;
 
-import es.ucm.as_usuario.integracion.Mail;
 import es.ucm.as_usuario.negocio.usuario.SAUsuario;
 
 import com.j256.ormlite.android.apptools.OpenHelperManager;
 import com.j256.ormlite.dao.Dao;
 
+import java.io.File;
 import java.sql.SQLException;
 import java.util.List;
 import es.ucm.as_usuario.integracion.DBHelper;
@@ -22,7 +21,6 @@ import es.ucm.as_usuario.negocio.suceso.SASuceso;
 import es.ucm.as_usuario.negocio.suceso.TransferTarea;
 import es.ucm.as_usuario.negocio.usuario.TransferUsuario;
 import es.ucm.as_usuario.negocio.usuario.Usuario;
-import es.ucm.as_usuario.negocio.utils.Frecuencia;
 import es.ucm.as_usuario.presentacion.Contexto;
 
 public class SAUsuarioImp implements SAUsuario {
@@ -44,7 +42,6 @@ public class SAUsuarioImp implements SAUsuario {
 			if (daoUsuario.idExists(1)) {
 				Usuario usuario = daoUsuario.queryForId(1);
 				usuario.setNombre(datos.getNombre());
-				usuario.setFrecuenciaRecibirInforme(datos.getFrecuenciaRecibirInforme());
 				usuario.setAvatar(datos.getAvatar());
 				usuario.setColor(datos.getColor());
 				usuario.setTono(datos.getTono());
@@ -112,11 +109,6 @@ public class SAUsuarioImp implements SAUsuario {
 			if (transferUsuario.getTono() != null)
 				usuario.setTono(transferUsuario.getTono());
 
-			if (transferUsuario.getFrecuenciaRecibirInforme() != null)
-				usuario.setFrecuenciaRecibirInforme(transferUsuario.getFrecuenciaRecibirInforme());
-			else
-				usuario.setFrecuenciaRecibirInforme(Frecuencia.SEMANAL);
-
 			if (transferUsuario.getNombreTutor() != null)
 				usuario.setNombreTutor(transferUsuario.getNombreTutor());
 
@@ -160,8 +152,6 @@ public class SAUsuarioImp implements SAUsuario {
 					transferUsuario.setColor(u.getColor());
 				if (u.getTono() != null)
 					transferUsuario.setTono(u.getTono());
-				if (u.getFrecuenciaRecibirInforme() != null)
-					transferUsuario.setFrecuenciaRecibirInforme(u.getFrecuenciaRecibirInforme());
 				if (u.getNombreTutor() != null)
 					transferUsuario.setNombreTutor(u.getNombreTutor());
 				if (u.getCorreoTutor() != null)
@@ -188,7 +178,7 @@ public class SAUsuarioImp implements SAUsuario {
 			e.printStackTrace();
 		}
 
-		/* Enviar correo abriendo aplicación/////////////////////////////////////////////////////
+		// Enviar correo abriendo aplicación/////////////////////////////////////////////////////
 
 		//Instanciamos un Intent del tipo ACTION_SEND
 		Intent emailIntent = new Intent(android.content.Intent.ACTION_SEND);
@@ -215,7 +205,7 @@ public class SAUsuarioImp implements SAUsuario {
 
 
 
-			// Este codigo usa la clase Mail del paquete de integración
+		/*	// Este codigo usa la clase Mail del paquete de utils, la tiene Maria en msalitu/documentos/mail.java
 			Mail m = new Mail(mail, "aa");
 
 			String[] toArr = {mail};
@@ -242,7 +232,7 @@ public class SAUsuarioImp implements SAUsuario {
 
 
 		// Esto sería usando la clase de Juanlu, lo malo es que solo sirve para gmail
-		/*Intent correo = new Intent (Contexto.getInstancia().getContext().getApplicationContext(), Correo.class);
+		Intent correo = new Intent (Contexto.getInstancia().getContext().getApplicationContext(), Correo.class);
 		correo.putExtra("destinatario", mail);
 		correo.putExtra("titulo", "Informe AS");
 		correo.putExtra("nombre", name);

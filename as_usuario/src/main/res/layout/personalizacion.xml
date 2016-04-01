@@ -48,181 +48,127 @@
 
     <LinearLayout
         android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
         android:id="@+id/cuerpo"
         android:layout_below="@+id/cabecera"
-        android:gravity="center_horizontal"
-        android:weightSum="1" >
+        android:gravity="center_horizontal">
 
         <TextView
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="Configuracion"
-            android:id="@+id/configuracion"
-            android:layout_below="@+id/cabecera"
-            android:layout_centerHorizontal="true"
+            android:id="@+id/nombreUser"
+            android:layout_gravity="center"
             android:textStyle="bold"
-            android:layout_gravity="center_horizontal"
             android:paddingTop="20dp"
-            android:layout_marginBottom="10dp" />
+            android:text="Configuración"/>
 
-        <RelativeLayout
+        <ImageView
             android:layout_width="match_parent"
-            android:layout_height="152dp"
-            android:id="@+id/avatarNombre">
+            android:layout_height="0dp"
+            android:id="@+id/editarAvatar"
+            android:src="@drawable/avatar"
+            android:layout_gravity="center"
+            android:clickable="true"
+            android:onClick="cambiarImagenPerfil"
+            android:layout_weight="4" />
 
-            <ImageView
-                android:layout_width="130dp"
-                android:layout_height="wrap_content"
-                android:id="@+id/editarAvatar"
-                android:src="@drawable/avatar"
-                android:layout_gravity="center_horizontal"
-                android:layout_alignParentStart="true"
-                android:layout_marginStart="20dp"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentBottom="true"
-                android:paddingBottom="15dp"
-                android:paddingTop="15dp"
-                android:clickable="true"
-                android:onClick="cambiarImagenPerfil" />
-
-            <EditText
-                android:layout_width="325dp"
-                android:layout_height="wrap_content"
-                android:inputType="textPersonName"
-                android:text="nombreActual"
-                android:ems="10"
-                android:id="@+id/editarNombre"
-                android:layout_centerVertical="true"
-                android:layout_alignParentEnd="true"
-                android:layout_toEndOf="@+id/editarAvatar"
-                android:layout_marginRight="20dp"
-                android:layout_marginLeft="20dp" />
-
-        </RelativeLayout>
-
-        <RelativeLayout
+        <EditText
             android:layout_width="wrap_content"
-            android:layout_height="88dp"
+            android:layout_height="0dp"
+            android:inputType="textPersonName"
+            android:text="nombreActual"
+            android:id="@+id/editarNombre"
+            android:ems="10"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentEnd="true"
+            android:layout_toEndOf="@+id/editarAvatar"
+            android:layout_weight="1"
+            android:layout_gravity="center"
+            android:editable="true"
+            android:layout_marginTop="10dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:layout_height="0dp"
             android:layout_gravity="center"
             android:id="@+id/fondoTono"
-            android:paddingLeft="20dp"
-            android:paddingRight="20dp"
-            android:layout_marginTop="10dp"
-            android:layout_weight="0.36">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="Personalizar"
-                android:id="@+id/Personalizar"
-                android:gravity="center_horizontal"
-                android:layout_centerHorizontal="true"
-                android:textStyle="bold"
-                android:layout_marginBottom="10dp" />
-
-            <Spinner
-                android:layout_width="130dp"
-                android:layout_height="55dp"
-                android:id="@+id/cambiarColor"
-                android:layout_alignParentStart="true"
-                style="@style/spinnerItemStyle"
-                android:layout_alignTop="@+id/cambiarTono" />
-
-            <Spinner
-                android:layout_width="130dp"
-                android:layout_height="55dp"
-                android:id="@+id/cambiarTono"
-                android:layout_alignParentBottom="true"
-                style="@style/spinnerItemStyle"
-                android:layout_alignParentEnd="true" />
-
-        </RelativeLayout>
-
-        <TableLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            android:id="@+id/envioInforme"
-            android:layout_marginTop="20dp"
+            android:layout_weight="1.5"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
             android:layout_marginBottom="20dp">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="Enviar informe a mi correo"
-                android:id="@+id/tituloEnvio"
-                android:gravity="center_horizontal"
-                android:textStyle="bold"
-                android:layout_marginBottom="10dp" />
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:layout_marginRight="10dp">
 
-                <LinearLayout
-                    android:orientation="horizontal"
+                <TextView
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:id="@+id/frecuenciaEnvio"
-                    android:layout_marginLeft="15dp">
+                    android:layout_weight="1"
+                    android:layout_height="0dp"
+                    android:text="Color"
+                    android:textStyle="bold"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:gravity="center_vertical"
+                    android:layout_gravity="center"
+                    />
 
-                    <RadioGroup
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="horizontal"
-                        android:id="@+id/rdgGrupo">
+                <Spinner
+                    android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:id="@+id/cambiarColor"
+                    style="@style/spinnerItemStyle"
+                    android:layout_gravity="center"/>
+            </LinearLayout>
 
-                        <RadioButton
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Diario"
-                            android:id="@+id/diario"
-                            android:layout_alignBaseline="@+id/semanal"
-                            android:layout_alignBottom="@+id/semanal"
-                            android:layout_alignStart="@+id/editarNombre"
-                            android:layout_weight="1"
-                            android:layout_gravity="center_horizontal"
-                            android:button="@drawable/custom_radio_button"
-                            android:gravity="center_vertical" />
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="10dp">
 
-                        <RadioButton
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Semanal"
-                            android:id="@+id/semanal"
-                            android:layout_above="@+id/envioNuevaConfig"
-                            android:layout_alignEnd="@+id/envioNuevaConfig"
-                            android:button="@drawable/custom_radio_button"
-                            android:layout_weight="1"
-                            android:layout_gravity="center_horizontal"
-                            android:gravity="center_vertical" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_weight="1"
+                    android:layout_height="0dp"
+                    android:text="Tono"
+                    android:textStyle="bold"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:gravity="center_vertical"
+                    android:layout_gravity="center"
+                    />
 
-                        <RadioButton
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Mensual"
-                            android:id="@+id/mensual"
-                            android:layout_alignTop="@+id/diario"
-                            android:button="@drawable/custom_radio_button"
-                            android:layout_alignParentEnd="true"
-                            android:layout_weight="1"
-                            android:gravity="center_vertical" />
-                    </RadioGroup>
+                <Spinner
+                    android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:id="@+id/cambiarTono"
+                    style="@style/spinnerItemStyle"
+                    android:layout_gravity="center"/>
+            </LinearLayout>
 
-                </LinearLayout>
-
-        </TableLayout>
+        </LinearLayout>
 
         <Button
             android:layout_width="wrap_content"
-            android:layout_height="40dp"
+            android:layout_height="0dp"
             android:text="Aceptar"
             android:id="@+id/envioNuevaConfig"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
             android:paddingLeft="20dp"
-            android:paddingRight="20dp" />
+            android:paddingRight="20dp"
+            android:layout_weight="1"
+            android:layout_marginBottom="20dp" />
 
     </LinearLayout>
 

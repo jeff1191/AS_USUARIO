@@ -12,6 +12,8 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import es.ucm.as_usuario.R;
+import es.ucm.as_usuario.presentacion.controlador.Controlador;
+import es.ucm.as_usuario.presentacion.controlador.ListaComandos;
 
 /**
  * Clase para que se vean los eventos temporales
@@ -57,8 +59,10 @@ public class VerEventos  extends Activity{
     }
 
     public void ayuda(View v){
-        //Esto debera llevar al pdf con la ayuda
+        Controlador.getInstancia().ejecutaComando(ListaComandos.AYUDA, "eventos");
     }
+
+
     public void cargarTema(){
         switch (Configuracion.temaActual){
             case "AS_theme_azul":

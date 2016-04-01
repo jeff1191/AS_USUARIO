@@ -1,7 +1,6 @@
 package es.ucm.as_usuario.presentacion;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -43,20 +42,20 @@ public class Registro extends Activity {
         String correo = String.valueOf(correoUsuario.getText());
         String clave = String.valueOf(claveUsuario.getText());
 
-
-
-    if(datosValidos(nombre,correo,clave)){
-        TransferUsuario crearUsuario = new TransferUsuario();
-        crearUsuario.setNombre(nombre);
-        crearUsuario.setAvatar("");
-        crearUsuario.setColor("AS_theme_azul");
-        crearUsuario.setPuntuacion(0);
-        crearUsuario.setPuntuacionAnterior(0);
-        crearUsuario.setCorreo(correo);
-        crearUsuario.setFrecuenciaRecibirInforme(Frecuencia.DIARIA);
-        Controlador.getInstancia().ejecutaComando(ListaComandos.CREAR_USUARIO, crearUsuario);
-        Controlador.getInstancia().ejecutaComando(ListaComandos.CARGAR_BBDD, null);
-        startActivity(new Intent(this, MainActivity.class));
+        if(datosValidos(nombre,correo,clave)){
+            TransferUsuario crearUsuario = new TransferUsuario();
+            crearUsuario.setNombre(nombre);
+            crearUsuario.setAvatar("");
+            crearUsuario.setColor("AS_theme_azul");
+            crearUsuario.setPuntuacion(0);
+            crearUsuario.setPuntuacionAnterior(0);
+            crearUsuario.setCorreo(correo);
+            
+            Controlador.getInstancia().ejecutaComando(ListaComandos.CREAR_USUARIO, crearUsuario);
+            Controlador.getInstancia().ejecutaComando(ListaComandos.CARGAR_BBDD, null);
+            Controlador.getInstancia().ejecutaComando(ListaComandos.CARGAR_NOTIFICACIONES, null);
+            
+            startActivity(new Intent(this, MainActivity.class));
     }
         /*
         //De momento va a sacar un mensaje y pasara a la main activity
@@ -93,6 +92,5 @@ public class Registro extends Activity {
                 Toast.makeText(getApplicationContext(),
                         msg, Toast.LENGTH_SHORT);
         errorNombre.show();
-
     }
 }
