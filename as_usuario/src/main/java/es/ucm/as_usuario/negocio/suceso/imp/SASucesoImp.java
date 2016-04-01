@@ -3,25 +3,24 @@ package es.ucm.as_usuario.negocio.suceso.imp;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Environment;
+import android.util.Log;
 
 import com.itextpdf.text.BaseColor;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Element;
+import com.itextpdf.text.Font;
+import com.itextpdf.text.FontFactory;
 import com.itextpdf.text.Image;
+import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.Phrase;
 import com.itextpdf.text.pdf.GrayColor;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
-import android.util.Log;
-
+import com.itextpdf.text.pdf.PdfWriter;
 import com.j256.ormlite.android.apptools.OpenHelperManager;
 import com.j256.ormlite.dao.Dao;
 
-import com.itextpdf.text.Document;
-import com.itextpdf.text.DocumentException;
-import com.itextpdf.text.Font;
-import com.itextpdf.text.FontFactory;
-import com.itextpdf.text.Paragraph;
-import com.itextpdf.text.pdf.PdfWriter;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -32,7 +31,6 @@ import java.util.List;
 
 import es.ucm.as_usuario.R;
 import es.ucm.as_usuario.integracion.DBHelper;
-import es.ucm.as_usuario.negocio.utils.Parser;
 import es.ucm.as_usuario.negocio.factoria.FactoriaSA;
 import es.ucm.as_usuario.negocio.suceso.Evento;
 import es.ucm.as_usuario.negocio.suceso.Reto;
@@ -43,6 +41,7 @@ import es.ucm.as_usuario.negocio.suceso.TransferReto;
 import es.ucm.as_usuario.negocio.suceso.TransferTarea;
 import es.ucm.as_usuario.negocio.usuario.SAUsuario;
 import es.ucm.as_usuario.negocio.usuario.TransferUsuario;
+import es.ucm.as_usuario.negocio.utils.Parser;
 import es.ucm.as_usuario.presentacion.Contexto;
 import es.ucm.as_usuario.presentacion.notificaciones.NotificacionAlarma;
 import es.ucm.as_usuario.presentacion.notificaciones.NotificacionPregunta;
@@ -349,7 +348,7 @@ public class SASucesoImp implements SASuceso {
         document.add(new Paragraph("\n", paragraphFont));
 
         // Insertamos el logo
-        Bitmap bitmap = BitmapFactory.decodeResource(Contexto.getInstancia().getContext().getResources(), R.drawable.logo_informe);
+        Bitmap bitmap = BitmapFactory.decodeResource(Contexto.getInstancia().getContext().getResources(), R.drawable.logo);
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.JPEG, 50, stream);
         Image imagen = Image.getInstance(stream.toByteArray());

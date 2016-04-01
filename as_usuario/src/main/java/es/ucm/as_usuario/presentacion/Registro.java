@@ -9,7 +9,6 @@ import android.widget.Toast;
 
 import es.ucm.as_usuario.R;
 import es.ucm.as_usuario.negocio.usuario.TransferUsuario;
-import es.ucm.as_usuario.negocio.utils.Frecuencia;
 import es.ucm.as_usuario.presentacion.controlador.Controlador;
 import es.ucm.as_usuario.presentacion.controlador.ListaComandos;
 
@@ -23,8 +22,6 @@ public class Registro extends Activity {
     private EditText claveUsuario;
     private static final String PATRON_EMAIL = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
             + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
-
-    private static final String PATRON_GMAIL = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@gmail.com";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -75,10 +72,7 @@ public class Registro extends Activity {
                 !clave.toString().matches("")) {
 
             if(correo.toString().matches(PATRON_EMAIL)){
-                if(correo.toString().matches(PATRON_GMAIL))
                     return true;
-                else
-                    mostrarMensajeError("El campo email debe ser gmail");
             }else
                 mostrarMensajeError("Campo email inválido");
         }else
