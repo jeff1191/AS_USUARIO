@@ -29,6 +29,7 @@ dependencies {
     compile 'com.j256.ormlite:ormlite-android:4.48'
     compile 'it.sephiroth.android.library.imagezoom:imagezoom:+'
     compile 'com.itextpdf:itextg:5.5.9'
+    compile 'javax.mail:mail:1.4.7'
     compile fileTree(dir: 'libs', include: '*.jar')
 }
 
