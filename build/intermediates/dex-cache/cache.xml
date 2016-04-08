@@ -2,18 +2,18 @@
 <items version="2" >
 
     <item
-        jar="C:\Users\msalitu\.AndroidStudio1.5\AS_USUARIO\as_usuario\libs\activation.jar"
+        jar="C:\Users\Jeffer\AndroidStudioProjects\AS_USUARIO\as_usuario\libs\additionnal.jar"
         jumboMode="false"
         revision="22.0.1"
-        sha1="d1257cbff6faa44c1f325ae0d9413522d4644383">
-        <dex dex="C:\Users\msalitu\.AndroidStudio1.5\AS_USUARIO\as_usuario\build\intermediates\pre-dexed\debug\activation-915a382d4af60c0e524aa13fa2d89dc2ed61c4a5.jar" />
+        sha1="bd9e8dc422bb8c8405359947fe9f4282b49f57f4">
+        <dex dex="C:\Users\Jeffer\AndroidStudioProjects\AS_USUARIO\as_usuario\build\intermediates\pre-dexed\debug\additionnal-7cbc0c529ca3288674335dab62a8bb0c32e003e5.jar" />
     </item>
     <item
-        jar="C:\Users\msalitu\.AndroidStudio1.5\AS_USUARIO\as_usuario\libs\mail.jar"
+        jar="C:\Users\Jeffer\.gradle\caches\modules-2\files-2.1\com.itextpdf\itextg\5.5.9\3580383b2c7db8fa2fee1ffbe1993017a9ea296e\itextg-5.5.9.jar"
         jumboMode="false"
         revision="22.0.1"
-        sha1="428e267abff0d10802ccde86b915da2c20471160">
-        <dex dex="C:\Users\msalitu\.AndroidStudio1.5\AS_USUARIO\as_usuario\build\intermediates\pre-dexed\debug\mail-805e48bb6607a6ceb0e3d1f66428c18edd5b9dc6.jar" />
+        sha1="3580383b2c7db8fa2fee1ffbe1993017a9ea296e">
+        <dex dex="C:\Users\Jeffer\AndroidStudioProjects\AS_USUARIO\as_usuario\build\intermediates\pre-dexed\debug\itextg-5.5.9-7c2871a719b5ad5bdaec21cf3a925ab484993df8.jar" />
     </item>
 
 </items>
