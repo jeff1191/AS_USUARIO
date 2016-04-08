@@ -13,8 +13,6 @@ import android.util.Log;
 import java.util.Calendar;
 import java.util.Date;
 
-import es.ucm.as_usuario.negocio.suceso.Tarea;
-
 public class ServicioNotificaciones extends Service {
 
     @Override
@@ -23,119 +21,82 @@ public class ServicioNotificaciones extends Service {
         return null;
     }
 
-    /*
-     * (non-Javadoc)
-     *
-     * @see android.app.Service#onCreate()
-     */
     @Override
     public void onCreate() {
         Log.d(this.getClass().getSimpleName(),"onCreate()");
         super.onCreate();
     }
 
-   /* private Alarm getNext(){
-        Set<Alarm> alarmQueue = new TreeSet<Alarm>(new Comparator<Alarm>() {
-            @Override
-            public int compare(Alarm lhs, Alarm rhs) {
-                int result = 0;
-                long diff = lhs.getAlarmTime().getTimeInMillis() - rhs.getAlarmTime().getTimeInMillis();
-                if(diff>0){
-                    return 1;
-                }else if (diff < 0){
-                    return -1;
-                }
-                return result;
-            }
-        });
-
-        Database.init(getApplicationContext());
-        List<Alarm> alarms = Database.getAll();
-
-        for(Alarm alarm : alarms){
-            if(alarm.getAlarmActive())
-                alarmQueue.add(alarm);
-        }
-        if(alarmQueue.iterator().hasNext()){
-            return alarmQueue.iterator().next();
-        }else{
-            return null;
-        }
-    }
-    /*
-     * (non-Javadoc)
-     *
-     * @see android.app.Service#onDestroy()
-     */
     @Override
     public void onDestroy() {
-       // Database.deactivate();
         super.onDestroy();
     }
 
-    /*
-     * (non-Javadoc)
-     *
-     * @see android.app.Service#onStartCommand(android.content.Intent, int, int)
-     */
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         //Tendriamos que pensar en tener to*do en una cola que la tendria que haber cogido de base de datos - esto es IMPORTANTE
         Log.d(this.getClass().getSimpleName(),"onStartCommand() SERVICIO");
-        //Alarm alarm = getNext();
+
+        AlarmManager am =( AlarmManager) getApplicationContext().getSystemService(Context.ALARM_SERVICE);
+        Intent i = new Intent(getApplicationContext(), CargarNotificaciones.class);
+        long time = new Date().getTime();
+        String tmpStr = String.valueOf(time);
+        String last4Str = tmpStr.substring(tmpStr.length() - 5);
+        int pendingId = Integer.valueOf(last4Str);
+        PendingIntent pi = PendingIntent.getBroadcast(getApplicationContext(), pendingId, i, PendingIntent.FLAG_ONE_SHOT);
+
+        Log.e("prueba", "Va a activar CARGARNOTIFICACIONES A LAS 23 55");
+
+        Calendar horaNotificacionCal = Calendar.getInstance();
+        horaNotificacionCal.set(Calendar.HOUR_OF_DAY, 23);
+        horaNotificacionCal.set(Calendar.MINUTE, 55);
+        horaNotificacionCal.set(Calendar.SECOND, 00);
+        long horaNotificacion = horaNotificacionCal.getTimeInMillis();
+
+        setAlarm(am, horaNotificacion, pi);
+
+        /////////////////////////////////////////////////
+/*
+        String tituloAlarmaNotificacion = "Alarma";
+        String tituloPreguntaNotificacion = "Pregunta";
         //obtener la siguiente tarea
         Tarea a = new Tarea();
-        a.setTextoPregunta("A1");
+        a.setTextoAlarma("Esto es la alarma 0");
+        a.setTextoPregunta("Esto es la pregunta 0");
         Tarea a1 = new Tarea();
-        a1.setTextoPregunta("A2");
+        a1.setTextoAlarma("Esto es la alarma 1");
+        a1.setTextoPregunta("Esto es la pregunta 1");
         Tarea a2 = new Tarea();
-        a2.setTextoPregunta("A3");
+        a2.setTextoAlarma("Esto es la alarma 2");
+        a2.setTextoPregunta("Esto es la pregunta 2");
         Tarea a3 = new Tarea();
-        a3.setTextoPregunta("A4");
-        /*
-        if(null != alarm){
-            alarm.schedule(getApplicationContext());
-            Log.d(this.getClass().getSimpleName(),alarm.getTimeUntilNextAlarmMessage());
+        a3.setTextoAlarma("Esto es la alarma 3");
+        a3.setTextoPregunta("Esto es la pregunta 3");
 
-        }else{*/
-            Intent myIntent = new Intent(getApplicationContext(), NotificacionPregunta.class);
-            myIntent.putExtra("titulo", a.getTextoPregunta());
-
-            PendingIntent pendingIntent = PendingIntent.getBroadcast(getApplicationContext(), 0, myIntent, PendingIntent.FLAG_UPDATE_CURRENT);
-            AlarmManager alarmManager = (AlarmManager)getApplicationContext().getSystemService(Context.ALARM_SERVICE);
-
-            lanzarSuceso(getApplicationContext(), 11, 25, a.getTextoAlarma(), "TEXOTOTOOTOT", "pregunta");
-            lanzarSuceso(getApplicationContext(), 11, 23, a1.getTextoAlarma(), "TEXOTOTOOTOT222222", "alarma");
-
-           // alarmManager.cancel(pendingIntent);
-        //}
+        lanzarSuceso(getApplicationContext(), 19, 21, tituloAlarmaNotificacion, a.getTextoAlarma(), "alarma", 1);
+        lanzarSuceso(getApplicationContext(), 19, 21, tituloPreguntaNotificacion, a.getTextoPregunta(), "pregunta", 1);
+        //lanzarSuceso(getApplicationContext(), 19, 18, tituloAlarmaNotificacion, a1.getTextoAlarma(), "alarma");
+        //lanzarSuceso(getApplicationContext(), 19, 18, tituloPreguntaNotificacion, a1.getTextoPregunta(), "pregunta");
+*/
         return START_NOT_STICKY;
     }
+/*
 
-
-    @TargetApi(19)
-    private void setAlarmFromKitkat(AlarmManager am, long ms, PendingIntent pi){
-        am.setExact(AlarmManager.RTC, ms, pi);
-    }
-
-
-    ///PARA OBTENER LOS MILISSEGUNDOS
-    public long lanzarSuceso(Context context, Integer hora, Integer minutos, String titulo, String texto, String tipo)
+    public long lanzarSuceso(Context context, Integer hora, Integer minutos, String titulo, String texto, String tipo, Integer idTarea)
     {
         Log.e("prueba", "Guarda la notificacion pregunta...");
         AlarmManager am =( AlarmManager)context.getSystemService(Context.ALARM_SERVICE);
+
         Intent i;
         if(tipo.equals("pregunta"))
             i = new Intent(context, NotificacionPregunta.class);
         else // alarma
             i = new Intent(context, NotificacionAlarma.class);
+
         i.putExtra("titulo", titulo);
         i.putExtra("texto", texto);
-         /*
-        It gets current system time. Then I'm reading only last 4 digits from it.
-         I'm using it to create unique id every time notification is displayed.
-         So the probability of getting same or reset of notification id will be avoided.
-         */
+        i.putExtra("idTarea", idTarea);
+
         long time = new Date().getTime();
         String tmpStr = String.valueOf(time);
         String last4Str = tmpStr.substring(tmpStr.length() - 5);
@@ -157,7 +118,7 @@ public class ServicioNotificaciones extends Service {
         long horaActual = horaActualCal.getTimeInMillis();
         long horaNotificacion = horaNotificacionCal.getTimeInMillis();
 
-        //Si ya se ha pasado de la hora actual, para que no pete
+        //Si ya se ha pasado de la hora actual, para que no se lance inmeditamente
         //se pone que empieze a partir de mañana
         if(horaNotificacion < horaActual){
             horaNotificacionCal.add(Calendar.DAY_OF_MONTH, 1);
@@ -165,27 +126,19 @@ public class ServicioNotificaciones extends Service {
             horaNotificacion = horaNotificacionCal.getTimeInMillis();
         }
 
-       // am.set(AlarmManager.RTC_WAKEUP, horaNotificacion, pi);
-
-
-
         setAlarm(am,horaNotificacion,pi);
-
-
-        // am.setRepeating(AlarmManager.RTC_WAKEUP, horaNotificacion, AlarmManager.INTERVAL_DAY, pi);
 
         return horaNotificacion;
     }
+*/
+    @TargetApi(19)
+    private void setAlarmFromKitkat(AlarmManager am, long ms, PendingIntent pi){
+        am.setExact(AlarmManager.RTC, ms, pi);
+    }
 
     private void setAlarm(AlarmManager am,long ms, PendingIntent pendingIntent){
-        /*final AlarmManager am = (AlarmManager) mCtx.getSystemService(Context.ALARM_SERVICE);
-        Intent intent = new Intent(this, BroadcastReceiverAlarm.class);
-        PendingIntent pi = PendingIntent.getBroadcast(this, ALARM_REQUEST_CODE, intent, PendingIntent.FLAG_UPDATE_CURRENT);*/
 
-
-        //  long ms = lanzarPregunta(getApplicationContext(),15,29,a.getTextoAlarma(), "texto 1");
-
-        if (Build.VERSION.SDK_INT< Build.VERSION_CODES.KITKAT) {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT) {
             am.set(AlarmManager.RTC, ms, pendingIntent);
         } else {
             setAlarmFromKitkat(am, ms, pendingIntent);

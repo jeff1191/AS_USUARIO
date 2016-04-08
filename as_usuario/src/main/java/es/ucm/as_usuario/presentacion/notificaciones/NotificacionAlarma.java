@@ -1,7 +1,5 @@
 package es.ucm.as_usuario.presentacion.notificaciones;
 
-import android.annotation.TargetApi;
-import android.app.AlarmManager;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
@@ -9,11 +7,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
-import android.os.Build;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
-import java.util.Calendar;
 import java.util.Date;
 
 import es.ucm.as_usuario.R;
@@ -50,17 +46,13 @@ public class NotificacionAlarma extends BroadcastReceiver {
 
         Log.e("prueba", "Notificacion con el ID..." + notificationId);
 
-        Intent mostrarAlarma = new Intent();
-        mostrarAlarma.putExtra("titulo", intent.getExtras().getString("titulo"));
-        mostrarAlarma.putExtra("texto", intent.getExtras().getString("texto"));
-        mostrarAlarma.putExtra("idNotificacion", notificationId);
-        PendingIntent aux = PendingIntent.getActivity(context, notificationId+4,  mostrarAlarma, PendingIntent.FLAG_UPDATE_CURRENT);
+        PendingIntent aux = PendingIntent.getBroadcast(context, notificationId+4, new Intent(), PendingIntent.FLAG_UPDATE_CURRENT);
 
         NotificationCompat.Builder n =
                 new NotificationCompat.Builder(context)
                         .setSmallIcon(R.drawable.logo)
-                        .setContentTitle("Alarma para...")
-                        .setContentText(intent.getExtras().getString("titulo"))
+                        .setContentTitle(intent.getExtras().getString("titulo"))
+                        .setContentText(intent.getExtras().getString("texto"))
                         .setAutoCancel(true)
                         .setPriority(NotificationCompat.PRIORITY_MAX)
                         .setLargeIcon(BitmapFactory.decodeResource(context.getResources(), R.drawable.logo))

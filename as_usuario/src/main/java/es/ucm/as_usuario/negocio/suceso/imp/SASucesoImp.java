@@ -167,6 +167,8 @@ public class SASucesoImp implements SASuceso {
     }
 
     @Override
+
+
     public void cargarTareasBBDD() {
         Parser p = new Parser();
         Dao<Tarea, Integer> tareaDao;
@@ -246,6 +248,9 @@ public class SASucesoImp implements SASuceso {
     }
 
     public void cargarNotificaciones() {
+        //Buscar las tareas y crear sus alarmas/preguntas con el servicio
+
+
 
         NotificacionAlarma alarma = new NotificacionAlarma();
         NotificacionPregunta pregunta = new NotificacionPregunta();

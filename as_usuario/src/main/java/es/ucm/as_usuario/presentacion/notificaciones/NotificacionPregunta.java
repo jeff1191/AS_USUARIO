@@ -1,6 +1,5 @@
 package es.ucm.as_usuario.presentacion.notificaciones;
 
-import android.app.AlarmManager;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -12,9 +11,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
-import android.widget.RemoteViews;
 
-import java.util.Calendar;
 import java.util.Date;
 
 import es.ucm.as_usuario.R;
@@ -31,6 +28,7 @@ public class NotificacionPregunta extends BroadcastReceiver {
 
         String titulo = bundle.getString("titulo");
         String texto = bundle.getString("texto");
+        Integer idTarea = bundle.getInt("idTarea");
 
         //Hay que mirar lo del SONIDO y la VIBRACION
         //Encontrar una foto mas pequeña para el logo en las notificaciones o poner otra imagen
@@ -50,19 +48,17 @@ public class NotificacionPregunta extends BroadcastReceiver {
 
         Log.e("prueba", "Notificacion con el ID..." + notificationId);
 
-        Intent mostrarPregunta = new Intent();
-        mostrarPregunta.putExtra("titulo", titulo);
-        mostrarPregunta.putExtra("texto", texto);
-        mostrarPregunta.putExtra("idNotificacion", notificationId);
-        PendingIntent aux = PendingIntent.getActivity(context, notificationId + 4, mostrarPregunta, PendingIntent.FLAG_UPDATE_CURRENT);
+        Intent resSi = new Intent(context, GestorRespuestas.class);
+        resSi.putExtra("respuesta", 1);
+        resSi.putExtra("idNotificacion", notificationId);
+        resSi.putExtra("idTarea", idTarea);
+        PendingIntent contestaSi = PendingIntent.getBroadcast(context,  notificationId+3, resSi, PendingIntent.FLAG_UPDATE_CURRENT);
 
-        //Encontrar una foto mas pequeña para el logo en las notificaciones
-        //O poner otra imagen
-        Intent closeButton = new Intent("Download_Cancelled");
-        closeButton.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
-        PendingIntent pendingSwitchIntent = PendingIntent.getBroadcast(context, 0, closeButton, 0);
-
-        RemoteViews notificationView = new RemoteViews( context.getPackageName(),R.layout.notificacion_pregunta);
+        Intent resNo = new Intent(context, GestorRespuestas.class);
+        resNo.putExtra("respuesta", -1);
+        resNo.putExtra("idNotificacion", notificationId);
+        resNo.putExtra("idTarea", idTarea);
+        PendingIntent contestaNo = PendingIntent.getBroadcast(context,  notificationId-2, resNo, PendingIntent.FLAG_UPDATE_CURRENT);
 
 
         NotificationCompat.Builder n =
@@ -70,14 +66,12 @@ public class NotificacionPregunta extends BroadcastReceiver {
                         .setSmallIcon(R.drawable.logo)
                         .setContentTitle(titulo) //Titulo
                         .setContentText(texto) //Texto
-                        .setAutoCancel(true)
-                        .setTicker("AS - Nueva Pregunta").setContent(notificationView)
                         .setLargeIcon(BitmapFactory.decodeResource(context.getResources(), R.drawable.logo))
-                        .setContentIntent(aux)
+                        .addAction(R.drawable.ic_done_white, "Si", contestaSi)
+                        .addAction(R.drawable.ic_clear_white, "No", contestaNo)
                         .setPriority(Notification.PRIORITY_MAX)
                         .setVibrate(new long[]{200, 300, 200, 300, 200})
                         .setLights(Color.YELLOW, 3000, 3000);
-       // notificationView.setOnClickPendingIntent(R.id.btn_close, pendingSwitchIntent);
 
 
         NotificationManager notificationManager =

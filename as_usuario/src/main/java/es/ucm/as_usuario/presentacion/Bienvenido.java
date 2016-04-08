@@ -11,7 +11,6 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import es.ucm.as_usuario.R;
-import es.ucm.as_usuario.presentacion.notificaciones.ServicioNotificaciones;
 
 public class Bienvenido extends Activity {
     private static final long DELAY = 2000;
@@ -46,7 +45,5 @@ public class Bienvenido extends Activity {
        };
        Timer timer = new Timer();
        timer.schedule(task, DELAY);
-
-       startService(new Intent(this, ServicioNotificaciones.class));
     }
 }

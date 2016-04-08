@@ -11,6 +11,7 @@ import es.ucm.as_usuario.R;
 import es.ucm.as_usuario.negocio.usuario.TransferUsuario;
 import es.ucm.as_usuario.presentacion.controlador.Controlador;
 import es.ucm.as_usuario.presentacion.controlador.ListaComandos;
+import es.ucm.as_usuario.presentacion.notificaciones.ServicioNotificaciones;
 
 /**
  * Created by Juan Lu on 15/03/2016.
@@ -50,7 +51,7 @@ public class Registro extends Activity {
             
             Controlador.getInstancia().ejecutaComando(ListaComandos.CREAR_USUARIO, crearUsuario);
             Controlador.getInstancia().ejecutaComando(ListaComandos.CARGAR_BBDD, null);
-            Controlador.getInstancia().ejecutaComando(ListaComandos.CARGAR_NOTIFICACIONES, null);
+            startService(new Intent(this, ServicioNotificaciones.class));
             
             startActivity(new Intent(this, MainActivity.class));
     }
