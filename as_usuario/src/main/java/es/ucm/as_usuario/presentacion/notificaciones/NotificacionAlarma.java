@@ -7,16 +7,18 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.net.Uri;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
 import java.util.Date;
 
 import es.ucm.as_usuario.R;
+import es.ucm.as_usuario.presentacion.Contexto;
 
 /**
  *
- * Lo guay de sto es que las notificaciones normalmente se lanzan con un notification manager
+ * Lo guay de esto es que las notificaciones normalmente se lanzan con un notification manager
  * Como lo que queremos es que se muestren a una hora X se deben lanzan con un alarm manager  y un servicio
  * En el servicio se llama con un intent al onReceive de la clase q extiende el BroadcastReciever
  *
@@ -57,8 +59,12 @@ public class NotificacionAlarma extends BroadcastReceiver {
                         .setPriority(NotificationCompat.PRIORITY_MAX)
                         .setLargeIcon(BitmapFactory.decodeResource(context.getResources(), R.drawable.logo_notificacion))
                         .setContentIntent(aux)
+                        .setSound(Uri.parse("android.resource://" + Contexto.getInstancia().getContext().getPackageName() + "/" + R.raw.silbido))
                         .setVibrate(new long[]{200, 300, 200, 300, 200})
-                        .setLights(Color.YELLOW, 3000, 3000);
+                        .setLights(Color.YELLOW, 3000, 3000)
+                        .setStyle(new NotificationCompat.BigTextStyle()
+                        .bigText(intent.getExtras().getString("texto"))
+                        .setBigContentTitle(intent.getExtras().getString("titulo")));
 
         NotificationManager notificationManager =
                 (NotificationManager) context.getSystemService(context.NOTIFICATION_SERVICE);

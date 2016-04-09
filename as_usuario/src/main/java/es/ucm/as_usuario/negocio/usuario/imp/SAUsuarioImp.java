@@ -63,13 +63,28 @@ public class SAUsuarioImp implements SAUsuario {
 	* */
 	@Override
 	public Integer calcularPuntuacion() {
+		Integer ret;
+		// Se cogen las tareas de la BBDD
 		SASuceso ss = FactoriaSA.getInstancia().nuevoSASuceso();
 		List<TransferTarea> tareas = ss.consultarTareas();
+		// Se cuentan las positivas y se realiza el calculo
 		int positivas = 0;
 		for (int i = 0; i < tareas.size(); i++)
 			if (tareas.get(i).getNumSi() - tareas.get(i).getNumNo() >= 0)
 				positivas++;
-		return 10*positivas/tareas.size();
+		ret = 10*positivas/tareas.size();
+		// Se actualiza la puntuacion en la BBDD
+		Dao<Usuario, Integer> daoUsuario;
+		try {
+			daoUsuario = getHelper().getUsuarioDao();
+			Usuario usuario = daoUsuario.queryForId(1);
+			usuario.setPuntuacionAnterior(usuario.getPuntuacion());
+			usuario.setPuntuacion(ret);
+			daoUsuario.update(usuario);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return ret;
 	}
 
 	@Override

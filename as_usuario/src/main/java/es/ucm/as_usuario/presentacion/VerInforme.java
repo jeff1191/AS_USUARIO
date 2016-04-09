@@ -38,11 +38,12 @@ public class VerInforme extends Activity{
 
         Bundle bundle = getIntent().getExtras();
 
-        ImageView img = (ImageView)findViewById(R.id.imageView2);
+        ImageView img = (ImageView)findViewById(R.id.flecha);
 
-        Integer puntAntes = bundle.getInt("puntuacion anterior");
-        Integer puntAhora = bundle.getInt("puntuacion actual");
-        if (puntAhora > puntAntes)
+        Integer puntAntes = bundle.getInt("puntuacionAnterior");
+        Integer puntAhora = bundle.getInt("puntuacion");
+
+        if (puntAhora >= puntAntes)
             img.setImageResource(R.drawable.flechaverde);
         else
             img.setImageResource(R.drawable.flecharoja);

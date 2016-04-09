@@ -71,7 +71,10 @@ public class NotificacionPregunta extends BroadcastReceiver {
                         .addAction(R.drawable.ic_clear_white, "No", contestaNo)
                         .setPriority(Notification.PRIORITY_MAX)
                         .setVibrate(new long[]{200, 300, 200, 300, 200})
-                        .setLights(Color.YELLOW, 3000, 3000);
+                        .setLights(Color.YELLOW, 3000, 3000)
+                        .setStyle(new NotificationCompat.BigTextStyle()
+                                .bigText(texto)
+                                .setBigContentTitle(titulo));
 
 
         NotificationManager notificationManager =

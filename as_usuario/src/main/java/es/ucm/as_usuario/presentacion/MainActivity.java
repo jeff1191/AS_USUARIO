@@ -11,7 +11,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import es.ucm.as_usuario.R;
 import es.ucm.as_usuario.negocio.usuario.TransferUsuario;
@@ -33,6 +32,7 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         // Se accede a los datos del usuario de la BBDD
+        Controlador.getInstancia().ejecutaComando(ListaComandos.ACTUALIZAR_PUNTUACION, null);
         Command c = FactoriaComandos.getInstancia().getCommand(ListaComandos.CONSULTAR_USUARIO);
         TransferUsuario usuario = new TransferUsuario();
         try {
@@ -47,6 +47,7 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
         nombrePrincipal=(TextView)findViewById(R.id.nombreUser);
         puntuacion = (TextView)findViewById(R.id.puntuacionUsuario);
+        puntuacion.setText(usuario.getPuntuacion()+"/10");
         imagenPerfil= (ImageView) findViewById(R.id.avatar);
         if(usuario.getAvatar() != null && !usuario.getAvatar().equals(""))
             imagenPerfil.setImageBitmap(BitmapFactory.decodeFile(usuario.getAvatar()));
@@ -61,7 +62,6 @@ public class MainActivity extends Activity {
             if (bundle.getString("editarAvatar") != null && !bundle.getString("editarAvatar").equals(""))
                 imagenPerfil.setImageBitmap(BitmapFactory.decodeFile(bundle.getString("editarAvatar")));
         }
-
 
         // Esto es para solventar un error al enviar el correo
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
@@ -103,6 +103,7 @@ public class MainActivity extends Activity {
 
     public void verInforme(View v){
         Controlador.getInstancia().ejecutaComando(ListaComandos.GENERAR_PDF, null);
+        Controlador.getInstancia().ejecutaComando(ListaComandos.ACTUALIZAR_PUNTUACION, null);
         Controlador.getInstancia().ejecutaComando(ListaComandos.VER_INFORME, null);
     }
 
