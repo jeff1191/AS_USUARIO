@@ -1,17 +1,17 @@
 Conseguido princesas
-9:30
-¿Te has levantado a la hora prevista?
-9:35
-false
+8:04
+¿Lo habeis conseguido princesas?
+8:05
+true
 ¡Vamos a desayunar!
-9:40
+8:06
 ¿Has desayunado? ¿Has dejado todo recogido?
-9:55
+8:07
 true
 ¡Es la hora del aseo! Tienes que: lavarte la cara, las axilas, etc.
-10:11
+7:34
 ¿Te has lavado antes de vestirte? Cara, Axilas...
-10:21
+7:35
 true
 ¡Es la hora del aseo! Tienes que: cepillarte los dientes
 10:11

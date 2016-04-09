@@ -141,4 +141,5 @@ public class Tarea {
 	public void setNumNo(Integer numNo) {
 		this.numNo = numNo;
 	}
+
 }

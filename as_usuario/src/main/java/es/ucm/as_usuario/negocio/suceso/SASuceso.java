@@ -18,4 +18,5 @@ public interface SASuceso {
     public void cargarEventosBBDD();
     public String generarPDF() throws IOException, DocumentException;
     public void cargarNotificaciones();
+    public void responderPregunta(Integer id_tarea, Integer respuesta);
 }

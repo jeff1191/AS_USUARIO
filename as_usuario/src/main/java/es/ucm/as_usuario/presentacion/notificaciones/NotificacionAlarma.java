@@ -28,8 +28,8 @@ public class NotificacionAlarma extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-            //Hay que mirar lo del SONIDO y la VIBRACION
-        //Encontrar una foto mas pequeña para el logo en las notificaciones o poner otra imagen
+        //Hay que mirar lo del SONIDO y la VIBRACION
+
         //Si los ids dan problemas, generarlos de otra manera y pasarselos aqui
 
         Log.e("prueba", "Empieza a crear la notificacion alarma...");
@@ -50,12 +50,12 @@ public class NotificacionAlarma extends BroadcastReceiver {
 
         NotificationCompat.Builder n =
                 new NotificationCompat.Builder(context)
-                        .setSmallIcon(R.drawable.logo)
+                        .setSmallIcon(R.drawable.logo_notificacion)
                         .setContentTitle(intent.getExtras().getString("titulo"))
                         .setContentText(intent.getExtras().getString("texto"))
                         .setAutoCancel(true)
                         .setPriority(NotificationCompat.PRIORITY_MAX)
-                        .setLargeIcon(BitmapFactory.decodeResource(context.getResources(), R.drawable.logo))
+                        .setLargeIcon(BitmapFactory.decodeResource(context.getResources(), R.drawable.logo_notificacion))
                         .setContentIntent(aux)
                         .setVibrate(new long[]{200, 300, 200, 300, 200})
                         .setLights(Color.YELLOW, 3000, 3000);

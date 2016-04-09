@@ -45,11 +45,14 @@ public class ServicioNotificaciones extends Service {
         int pendingId = Integer.valueOf(last4Str);
         PendingIntent pi = PendingIntent.getBroadcast(getApplicationContext(), pendingId, i, PendingIntent.FLAG_ONE_SHOT);
 
-        Log.e("prueba", "Va a activar CARGARNOTIFICACIONES A LAS 23 55");
+        // Establecer la hora a la que cargara de BBDD las notificaciones
+        Integer h = 8;
+        Integer m = 04;
+        Log.e("prueba", "Va a activar CARGARNOTIFICACIONES A LAS " + h +":" + m);
 
         Calendar horaNotificacionCal = Calendar.getInstance();
-        horaNotificacionCal.set(Calendar.HOUR_OF_DAY, 23);
-        horaNotificacionCal.set(Calendar.MINUTE, 55);
+        horaNotificacionCal.set(Calendar.HOUR_OF_DAY, h);
+        horaNotificacionCal.set(Calendar.MINUTE, m);
         horaNotificacionCal.set(Calendar.SECOND, 00);
         long horaNotificacion = horaNotificacionCal.getTimeInMillis();
 

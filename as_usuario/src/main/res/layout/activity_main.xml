@@ -55,65 +55,78 @@
         android:layout_marginTop="70dp"
         android:gravity="center_horizontal">
 
+        <!-- Nombre -->
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:id="@+id/nombreUser"
-            android:layout_gravity="center"
+            android:gravity="center"
             android:textStyle="bold"
-            android:paddingTop="20dp" />
+            android:text="Nombre"
+            android:textAlignment="center" />
 
+        <!-- Avatar -->
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="5"
+            android:paddingBottom="5dp"
+            android:id="@+id/avatar"
+            android:src="@drawable/avatar"
+            android:gravity="center" />
+
+        <!-- Fila puntuacion -->
         <LinearLayout
             android:orientation="horizontal"
-            android:layout_weight="4"
+            android:layout_weight="1"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:id="@+id/imgYPunt"
-            android:gravity="center_horizontal"
-            android:paddingBottom="10dp">
+            android:gravity="center">
 
-            <ImageView
+            <!-- Espacio -->
+            <TextView
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="5"
-                android:id="@+id/avatar"
-                android:src="@drawable/avatar"
-                android:layout_marginLeft="20dp"
-                android:layout_gravity="center"
-                android:layout_marginRight="10dp" />
+                android:layout_weight="2.5"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:gravity="center" />
 
-            <LinearLayout
-                android:orientation="vertical"
-                android:layout_weight="1.5"
+            <!-- Puntuacion icono -->
+            <ImageButton
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:id="@+id/puntuacion"
-                android:layout_gravity="center"
-                android:layout_marginRight="20dp"
-                android:layout_marginLeft="10dp">
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:id="@+id/puntuacionImg"
+                android:scaleType="fitCenter"
+                android:src="@drawable/puntuacion"
+                android:gravity="center" />
 
-                <ImageButton
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
-                    android:layout_weight="1"
-                    android:id="@+id/puntuacionImg"
-                    android:scaleType="fitCenter"
-                    android:src="@drawable/puntuacion"
-                    android:layout_gravity="center"
-                    android:clickable="false" />
+            <!-- Puntuacion texto -->
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:id="@+id/puntuacionUsuario"
+                android:gravity="center"
+                android:text="7/10"/>
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:id="@+id/puntuacionUsuario"
-                    android:layout_gravity="center" />
-            </LinearLayout>
+            <!-- Espacio -->
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2.5"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:gravity="center" />
+
         </LinearLayout>
 
+
+
+        <!-- Botones -->
         <Button
             android:layout_width="match_parent"
             android:layout_height="0dp"
@@ -123,6 +136,7 @@
             android:layout_gravity="center_horizontal"
             android:layout_weight="1"
             android:onClick="verInforme"
+            android:layout_marginTop="5dp"
             android:layout_marginBottom="1dp" />
 
         <Button
@@ -160,4 +174,5 @@
             android:layout_marginBottom="1dp" />
 
     </LinearLayout>
+
 </RelativeLayout>

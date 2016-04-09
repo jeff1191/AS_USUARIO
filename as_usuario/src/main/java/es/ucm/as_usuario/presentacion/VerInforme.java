@@ -2,6 +2,7 @@ package es.ucm.as_usuario.presentacion;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 
 import android.view.View;
@@ -29,6 +30,7 @@ public class VerInforme extends Activity{
     protected void onCreate(Bundle savedInstanceState) {
         cargarTema();
         super.onCreate(savedInstanceState);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         setContentView(R.layout.informe);
 
         TextView titulo = (TextView)findViewById(R.id.tituloInforme);

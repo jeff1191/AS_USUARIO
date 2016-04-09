@@ -6,6 +6,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 
+import java.util.ArrayList;
+
+import es.ucm.as_usuario.presentacion.controlador.Controlador;
+import es.ucm.as_usuario.presentacion.controlador.ListaComandos;
+
 /**
  * Created by Juan Lu on 10/03/2016.
  */
@@ -25,12 +30,11 @@ public class GestorRespuestas extends BroadcastReceiver {
 
         notificationManager.cancel(idNot);
 
-        String respuestaTarea = respuesta + "___idTarea:" + idTarea;
-
-        Log.e("prueba", "Lo que se le pasa al programa es ..." + respuestaTarea);
-
-        //Ponerle la funcionalidad
-        //Controlador.getInstancia().ejecutaComando(ListaComandos.RESPONDER_TAREA, respuestaTarea);
+        ArrayList<Integer> objetoRespuesta = new ArrayList<Integer>();
+        objetoRespuesta.add(0, idTarea);
+        objetoRespuesta.add(1, respuesta);
+        Log.e("prueba", "Responde a la tarea " + idTarea + " con respuesta " + respuesta);
+        Controlador.getInstancia().ejecutaComando(ListaComandos.RESPONDER_TAREA, objetoRespuesta);
 
     }
 

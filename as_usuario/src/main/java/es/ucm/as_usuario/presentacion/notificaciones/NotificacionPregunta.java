@@ -63,10 +63,10 @@ public class NotificacionPregunta extends BroadcastReceiver {
 
         NotificationCompat.Builder n =
                 new NotificationCompat.Builder(context)
-                        .setSmallIcon(R.drawable.logo)
-                        .setContentTitle(titulo) //Titulo
-                        .setContentText(texto) //Texto
-                        .setLargeIcon(BitmapFactory.decodeResource(context.getResources(), R.drawable.logo))
+                        .setSmallIcon(R.drawable.logo_notificacion)
+                        .setContentTitle(titulo)    //Titulo
+                        .setContentText(texto)      //Texto
+                        .setLargeIcon(BitmapFactory.decodeResource(context.getResources(), R.drawable.logo_notificacion))
                         .addAction(R.drawable.ic_done_white, "Si", contestaSi)
                         .addAction(R.drawable.ic_clear_white, "No", contestaNo)
                         .setPriority(Notification.PRIORITY_MAX)

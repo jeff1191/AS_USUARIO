@@ -201,45 +201,8 @@ public class SAUsuarioImp implements SAUsuario {
 
 		Contexto.getInstancia().getContext().startActivity(emailIntent);
 
-		//*/////////////////////////////////////////////////////////////////////////////////////////
+		///////////////////////////////////////////////////////////////////////////////////////////
 
-
-
-		/*	// Este codigo usa la clase Mail del paquete de utils, la tiene Maria en msalitu/documentos/mail.java
-			Mail m = new Mail(mail, "aa");
-
-			String[] toArr = {mail};
-			m.setTo(toArr);
-			m.setFrom(mail);
-			m.setSubject("Informe AS");
-			m.setBody("¡Hola " + name + "!\n" +
-					"Este es tu progreso hasta el momento. Sigue esforzándote para continuar mejorando."
-					+ "\n¡Ánimo!" + "\n\nEnviado desde AS");
-
-			try {
-				m.addAttachment("sdcard/Download/AS/Informe.pdf");
-
-				if (m.send()) {
-					Toast.makeText(Contexto.getInstancia().getContext().getApplicationContext(), "Email was sent successfully.", Toast.LENGTH_LONG).show();
-				} else {
-					Toast.makeText(Contexto.getInstancia().getContext().getApplicationContext(), "Email was not sent.", Toast.LENGTH_LONG).show();
-				}
-			} catch (Exception e) {
-				//Toast.makeText(MailApp.this, "There was a problem sending the email.", Toast.LENGTH_LONG).show();
-				Toast.makeText(Contexto.getInstancia().getContext().getApplicationContext(), "Exception autenticación u otra cosa " , Toast.LENGTH_LONG).show();
-				Log.e("MailApp", "Could not send email", e);
-			}
-
-
-		// Esto sería usando la clase de Juanlu, lo malo es que solo sirve para gmail
-		Intent correo = new Intent (Contexto.getInstancia().getContext().getApplicationContext(), Correo.class);
-		correo.putExtra("destinatario", mail);
-		correo.putExtra("titulo", "Informe AS");
-		correo.putExtra("nombre", name);
-		correo.putExtra("texto", "¡Hola " + name + "!\n " +
-				"Este es tu progreso hasta el momento. Sigue esforzándote para continuar mejorando."
-				+ "\n¡Ánimo!" + "\n\nEnviado desde AS");
-		Contexto.getInstancia().getContext().startActivity(correo);*/
 	}
 
 

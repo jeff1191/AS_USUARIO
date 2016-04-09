@@ -138,6 +138,9 @@ public class DispatcherImp extends Dispatcher{
 
             case ListaComandos.CARGAR_NOTIFICACIONES:
                 break;
+
+            case ListaComandos.RESPONDER_TAREA:
+                break;
         }
     }
 }
