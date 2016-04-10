@@ -1,17 +1,17 @@
 Conseguido princesasAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-17:26
+17:51
 ¿Lo habeis conseguido princesas? BLAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-17:27
+17:52
 true
 ¡Vamos a desayunar!
-17:26
+17:51
 ¿Has desayunado? ¿Has dejado todo recogido?
-17:27
+17:52
 true
 ¡Es la hora del aseo! Tienes que: lavarte la cara, las axilas, etc.
-7:34
+17:53
 ¿Te has lavado antes de vestirte? Cara, Axilas...
-7:35
+17:54
 true
 ¡Es la hora del aseo! Tienes que: cepillarte los dientes
 10:11

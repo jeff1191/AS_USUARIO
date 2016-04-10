@@ -47,7 +47,7 @@ public class ServicioNotificaciones extends Service {
 
         // Establecer la hora a la que cargara de BBDD las notificaciones
         Integer h = 17;
-        Integer m = 25;
+        Integer m = 50;
         Log.e("prueba", "Va a activar CARGARNOTIFICACIONES A LAS " + h +":" + m);
 
         Calendar horaNotificacionCal = Calendar.getInstance();
