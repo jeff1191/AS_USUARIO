@@ -34,7 +34,7 @@ public class VerInforme extends Activity{
         setContentView(R.layout.informe);
 
         TextView titulo = (TextView)findViewById(R.id.tituloInforme);
-        titulo.setText("¿CÓMO VAS?");
+        titulo.setText("¿Cómo vas?");
 
         Bundle bundle = getIntent().getExtras();
 

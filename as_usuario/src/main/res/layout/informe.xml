@@ -9,7 +9,7 @@
             <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="fill_parent"
-                android:layout_height="70dp"
+                android:layout_height="56dp"
                 android:gravity="center_vertical"
                 android:id="@+id/cabecera">
 
@@ -55,8 +55,9 @@
                 android:layout_height="match_parent"
                 android:id="@+id/cuerpo"
                 android:background="@color/white"
-                android:layout_marginTop="70dp">
+                android:layout_below="@+id/cabecera">
 
+                <!-- Titulo -->
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="0dp"
@@ -68,15 +69,16 @@
                     android:textAlignment="center"
                     android:layout_weight="1" />
 
+                <!-- Seccion horizontal puntuacion -->
                 <LinearLayout
                     android:orientation="horizontal"
                     android:layout_width="match_parent"
                     android:layout_weight="1"
                     android:layout_height="0dp"
                     android:layout_gravity="center"
-                    android:id="@+id/puntuaciongeneral"
-                    android:layout_marginBottom="20dp">
+                    android:id="@+id/puntuaciongeneral">
 
+                    <!-- Seccion puntuacion anterior -->
                     <LinearLayout
                         android:orientation="vertical"
                         android:layout_height="match_parent"
@@ -99,13 +101,13 @@
                             android:layout_height="match_parent"
                             android:layout_weight="1"
                             android:textAppearance="?android:attr/textAppearanceLarge"
-                            android:textSize="30dp"
                             android:text="6"
                             android:gravity="center"
                             android:id="@+id/puntuacionAnterior" />
 
                         </LinearLayout>
 
+                    <!-- Seccion puntuacion actual -->
                     <LinearLayout
                         android:orientation="vertical"
                         android:layout_height="match_parent"
@@ -129,23 +131,25 @@
                             android:layout_height="0dp"
                             android:layout_weight="1"
                             android:textAppearance="?android:attr/textAppearanceLarge"
-                            android:textSize="30dp"
                             android:text="7.5"
                             android:gravity="center"
                             android:id="@+id/puntuacionAhora" />
 
                     </LinearLayout>
 
+                    <!-- Flecha -->
                     <ImageView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        android:paddingBottom="5dp"
                         android:id="@+id/flecha"
                         android:gravity="center_horizontal"
                         android:src="@drawable/flechaverde" />
 
                 </LinearLayout>
 
+                <!-- Encabezado -->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
@@ -210,9 +214,10 @@
                         android:gravity="center" />
 
                 </LinearLayout>
+
+                <!-- Lista -->
                 <ListView
                     android:layout_width="match_parent"
-
                     android:layout_height="0dp"
                     android:id="@+id/listView"
                     android:layout_alignParentTop="true"

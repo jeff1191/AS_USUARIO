@@ -46,6 +46,7 @@ public class MainActivity extends Activity {
         cargarTema();
         setContentView(R.layout.activity_main);
         nombrePrincipal=(TextView)findViewById(R.id.nombreUser);
+        nombrePrincipal.setText(usuario.getNombre());
         puntuacion = (TextView)findViewById(R.id.puntuacionUsuario);
         puntuacion.setText(usuario.getPuntuacion()+"/10");
         imagenPerfil= (ImageView) findViewById(R.id.avatar);
@@ -53,8 +54,7 @@ public class MainActivity extends Activity {
             imagenPerfil.setImageBitmap(BitmapFactory.decodeFile(usuario.getAvatar()));
         else
             imagenPerfil.setImageResource(R.drawable.avatar);
-        puntuacion.setText(usuario.getPuntuacion() + "/10");
-        nombrePrincipal.setText(usuario.getNombre());
+
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
             if (bundle.getString("editarUsuario") != null)
