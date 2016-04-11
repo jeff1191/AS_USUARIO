@@ -3,7 +3,6 @@ package es.ucm.as_usuario.presentacion.controlador.comandos.factoria.imp;
 import es.ucm.as_usuario.presentacion.controlador.ListaComandos;
 import es.ucm.as_usuario.presentacion.controlador.comandos.Command;
 import es.ucm.as_usuario.presentacion.controlador.comandos.factoria.FactoriaComandos;
-import es.ucm.as_usuario.presentacion.controlador.comandos.imp.CargarNotificaciones;
 import es.ucm.as_usuario.presentacion.controlador.comandos.imp.ActualizaPuntuacionComando;
 import es.ucm.as_usuario.presentacion.controlador.comandos.imp.CargarBBDDComando;
 import es.ucm.as_usuario.presentacion.controlador.comandos.imp.ConsultarUsuarioComando;
@@ -12,7 +11,6 @@ import es.ucm.as_usuario.presentacion.controlador.comandos.imp.CrearUsuarioComan
 import es.ucm.as_usuario.presentacion.controlador.comandos.imp.EditarUsuarioComando;
 import es.ucm.as_usuario.presentacion.controlador.comandos.imp.EnviarCorreoComando;
 import es.ucm.as_usuario.presentacion.controlador.comandos.imp.GenerarPDFComando;
-import es.ucm.as_usuario.presentacion.controlador.comandos.imp.ResponderTareaComando;
 import es.ucm.as_usuario.presentacion.controlador.comandos.imp.ResponderRetoComando;
 import es.ucm.as_usuario.presentacion.controlador.comandos.imp.VerAyudaComando;
 import es.ucm.as_usuario.presentacion.controlador.comandos.imp.VerEventosComando;
@@ -30,9 +28,6 @@ public class FactoriaComandosImp extends FactoriaComandos {
             case ListaComandos.RESPONDER_RETO:
                 ret = new ResponderRetoComando();
             break;
-            case ListaComandos.RESPONDER_TAREA:
-                ret = new ResponderTareaComando();
-                break;
             case ListaComandos.VER_RETO:
                 ret = new VerRetoComando();
                 break;
@@ -62,9 +57,6 @@ public class FactoriaComandosImp extends FactoriaComandos {
                 break;
             case ListaComandos.CARGAR_BBDD:
                 ret = new CargarBBDDComando();
-                break;
-            case ListaComandos.CARGAR_NOTIFICACIONES:
-                ret = new CargarNotificaciones();
                 break;
             case ListaComandos.GENERAR_PDF:
                 ret = new GenerarPDFComando();

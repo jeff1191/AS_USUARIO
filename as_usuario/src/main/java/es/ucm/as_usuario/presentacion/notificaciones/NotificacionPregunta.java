@@ -8,6 +8,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
@@ -70,6 +71,7 @@ public class NotificacionPregunta extends BroadcastReceiver {
                         .addAction(R.drawable.ic_done_white, "Si", contestaSi)
                         .addAction(R.drawable.ic_clear_white, "No", contestaNo)
                         .setPriority(Notification.PRIORITY_MAX)
+                        .setSound(Uri.parse("android.resource://" + context.getPackageName() + "/" + R.raw.silbido))
                         .setVibrate(new long[]{200, 300, 200, 300, 200})
                         .setLights(Color.YELLOW, 3000, 3000)
                         .setStyle(new NotificationCompat.BigTextStyle()

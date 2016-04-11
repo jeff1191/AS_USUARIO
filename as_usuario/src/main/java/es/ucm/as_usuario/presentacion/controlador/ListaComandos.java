@@ -17,8 +17,6 @@ public class ListaComandos {
     public static final String CARGAR_BBDD = "cargarBBDD";
     public static final String GENERAR_PDF = "generarPDF";
     public static final String ENVIAR_CORREO = "enviarCorreo";
-    public static final String CARGAR_NOTIFICACIONES = "cargarNotificaciones";
-    public static final String RESPONDER_TAREA = "responderPregunta";
 
     /*
     .

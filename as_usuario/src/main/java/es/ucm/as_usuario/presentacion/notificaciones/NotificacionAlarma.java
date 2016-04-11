@@ -14,7 +14,6 @@ import android.util.Log;
 import java.util.Date;
 
 import es.ucm.as_usuario.R;
-import es.ucm.as_usuario.presentacion.Contexto;
 
 /**
  *
@@ -59,12 +58,12 @@ public class NotificacionAlarma extends BroadcastReceiver {
                         .setPriority(NotificationCompat.PRIORITY_MAX)
                         .setLargeIcon(BitmapFactory.decodeResource(context.getResources(), R.drawable.logo_notificacion))
                         .setContentIntent(aux)
-                        .setSound(Uri.parse("android.resource://" + Contexto.getInstancia().getContext().getPackageName() + "/" + R.raw.silbido))
+                        .setSound(Uri.parse("android.resource://" + context.getPackageName() + "/" + R.raw.silbido))
                         .setVibrate(new long[]{200, 300, 200, 300, 200})
                         .setLights(Color.YELLOW, 3000, 3000)
                         .setStyle(new NotificationCompat.BigTextStyle()
-                        .bigText(intent.getExtras().getString("texto"))
-                        .setBigContentTitle(intent.getExtras().getString("titulo")));
+                                  .bigText(intent.getExtras().getString("texto"))
+                                  .setBigContentTitle(intent.getExtras().getString("titulo")));
 
         NotificationManager notificationManager =
                 (NotificationManager) context.getSystemService(context.NOTIFICATION_SERVICE);

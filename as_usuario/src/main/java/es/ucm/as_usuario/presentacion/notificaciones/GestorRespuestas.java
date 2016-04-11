@@ -10,14 +10,10 @@ import com.j256.ormlite.android.apptools.OpenHelperManager;
 import com.j256.ormlite.dao.Dao;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
 
 import es.ucm.as_usuario.integracion.DBHelper;
 import es.ucm.as_usuario.negocio.suceso.Tarea;
 import es.ucm.as_usuario.negocio.utils.Frecuencia;
-import es.ucm.as_usuario.presentacion.Contexto;
-import es.ucm.as_usuario.presentacion.controlador.Controlador;
-import es.ucm.as_usuario.presentacion.controlador.ListaComandos;
 
 import static es.ucm.as_usuario.negocio.utils.Frecuencia.DIARIA;
 import static es.ucm.as_usuario.negocio.utils.Frecuencia.MENSUAL;
@@ -28,22 +24,41 @@ import static es.ucm.as_usuario.negocio.utils.Frecuencia.SEMANAL;
  */
 public class GestorRespuestas extends BroadcastReceiver {
 
-
-    // Esto es por no llamar al comando *********************************************************************************************
     private DBHelper mDBHelper;
 
-    private DBHelper getHelper() {
+    private DBHelper getHelper(Context context) {
         if (mDBHelper == null) {
-            mDBHelper = OpenHelperManager.getHelper(Contexto.getInstancia().getContext().getApplicationContext(), DBHelper.class);
+            mDBHelper = OpenHelperManager.getHelper(context, DBHelper.class);
         }
         return mDBHelper;
     }
 
-    public void responderPregunta(Integer idTarea, Integer respuesta) {
+    @Override
+    public void onReceive(Context context, Intent intent) {
+
+        Integer respuesta = intent.getExtras().getInt("respuesta");
+        Integer idNot = intent.getExtras().getInt("idNotificacion");
+        Integer idTarea = intent.getExtras().getInt("idTarea");
+
+        NotificationManager notificationManager =
+                (NotificationManager) context.getSystemService(context.NOTIFICATION_SERVICE);
+
+        Log.e("prueba", "Va a cerrar la notifiacion ..." + idNot);
+
+        notificationManager.cancel(idNot);
+
+        Log.e("prueba", "Responde a la tarea " + idTarea + " con respuesta " + respuesta);
+
+        responderPregunta(context, idTarea, respuesta);
+
+    }
+
+    // Esta funcion implementa el sistema de aprendizaje automatico de la app
+    public void responderPregunta(Context context, Integer idTarea, Integer respuesta) {
         Dao<Tarea, Integer> tareasDao;
         Tarea tarea;
         try {
-            tareasDao = getHelper().getTareaDao();
+            tareasDao = getHelper(context).getTareaDao();
             tarea = tareasDao.queryForId(idTarea);
 
             // si respondio que "si"***************************************************************
@@ -82,6 +97,7 @@ public class GestorRespuestas extends BroadcastReceiver {
 
             // y se actualiza en la BBDD
             tareasDao.update(tarea);
+            Log.e("prueba", "Respuesta guardada");
         } catch (SQLException e) {
 
         }
@@ -112,32 +128,4 @@ public class GestorRespuestas extends BroadcastReceiver {
         }
         return nueva;
     }
-    /**********************************Hasta aqui**********************************************************************************/
-
-
-
-    @Override
-    public void onReceive(Context context, Intent intent) {
-
-        Integer respuesta = intent.getExtras().getInt("respuesta");
-        Integer idNot = intent.getExtras().getInt("idNotificacion");
-        Integer idTarea = intent.getExtras().getInt("idTarea");
-
-        NotificationManager notificationManager =
-                (NotificationManager) context.getSystemService(context.NOTIFICATION_SERVICE);
-
-        Log.e("prueba", "Va a cerrar la notifiacion ..." + idNot);
-
-        notificationManager.cancel(idNot);
-
-        /* Estas lineas comentadas sirven si se hiciera a traves de un comando
-        ArrayList<Integer> objetoRespuesta = new ArrayList<Integer>();
-        objetoRespuesta.add(0, idTarea);
-        objetoRespuesta.add(1, respuesta);
-        Log.e("prueba", "Responde a la tarea " + idTarea + " con respuesta " + respuesta);
-        Controlador.getInstancia().ejecutaComando(ListaComandos.RESPONDER_TAREA, objetoRespuesta);*/
-
-        responderPregunta(idTarea, respuesta);
-    }
-
 }

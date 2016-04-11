@@ -23,7 +23,6 @@ import java.util.StringTokenizer;
 import es.ucm.as_usuario.integracion.DBHelper;
 import es.ucm.as_usuario.negocio.suceso.Tarea;
 import es.ucm.as_usuario.negocio.suceso.TransferTarea;
-import es.ucm.as_usuario.presentacion.Contexto;
 
 /**
  * Created by Juan Lu on 08/04/2016.
@@ -32,9 +31,9 @@ public class CargarNotificaciones extends BroadcastReceiver {
 
     private DBHelper mDBHelper;
 
-    private DBHelper getHelper() {
+    private DBHelper getHelper(Context context) {
         if (mDBHelper == null) {
-            mDBHelper = OpenHelperManager.getHelper(Contexto.getInstancia().getContext().getApplicationContext(), DBHelper.class);
+            mDBHelper = OpenHelperManager.getHelper(context, DBHelper.class);
         }
         return mDBHelper;
     }
@@ -47,7 +46,7 @@ public class CargarNotificaciones extends BroadcastReceiver {
         List<TransferTarea> transferTareas = new ArrayList<TransferTarea>();
         try {
             Log.e("prueba", "Va a buscar las tareas");
-            tareasDao = getHelper().getTareaDao();
+            tareasDao = getHelper(context).getTareaDao();
             tareas = tareasDao.queryForAll();
             String tituloAlarma = "Alarma";
             String tituloPregunta = "Pregunta";
