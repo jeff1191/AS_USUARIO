@@ -10,8 +10,8 @@
     <!-- | TEMA AZUL AS |  -->
     <style name="AS_tema_azul" parent="android:Theme.NoTitleBar" >
         <item name="android:background">#ffffff</item>
-        <item name="android:textColor">#0755c9</item>
-        <item name="android:editTextColor">#0755c9</item>
+        <item name="android:textColor">#1E88E5</item>
+        <item name="android:editTextColor">#1E88E5</item>
         <item name="android:radioButtonStyle">@style/radioButtonTemaAzul</item>
         <item name="android:buttonStyle">@style/botonTemaAzul</item>
         <item name="android:imageButtonStyle">@style/imagenNavegacionAzul</item>
@@ -20,13 +20,13 @@
     <style name="botonTemaAzul" parent="android:style/Widget.Button">
         <item name="android:textColor">#ffffff</item>
         <item name="android:textSize">20dp</item>
-        <item name="android:background">#0063ed</item>
+        <item name="android:background">#1E88E5</item>
     </style>
     <style name="imagenNavegacionAzul" parent="@android:style/Widget.ImageButton">
-        <item name="android:background">#0063ed</item>
+        <item name="android:background">#1E88E5</item>
     </style>
     <style name="radioButtonTemaAzul" parent="@android:style/Widget.CompoundButton.RadioButton">
-        <item name="android:textColor">#0755c9</item>
+        <item name="android:textColor">#1E88E5</item>
         <item name="android:checkedButton">@android:integer/config_longAnimTime</item>
     </style>
     <!-- | FIN TEMA AZUL AS |  -->
