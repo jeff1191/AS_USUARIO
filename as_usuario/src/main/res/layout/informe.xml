@@ -74,6 +74,7 @@
                     android:orientation="horizontal"
                     android:layout_width="match_parent"
                     android:layout_weight="1"
+                    android:layout_marginBottom="10dp"
                     android:layout_height="0dp"
                     android:layout_gravity="center"
                     android:id="@+id/puntuaciongeneral">
@@ -149,15 +150,15 @@
 
                 </LinearLayout>
 
-                <!-- Encabezado -->
+                <!--  listheader  -->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
+                    android:layout_weight="0.75"
                     android:orientation="horizontal"
-                    android:gravity="bottom"
-                    android:id="@+id/cabeceraLista"
-                    android:layout_weight="0.5"
-                    android:layout_gravity="center_vertical">
+                    android:gravity="center">
+
+                    <!-- Titulo -->
                     <Button
                         android:id="@+id/tarea"
                         android:layout_width="0dp"
@@ -165,10 +166,8 @@
                         android:layout_height="match_parent"
                         android:text="TAREA"
                         android:textStyle="bold"
-                        android:textSize="18dp"
-                        android:layout_centerVertical="true"
-                        android:gravity="center"
-                        />
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:gravity="center" />
 
                     <!-- numero de veces que se respondio que si-->
                     <Button
@@ -178,12 +177,10 @@
                         android:layout_weight="1"
                         android:text="SI"
                         android:textStyle="bold"
-                        android:textSize="18dp"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
                         android:layout_centerVertical="true"
-                        android:layout_toRightOf="@+id/thumbnail"
-                        android:gravity="center"
-                        />
-
+                        android:layout_toRightOf="@+id/tarea"
+                        android:gravity="center" />
 
                     <!-- numero de veces que se respondio que no-->
                     <Button
@@ -193,14 +190,12 @@
                         android:layout_weight="1"
                         android:text="NO"
                         android:textStyle="bold"
-                        android:textSize="18dp"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
                         android:layout_centerVertical="true"
                         android:layout_toRightOf="@+id/si"
-                        android:gravity="center"
+                        android:gravity="center" />
 
-                        />
-
-                    <!-- numero de veces que se respondio que no-->
+                    <!-- Balance entre num si y num no -->
                     <Button
                         android:id="@+id/total"
                         android:layout_width="0dp"
@@ -208,11 +203,10 @@
                         android:layout_weight="1"
                         android:text="="
                         android:textStyle="bold"
-                        android:textSize="18dp"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
                         android:layout_centerVertical="true"
-                        android:layout_toRightOf="@+id/si"
+                        android:layout_toRightOf="@+id/no"
                         android:gravity="center" />
-
                 </LinearLayout>
 
                 <!-- Lista -->
@@ -220,10 +214,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:id="@+id/listView"
-                    android:layout_alignParentTop="true"
-                    android:layout_centerHorizontal="true"
                     android:layout_weight="5" />
-
 
             </LinearLayout>
 

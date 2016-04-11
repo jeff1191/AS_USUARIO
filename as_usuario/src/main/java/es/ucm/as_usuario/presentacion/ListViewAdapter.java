@@ -18,12 +18,14 @@ public class ListViewAdapter extends BaseAdapter {
     ArrayList<Integer> si;
     ArrayList<Integer> no;
     LayoutInflater inflater;
+    Context context;
 
     public ListViewAdapter(ArrayList<String> titulos, ArrayList<Integer> si,
-                           ArrayList<Integer> no) {
+                           ArrayList<Integer> no, Context context) {
         this.titulos = titulos;
         this.si = si;
         this.no = no;
+        this.context = context;
     }
 
     @Override
@@ -48,7 +50,7 @@ public class ListViewAdapter extends BaseAdapter {
         TextView not;       // numero de no
         TextView total;     // balance del progreso (si - no = total)
 
-        inflater = (LayoutInflater) Contexto.getInstancia().getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
         View itemView = inflater.inflate(R.layout.list_row, parent, false);
 
@@ -66,9 +68,9 @@ public class ListViewAdapter extends BaseAdapter {
         not.setText(sn);
         Integer t = si.get(position)-no.get(position);
         if(t >= 0)
-            total.setTextColor(Color.GREEN);
+            total.setTextColor(Color.parseColor("#2fb518"));
         else
-            total.setTextColor(Color.RED);
+            total.setTextColor(Color.parseColor("#2fb518"));
         total.setText(t.toString());
 
         return itemView;

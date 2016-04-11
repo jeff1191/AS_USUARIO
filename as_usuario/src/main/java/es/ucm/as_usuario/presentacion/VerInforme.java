@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -56,13 +57,19 @@ public class VerInforme extends Activity{
 
         final ListView lista = (ListView) findViewById(R.id.listView);
 
+        LayoutInflater inflater = getLayoutInflater();
+        /*Se establece la fila cabecera, el problema es que no es sticky
+        View header = inflater.inflate(R.layout.list_header, lista, false);
+        lista.addHeaderView(header, null, false);
+        */
+
         ArrayList<String> t = getIntent().getStringArrayListExtra("titulos");
         ArrayList<Integer> s = getIntent().getIntegerArrayListExtra("si");
         ArrayList<Integer> n = getIntent().getIntegerArrayListExtra("no");
 
         Integer st = s.size();
         if(t.size()!= 0){
-            adapter = new ListViewAdapter(t, s, n);
+            adapter = new ListViewAdapter(t, s, n, this.getApplicationContext());
             lista.setAdapter(adapter);
         }
     }
