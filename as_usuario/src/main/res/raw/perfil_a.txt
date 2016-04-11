@@ -34,19 +34,19 @@ true
 10:55
 true
 Mírate en el espejo y comprueba que te ves bien
-10:55
+13:35
 ¿Te has mirado en el espejo?
-10:57
+13:36
 true
 ¡Revisa la mochila! Comprueba que tienes todos los libros y los materiales necesarios
-11:00
+13:38
 ¿Has comprobado que en la mochila tengas todo lo necesario para el colegio? ¿Has repasado todas las asignaturas que tienes hoy? ¿Está todo el material?
-11:10
+13:39
 true
 ¡Revisa la mochila! Mete la agenda
-11:00
+13:40
 ¿Tienes la agenda?
-11:10
+11:42
 true
 Coges el almuerzo y lo metes en la mochila
 11:00
