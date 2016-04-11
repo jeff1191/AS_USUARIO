@@ -1,5 +1,6 @@
 package es.ucm.as_usuario.negocio.suceso.imp;
 
+import android.database.DatabaseUtils;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Environment;
@@ -41,10 +42,13 @@ import es.ucm.as_usuario.negocio.suceso.TransferReto;
 import es.ucm.as_usuario.negocio.suceso.TransferTarea;
 import es.ucm.as_usuario.negocio.usuario.SAUsuario;
 import es.ucm.as_usuario.negocio.usuario.TransferUsuario;
+import es.ucm.as_usuario.negocio.utils.Frecuencia;
 import es.ucm.as_usuario.negocio.utils.Parser;
 import es.ucm.as_usuario.presentacion.Contexto;
 import es.ucm.as_usuario.presentacion.notificaciones.NotificacionAlarma;
 import es.ucm.as_usuario.presentacion.notificaciones.NotificacionPregunta;
+
+import static es.ucm.as_usuario.negocio.utils.Frecuencia.*;
 
 /**
  * Created by Jeffer on 02/03/2016.
@@ -167,6 +171,8 @@ public class SASucesoImp implements SASuceso {
     }
 
     @Override
+
+
     public void cargarTareasBBDD() {
         Parser p = new Parser();
         Dao<Tarea, Integer> tareaDao;
@@ -246,14 +252,17 @@ public class SASucesoImp implements SASuceso {
     }
 
     public void cargarNotificaciones() {
+        //Buscar las tareas y crear sus alarmas/preguntas con el servicio
+
+
 
         NotificacionAlarma alarma = new NotificacionAlarma();
         NotificacionPregunta pregunta = new NotificacionPregunta();
         Log.e("prueba", "Variables inicializadas...");
         Log.e("prueba", "Vamos a ello...");
-        alarma.lanzarAlarma(Contexto.getInstancia().getContext().getApplicationContext(),
+        /*alarma.lanzarAlarma(Contexto.getInstancia().getContext().getApplicationContext(),
                 14, 19, "Desayunar", "Vamos a desayunar!");
-        pregunta.lanzarPregunta(Contexto.getInstancia().getContext().getApplicationContext(),
+       // pregunta.lanzarPregunta(Contexto.getInstancia().getContext().getApplicationContext(),
                 14, 20 , "Desayunar", "¿Has desayunado?/¿Has dejado todo recogido?");
         /*alarma.lanzarAlarma(Contexto.getInstancia().getContext().getApplicationContext(),
                 21, 5, "Aseo personal", "Es la hora del aseo... tienes que... " +
@@ -296,6 +305,83 @@ public class SASucesoImp implements SASuceso {
             }
         }*/
     }
+
+    // Esta funcion implementa el sistema de aprendizaje automatico de la app
+    @Override
+    public void responderPregunta(Integer idTarea, Integer respuesta) {
+        Dao<Tarea, Integer> tareasDao;
+        Tarea tarea;
+        try {
+            tareasDao = getHelper().getTareaDao();
+            tarea = tareasDao.queryForId(idTarea);
+
+            // si respondio que "si"***************************************************************
+            if (respuesta == 1){
+                tarea.setNumSi(tarea.getNumSi() + 1);
+                tarea.setContador(tarea.getContador() + 1);
+                tarea.setNoSeguidos(0); // se reinicia la cuenta de "no" seguidos
+
+                // si mejora disminuye la frecuencia y se reinician los contadores
+                if(tarea.getContador() == tarea.getMejorar()){
+                    tarea.setFrecuenciaTarea(disminuirFrecuencia(tarea.getFrecuenciaTarea()));
+                    tarea.setContador(0);
+                    tarea.setNumSi(0);
+                    tarea.setNumNo(0);
+                }
+                /**********************************************************************************/
+
+
+                // si respondio que "no"////////////////////////////////////////////////////////////
+            }else{
+                    if (tarea.getNoSeguidos() >= 2) {    // si suma 3 "no" seguidos
+                        // Se le aumenta la frecuencia de nuevo
+                        tarea.setFrecuenciaTarea(aumentarFrecuencia(tarea.getFrecuenciaTarea()));
+                        // Se reinician los contadores
+                        tarea.setNumNo(0);
+                        tarea.setNumSi(0);
+                        tarea.setNoSeguidos(0);
+                        tarea.setContador(0);
+                    } else {                              // si aun no son 3 "no" seguidos
+                        tarea.setNumNo(tarea.getNumNo() + 1);
+                        tarea.setNoSeguidos(tarea.getNoSeguidos() + 1);
+                        tarea.setContador(tarea.getContador() - 1);
+                    }
+
+            }//////////////////////////////////////////////////////////////////////////////////////
+
+            // y se actualiza en la BBDD
+            tareasDao.update(tarea);
+        } catch (SQLException e) {
+
+        }
+    }
+
+    private Frecuencia aumentarFrecuencia (Frecuencia frecuencia){
+       Frecuencia nueva = DIARIA;
+        switch (frecuencia){
+            case DIARIA:
+                nueva = DIARIA;
+            case SEMANAL:
+                nueva = DIARIA;
+            case MENSUAL:
+                nueva = SEMANAL;
+        }
+        return nueva;
+    }
+
+    private Frecuencia disminuirFrecuencia (Frecuencia frecuencia){
+        Frecuencia nueva = MENSUAL;
+        switch (frecuencia){
+            case DIARIA:
+                nueva = SEMANAL;
+            case SEMANAL:
+                nueva = MENSUAL;
+            case MENSUAL:
+                nueva = MENSUAL;
+        }
+        return nueva;
+    }
+
 
     public static File crearFichero(String nombreFichero) throws IOException {
         File ruta = getRuta();

@@ -94,8 +94,8 @@ public class DispatcherImp extends Dispatcher{
                     si.add(tt.getNumSi());
                 }
 
-                intentTareas.putExtra("puntuacion actual",tu.getPuntuacion() );
-                intentTareas.putExtra("puntuacion anterior", tu.getPuntuacionAnterior());
+                intentTareas.putExtra("puntuacion",tu.getPuntuacion() );
+                intentTareas.putExtra("puntuacionAnterior", tu.getPuntuacionAnterior());
                 intentTareas.putStringArrayListExtra("titulos", titulos);
                 intentTareas.putIntegerArrayListExtra("no", no);
                 intentTareas.putIntegerArrayListExtra("si", si);
@@ -118,7 +118,7 @@ public class DispatcherImp extends Dispatcher{
                     iUsuario.putExtra("correo", transferUsuario.getCorreo());
                     iUsuario.putExtra("avatar", transferUsuario.getAvatar());
                     iUsuario.putExtra("puntuacion", transferUsuario.getPuntuacion());
-                    iUsuario.putExtra("puntuacion anterior", transferUsuario.getPuntuacionAnterior());
+                    iUsuario.putExtra("puntuacionAnterior", transferUsuario.getPuntuacionAnterior());
                     iUsuario.putExtra("color", transferUsuario.getColor());
                     iUsuario.putExtra("tono", transferUsuario.getTono());
                     iUsuario.putExtra("nombre tutor", transferUsuario.getNombreTutor());
@@ -137,6 +137,9 @@ public class DispatcherImp extends Dispatcher{
                 break;
 
             case ListaComandos.CARGAR_NOTIFICACIONES:
+                break;
+
+            case ListaComandos.RESPONDER_TAREA:
                 break;
         }
     }

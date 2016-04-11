@@ -2,6 +2,7 @@ package es.ucm.as_usuario.presentacion;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -11,6 +12,7 @@ import es.ucm.as_usuario.R;
 import es.ucm.as_usuario.negocio.usuario.TransferUsuario;
 import es.ucm.as_usuario.presentacion.controlador.Controlador;
 import es.ucm.as_usuario.presentacion.controlador.ListaComandos;
+import es.ucm.as_usuario.presentacion.notificaciones.ServicioNotificaciones;
 
 /**
  * Created by Juan Lu on 15/03/2016.
@@ -25,6 +27,7 @@ public class Registro extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         setContentView(R.layout.activity_registro);
         nombreUsuario = (EditText)findViewById(R.id.nombreRegistro);
         correoUsuario = (EditText)findViewById(R.id.emailRegistro);
@@ -50,7 +53,7 @@ public class Registro extends Activity {
             
             Controlador.getInstancia().ejecutaComando(ListaComandos.CREAR_USUARIO, crearUsuario);
             Controlador.getInstancia().ejecutaComando(ListaComandos.CARGAR_BBDD, null);
-            Controlador.getInstancia().ejecutaComando(ListaComandos.CARGAR_NOTIFICACIONES, null);
+            startService(new Intent(this, ServicioNotificaciones.class));
             
             startActivity(new Intent(this, MainActivity.class));
     }
@@ -80,6 +83,7 @@ public class Registro extends Activity {
 
         return false;
     }
+
 
     private void mostrarMensajeError(String msg){
         Toast errorNombre =

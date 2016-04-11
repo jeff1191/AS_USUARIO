@@ -2,18 +2,18 @@
 <items version="2" >
 
     <item
-        jar="C:\Users\Juan Lu\git\AS_USUARIO\as_usuario\libs\additionnal.jar"
+        jar="C:\Users\Jeffer\AndroidStudioProjects\AS_USUARIO\as_usuario\libs\additionnal.jar"
         jumboMode="false"
         revision="22.0.1"
         sha1="bd9e8dc422bb8c8405359947fe9f4282b49f57f4">
-        <dex dex="C:\Users\Juan Lu\git\AS_USUARIO\as_usuario\build\intermediates\pre-dexed\debug\additionnal-47fe09d43b40bacf3f241f8d0cc05fdeb428f844.jar" />
+        <dex dex="C:\Users\Jeffer\AndroidStudioProjects\AS_USUARIO\as_usuario\build\intermediates\pre-dexed\debug\additionnal-7cbc0c529ca3288674335dab62a8bb0c32e003e5.jar" />
     </item>
     <item
-        jar="C:\Users\Juan Lu\.gradle\caches\modules-2\files-2.1\com.itextpdf\itextg\5.5.9\3580383b2c7db8fa2fee1ffbe1993017a9ea296e\itextg-5.5.9.jar"
+        jar="C:\Users\Jeffer\.gradle\caches\modules-2\files-2.1\com.itextpdf\itextg\5.5.9\3580383b2c7db8fa2fee1ffbe1993017a9ea296e\itextg-5.5.9.jar"
         jumboMode="false"
         revision="22.0.1"
         sha1="3580383b2c7db8fa2fee1ffbe1993017a9ea296e">
-        <dex dex="C:\Users\Juan Lu\git\AS_USUARIO\as_usuario\build\intermediates\pre-dexed\debug\itextg-5.5.9-041a1db288b2c08ea4e395a6627e9ed8cbd788a7.jar" />
+        <dex dex="C:\Users\Jeffer\AndroidStudioProjects\AS_USUARIO\as_usuario\build\intermediates\pre-dexed\debug\itextg-5.5.9-7c2871a719b5ad5bdaec21cf3a925ab484993df8.jar" />
     </item>
 
 </items>

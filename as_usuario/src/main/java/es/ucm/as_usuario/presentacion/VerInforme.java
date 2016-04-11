@@ -2,6 +2,7 @@ package es.ucm.as_usuario.presentacion;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 
 import android.view.View;
@@ -29,18 +30,20 @@ public class VerInforme extends Activity{
     protected void onCreate(Bundle savedInstanceState) {
         cargarTema();
         super.onCreate(savedInstanceState);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         setContentView(R.layout.informe);
 
         TextView titulo = (TextView)findViewById(R.id.tituloInforme);
-        titulo.setText("¿CÓMO VAS?");
+        titulo.setText("¿Cómo vas?");
 
         Bundle bundle = getIntent().getExtras();
 
-        ImageView img = (ImageView)findViewById(R.id.imageView2);
+        ImageView img = (ImageView)findViewById(R.id.flecha);
 
-        Integer puntAntes = bundle.getInt("puntuacion anterior");
-        Integer puntAhora = bundle.getInt("puntuacion actual");
-        if (puntAhora > puntAntes)
+        Integer puntAntes = bundle.getInt("puntuacionAnterior");
+        Integer puntAhora = bundle.getInt("puntuacion");
+
+        if (puntAhora >= puntAntes)
             img.setImageResource(R.drawable.flechaverde);
         else
             img.setImageResource(R.drawable.flecharoja);

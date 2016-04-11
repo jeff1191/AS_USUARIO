@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.content.CursorLoader;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -70,6 +71,7 @@ public class Configuracion extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         cargarTema();
         super.onCreate(savedInstanceState);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         setContentView(R.layout.personalizacion);
         Bundle bundle = getIntent().getExtras();
         editarNombre = (EditText)findViewById(R.id.editarNombre);

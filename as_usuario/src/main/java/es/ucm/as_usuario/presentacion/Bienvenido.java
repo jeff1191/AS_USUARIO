@@ -45,6 +45,5 @@ public class Bienvenido extends Activity {
        };
        Timer timer = new Timer();
        timer.schedule(task, DELAY);
-
     }
 }

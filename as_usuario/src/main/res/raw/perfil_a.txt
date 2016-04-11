@@ -1,36 +1,60 @@
-Conseguido princesas
-¿Te has levantado a la hora prevista?
-false
+Conseguido princesasAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+17:51
+¿Lo habeis conseguido princesas? BLAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+17:52
+true
 ¡Vamos a desayunar!
+17:51
 ¿Has desayunado? ¿Has dejado todo recogido?
+17:52
 true
 ¡Es la hora del aseo! Tienes que: lavarte la cara, las axilas, etc.
+17:53
 ¿Te has lavado antes de vestirte? Cara, Axilas...
+17:54
 true
 ¡Es la hora del aseo! Tienes que: cepillarte los dientes
+10:11
 ¿Te has lavado los dientes?
+10:21
 true
 ¡Es la hora del aseo! Tienes que: ponerte desodorante y colonia
+10:11
 ¿Te has puesto desodorante y colonia?
+10:21
 true
 ¡Es la hora del aseo! Tienes que peinarte
+10:11
 ¿Te has peinado?
+10:21
 true
 ¡Ahora hay que vestirse! Ten en cuenta el clima que hace y la actividad que vayas a hacer hoy
+10:35
 ¿Te has vestido adecuadamente? ¿La ropa que has elegido es la adecuada para la época del año en la que estás? ¿La ropa que has elegido es la adecuada para la actividad que vas a hacer?
+10:55
 true
 Mírate en el espejo y comprueba que te ves bien
+10:55
 ¿Te has mirado en el espejo?
+10:57
 true
 ¡Revisa la mochila! Comprueba que tienes todos los libros y los materiales necesarios
+11:00
 ¿Has comprobado que en la mochila tengas todo lo necesario para el colegio? ¿Has repasado todas las asignaturas que tienes hoy? ¿Está todo el material?
+11:10
 true
 ¡Revisa la mochila! Mete la agenda
+11:00
 ¿Tienes la agenda?
+11:10
 true
 Coges el almuerzo y lo metes en la mochila
+11:00
 ¿Has cogido el almuerzo y lo has metido en la mochila?
+11:10
 true
 ¡Hay que salir de casa!.. Y coger el transporte adecuado
+11:20
 ¿Has salido a la hora prevista?
+11:25
 true

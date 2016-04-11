@@ -1,4 +1,5 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
@@ -9,7 +10,7 @@
                 android:orientation="horizontal"
                 android:layout_weight="1"
                 android:layout_width="fill_parent"
-                android:layout_height="70dp"
+                android:layout_height="56dp"
                 android:gravity="center_vertical"
                 android:id="@+id/cabecera">
 
@@ -49,7 +50,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
                 android:id="@+id/cuerpo"
-                android:layout_marginTop="70dp"
+                android:layout_below="@+id/cabecera"
                 android:gravity="center_horizontal">
 
                 <it.sephiroth.android.library.imagezoom.ImageViewTouch

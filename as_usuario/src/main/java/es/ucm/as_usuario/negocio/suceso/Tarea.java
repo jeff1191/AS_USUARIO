@@ -6,7 +6,6 @@ package es.ucm.as_usuario.negocio.suceso;
 import com.j256.ormlite.field.DataType;
 import com.j256.ormlite.field.DatabaseField;
 
-import java.sql.Timestamp;
 import java.util.Date;
 
 import es.ucm.as_usuario.negocio.utils.Frecuencia;
@@ -22,10 +21,10 @@ public class Tarea {
 	@DatabaseField(columnName = "TEXTO_ALARMA")
 	private String textoAlarma;
 
-	@DatabaseField(columnName = "HORA_PREGUNTA", dataType = DataType.DATE_STRING, format = "dd-MM-yyyy HH:mm:ss")
+	@DatabaseField(columnName = "HORA_PREGUNTA", dataType = DataType.DATE_STRING, format = "HH:mm")
 	private Date horaPregunta;
 
-	@DatabaseField(columnName = "HORA_ALARMA", dataType = DataType.DATE_STRING, format = "dd-MM-yyyy HH:mm:ss")
+	@DatabaseField(columnName = "HORA_ALARMA", dataType = DataType.DATE_STRING, format = "HH:mm")
 	private Date horaAlarma;
 
 	@DatabaseField(columnName = "CONTADOR")
@@ -142,4 +141,5 @@ public class Tarea {
 	public void setNumNo(Integer numNo) {
 		this.numNo = numNo;
 	}
+
 }
