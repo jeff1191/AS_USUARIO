@@ -1,60 +1,115 @@
-Esto es una prueba de una notificación larga para ver que se muestra todo el texto de la alarma
-18:16
-¿Esto es una prueba de una regunta larga para ver que se muestra todo el texto de la pregunta?
-18:17
+Buenos dias... hay que levantarse!
+7:00
+¿Te has levantado a la hora prevista?
+7:10
 true
 ¡Vamos a desayunar!
-18:18
-¿Has desayunado? ¿Has dejado todo recogido?
-18:19
+7:15
+¿Has desayunado?
+7:30
 true
-¡Es la hora del aseo! Tienes que: lavarte la cara, las axilas, etc.
-18:20
-¿Te has lavado antes de vestirte? Cara, Axilas...
-18:21
+Cuando acabes tienes que recoger todo
+7:15
+¿Has dejado todo recogido?
+7:30
 true
-¡Es la hora del aseo! Tienes que: cepillarte los dientes
-18:22
+¡Es la hora del aseo! Tienes que lavarte la cara, las axilas, etc.
+7:31
+¿Te has lavado la cara, las axilas, etc. antes de vestirte?
+7:45
+true
+¡Es la hora del aseo! Tienes que cepillarte los dientes
+7:31
 ¿Te has lavado los dientes?
-18:23
+7:45
 true
-¡Es la hora del aseo! Tienes que: ponerte desodorante y colonia
-18:24
+¡Es la hora del aseo! Tienes que ponerte desodorante y colonia
+7:31
 ¿Te has puesto desodorante y colonia?
-18:25
+7:45
 true
 ¡Es la hora del aseo! Tienes que peinarte
-10:11
+7:31
 ¿Te has peinado?
-10:21
+7:45
 true
 ¡Ahora hay que vestirse! Ten en cuenta el clima que hace y la actividad que vayas a hacer hoy
-10:35
+7:50
 ¿Te has vestido adecuadamente? ¿La ropa que has elegido es la adecuada para la época del año en la que estás? ¿La ropa que has elegido es la adecuada para la actividad que vas a hacer?
-10:55
+8:01
 true
 Mírate en el espejo y comprueba que te ves bien
-13:35
+7:50
 ¿Te has mirado en el espejo?
-13:36
+8:01
 true
 ¡Revisa la mochila! Comprueba que tienes todos los libros y los materiales necesarios
-13:38
+8:03
 ¿Has comprobado que en la mochila tengas todo lo necesario para el colegio? ¿Has repasado todas las asignaturas que tienes hoy? ¿Está todo el material?
-13:39
+8:15
 true
 ¡Revisa la mochila! Mete la agenda
-13:40
+8:03
 ¿Tienes la agenda?
-11:42
+8:15
 true
-Coges el almuerzo y lo metes en la mochila
-11:00
-¿Has cogido el almuerzo y lo has metido en la mochila?
-11:10
+¡Revisa la mochila! Coge el almuerzo y lo metes en la mochila
+8:03
+¿Has cogido el almuerzo?
+8:15
 true
-¡Hay que salir de casa!.. Y coger el transporte adecuado
-11:20
+¡Hay que salir de casa!
+8:17
 ¿Has salido a la hora prevista?
-11:25
+8:25
+true
+¡Hay que salir de casa! Coge el transporte adecuado
+8:17
+¿Sabes que transporte tienes que coger?¿Has cogido el transporte a la hora prevista?
+8:25
+true
+A clase! Qué tengas un buen dia
+8:50
+¿Has llegado puntual?
+8:59
+true
+Revisa que hayas apuntado todos los deberes en tu agenda
+17:00
+¿Has apuntado en la agenda todos tus deberes?
+17:05
+true
+Revisa que llevas el material necesario para poder hacer tus deberes: libros, cuadernos, etc
+17:00
+¿Llevas todo el material necesario para trabajar esta tarde? ¿Llevas todos los libros que necesitas?
+17:05
+true
+¡Es hora de ducharse! Es muy imporortante que te laves bien todo el cuerpo, que te enjabones el pelo, que te aclares bien el pelo sin dejar jabon y que te seques bien
+20:30
+¿Te has duchado?
+20:50
+true
+Cuando salgas de la ducha ponte desodorante antes de ponerte el pijama
+20:30
+¿Te has puesto desodorante?
+20:50
+true
+Cuando salgas de la ducha echa la ropa sucia a lavar
+20:30
+¿Has echado la ropa sucia a lavar?
+20:50
+true
+Antes de irte a dormir comprueba que tienes todos los libros , materiales necesarios y la agenda en la mochila
+21:40
+¿Has metido todo lo necesario en la mochila?
+21:55
+true
+Antes de irte a dormir comprueba que no hay nada encima de la mesa o tirado por el suelo
+21:40
+¿Has revisado que no haya nada encima de la mesa o tirado por el suelo?
+21:55
+true
+Ademas prepara la ropa que te vas a poner mañana, ha de ser ROPA LIMPIA
+21:40
+¿Has elegido y has dejado preparada la ropa para el día siguiente? ¿Es ropa limpia?
+21:55
 true
