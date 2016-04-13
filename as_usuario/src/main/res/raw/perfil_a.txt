@@ -1,22 +1,22 @@
 Esto es una prueba de una notificación larga para ver que se muestra todo el texto de la alarma
-18:16
+20:55
 ¿Esto es una prueba de una regunta larga para ver que se muestra todo el texto de la pregunta?
-18:17
+20:56
 true
 ¡Vamos a desayunar!
-18:18
+21:00
 ¿Has desayunado? ¿Has dejado todo recogido?
-18:19
+21:01
 true
 ¡Es la hora del aseo! Tienes que: lavarte la cara, las axilas, etc.
-18:20
+21:03
 ¿Te has lavado antes de vestirte? Cara, Axilas...
-18:21
+21:04
 true
 ¡Es la hora del aseo! Tienes que: cepillarte los dientes
-18:22
+21:05
 ¿Te has lavado los dientes?
-18:23
+21:07
 true
 ¡Es la hora del aseo! Tienes que: ponerte desodorante y colonia
 18:24
