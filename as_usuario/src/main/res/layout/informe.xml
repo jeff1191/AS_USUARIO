@@ -4,7 +4,7 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical"
-    tools:context=".presentacion.MainActivity">
+    tools:context=".presentacion.vista.MainActivity">
 
             <LinearLayout
                 android:orientation="horizontal"

@@ -1,4 +1,4 @@
-package es.ucm.as_usuario.presentacion;
+package es.ucm.as_usuario.presentacion.vista;
 
 import android.app.Activity;
 import android.content.Intent;

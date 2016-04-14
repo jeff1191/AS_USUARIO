@@ -1,4 +1,4 @@
-package es.ucm.as_usuario.presentacion;
+package es.ucm.as_usuario.presentacion.vista;
 
 import android.content.Context;
 import android.graphics.Color;

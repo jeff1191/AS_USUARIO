@@ -12,7 +12,7 @@ import es.ucm.as_usuario.R;
 import es.ucm.as_usuario.negocio.suceso.Evento;
 import es.ucm.as_usuario.negocio.suceso.Reto;
 import es.ucm.as_usuario.negocio.suceso.Tarea;
-import es.ucm.as_usuario.presentacion.Contexto;
+import es.ucm.as_usuario.presentacion.vista.Contexto;
 
 /**
  * Created by msalitu on 14/03/2016.

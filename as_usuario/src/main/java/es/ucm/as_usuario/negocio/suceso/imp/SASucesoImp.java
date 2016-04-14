@@ -41,7 +41,7 @@ import es.ucm.as_usuario.negocio.suceso.TransferTarea;
 import es.ucm.as_usuario.negocio.usuario.SAUsuario;
 import es.ucm.as_usuario.negocio.usuario.TransferUsuario;
 import es.ucm.as_usuario.negocio.utils.Parser;
-import es.ucm.as_usuario.presentacion.Contexto;
+import es.ucm.as_usuario.presentacion.vista.Contexto;
 
 /**
  * Created by Jeffer on 02/03/2016.

@@ -1,4 +1,4 @@
-package es.ucm.as_usuario.presentacion;
+package es.ucm.as_usuario.presentacion.vista;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -7,11 +7,8 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.ImageView;
 
 import es.ucm.as_usuario.R;
-import es.ucm.as_usuario.presentacion.controlador.Controlador;
-import es.ucm.as_usuario.presentacion.controlador.ListaComandos;
 import it.sephiroth.android.library.imagezoom.ImageViewTouch;
 import it.sephiroth.android.library.imagezoom.ImageViewTouchBase;
 
