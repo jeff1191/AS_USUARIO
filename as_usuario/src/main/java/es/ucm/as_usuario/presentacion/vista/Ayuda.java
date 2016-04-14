@@ -22,7 +22,7 @@ public class Ayuda extends Activity{
         cargarTema();
         super.onCreate(savedInstanceState);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-        setContentView(R.layout.ayuda);
+        setContentView(R.layout.activity_ayuda);
         Bundle bundle = getIntent().getExtras();
         String pantalla = bundle.getString("pantalla");
         mImage = (ImageViewTouch)findViewById(R.id.imageView);
@@ -61,13 +61,13 @@ public class Ayuda extends Activity{
             case "principal":
                 mImage.setImageResource(R.drawable.ayuda_main);
                 break;
-            case "reto":
+            case "activity_reto":
                 mImage.setImageResource(R.drawable.ayuda_main);
                 break;
             case "configuracion":
                 mImage.setImageResource(R.drawable.ayuda_main);
                 break;
-            case "informe":
+            case "activity_informe":
                 mImage.setImageResource(R.drawable.ayuda_main);
                 break;
         }

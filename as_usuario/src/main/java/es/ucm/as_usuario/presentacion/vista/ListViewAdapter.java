@@ -52,7 +52,7 @@ public class ListViewAdapter extends BaseAdapter {
 
         inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-        View itemView = inflater.inflate(R.layout.list_row, parent, false);
+        View itemView = inflater.inflate(R.layout.list_row_tarea, parent, false);
 
         // Locacalizar en el listview_item.xml
         txtTitle = (TextView) itemView.findViewById(R.id.tarea);

@@ -37,7 +37,7 @@ import es.ucm.as_usuario.presentacion.controlador.Controlador;
 import es.ucm.as_usuario.presentacion.controlador.ListaComandos;
 
 /**
- * Clase asociada a la vista de personalizacion
+ * Clase asociada a la vista de activity_configuracion
  *
  * Created by Juan Lu on 24/02/2016.
  */
@@ -72,7 +72,7 @@ public class Configuracion extends Activity {
         cargarTema();
         super.onCreate(savedInstanceState);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-        setContentView(R.layout.personalizacion);
+        setContentView(R.layout.activity_configuracion);
         Bundle bundle = getIntent().getExtras();
         editarNombre = (EditText)findViewById(R.id.editarNombre);
         aceptar = (Button)findViewById(R.id.envioNuevaConfig);

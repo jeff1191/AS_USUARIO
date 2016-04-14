@@ -18,24 +18,24 @@ import es.ucm.as_usuario.presentacion.controlador.Controlador;
 import es.ucm.as_usuario.presentacion.controlador.ListaComandos;
 
 /**
- * Clase para que se muestre el reto
+ * Clase para que se muestre el activity_reto
  *
  * Created by Juan Lu on 25/02/2016.
  */
 public class VerReto extends Activity {
 
     private ProgressBar progreso;
-    private Integer contInt;    // contador del reto
+    private Integer contInt;    // contador del activity_reto
     private Integer nuevo;      // necesario para hacer el efecto de avance de la barra de progreso
     private TextView c;         // muestra el contador
-    private TextView tv;        // muestra el texto del reto
+    private TextView tv;        // muestra el texto del activity_reto
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         cargarTema();
         super.onCreate(savedInstanceState);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-        setContentView(R.layout.reto);
+        setContentView(R.layout.activity_reto);
 
 
         Bundle bundle = getIntent().getExtras();
@@ -75,7 +75,7 @@ public class VerReto extends Activity {
             progreso = (ProgressBar) findViewById(R.id.progressBar);
             progreso.setVisibility(View.INVISIBLE);
             TextView sup = (TextView) findViewById(R.id.tituloReto);
-            sup.setText("No tienes ningún reto");
+            sup.setText("No tienes ningún activity_reto");
             sup.setTextColor(Color.GRAY);
         }
     }
@@ -86,7 +86,7 @@ public class VerReto extends Activity {
     }
 
     public void ayuda(View v){
-        Controlador.getInstancia().ejecutaComando(ListaComandos.AYUDA, "reto");
+        Controlador.getInstancia().ejecutaComando(ListaComandos.AYUDA, "activity_reto");
     }
 
     public void responderRetoNO(View v){
@@ -119,7 +119,7 @@ public class VerReto extends Activity {
         }
         if (nuevo == 30){
             Toast toast = Toast.makeText(getApplicationContext(),
-                    "¡Enhorabuena! Has superado tu reto", Toast.LENGTH_LONG);
+                    "¡Enhorabuena! Has superado tu activity_reto", Toast.LENGTH_LONG);
             toast.show();
             Button si = (Button) findViewById(R.id.si);
             si.setEnabled(false);

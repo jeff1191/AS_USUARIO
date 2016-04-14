@@ -86,7 +86,7 @@ public class SASucesoImp implements SASuceso {
         try {
             dao = getHelper().getRetoDao();
 
-            if (dao.idExists(1)) {  // comprueba si hay algun reto en la BBDD
+            if (dao.idExists(1)) {  // comprueba si hay algun activity_reto en la BBDD
                 reto = (Reto) dao.queryForId(1);
                 tr.setContador(reto.getContador());
                 tr.setId(reto.getId());
@@ -110,7 +110,7 @@ public class SASucesoImp implements SASuceso {
             dao = getHelper().getRetoDao();
             reto = (Reto) dao.queryForId(1);
             if (!reto.equals(null)) {
-                //Si el reto no esta superado y se puede incrementar o decrementar aun se modifica
+                //Si el activity_reto no esta superado y se puede incrementar o decrementar aun se modifica
                 if (!reto.getSuperado() && respuesta == -1 && reto.getContador() > 0 ||
                         !reto.getSuperado() && respuesta == 1 && reto.getContador() <= 30) {
                     reto.setContador(reto.getContador() + respuesta);
@@ -201,7 +201,7 @@ public class SASucesoImp implements SASuceso {
     public void cargarRetoBBDD() {
         Parser p = new Parser();
         Dao<Reto, Integer> retoDao;
-        String texto = p.readReto();   // lee del fichero y obtiene el texto del reto
+        String texto = p.readReto();   // lee del fichero y obtiene el texto del activity_reto
         try {
             retoDao = getHelper().getRetoDao();
             Reto reto = p.toReto(texto);
@@ -216,7 +216,7 @@ public class SASucesoImp implements SASuceso {
     public void cargarEventosBBDD() {
         Parser p = new Parser();
         Dao<Evento, Integer> eventoDao;
-        p.readEventos();   // lee del fichero y convierte en eventos
+        p.readEventos();   // lee del fichero y convierte en activity_eventos
 
         // crea las nuevas tareas en BBDD si hubiera
         ArrayList<Evento> eventosBBDD = p.getEventos();
@@ -336,7 +336,7 @@ public class SASucesoImp implements SASuceso {
         document.add(new Paragraph("\n", paragraphFont));
 
 
-        // Mostramos el reto
+        // Mostramos el activity_reto
         document.add(new Paragraph("Reto", chapterFont));
         document.add(new Paragraph("\n", paragraphFont));
         Dao<Reto, Integer> retoDao;

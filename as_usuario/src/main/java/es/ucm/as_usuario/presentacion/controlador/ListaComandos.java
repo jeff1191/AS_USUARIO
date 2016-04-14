@@ -7,7 +7,7 @@ public class ListaComandos {
     public static final String RESPONDER_RETO = "responderReto";
     public static final String VER_RETO = "verReto";
     public static final String VER_EVENTOS = "verEventos";
-    public static final String AYUDA = "ayuda";
+    public static final String AYUDA = "activity_ayuda";
     public static final String VER_INFORME = "verInforme";
     public static final String ACTUALIZAR_PUNTUACION = "actualizarPuntuacion";
     public static final String CREAR_USUARIO = "crearUsuario";

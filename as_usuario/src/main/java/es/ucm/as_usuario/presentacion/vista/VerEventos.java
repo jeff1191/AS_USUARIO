@@ -17,7 +17,7 @@ import es.ucm.as_usuario.presentacion.controlador.Controlador;
 import es.ucm.as_usuario.presentacion.controlador.ListaComandos;
 
 /**
- * Clase para que se vean los eventos temporales
+ * Clase para que se vean los activity_eventos temporales
  *
  * Created by Juan Lu on 25/02/2016.
  */
@@ -30,7 +30,7 @@ public class VerEventos  extends Activity{
         cargarTema();
         super.onCreate(savedInstanceState);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-        setContentView(R.layout.eventos);
+        setContentView(R.layout.activity_eventos);
         listaEventos = (ListView)findViewById(R.id.listViewEventos);
         titulo = (TextView)findViewById(R.id.tituloEventos);
         Bundle bundle = getIntent().getExtras();
@@ -47,7 +47,7 @@ public class VerEventos  extends Activity{
                 titulo.setTextColor(Color.GRAY);
             }
             else{
-                titulo.setText("Próximos eventos");
+                titulo.setText("Próximos activity_eventos");
                 ArrayAdapter<String> adaptador = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, listaE);
                 listaEventos.setAdapter(adaptador);
             }
@@ -61,7 +61,7 @@ public class VerEventos  extends Activity{
     }
 
     public void ayuda(View v){
-        Controlador.getInstancia().ejecutaComando(ListaComandos.AYUDA, "eventos");
+        Controlador.getInstancia().ejecutaComando(ListaComandos.AYUDA, "activity_eventos");
     }
 
 

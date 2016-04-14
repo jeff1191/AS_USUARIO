@@ -19,7 +19,7 @@ import es.ucm.as_usuario.presentacion.controlador.Controlador;
 import es.ucm.as_usuario.presentacion.controlador.ListaComandos;
 
 /**
- * Clase para que se vean los eventos temporales
+ * Clase para que se vean los activity_eventos temporales
  *
  * Created by msalitu on 09/03/2015.
  */
@@ -32,7 +32,7 @@ public class VerInforme extends Activity{
         cargarTema();
         super.onCreate(savedInstanceState);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-        setContentView(R.layout.informe);
+        setContentView(R.layout.activity_informe);
 
         TextView titulo = (TextView)findViewById(R.id.tituloInforme);
         titulo.setText("¿Cómo vas?");
@@ -59,7 +59,7 @@ public class VerInforme extends Activity{
 
         LayoutInflater inflater = getLayoutInflater();
         /*Se establece la fila cabecera, el problema es que no es sticky
-        View header = inflater.inflate(R.layout.list_header, lista, false);
+        View header = inflater.inflate(R.layout.list_header_tarea, lista, false);
         lista.addHeaderView(header, null, false);
         */
 
@@ -80,7 +80,7 @@ public class VerInforme extends Activity{
     }
 
     public void ayuda(View v){
-        Controlador.getInstancia().ejecutaComando(ListaComandos.AYUDA, "informe");
+        Controlador.getInstancia().ejecutaComando(ListaComandos.AYUDA, "activity_informe");
     }
 
     public void cargarTema(){
