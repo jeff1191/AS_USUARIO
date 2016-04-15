@@ -11,6 +11,7 @@ import es.ucm.as_usuario.presentacion.controlador.comandos.imp.CrearUsuarioComan
 import es.ucm.as_usuario.presentacion.controlador.comandos.imp.EditarUsuarioComando;
 import es.ucm.as_usuario.presentacion.controlador.comandos.imp.EnviarCorreoComando;
 import es.ucm.as_usuario.presentacion.controlador.comandos.imp.GenerarPDFComando;
+import es.ucm.as_usuario.presentacion.controlador.comandos.imp.GuardarEventosComando;
 import es.ucm.as_usuario.presentacion.controlador.comandos.imp.ResponderRetoComando;
 import es.ucm.as_usuario.presentacion.controlador.comandos.imp.VerAyudaComando;
 import es.ucm.as_usuario.presentacion.controlador.comandos.imp.VerEventosComando;
@@ -63,6 +64,8 @@ public class FactoriaComandosImp extends FactoriaComandos {
                 break;
             case ListaComandos.ENVIAR_CORREO:
                 ret = new EnviarCorreoComando();
+            case ListaComandos.GUARDAR_EVENTOS:
+                ret = new GuardarEventosComando();
         }
 
         return ret;

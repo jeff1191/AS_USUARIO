@@ -70,7 +70,8 @@ public class SASucesoImp implements SASuceso {
             eventos = getHelper().getEventoDao();
             listaEventos= eventos.queryForAll();
             for(int i = 0; i < listaEventos.size(); i++)
-                transferEventos.add(new TransferEvento(listaEventos.get(i)));
+                transferEventos.add(new TransferEvento(listaEventos.get(i).getId(),listaEventos.get(i).getTextoAlarma(),
+                        listaEventos.get(i).getTextoFecha(),listaEventos.get(i).getHoraAlarma(),listaEventos.get(i).getAsistencia()));
 
         } catch (SQLException e) {
 
@@ -223,8 +224,10 @@ public class SASucesoImp implements SASuceso {
         for (int i = 0; i < eventosBBDD.size(); i++){
             try {
                 eventoDao = getHelper().getEventoDao();
-                if (eventoDao.queryForEq("TEXTO_ALARMA", eventosBBDD.get(i).getTextoAlarma()).size() == 0)
+                if (eventoDao.queryForEq("TEXTO_ALARMA", eventosBBDD.get(i).getTextoAlarma()).size() == 0) {
+                    eventosBBDD.get(i).setAsistencia(0); // Al principio No va a ningun evento
                     eventoDao.create(eventosBBDD.get(i));
+                }
 
             } catch (SQLException e) {
                 e.printStackTrace();
@@ -411,6 +414,23 @@ public class SASucesoImp implements SASuceso {
 
         document.close();
         return f.getAbsolutePath();
+    }
+
+    @Override
+    public void guardarEventos(List<TransferEvento> eventosRespuesta) {
+
+        Dao<Evento, Integer> eventos;
+        try {
+            eventos = getHelper().getEventoDao();
+            for(int i=0; i < eventosRespuesta.size();i++){
+                Evento actualizar = eventos.queryForId(eventosRespuesta.get(i).getId());
+                actualizar.setAsistencia(eventosRespuesta.get(i).getAsistencia());
+                eventos.update(actualizar);
+            }
+
+        } catch (SQLException e) {
+
+        }
     }
 
 }

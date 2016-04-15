@@ -66,6 +66,40 @@
                     android:gravity="center"
                     android:textStyle="bold" />
 
+                <!--  listheader  -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="0.75"
+                    android:orientation="horizontal"
+                    android:gravity="center">
+
+                    <!-- Titulo -->
+                    <Button
+                        android:id="@+id/tarea"
+                        android:layout_width="0dp"
+                        android:layout_weight="5"
+                        android:layout_height="match_parent"
+                        android:text="Evento"
+                        android:textStyle="bold"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:gravity="center" />
+
+
+                    <Button
+                        android:id="@+id/no"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text="Voy"
+                        android:textStyle="bold"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:layout_centerVertical="true"
+                        android:layout_toRightOf="@+id/si"
+                        android:gravity="center" />
+
+                </LinearLayout>
+
                 <ListView
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
@@ -73,8 +107,28 @@
                     android:id="@+id/listViewEventos"
                     android:gravity="center"
                     android:isScrollContainer="true"
+                    android:choiceMode="singleChoice"
                     android:paddingLeft="20dp"
                     android:paddingRight="20dp" />
 
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_weight="0.7"
+                    android:gravity="center"
+                    android:isScrollContainer="true"
+                    android:paddingLeft="20dp"
+                    android:paddingRight="20dp"
+                    android:text="Guardar"
+                    android:id="@+id/guardarEvento" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="0.2">
+
+                </LinearLayout>
+
             </LinearLayout>
+
 </RelativeLayout>

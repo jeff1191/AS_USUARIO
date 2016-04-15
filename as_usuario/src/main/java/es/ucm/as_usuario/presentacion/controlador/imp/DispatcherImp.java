@@ -33,11 +33,17 @@ public class DispatcherImp extends Dispatcher{
                 Intent intent = new Intent(Contexto.getInstancia().getContext().getApplicationContext(), VerEventos.class);
                 List<TransferEvento> eventosModelo= (List<TransferEvento>) datos;
                 ArrayList<String> listaActividad= new ArrayList<String>();
+                ArrayList<Integer> listaIds = new ArrayList<Integer>();
+                ArrayList<Integer> listaActivos = new ArrayList<Integer>();
                 for(int i=0; i < eventosModelo.size(); i++){
                     String addEvento= eventosModelo.get(i).getTextoAlarma() + " el " + eventosModelo.get(i).getTextoFecha();
                     listaActividad.add(addEvento);
+                    listaIds.add(eventosModelo.get(i).getId());
+                    listaActivos.add(eventosModelo.get(i).getAsistencia());
                 }
                 intent.putStringArrayListExtra("listaEventos", listaActividad);
+                intent.putIntegerArrayListExtra("listaIds", listaIds);
+                intent.putIntegerArrayListExtra("listaAsistencia", listaActivos);
                 Contexto.getInstancia().getContext().startActivity(intent);
                 break;
 
@@ -133,6 +139,10 @@ public class DispatcherImp extends Dispatcher{
                 break;
 
             case ListaComandos.ENVIAR_CORREO:
+                break;
+            case ListaComandos.GUARDAR_EVENTOS:
+                Intent iGuardarEvento = new Intent(Contexto.getInstancia().getContext().getApplicationContext(), MainActivity.class);
+                Contexto.getInstancia().getContext().startActivity(iGuardarEvento);
                 break;
         }
     }

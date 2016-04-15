@@ -1,66 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    android:gravity="center">
+    android:layout_width="fill_parent">
 
-    <!--  listrow  -->
-
-    <!-- texto de la tarea -->
     <TextView
-        android:id="@+id/tarea"
         android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="4"
+        android:paddingRight="20dp"
+        android:id="@+id/nombreEvento"
+        android:focusable="false"
+        android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium"
+        android:gravity="center_vertical">
+    </TextView>
+    <CheckBox
+        android:id="@+id/chkItem"
+        android:visibility="visible"
+        android:layout_width="wrap_content"
+        android:editable="false"
         android:layout_height="wrap_content"
-        android:layout_weight="5"
-        android:text="Dar los buenos días a mamá"
-        android:textColor="@color/negro"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:gravity="left"
-        android:paddingLeft="10dp" />
-
-
-
-    <!-- numero de veces que se respondio que si-->
-    <TextView
-        android:id="@+id/si"
-        android:layout_width="0dp"
-        android:layout_weight="1"
-        android:layout_height="wrap_content"
-        android:text="5"
-        android:textColor="@color/verde"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:layout_toRightOf="@+id/tarea"
-        android:gravity="center"
-         />
-
-
-    <!-- numero de veces que se respondio que no-->
-    <TextView
-        android:id="@+id/no"
-        android:layout_width="0dp"
-        android:layout_weight="1"
-        android:layout_height="wrap_content"
-        android:text="4"
-        android:textColor="@color/rojo"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:layout_toRightOf="@+id/si"
-        android:gravity="center"
-
-        />
-
-    <!-- total diferencia-->
-    <TextView
-        android:id="@+id/total"
-        android:layout_width="0dp"
-        android:layout_weight="1"
-        android:layout_height="wrap_content"
-        android:text="1"
-        android:textColor="@color/verde"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:layout_toRightOf="@+id/no"
-        android:gravity="center" />
-
-
+        android:focusable="false"
+        android:gravity="right"
+        android:clickable="false" />
 </LinearLayout>

@@ -17,14 +17,16 @@ public class TransferEvento {
     private String textoAlarma;
     private String textoFecha;
     private Date horaAlarma;
+    private Integer asistencia;
 
     public TransferEvento(){    }
 
-    public TransferEvento(Evento evento){
-        this.id = evento.getId();
-        this.textoAlarma = evento.getTextoAlarma();
-        this.textoFecha = evento.getTextoFecha();
-        this.horaAlarma = evento.getHoraAlarma();
+    public TransferEvento(Integer id, String textoAlarma, String textoFecha, Date horaAlarma,Integer asistencia){
+        this.id = id;
+        this.textoAlarma = textoAlarma;
+        this.textoFecha = textoFecha;
+        this.horaAlarma = horaAlarma;
+        this.asistencia= asistencia;
     }
 
     public Integer getId() {
@@ -57,6 +59,13 @@ public class TransferEvento {
 
     public void setTextoFecha(String textoFecha) {
         this.textoFecha = textoFecha;
+    }
+    public void setAsistencia(int asistencia) {
+        this.asistencia = asistencia;
+    }
+
+    public Integer getAsistencia() {
+        return asistencia;
     }
 }
 
