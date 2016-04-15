@@ -13,6 +13,7 @@ import es.ucm.as_usuario.presentacion.vista.Ayuda;
 import es.ucm.as_usuario.presentacion.vista.Configuracion;
 import es.ucm.as_usuario.presentacion.vista.Contexto;
 import es.ucm.as_usuario.presentacion.vista.MainActivity;
+import es.ucm.as_usuario.presentacion.vista.Registro;
 import es.ucm.as_usuario.presentacion.vista.VerEventos;
 import es.ucm.as_usuario.presentacion.vista.VerInforme;
 import es.ucm.as_usuario.presentacion.vista.VerReto;
@@ -111,20 +112,18 @@ public class DispatcherImp extends Dispatcher{
                 break;
 
             case ListaComandos.CONSULTAR_USUARIO:
-                Intent iUsuario = new Intent(Contexto.getInstancia().getContext().getApplicationContext(), MainActivity.class);
                 TransferUsuario transferUsuario = (TransferUsuario)datos;
-                if (transferUsuario!= null) {
-                    iUsuario.putExtra("nombre", transferUsuario.getNombre());
-                    iUsuario.putExtra("correo", transferUsuario.getCorreo());
-                    iUsuario.putExtra("avatar", transferUsuario.getAvatar());
-                    iUsuario.putExtra("puntuacion", transferUsuario.getPuntuacion());
-                    iUsuario.putExtra("puntuacionAnterior", transferUsuario.getPuntuacionAnterior());
-                    iUsuario.putExtra("color", transferUsuario.getColor());
-                    iUsuario.putExtra("tono", transferUsuario.getTono());
-                    iUsuario.putExtra("nombre tutor", transferUsuario.getNombreTutor());
-                    iUsuario.putExtra("correo tutor", transferUsuario.getCorreoTutor());
-                }             
-                Contexto.getInstancia().getContext().startActivity(iUsuario);
+                Intent hayUsuario = new Intent(Contexto.getInstancia().getContext().getApplicationContext(), MainActivity.class);
+                hayUsuario.putExtra("nombre", transferUsuario.getNombre());
+                hayUsuario.putExtra("correo", transferUsuario.getCorreo());
+                hayUsuario.putExtra("avatar", transferUsuario.getAvatar());
+                hayUsuario.putExtra("puntuacion", transferUsuario.getPuntuacion());
+                hayUsuario.putExtra("puntuacionAnterior", transferUsuario.getPuntuacionAnterior());
+                hayUsuario.putExtra("color", transferUsuario.getColor());
+                hayUsuario.putExtra("tono", transferUsuario.getTono());
+                hayUsuario.putExtra("nombre tutor", transferUsuario.getNombreTutor());
+                hayUsuario.putExtra("correo tutor", transferUsuario.getCorreoTutor());
+                Contexto.getInstancia().getContext().startActivity(hayUsuario);
                 break;
 
             case ListaComandos.CARGAR_BBDD:
