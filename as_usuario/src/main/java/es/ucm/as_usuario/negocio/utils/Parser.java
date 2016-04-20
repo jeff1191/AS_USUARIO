@@ -4,14 +4,15 @@ package es.ucm.as_usuario.negocio.utils;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 
 import es.ucm.as_usuario.R;
 import es.ucm.as_usuario.negocio.suceso.Evento;
 import es.ucm.as_usuario.negocio.suceso.Reto;
 import es.ucm.as_usuario.negocio.suceso.Tarea;
-import es.ucm.as_usuario.presentacion.Contexto;
+import es.ucm.as_usuario.presentacion.vista.Contexto;
 
 /**
  * Created by msalitu on 14/03/2016.
@@ -50,6 +51,8 @@ public class Parser {
         String alarma = "";
         String pregunta = "";
         String habilitada = "";
+        String horaPregunta = "";
+        String horaAlarma = "";
         try {
             InputStream fraw = Contexto.getInstancia().getContext().getResources().openRawResource(R.raw.perfil_a);
 
@@ -58,13 +61,15 @@ public class Parser {
 
             while(alarma != null){
                 alarma = brin.readLine();
+                horaAlarma = brin.readLine();
                 pregunta = brin.readLine();
+                horaPregunta = brin.readLine();
                 habilitada = brin.readLine();
-                if (alarma != null && pregunta != null) {
+                if (alarma != null && horaAlarma != null && pregunta != null && horaPregunta != null) {
                     if (habilitada.equals("true"))
-                        tareas.add(toTarea(alarma, pregunta));
+                        tareas.add(toTarea(alarma, pregunta, horaAlarma, horaPregunta));
                     else
-                        tareasObsoletas.add(toTarea(alarma, pregunta));
+                        tareasObsoletas.add(toTarea(alarma, pregunta, horaAlarma, horaPregunta));
                 }
             }
             fraw.close();
@@ -119,10 +124,18 @@ public class Parser {
     }
 
     /*A partir de dos Strings crea una pregunta con esos textos de alarma y pregunta*/
-    public Tarea toTarea(String textoAlarma, String textoPregunta){
+    public Tarea toTarea(String textoAlarma, String textoPregunta, String horaAlarma, String horaPregunta){
         Tarea ret = new Tarea();
+        SimpleDateFormat horasMinutos = new SimpleDateFormat("HH:mm");
         ret.setTextoAlarma(textoAlarma);
         ret.setTextoPregunta(textoPregunta);
+        try {
+            ret.setHoraAlarma(horasMinutos.parse(horaAlarma));
+            ret.setHoraPregunta(horasMinutos.parse(horaPregunta));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
         return ret;
     }
 

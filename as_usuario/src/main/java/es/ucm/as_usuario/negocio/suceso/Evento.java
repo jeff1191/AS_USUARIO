@@ -24,6 +24,9 @@ public class Evento {
 	@DatabaseField(columnName = "HORA_ALARMA" ,dataType = DataType.DATE_STRING, format = "dd-MM-yyyy HH:mm:ss")
 	private Date horaAlarma;
 
+	@DatabaseField(columnName = "ASISTENCIA")  //1 va al evento,  0 no va
+	private Integer asistencia;
+
 	public Integer getId() {
 		return id;
 	}
@@ -56,5 +59,12 @@ public class Evento {
 		this.textoFecha = textoFecha;
 	}
 
+	public Integer getAsistencia() {
+		return asistencia;
+	}
+
+	public void setAsistencia(Integer asistencia) {
+		this.asistencia = asistencia;
+	}
 
 }

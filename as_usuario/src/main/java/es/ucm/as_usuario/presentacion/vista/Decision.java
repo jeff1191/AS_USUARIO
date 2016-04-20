@@ -1,4 +1,4 @@
-package es.ucm.as_usuario.presentacion;
+package es.ucm.as_usuario.presentacion.vista;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -26,6 +26,7 @@ public class Decision extends Activity {
 
             if (cargarUsuario == null){
                 Intent intent = new Intent().setClass(Decision.this, Registro.class);
+                intent.setFlags(intent.getFlags() | Intent.FLAG_ACTIVITY_NO_HISTORY);
                 startActivity(intent);
             }
             else{

@@ -1,16 +1,14 @@
-package es.ucm.as_usuario.presentacion;
+package es.ucm.as_usuario.presentacion.vista;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.ImageView;
 
 import es.ucm.as_usuario.R;
-import es.ucm.as_usuario.presentacion.controlador.Controlador;
-import es.ucm.as_usuario.presentacion.controlador.ListaComandos;
 import it.sephiroth.android.library.imagezoom.ImageViewTouch;
 import it.sephiroth.android.library.imagezoom.ImageViewTouchBase;
 
@@ -23,7 +21,8 @@ public class Ayuda extends Activity{
     protected void onCreate(Bundle savedInstanceState) {
         cargarTema();
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.ayuda);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        setContentView(R.layout.activity_ayuda);
         Bundle bundle = getIntent().getExtras();
         String pantalla = bundle.getString("pantalla");
         mImage = (ImageViewTouch)findViewById(R.id.imageView);
@@ -62,13 +61,13 @@ public class Ayuda extends Activity{
             case "principal":
                 mImage.setImageResource(R.drawable.ayuda_main);
                 break;
-            case "reto":
+            case "activity_reto":
                 mImage.setImageResource(R.drawable.ayuda_main);
                 break;
             case "configuracion":
                 mImage.setImageResource(R.drawable.ayuda_main);
                 break;
-            case "informe":
+            case "activity_informe":
                 mImage.setImageResource(R.drawable.ayuda_main);
                 break;
         }

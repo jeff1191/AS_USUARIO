@@ -3,7 +3,6 @@ package es.ucm.as_usuario.negocio.suceso.imp;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Environment;
-import android.util.Log;
 
 import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Document;
@@ -42,9 +41,7 @@ import es.ucm.as_usuario.negocio.suceso.TransferTarea;
 import es.ucm.as_usuario.negocio.usuario.SAUsuario;
 import es.ucm.as_usuario.negocio.usuario.TransferUsuario;
 import es.ucm.as_usuario.negocio.utils.Parser;
-import es.ucm.as_usuario.presentacion.Contexto;
-import es.ucm.as_usuario.presentacion.notificaciones.NotificacionAlarma;
-import es.ucm.as_usuario.presentacion.notificaciones.NotificacionPregunta;
+import es.ucm.as_usuario.presentacion.vista.Contexto;
 
 /**
  * Created by Jeffer on 02/03/2016.
@@ -73,7 +70,8 @@ public class SASucesoImp implements SASuceso {
             eventos = getHelper().getEventoDao();
             listaEventos= eventos.queryForAll();
             for(int i = 0; i < listaEventos.size(); i++)
-                transferEventos.add(new TransferEvento(listaEventos.get(i)));
+                transferEventos.add(new TransferEvento(listaEventos.get(i).getId(),listaEventos.get(i).getTextoAlarma(),
+                        listaEventos.get(i).getTextoFecha(),listaEventos.get(i).getHoraAlarma(),listaEventos.get(i).getAsistencia()));
 
         } catch (SQLException e) {
 
@@ -89,7 +87,7 @@ public class SASucesoImp implements SASuceso {
         try {
             dao = getHelper().getRetoDao();
 
-            if (dao.idExists(1)) {  // comprueba si hay algun reto en la BBDD
+            if (dao.idExists(1)) {  // comprueba si hay algun activity_reto en la BBDD
                 reto = (Reto) dao.queryForId(1);
                 tr.setContador(reto.getContador());
                 tr.setId(reto.getId());
@@ -113,7 +111,7 @@ public class SASucesoImp implements SASuceso {
             dao = getHelper().getRetoDao();
             reto = (Reto) dao.queryForId(1);
             if (!reto.equals(null)) {
-                //Si el reto no esta superado y se puede incrementar o decrementar aun se modifica
+                //Si el activity_reto no esta superado y se puede incrementar o decrementar aun se modifica
                 if (!reto.getSuperado() && respuesta == -1 && reto.getContador() > 0 ||
                         !reto.getSuperado() && respuesta == 1 && reto.getContador() <= 30) {
                     reto.setContador(reto.getContador() + respuesta);
@@ -167,6 +165,8 @@ public class SASucesoImp implements SASuceso {
     }
 
     @Override
+
+
     public void cargarTareasBBDD() {
         Parser p = new Parser();
         Dao<Tarea, Integer> tareaDao;
@@ -202,7 +202,7 @@ public class SASucesoImp implements SASuceso {
     public void cargarRetoBBDD() {
         Parser p = new Parser();
         Dao<Reto, Integer> retoDao;
-        String texto = p.readReto();   // lee del fichero y obtiene el texto del reto
+        String texto = p.readReto();   // lee del fichero y obtiene el texto del activity_reto
         try {
             retoDao = getHelper().getRetoDao();
             Reto reto = p.toReto(texto);
@@ -217,15 +217,17 @@ public class SASucesoImp implements SASuceso {
     public void cargarEventosBBDD() {
         Parser p = new Parser();
         Dao<Evento, Integer> eventoDao;
-        p.readEventos();   // lee del fichero y convierte en eventos
+        p.readEventos();   // lee del fichero y convierte en activity_eventos
 
         // crea las nuevas tareas en BBDD si hubiera
         ArrayList<Evento> eventosBBDD = p.getEventos();
         for (int i = 0; i < eventosBBDD.size(); i++){
             try {
                 eventoDao = getHelper().getEventoDao();
-                if (eventoDao.queryForEq("TEXTO_ALARMA", eventosBBDD.get(i).getTextoAlarma()).size() == 0)
+                if (eventoDao.queryForEq("TEXTO_ALARMA", eventosBBDD.get(i).getTextoAlarma()).size() == 0) {
+                    eventosBBDD.get(i).setAsistencia(0); // Al principio No va a ningun evento
                     eventoDao.create(eventosBBDD.get(i));
+                }
 
             } catch (SQLException e) {
                 e.printStackTrace();
@@ -243,58 +245,6 @@ public class SASucesoImp implements SASuceso {
                 e.printStackTrace();
             }
         }
-    }
-
-    public void cargarNotificaciones() {
-
-        NotificacionAlarma alarma = new NotificacionAlarma();
-        NotificacionPregunta pregunta = new NotificacionPregunta();
-        Log.e("prueba", "Variables inicializadas...");
-        Log.e("prueba", "Vamos a ello...");
-        alarma.lanzarAlarma(Contexto.getInstancia().getContext().getApplicationContext(),
-                14, 19, "Desayunar", "Vamos a desayunar!");
-        pregunta.lanzarPregunta(Contexto.getInstancia().getContext().getApplicationContext(),
-                14, 20 , "Desayunar", "¿Has desayunado?/¿Has dejado todo recogido?");
-        /*alarma.lanzarAlarma(Contexto.getInstancia().getContext().getApplicationContext(),
-                21, 5, "Aseo personal", "Es la hora del aseo... tienes que... " +
-                        "/Lavarte la cara, las axilas, etc..." +
-                        "/Lavarte los dientes" +
-                        "/Ponerte desodorante" +
-                        "/Ponerte colonia" +
-                        "/Peinarte");
-        pregunta.lanzarPregunta(Contexto.getInstancia().getContext().getApplicationContext(),
-                21, 5, "Aseo personal", "¿Te has lavado antes de vestirte? Cara, Axilas..." +
-                "/¿Te has lavado los dientes?" +
-                "/¿Te has puesto desodorante y colonia?" +
-                "/¿Te has peinado?");
-        */
-       /* Parser p = new Parser();
-        Dao<Tarea, Integer> tareaDao;
-        p.readTareas();   // lee del fichero y convierte en tareas
-
-        // crea las nuevas tareas en BBDD si hubiera
-        ArrayList<Tarea> tareasBBDD = p.getTareas();
-        for (int i = 0; i < tareasBBDD.size(); i++){
-            try {
-                tareaDao = getHelper().getTareaDao();
-                if (tareaDao.queryForEq("TEXTO_ALARMA", tareasBBDD.get(i).getTextoAlarma()).size() == 0)
-                    tareaDao.create(tareasBBDD.get(i));
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        }
-
-        // elimina las tareas que el tutor ha deshabilitado o borrado
-        ArrayList<Tarea> tareasObsoletas = p.getTareasObsoletas();
-        for (int i = 0; i < tareasObsoletas.size(); i++){
-            try {
-                tareaDao = getHelper().getTareaDao();
-                if (tareaDao.queryForEq("TEXTO_ALARMA", tareasObsoletas.get(i).getTextoAlarma()).size() != 0)
-                    tareaDao.delete(tareaDao.queryForEq("TEXTO_ALARMA", tareasObsoletas.get(i).getTextoAlarma()));
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        }*/
     }
 
     public static File crearFichero(String nombreFichero) throws IOException {
@@ -389,7 +339,7 @@ public class SASucesoImp implements SASuceso {
         document.add(new Paragraph("\n", paragraphFont));
 
 
-        // Mostramos el reto
+        // Mostramos el activity_reto
         document.add(new Paragraph("Reto", chapterFont));
         document.add(new Paragraph("\n", paragraphFont));
         Dao<Reto, Integer> retoDao;
@@ -464,6 +414,23 @@ public class SASucesoImp implements SASuceso {
 
         document.close();
         return f.getAbsolutePath();
+    }
+
+    @Override
+    public void guardarEventos(List<TransferEvento> eventosRespuesta) {
+
+        Dao<Evento, Integer> eventos;
+        try {
+            eventos = getHelper().getEventoDao();
+            for(int i=0; i < eventosRespuesta.size();i++){
+                Evento actualizar = eventos.queryForId(eventosRespuesta.get(i).getId());
+                actualizar.setAsistencia(eventosRespuesta.get(i).getAsistencia());
+                eventos.update(actualizar);
+            }
+
+        } catch (SQLException e) {
+
+        }
     }
 
 }

@@ -9,13 +9,14 @@ import es.ucm.as_usuario.negocio.suceso.TransferEvento;
 import es.ucm.as_usuario.negocio.suceso.TransferReto;
 import es.ucm.as_usuario.negocio.suceso.TransferTarea;
 import es.ucm.as_usuario.negocio.usuario.TransferUsuario;
-import es.ucm.as_usuario.presentacion.Ayuda;
-import es.ucm.as_usuario.presentacion.Configuracion;
-import es.ucm.as_usuario.presentacion.Contexto;
-import es.ucm.as_usuario.presentacion.MainActivity;
-import es.ucm.as_usuario.presentacion.VerEventos;
-import es.ucm.as_usuario.presentacion.VerInforme;
-import es.ucm.as_usuario.presentacion.VerReto;
+import es.ucm.as_usuario.presentacion.vista.Ayuda;
+import es.ucm.as_usuario.presentacion.vista.Configuracion;
+import es.ucm.as_usuario.presentacion.vista.Contexto;
+import es.ucm.as_usuario.presentacion.vista.MainActivity;
+import es.ucm.as_usuario.presentacion.vista.Registro;
+import es.ucm.as_usuario.presentacion.vista.VerEventos;
+import es.ucm.as_usuario.presentacion.vista.VerInforme;
+import es.ucm.as_usuario.presentacion.vista.VerReto;
 import es.ucm.as_usuario.presentacion.controlador.Dispatcher;
 import es.ucm.as_usuario.presentacion.controlador.ListaComandos;
 
@@ -32,11 +33,17 @@ public class DispatcherImp extends Dispatcher{
                 Intent intent = new Intent(Contexto.getInstancia().getContext().getApplicationContext(), VerEventos.class);
                 List<TransferEvento> eventosModelo= (List<TransferEvento>) datos;
                 ArrayList<String> listaActividad= new ArrayList<String>();
+                ArrayList<Integer> listaIds = new ArrayList<Integer>();
+                ArrayList<Integer> listaActivos = new ArrayList<Integer>();
                 for(int i=0; i < eventosModelo.size(); i++){
                     String addEvento= eventosModelo.get(i).getTextoAlarma() + " el " + eventosModelo.get(i).getTextoFecha();
                     listaActividad.add(addEvento);
+                    listaIds.add(eventosModelo.get(i).getId());
+                    listaActivos.add(eventosModelo.get(i).getAsistencia());
                 }
                 intent.putStringArrayListExtra("listaEventos", listaActividad);
+                intent.putIntegerArrayListExtra("listaIds", listaIds);
+                intent.putIntegerArrayListExtra("listaAsistencia", listaActivos);
                 Contexto.getInstancia().getContext().startActivity(intent);
                 break;
 
@@ -94,8 +101,8 @@ public class DispatcherImp extends Dispatcher{
                     si.add(tt.getNumSi());
                 }
 
-                intentTareas.putExtra("puntuacion actual",tu.getPuntuacion() );
-                intentTareas.putExtra("puntuacion anterior", tu.getPuntuacionAnterior());
+                intentTareas.putExtra("puntuacion",tu.getPuntuacion() );
+                intentTareas.putExtra("puntuacionAnterior", tu.getPuntuacionAnterior());
                 intentTareas.putStringArrayListExtra("titulos", titulos);
                 intentTareas.putIntegerArrayListExtra("no", no);
                 intentTareas.putIntegerArrayListExtra("si", si);
@@ -111,20 +118,18 @@ public class DispatcherImp extends Dispatcher{
                 break;
 
             case ListaComandos.CONSULTAR_USUARIO:
-                Intent iUsuario = new Intent(Contexto.getInstancia().getContext().getApplicationContext(), MainActivity.class);
                 TransferUsuario transferUsuario = (TransferUsuario)datos;
-                if (transferUsuario!= null) {
-                    iUsuario.putExtra("nombre", transferUsuario.getNombre());
-                    iUsuario.putExtra("correo", transferUsuario.getCorreo());
-                    iUsuario.putExtra("avatar", transferUsuario.getAvatar());
-                    iUsuario.putExtra("puntuacion", transferUsuario.getPuntuacion());
-                    iUsuario.putExtra("puntuacion anterior", transferUsuario.getPuntuacionAnterior());
-                    iUsuario.putExtra("color", transferUsuario.getColor());
-                    iUsuario.putExtra("tono", transferUsuario.getTono());
-                    iUsuario.putExtra("nombre tutor", transferUsuario.getNombreTutor());
-                    iUsuario.putExtra("correo tutor", transferUsuario.getCorreoTutor());
-                }             
-                Contexto.getInstancia().getContext().startActivity(iUsuario);
+                Intent hayUsuario = new Intent(Contexto.getInstancia().getContext().getApplicationContext(), MainActivity.class);
+                hayUsuario.putExtra("nombre", transferUsuario.getNombre());
+                hayUsuario.putExtra("correo", transferUsuario.getCorreo());
+                hayUsuario.putExtra("avatar", transferUsuario.getAvatar());
+                hayUsuario.putExtra("puntuacion", transferUsuario.getPuntuacion());
+                hayUsuario.putExtra("puntuacionAnterior", transferUsuario.getPuntuacionAnterior());
+                hayUsuario.putExtra("color", transferUsuario.getColor());
+                hayUsuario.putExtra("tono", transferUsuario.getTono());
+                hayUsuario.putExtra("nombre tutor", transferUsuario.getNombreTutor());
+                hayUsuario.putExtra("correo tutor", transferUsuario.getCorreoTutor());
+                Contexto.getInstancia().getContext().startActivity(hayUsuario);
                 break;
 
             case ListaComandos.CARGAR_BBDD:
@@ -135,8 +140,9 @@ public class DispatcherImp extends Dispatcher{
 
             case ListaComandos.ENVIAR_CORREO:
                 break;
-
-            case ListaComandos.CARGAR_NOTIFICACIONES:
+            case ListaComandos.GUARDAR_EVENTOS:
+                Intent iGuardarEvento = new Intent(Contexto.getInstancia().getContext().getApplicationContext(), MainActivity.class);
+                Contexto.getInstancia().getContext().startActivity(iGuardarEvento);
                 break;
         }
     }

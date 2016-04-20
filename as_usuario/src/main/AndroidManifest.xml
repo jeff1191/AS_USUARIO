@@ -1,14 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="es.ucm.as_usuario">
-    
+
+    <!-- Permisos requeridos -->
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="false" />
+
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <!-- Final permisos requeridos -->
+
     <application
         android:allowBackup="true"
         android:icon="@drawable/logo"
         android:theme="@style/AS_tema_azul">
 
         <activity
-            android:name=".presentacion.Bienvenido"
+            android:name=".presentacion.vista.Bienvenido"
             android:label="@string/app_name"
             android:theme="@android:style/Theme.NoTitleBar">
             <intent-filter>
@@ -16,16 +29,28 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".presentacion.Decision" />
-        <activity android:name=".presentacion.MainActivity" />
-        <activity android:name=".presentacion.Configuracion" />
-        <activity android:name=".presentacion.VerReto" />
-        <activity android:name=".presentacion.VerEventos" />
-        <activity android:name=".presentacion.Ayuda"/>
-        <activity android:name=".presentacion.VerInforme"/>
-        <activity android:name=".presentacion.Registro"/>
-        <activity android:name=".presentacion.Correo"/>
-        <activity android:name=".presentacion.notificaciones.GestorRespuestas"/>
+
+        <activity android:name=".presentacion.vista.Decision" />
+
+        <activity android:name=".presentacion.vista.MainActivity" />
+
+        <activity
+            android:name=".presentacion.vista.Configuracion"
+            android:windowSoftInputMode="adjustPan">
+        </activity>
+
+        <activity android:name=".presentacion.vista.VerReto" />
+
+        <activity android:name=".presentacion.vista.VerEventos" />
+
+        <activity android:name=".presentacion.vista.Ayuda" />
+
+        <activity android:name=".presentacion.vista.VerInforme" />
+
+        <activity android:name=".presentacion.vista.Registro"
+            android:windowSoftInputMode="adjustPan">
+        </activity>
+
 
         <service
             android:name=".presentacion.notificaciones.ServicioNotificaciones"
@@ -33,18 +58,10 @@
             android:exported="true"
             android:process=":servicio_notificaciones" />
 
+        <receiver android:name=".presentacion.notificaciones.CargarNotificaciones" />
+        <receiver android:name=".presentacion.notificaciones.GestorRespuestas" />
         <receiver android:name=".presentacion.notificaciones.NotificacionAlarma" />
         <receiver android:name=".presentacion.notificaciones.NotificacionPregunta" />
-
     </application>
-
-    <!-- Permisos requeridos-->
-    <uses-permission android:name="android.permission.WAKE_LOCK" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-feature android:name="android.hardware.camera" android:required="false"></uses-feature>
-    <uses-permission android:name="android.permission.VIBRATE"/>
-    <!-- Final permisos requeridos-->
 
 </manifest>

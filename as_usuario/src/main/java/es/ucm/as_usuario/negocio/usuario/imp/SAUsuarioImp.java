@@ -21,7 +21,7 @@ import es.ucm.as_usuario.negocio.suceso.SASuceso;
 import es.ucm.as_usuario.negocio.suceso.TransferTarea;
 import es.ucm.as_usuario.negocio.usuario.TransferUsuario;
 import es.ucm.as_usuario.negocio.usuario.Usuario;
-import es.ucm.as_usuario.presentacion.Contexto;
+import es.ucm.as_usuario.presentacion.vista.Contexto;
 
 public class SAUsuarioImp implements SAUsuario {
 
@@ -63,13 +63,28 @@ public class SAUsuarioImp implements SAUsuario {
 	* */
 	@Override
 	public Integer calcularPuntuacion() {
+		Integer ret;
+		// Se cogen las tareas de la BBDD
 		SASuceso ss = FactoriaSA.getInstancia().nuevoSASuceso();
 		List<TransferTarea> tareas = ss.consultarTareas();
+		// Se cuentan las positivas y se realiza el calculo
 		int positivas = 0;
 		for (int i = 0; i < tareas.size(); i++)
 			if (tareas.get(i).getNumSi() - tareas.get(i).getNumNo() >= 0)
 				positivas++;
-		return 10*positivas/tareas.size();
+		ret = 10*positivas/tareas.size();
+		// Se actualiza la puntuacion en la BBDD
+		Dao<Usuario, Integer> daoUsuario;
+		try {
+			daoUsuario = getHelper().getUsuarioDao();
+			Usuario usuario = daoUsuario.queryForId(1);
+			usuario.setPuntuacionAnterior(usuario.getPuntuacion());
+			usuario.setPuntuacion(ret);
+			daoUsuario.update(usuario);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return ret;
 	}
 
 	@Override
@@ -201,45 +216,8 @@ public class SAUsuarioImp implements SAUsuario {
 
 		Contexto.getInstancia().getContext().startActivity(emailIntent);
 
-		//*/////////////////////////////////////////////////////////////////////////////////////////
+		///////////////////////////////////////////////////////////////////////////////////////////
 
-
-
-		/*	// Este codigo usa la clase Mail del paquete de utils, la tiene Maria en msalitu/documentos/mail.java
-			Mail m = new Mail(mail, "aa");
-
-			String[] toArr = {mail};
-			m.setTo(toArr);
-			m.setFrom(mail);
-			m.setSubject("Informe AS");
-			m.setBody("¡Hola " + name + "!\n" +
-					"Este es tu progreso hasta el momento. Sigue esforzándote para continuar mejorando."
-					+ "\n¡Ánimo!" + "\n\nEnviado desde AS");
-
-			try {
-				m.addAttachment("sdcard/Download/AS/Informe.pdf");
-
-				if (m.send()) {
-					Toast.makeText(Contexto.getInstancia().getContext().getApplicationContext(), "Email was sent successfully.", Toast.LENGTH_LONG).show();
-				} else {
-					Toast.makeText(Contexto.getInstancia().getContext().getApplicationContext(), "Email was not sent.", Toast.LENGTH_LONG).show();
-				}
-			} catch (Exception e) {
-				//Toast.makeText(MailApp.this, "There was a problem sending the email.", Toast.LENGTH_LONG).show();
-				Toast.makeText(Contexto.getInstancia().getContext().getApplicationContext(), "Exception autenticación u otra cosa " , Toast.LENGTH_LONG).show();
-				Log.e("MailApp", "Could not send email", e);
-			}
-
-
-		// Esto sería usando la clase de Juanlu, lo malo es que solo sirve para gmail
-		Intent correo = new Intent (Contexto.getInstancia().getContext().getApplicationContext(), Correo.class);
-		correo.putExtra("destinatario", mail);
-		correo.putExtra("titulo", "Informe AS");
-		correo.putExtra("nombre", name);
-		correo.putExtra("texto", "¡Hola " + name + "!\n " +
-				"Este es tu progreso hasta el momento. Sigue esforzándote para continuar mejorando."
-				+ "\n¡Ánimo!" + "\n\nEnviado desde AS");
-		Contexto.getInstancia().getContext().startActivity(correo);*/
 	}
 
 

@@ -3,13 +3,13 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:layout_weight="1"
-    tools:context=".presentacion.MainActivity">
+    tools:context=".presentacion.vista.MainActivity">
 
             <LinearLayout
                 android:orientation="horizontal"
                 android:layout_weight="1"
                 android:layout_width="fill_parent"
-                android:layout_height="70dp"
+                android:layout_height="56dp"
                 android:gravity="center_vertical"
                 android:id="@+id/cabecera">
 
@@ -55,17 +55,18 @@
         android:layout_below="@+id/cabecera"
         android:gravity="center_horizontal">
 
+        <!-- Titulo -->
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:id="@+id/nombreUser"
-            android:layout_gravity="center"
+            android:gravity="center"
             android:textStyle="bold"
-            android:paddingTop="20dp"
             android:text="Configuración"/>
 
+        <!-- Avatar -->
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="0dp"
@@ -76,6 +77,7 @@
             android:onClick="cambiarImagenPerfil"
             android:layout_weight="4" />
 
+        <!-- Nombre usuario editable -->
         <EditText
             android:layout_width="wrap_content"
             android:layout_height="0dp"
@@ -91,6 +93,7 @@
             android:editable="true"
             android:layout_marginTop="10dp" />
 
+        <!-- Seccion color y tono -->
         <LinearLayout
             android:layout_width="match_parent"
             android:orientation="horizontal"
@@ -102,6 +105,7 @@
             android:layout_marginRight="20dp"
             android:layout_marginBottom="20dp">
 
+            <!-- Color -->
             <LinearLayout
                 android:orientation="vertical"
                 android:layout_width="0dp"
@@ -117,8 +121,7 @@
                     android:textStyle="bold"
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:gravity="center_vertical"
-                    android:layout_gravity="center"
-                    />
+                    android:layout_gravity="center" />
 
                 <Spinner
                     android:layout_weight="1"
@@ -129,6 +132,7 @@
                     android:layout_gravity="center"/>
             </LinearLayout>
 
+            <!-- Tono -->
             <LinearLayout
                 android:orientation="vertical"
                 android:layout_width="0dp"

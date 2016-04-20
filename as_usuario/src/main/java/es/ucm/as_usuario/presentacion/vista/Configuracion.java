@@ -1,10 +1,11 @@
-package es.ucm.as_usuario.presentacion;
+package es.ucm.as_usuario.presentacion.vista;
 
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.CursorLoader;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -36,7 +37,7 @@ import es.ucm.as_usuario.presentacion.controlador.Controlador;
 import es.ucm.as_usuario.presentacion.controlador.ListaComandos;
 
 /**
- * Clase asociada a la vista de personalizacion
+ * Clase asociada a la vista de activity_configuracion
  *
  * Created by Juan Lu on 24/02/2016.
  */
@@ -70,7 +71,8 @@ public class Configuracion extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         cargarTema();
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.personalizacion);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        setContentView(R.layout.activity_configuracion);
         Bundle bundle = getIntent().getExtras();
         editarNombre = (EditText)findViewById(R.id.editarNombre);
         aceptar = (Button)findViewById(R.id.envioNuevaConfig);
