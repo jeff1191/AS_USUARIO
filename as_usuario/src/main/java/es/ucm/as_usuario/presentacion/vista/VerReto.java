@@ -3,12 +3,14 @@ package es.ucm.as_usuario.presentacion.vista;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -24,11 +26,12 @@ import es.ucm.as_usuario.presentacion.controlador.ListaComandos;
  */
 public class VerReto extends Activity {
 
-    private ProgressBar progreso;
-    private Integer contInt;    // contador del activity_reto
-    private Integer nuevo;      // necesario para hacer el efecto de avance de la barra de progreso
-    private TextView c;         // muestra el contador
-    private TextView tv;        // muestra el texto del activity_reto
+    private ProgressBar progreso;   // barra progreso
+    private Integer contInt;        // contador del activity_reto
+    private Integer nuevo;          // necesario para el efecto de avance de la barra de progreso
+    private TextView c;             // muestra el contador
+    private TextView tv;            // muestra el texto del activity_reto
+    private ImageView imagenPremio; // muestra la foto del premio por completar el reto
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +48,13 @@ public class VerReto extends Activity {
 
             tv = (TextView) findViewById(R.id.textoReto);
             tv.setText(nombre);
+
+            imagenPremio = (ImageView) findViewById(R.id.premio);
+            if(!bundle.getString("premioReto").equals(""))
+                imagenPremio.setImageBitmap(BitmapFactory.decodeFile(bundle.getString("premioReto")));
+            else
+                imagenPremio.setImageResource(R.drawable.jirafa);
+                //imagenPremio.setImageResource(R.drawable.sonrisa_premio_defecto);
 
             contInt = bundle.getInt("contadorReto");
             c = (TextView) findViewById(R.id.cont);

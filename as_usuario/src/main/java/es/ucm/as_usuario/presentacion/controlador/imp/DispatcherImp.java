@@ -9,16 +9,15 @@ import es.ucm.as_usuario.negocio.suceso.TransferEvento;
 import es.ucm.as_usuario.negocio.suceso.TransferReto;
 import es.ucm.as_usuario.negocio.suceso.TransferTarea;
 import es.ucm.as_usuario.negocio.usuario.TransferUsuario;
+import es.ucm.as_usuario.presentacion.controlador.Dispatcher;
+import es.ucm.as_usuario.presentacion.controlador.ListaComandos;
 import es.ucm.as_usuario.presentacion.vista.Ayuda;
 import es.ucm.as_usuario.presentacion.vista.Configuracion;
 import es.ucm.as_usuario.presentacion.vista.Contexto;
 import es.ucm.as_usuario.presentacion.vista.MainActivity;
-import es.ucm.as_usuario.presentacion.vista.Registro;
 import es.ucm.as_usuario.presentacion.vista.VerEventos;
 import es.ucm.as_usuario.presentacion.vista.VerInforme;
 import es.ucm.as_usuario.presentacion.vista.VerReto;
-import es.ucm.as_usuario.presentacion.controlador.Dispatcher;
-import es.ucm.as_usuario.presentacion.controlador.ListaComandos;
 
 /**
  * Created by Jeffer on 02/03/2016.
@@ -77,6 +76,7 @@ public class DispatcherImp extends Dispatcher{
                     intentR.putExtra("textReto", r.getNombre());
                     intentR.putExtra("contadorReto", r.getContador());
                     intentR.putExtra("superadoReto", r.getSuperado());
+                    intentR.putExtra("premioReto", r.getPremio());
                 }
 
                 Contexto.getInstancia().getContext().startActivity(intentR);

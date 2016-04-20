@@ -5,8 +5,6 @@ package es.ucm.as_usuario.negocio.suceso;
 
 import com.j256.ormlite.field.DatabaseField;
 
-import java.sql.Timestamp;
-
 public class Reto {
 
 	@DatabaseField(generatedId = true, columnName = "ID")
@@ -14,6 +12,9 @@ public class Reto {
 
 	@DatabaseField(columnName = "NOMBRE")
 	private String nombre;
+
+	@DatabaseField(columnName = "PREMIO")
+	private String premio;
 
 	@DatabaseField(columnName = "CONTADOR")
 	private Integer contador;
@@ -24,6 +25,7 @@ public class Reto {
 	public Reto(){
 		this.contador = 0;
 		this.superado = false;
+		this.premio = "";
 	}
 
 	public Integer getId() {
@@ -45,4 +47,14 @@ public class Reto {
 	public boolean getSuperado() {return superado;}
 
 	public void setSuperado(boolean superado) {this.superado = superado;}
+
+	public String getPremio() {
+		return premio;
+	}
+
+	public void setPremio(String premio) {
+		this.premio = premio;
+	}
+
+
 }

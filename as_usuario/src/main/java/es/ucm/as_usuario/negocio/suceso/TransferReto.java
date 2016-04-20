@@ -3,14 +3,13 @@
  */
 package es.ucm.as_usuario.negocio.suceso;
 
-import java.sql.Timestamp;
-
-
 public class TransferReto {
 
 	private Integer id;
 
 	private String nombre;
+
+	private String premio;
 
 	private Integer contador;
 
@@ -45,4 +44,12 @@ public class TransferReto {
 	public boolean getSuperado() {return superado;	}
 
 	public void setSuperado(boolean superado) {		this.superado = superado;	}
+
+	public String getPremio() {
+		return premio;
+	}
+
+	public void setPremio(String premio) {
+		this.premio = premio;
+	}
 }

@@ -91,6 +91,7 @@ public class SASucesoImp implements SASuceso {
                 reto = (Reto) dao.queryForId(1);
                 tr.setContador(reto.getContador());
                 tr.setId(reto.getId());
+                tr.setPremio(reto.getPremio());
                 tr.setNombre(reto.getNombre());
                 tr.setSuperado(reto.getSuperado());
             }else
