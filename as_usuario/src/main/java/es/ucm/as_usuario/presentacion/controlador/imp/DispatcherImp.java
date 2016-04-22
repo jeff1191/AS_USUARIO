@@ -73,7 +73,7 @@ public class DispatcherImp extends Dispatcher{
                 Intent intentR = new Intent(Contexto.getInstancia().getContext().getApplicationContext(), VerReto.class);
                 TransferReto r = (TransferReto)datos;
                 if (r != null) {
-                    intentR.putExtra("textReto", r.getNombre());
+                    intentR.putExtra("textReto", r.getTexto());
                     intentR.putExtra("contadorReto", r.getContador());
                     intentR.putExtra("superadoReto", r.getSuperado());
                     intentR.putExtra("premioReto", r.getPremio());

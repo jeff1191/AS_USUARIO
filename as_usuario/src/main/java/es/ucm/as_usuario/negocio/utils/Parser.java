@@ -23,12 +23,14 @@ public class Parser {
     private ArrayList<Tarea> tareasObsoletas;
     private ArrayList<Evento> eventos;
     private ArrayList<Evento> eventosObsoletos;
+    private Reto reto;
 
     public Parser(){
         tareas = new ArrayList<Tarea>();
         eventos = new ArrayList<Evento>();
         tareasObsoletas = new ArrayList<Tarea>();
         eventosObsoletos = new ArrayList<Evento>();
+        reto = new Reto();
     }
 
     public ArrayList<Tarea> getTareas(){
@@ -45,6 +47,9 @@ public class Parser {
         return this.eventosObsoletos;
     }
 
+    public Reto getReto() {
+        return reto;
+    }
 
     /* Lee de fichero y transforma en tareas que almacena en el ArrayList atributo de esta clase*/
     public void readTareas() {
@@ -79,18 +84,25 @@ public class Parser {
         }
     }
 
-    public String readReto() {
+    public void readReto() {
         String texto = null;
+        String premio = null;
         try {
             InputStream fraw = Contexto.getInstancia().getContext().getResources().openRawResource(R.raw.reto);
             BufferedReader brin =
                     new BufferedReader(new InputStreamReader(fraw));
             texto = brin.readLine();
+            if(texto != null){
+                reto.setTexto(texto);
+                premio = brin.readLine();
+                if(premio != null){
+                    reto.setPremio(premio);
+                }
+            }
             fraw.close();
         } catch (Exception ex) {
 
         }
-        return texto;
     }
 
     /* Lee de fichero y transforma en tareas que almacena en el ArrayList atributo de esta clase*/
@@ -137,15 +149,6 @@ public class Parser {
         }
 
         return ret;
-    }
-
-    public Reto toReto(String texto){
-        if (texto != null){
-            Reto ret = new Reto();
-            ret.setNombre(texto);
-            return ret;
-        } else
-            return null;
     }
 
     public Evento toEvento(String alarma, String fecha){

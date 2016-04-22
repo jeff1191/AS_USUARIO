@@ -92,7 +92,7 @@ public class SASucesoImp implements SASuceso {
                 tr.setContador(reto.getContador());
                 tr.setId(reto.getId());
                 tr.setPremio(reto.getPremio());
-                tr.setNombre(reto.getNombre());
+                tr.setTexto(reto.getTexto());
                 tr.setSuperado(reto.getSuperado());
             }else
                 return null;
@@ -203,10 +203,10 @@ public class SASucesoImp implements SASuceso {
     public void cargarRetoBBDD() {
         Parser p = new Parser();
         Dao<Reto, Integer> retoDao;
-        String texto = p.readReto();   // lee del fichero y obtiene el texto del activity_reto
+        p.readReto();   // lee del fichero y obtiene el reto (texto y posible premio)
         try {
             retoDao = getHelper().getRetoDao();
-            Reto reto = p.toReto(texto);
+            Reto reto = p.getReto();
             if (reto != null && !retoDao.idExists(1))
                 retoDao.create(reto);
         } catch (SQLException e) {
@@ -351,10 +351,14 @@ public class SASucesoImp implements SASuceso {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        document.add(new Paragraph(reto.getNombre(), paragraphFont));
+        document.add(new Paragraph("Texto: " + reto.getTexto(), paragraphFont));
+        if(reto.getPremio() != null)
+            document.add(new Paragraph("Premio: "+ reto.getPremio(), paragraphFont));
         document.add(new Paragraph("Contador: " + reto.getContador().toString() + "/30" , paragraphFont));
         if (reto.getSuperado())
             document.add(new Paragraph("Superado" , paragraphFont));
+        else
+            document.add(new Paragraph("No superado" , paragraphFont));
         document.add(new Paragraph("\n", paragraphFont));
 
 

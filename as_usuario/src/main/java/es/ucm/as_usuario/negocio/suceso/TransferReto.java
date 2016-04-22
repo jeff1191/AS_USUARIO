@@ -7,7 +7,7 @@ public class TransferReto {
 
 	private Integer id;
 
-	private String nombre;
+	private String texto;
 
 	private String premio;
 
@@ -25,12 +25,12 @@ public class TransferReto {
 
 	public TransferReto(){	}
 
-	public String getNombre() {
-		return nombre;
+	public String getTexto() {
+		return texto;
 	}
 
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
+	public void setTexto(String texto) {
+		this.texto = texto;
 	}
 
 	public Integer getContador() {

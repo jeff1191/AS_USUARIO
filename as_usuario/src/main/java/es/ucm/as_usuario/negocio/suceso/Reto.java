@@ -10,8 +10,8 @@ public class Reto {
 	@DatabaseField(generatedId = true, columnName = "ID")
 	private Integer id;
 
-	@DatabaseField(columnName = "NOMBRE")
-	private String nombre;
+	@DatabaseField(columnName = "Texto")
+	private String texto;
 
 	@DatabaseField(columnName = "PREMIO")
 	private String premio;
@@ -34,9 +34,9 @@ public class Reto {
 
 	public void setId(Integer id) {this.id = id;}
 
-	public String getNombre() {return nombre;}
+	public String getTexto() {return texto;}
 
-	public void setNombre(String nombre) {this.nombre = nombre;}
+	public void setTexto(String texto) {this.texto = texto;}
 
 	public Integer getContador() {return contador;}
 
