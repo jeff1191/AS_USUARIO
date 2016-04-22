@@ -18,6 +18,7 @@
     <application
         android:allowBackup="true"
         android:icon="@drawable/logo"
+        android:label="@string/app_header"
         android:theme="@style/AS_tema_azul">
 
         <activity
