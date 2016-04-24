@@ -13,7 +13,6 @@ import android.util.Log;
 public class AutoArranque extends BroadcastReceiver{
     @Override
     public void onReceive(Context context, Intent intent) {
-        Log.e("prueba", "Autoarranque recibido");
         Intent service = new Intent(context,  ServicioNotificaciones.class);
         context.startService(service);
     }

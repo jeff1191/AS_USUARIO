@@ -7,12 +7,9 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-
-    <uses-feature
-        android:name="android.hardware.camera"
-        android:required="false" />
-
     <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-feature android:name="android.hardware.camera" android:required="false" />
     <!-- Final permisos requeridos -->
 
     <application
@@ -63,6 +60,11 @@
         <receiver android:name=".presentacion.notificaciones.GestorRespuestas" />
         <receiver android:name=".presentacion.notificaciones.NotificacionAlarma" />
         <receiver android:name=".presentacion.notificaciones.NotificacionPregunta" />
+        <receiver android:name=".presentacion.notificaciones.AutoArranque" >
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>
