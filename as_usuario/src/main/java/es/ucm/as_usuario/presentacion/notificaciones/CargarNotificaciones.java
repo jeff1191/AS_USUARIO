@@ -11,6 +11,7 @@ import android.util.Log;
 
 import com.j256.ormlite.android.apptools.OpenHelperManager;
 import com.j256.ormlite.dao.Dao;
+import com.j256.ormlite.stmt.QueryBuilder;
 
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
@@ -23,15 +24,20 @@ import java.util.StringTokenizer;
 import es.ucm.as_usuario.integracion.DBHelper;
 import es.ucm.as_usuario.negocio.suceso.Tarea;
 import es.ucm.as_usuario.negocio.suceso.TransferTarea;
+import es.ucm.as_usuario.negocio.utils.Frecuencia;
 
 /**
  * Created by Juan Lu on 08/04/2016.
  */
 public class CargarNotificaciones extends BroadcastReceiver {
 
+    private static final int MS_DIA = 86400000;
+    private static final int MS_SEMANA = 604800000;
+    private static final long MS_MES = 2592000000L;
+
     private DBHelper mDBHelper;
 
-    private DBHelper getHelper(Context context) {
+        private DBHelper getHelper(Context context) {
         if (mDBHelper == null) {
             mDBHelper = OpenHelperManager.getHelper(context, DBHelper.class);
         }
@@ -41,43 +47,51 @@ public class CargarNotificaciones extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         //Lee las tareas de bbdd
-        Dao<Tarea, Integer> tareasDao;
         List<Tarea> tareas = new ArrayList<Tarea>();
         List<TransferTarea> transferTareas = new ArrayList<TransferTarea>();
         try {
-            Log.e("prueba", "Va a buscar las tareas");
-            tareasDao = getHelper(context).getTareaDao();
-            tareas = tareasDao.queryForAll();
+            // Se obtienen las tareas a recordar ese dia ordenadas por horas de manera ascendente
+            QueryBuilder<Tarea, Integer> qb = getHelper(context).getTareaDao().queryBuilder();
+            qb.orderBy("HORA_ALARMA", true);
+            tareas = qb.query();
+
             String tituloAlarma = "Alarma";
             String tituloPregunta = "Pregunta";
             for(int i = 0; i < tareas.size(); i++){
+                Tarea tarea = tareas.get(i);
+                Log.e("notificaciones", tarea.getTextoAlarma());
+                Log.e("notificaciones", tarea.getHoraAlarma().toString());
                 //Esto es para dividir el date en horas y minutos
                 SimpleDateFormat horasMinutos = new SimpleDateFormat("HH:mm");
                 StringTokenizer tokensAlarma = new StringTokenizer(horasMinutos.format
-                        (tareas.get(i).getHoraAlarma()),":");
+                        (tarea.getHoraAlarma()),":");
                 StringTokenizer tokensPregunta = new StringTokenizer(horasMinutos.format
-                        (tareas.get(i).getHoraPregunta()),":");
+                        (tarea.getHoraPregunta()),":");
 
                 lanzarSuceso(context, Integer.parseInt(tokensAlarma.nextToken()),
                         Integer.parseInt(tokensAlarma.nextToken()), tituloAlarma,
-                        tareas.get(i).getTextoAlarma(), "alarma", tareas.get(i).getId());
+                        tarea.getTextoAlarma(), "alarma", tarea.getId());
                 lanzarSuceso(context, Integer.parseInt(tokensPregunta.nextToken()),
                         Integer.parseInt(tokensPregunta.nextToken()), tituloPregunta,
-                        tareas.get(i).getTextoPregunta(), "pregunta", tareas.get(i).getId());
+                        tarea.getTextoPregunta(), "pregunta",tarea.getId());
 
-                Log.e("prueba", "Se crean las notificaciones para la tarea " + tareas.get(i).getId());
+                // Se actualizan las proximas horas de alarma y pregunta de esa tarea en base a la frecuencia
+                Date newAlarma = new Date(proximaNotificacion(tarea.getHoraAlarma(), tarea.getFrecuenciaTarea()));
+                Date newPregunta = new Date(proximaNotificacion(tarea.getHoraPregunta(), tarea.getFrecuenciaTarea()));
+                tarea.setHoraAlarma(newAlarma);
+                tarea.setHoraPregunta(newPregunta);
+                Dao<Tarea, Integer> tareaDao = getHelper(context).getTareaDao();
+                tareaDao.update(tarea);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
     }
 
-    public long lanzarSuceso(Context context, Integer hora, Integer minutos, String titulo, String texto, String tipo, Integer idTarea)
-    {
-        Log.e("prueba", "Guarda la notificacion pregunta...");
-        AlarmManager am =( AlarmManager)context.getSystemService(Context.ALARM_SERVICE);
+    public long lanzarSuceso
+            (Context context, Integer hora, Integer minutos, String titulo, String texto, String tipo, Integer idTarea) {
 
+        AlarmManager am =( AlarmManager)context.getSystemService(Context.ALARM_SERVICE);
         Intent i;
         if(tipo.equals("pregunta"))
             i = new Intent(context, NotificacionPregunta.class);
@@ -98,11 +112,7 @@ public class CargarNotificaciones extends BroadcastReceiver {
         String last4Str = tmpStr.substring(tmpStr.length() - 5);
         int pendingId = Integer.valueOf(last4Str);
 
-        Log.e("prueba", "Pending con el ID..." + pendingId);
-
         PendingIntent pi = PendingIntent.getBroadcast(context, pendingId, i, PendingIntent.FLAG_ONE_SHOT);
-
-        Log.e("prueba", "La hora es..." + hora + ":" + minutos);
 
         Calendar horaActualCal = Calendar.getInstance();
         Calendar horaNotificacionCal = Calendar.getInstance();
@@ -118,18 +128,12 @@ public class CargarNotificaciones extends BroadcastReceiver {
         //se pone que empieze a partir de mañana
         if(horaNotificacion < horaActual){
             horaNotificacionCal.add(Calendar.DAY_OF_MONTH, 1);
-            Log.e("prueba", "La hora de la pregunta se pasa al dia ..." + horaNotificacionCal.getTime().toString());
             horaNotificacion = horaNotificacionCal.getTimeInMillis();
         }
 
         setAlarm(am,horaNotificacion,pi);
 
         return horaNotificacion;
-    }
-
-    @TargetApi(19)
-    private void setAlarmFromKitkat(AlarmManager am, long ms, PendingIntent pi){
-        am.setExact(AlarmManager.RTC, ms, pi);
     }
 
     private void setAlarm(AlarmManager am,long ms, PendingIntent pendingIntent){
@@ -139,6 +143,25 @@ public class CargarNotificaciones extends BroadcastReceiver {
         } else {
             setAlarmFromKitkat(am, ms, pendingIntent);
         }
+    }
+
+    @TargetApi(19)
+    private void setAlarmFromKitkat(AlarmManager am, long ms, PendingIntent pi){
+        am.setExact(AlarmManager.RTC, ms, pi);
+    }
+
+
+    private long proximaNotificacion(Date old, Frecuencia frecuencia) {
+        long nuevo = old.getTime();
+        switch (frecuencia) {
+            case DIARIA:
+                nuevo += MS_DIA;
+            case SEMANAL:
+                nuevo += MS_SEMANA;
+            case MENSUAL:
+                nuevo += MS_MES;
+        }
+        return nuevo;
     }
 
 }
