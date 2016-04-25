@@ -1,12 +1,16 @@
 package es.ucm.as_usuario.negocio.utils;
 
 
+import android.util.Log;
+
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 import es.ucm.as_usuario.R;
 import es.ucm.as_usuario.negocio.suceso.Evento;
@@ -138,12 +142,17 @@ public class Parser {
     /*A partir de dos Strings crea una pregunta con esos textos de alarma y pregunta*/
     public Tarea toTarea(String textoAlarma, String textoPregunta, String horaAlarma, String horaPregunta){
         Tarea ret = new Tarea();
-        SimpleDateFormat horasMinutos = new SimpleDateFormat("HH:mm");
+        SimpleDateFormat horasMinutos = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+        SimpleDateFormat diaMes = new SimpleDateFormat("dd/MM/yyyy");
         ret.setTextoAlarma(textoAlarma);
         ret.setTextoPregunta(textoPregunta);
         try {
-            ret.setHoraAlarma(horasMinutos.parse(horaAlarma));
-            ret.setHoraPregunta(horasMinutos.parse(horaPregunta));
+            Date e = Calendar.getInstance().getTime();
+            String concat = diaMes.format(e).toString();
+            String loquesea= concat+" "+horaAlarma;
+            ret.setHoraAlarma(horasMinutos.parse(loquesea));
+            loquesea= concat+" "+horaPregunta;
+            ret.setHoraPregunta(horasMinutos.parse(loquesea));
         } catch (ParseException e) {
             e.printStackTrace();
         }

@@ -52,6 +52,9 @@ public class CargarNotificaciones extends BroadcastReceiver {
         try {
             // Se obtienen las tareas a recordar ese dia ordenadas por horas de manera ascendente
             QueryBuilder<Tarea, Integer> qb = getHelper(context).getTareaDao().queryBuilder();
+            Date actual = new Date();
+            Date tomorrow = new Date(actual.getTime() + MS_DIA);
+            qb.where().between("HORA_ALARMA",actual, tomorrow );
             qb.orderBy("HORA_ALARMA", true);
             tareas = qb.query();
 
