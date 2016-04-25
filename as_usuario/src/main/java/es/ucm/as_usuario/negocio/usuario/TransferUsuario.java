@@ -7,7 +7,6 @@ import java.util.List;
 
 import es.ucm.as_usuario.negocio.suceso.Evento;
 import es.ucm.as_usuario.negocio.suceso.Reto;
-import es.ucm.as_usuario.negocio.utils.Frecuencia;
 
 public class TransferUsuario {
 
@@ -31,10 +30,6 @@ public class TransferUsuario {
 
 	private List<Evento> tareas;
 
-	private String nombreTutor;
-
-	private String correoTutor;
-
 	private Integer puntuacionAnterior;
 
 	public TransferUsuario(){	}
@@ -47,8 +42,6 @@ public class TransferUsuario {
 		this.puntuacion = usuario.getPuntuacion();
 		this.color = usuario.getColor();
 		this.tono = usuario.getTono();
-		this.nombreTutor = usuario.getNombreTutor();
-		this.correoTutor = usuario.getCorreoTutor();
 		this.puntuacionAnterior = usuario.getPuntuacionAnterior();
 	}
 
@@ -130,22 +123,6 @@ public class TransferUsuario {
 
 	public void setTareas(List<Evento> tareas) {
 		this.tareas = tareas;
-	}
-
-	public String getNombreTutor() {
-		return nombreTutor;
-	}
-
-	public void setNombreTutor(String nombreTutor) {
-		this.nombreTutor = nombreTutor;
-	}
-
-	public String getCorreoTutor() {
-		return correoTutor;
-	}
-
-	public void setCorreoTutor(String correoTutor) {
-		this.correoTutor = correoTutor;
 	}
 
 	public Integer getPuntuacionAnterior() {

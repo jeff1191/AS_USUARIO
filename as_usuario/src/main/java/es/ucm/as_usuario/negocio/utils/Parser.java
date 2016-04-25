@@ -1,8 +1,6 @@
 package es.ucm.as_usuario.negocio.utils;
 
 
-import android.util.Log;
-
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -162,8 +160,8 @@ public class Parser {
 
     public Evento toEvento(String alarma, String fecha){
         Evento ret = new Evento();
-        ret.setTextoAlarma(alarma);
-        ret.setTextoFecha(fecha);
+        ret.setTexto(alarma);
+        ret.setFecha(fecha);
         // falta convertir a Date la fecha y almacenarla tambien
         return ret;
     }

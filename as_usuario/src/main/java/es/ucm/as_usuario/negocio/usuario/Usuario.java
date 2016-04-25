@@ -3,14 +3,7 @@
  */
 package es.ucm.as_usuario.negocio.usuario;
 
-import com.j256.ormlite.field.DataType;
 import com.j256.ormlite.field.DatabaseField;
-
-import java.util.List;
-
-import es.ucm.as_usuario.negocio.suceso.Reto;
-import es.ucm.as_usuario.negocio.suceso.Evento;
-import es.ucm.as_usuario.negocio.utils.Frecuencia;
 
 
 public class Usuario {
@@ -38,12 +31,6 @@ public class Usuario {
 
 	@DatabaseField(columnName = "TONO")
 	private String tono;
-
-	@DatabaseField(columnName = "NOMBRE_TUTOR")
-	private String nombreTutor;
-
-	@DatabaseField(columnName = "CORREO_TUTOR")
-	private String correoTutor;
 
 	public Integer getId() {		return this.id;	}
 
@@ -81,14 +68,6 @@ public class Usuario {
 		return this.tono;
 	}
 
-	public String getNombreTutor() {
-		return nombreTutor;
-	}
-
-	public String getCorreoTutor() {
-		return correoTutor;
-	}
-
 	public void setNombre(String nuevoNombre) {
 		this.nombre=nuevoNombre;
 	}
@@ -106,14 +85,5 @@ public class Usuario {
 	public void setColor(String nuevoColor) {
 		this.color=nuevoColor;
 	}
-
-	public void setNombreTutor(String nuevoNombreTutor) {
-		this.nombreTutor=nuevoNombreTutor;
-	}
-
-	public void setCorreoTutor(String nuevoCorreoTutor) {
-		this.correoTutor=nuevoCorreoTutor;
-	}
-
 
 }

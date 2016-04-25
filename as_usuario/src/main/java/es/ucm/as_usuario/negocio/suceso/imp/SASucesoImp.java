@@ -70,8 +70,8 @@ public class SASucesoImp implements SASuceso {
             eventos = getHelper().getEventoDao();
             listaEventos= eventos.queryForAll();
             for(int i = 0; i < listaEventos.size(); i++)
-                transferEventos.add(new TransferEvento(listaEventos.get(i).getId(),listaEventos.get(i).getTextoAlarma(),
-                        listaEventos.get(i).getTextoFecha(),listaEventos.get(i).getHoraAlarma(),listaEventos.get(i).getAsistencia()));
+                transferEventos.add(new TransferEvento(listaEventos.get(i).getId(),listaEventos.get(i).getTexto(),
+                        listaEventos.get(i).getFecha(),listaEventos.get(i).getHoraAlarma(),listaEventos.get(i).getAsistencia()));
 
         } catch (SQLException e) {
 
@@ -225,8 +225,8 @@ public class SASucesoImp implements SASuceso {
         for (int i = 0; i < eventosBBDD.size(); i++){
             try {
                 eventoDao = getHelper().getEventoDao();
-                if (eventoDao.queryForEq("TEXTO_ALARMA", eventosBBDD.get(i).getTextoAlarma()).size() == 0) {
-                    eventosBBDD.get(i).setAsistencia(0); // Al principio No va a ningun evento
+                if (eventoDao.queryForEq("TEXTO", eventosBBDD.get(i).getTexto()).size() == 0) {
+                    eventosBBDD.get(i).setAsistencia(false); // Al principio No va a ningun evento
                     eventoDao.create(eventosBBDD.get(i));
                 }
 
@@ -240,8 +240,8 @@ public class SASucesoImp implements SASuceso {
         for (int i = 0; i < eventosObsoletos.size(); i++){
             try {
                 eventoDao = getHelper().getEventoDao();
-                if (eventoDao.queryForEq("TEXTO_ALARMA", eventosObsoletos.get(i).getTextoAlarma()).size() != 0)
-                    eventoDao.delete(eventoDao.queryForEq("TEXTO_ALARMA", eventosObsoletos.get(i).getTextoAlarma()));
+                if (eventoDao.queryForEq("TEXTO", eventosObsoletos.get(i).getTexto()).size() != 0)
+                    eventoDao.delete(eventoDao.queryForEq("TEXTO", eventosObsoletos.get(i).getTexto()));
             } catch (SQLException e) {
                 e.printStackTrace();
             }

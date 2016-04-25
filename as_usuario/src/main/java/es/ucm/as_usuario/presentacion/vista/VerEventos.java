@@ -8,11 +8,9 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -42,25 +40,18 @@ public class VerEventos  extends Activity{
         guardarCambios = (Button)findViewById(R.id.guardarEvento);
         Bundle bundle = getIntent().getExtras();
 
-       /*if(bundle.getString("hola")!= null)
-        {
-            //TODO here get the string stored in the string variable and do
-            userName.setText(bundle.getString("hola"));
-        }*/
         if(bundle.getStringArrayList("listaEventos") != null){
             ArrayList<String> listaE = bundle.getStringArrayList("listaEventos");
             final ArrayList<Integer> listaIds = bundle.getIntegerArrayList("listaIds");
-            ArrayList<Integer> listaAsistencia= bundle.getIntegerArrayList("listaAsistencia");
+            boolean listaAsistencia[] = bundle.getBooleanArray("listaAsistencia");
             final ArrayList<Boolean> asistencia= new ArrayList<>();
 
             for(int i=0; i < listaE.size(); i++) {
-                 if(listaAsistencia.get(i)==1)
+                 if(listaAsistencia[i])
                         asistencia.add(true);
                  else
                         asistencia.add(false);
             }
-
-
 
 
             if(listaE.isEmpty()){
@@ -95,9 +86,9 @@ public class VerEventos  extends Activity{
                             TransferEvento eGuardar = new TransferEvento();
                             eGuardar.setId(listaIds.get(i));
                             if(adaptador.getActivos().get(i))
-                                eGuardar.setAsistencia(1);
+                                eGuardar.setAsistencia(true);
                             else
-                                eGuardar.setAsistencia(0);
+                                eGuardar.setAsistencia(false);
                             Log.e("TRANSFER: ",eGuardar.getId() + " ACTIVO: " + eGuardar.getAsistencia());
                             eventosModificados.add(eGuardar);
                         }

@@ -1,6 +1,7 @@
 package es.ucm.as_usuario.presentacion.controlador.imp;
 
 import android.content.Intent;
+import android.os.Bundle;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,16 +34,21 @@ public class DispatcherImp extends Dispatcher{
                 List<TransferEvento> eventosModelo= (List<TransferEvento>) datos;
                 ArrayList<String> listaActividad= new ArrayList<String>();
                 ArrayList<Integer> listaIds = new ArrayList<Integer>();
-                ArrayList<Integer> listaActivos = new ArrayList<Integer>();
+                boolean listaActivos[] = new boolean[eventosModelo.size()];
                 for(int i=0; i < eventosModelo.size(); i++){
-                    String addEvento= eventosModelo.get(i).getTextoAlarma() + " el " + eventosModelo.get(i).getTextoFecha();
+                    String addEvento= eventosModelo.get(i).getTexto() + " el " + eventosModelo.get(i).getFecha();
                     listaActividad.add(addEvento);
                     listaIds.add(eventosModelo.get(i).getId());
-                    listaActivos.add(eventosModelo.get(i).getAsistencia());
+                    listaActivos[i] = eventosModelo.get(i).getAsistencia();
                 }
-                intent.putStringArrayListExtra("listaEventos", listaActividad);
-                intent.putIntegerArrayListExtra("listaIds", listaIds);
-                intent.putIntegerArrayListExtra("listaAsistencia", listaActivos);
+                //intent.putStringArrayListExtra("listaEventos", listaActividad);
+                //intent.putIntegerArrayListExtra("listaIds", listaIds);
+                //intent.put. putArrayListExtra("listaAsistencia", listaActivos);
+                Bundle b = new Bundle();
+                b.putIntegerArrayList("listaIds", listaIds);
+                b.putStringArrayList("listaEventos", listaActividad);
+                b.putBooleanArray("listaAsistencia", listaActivos);
+                intent.putExtras(b);
                 Contexto.getInstancia().getContext().startActivity(intent);
                 break;
 
@@ -127,8 +133,6 @@ public class DispatcherImp extends Dispatcher{
                 hayUsuario.putExtra("puntuacionAnterior", transferUsuario.getPuntuacionAnterior());
                 hayUsuario.putExtra("color", transferUsuario.getColor());
                 hayUsuario.putExtra("tono", transferUsuario.getTono());
-                hayUsuario.putExtra("nombre tutor", transferUsuario.getNombreTutor());
-                hayUsuario.putExtra("correo tutor", transferUsuario.getCorreoTutor());
                 Contexto.getInstancia().getContext().startActivity(hayUsuario);
                 break;
 

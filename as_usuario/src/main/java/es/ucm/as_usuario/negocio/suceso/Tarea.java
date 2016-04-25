@@ -6,9 +6,7 @@ package es.ucm.as_usuario.negocio.suceso;
 import com.j256.ormlite.field.DataType;
 import com.j256.ormlite.field.DatabaseField;
 
-import java.util.Calendar;
 import java.util.Date;
-import java.util.Locale;
 
 import es.ucm.as_usuario.negocio.utils.Frecuencia;
 
@@ -35,7 +33,7 @@ public class Tarea {
 	@DatabaseField(columnName = "NO_SEGUIDOS")
 	private Integer noSeguidos;
 
-	@DatabaseField(columnName = "FREC_TAREA", dataType = DataType.ENUM_STRING)
+	@DatabaseField(columnName = "FRECUENCIA_TAREA", dataType = DataType.ENUM_STRING)
 	private Frecuencia frecuenciaTarea;
 
 	@DatabaseField(columnName = "MEJORAR")

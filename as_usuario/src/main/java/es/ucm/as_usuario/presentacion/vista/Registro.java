@@ -2,10 +2,8 @@ package es.ucm.as_usuario.presentacion.vista;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -14,9 +12,6 @@ import es.ucm.as_usuario.R;
 import es.ucm.as_usuario.negocio.usuario.TransferUsuario;
 import es.ucm.as_usuario.presentacion.controlador.Controlador;
 import es.ucm.as_usuario.presentacion.controlador.ListaComandos;
-import es.ucm.as_usuario.presentacion.controlador.comandos.Command;
-import es.ucm.as_usuario.presentacion.controlador.comandos.exceptions.commandException;
-import es.ucm.as_usuario.presentacion.controlador.comandos.factoria.FactoriaComandos;
 import es.ucm.as_usuario.presentacion.notificaciones.ServicioNotificaciones;
 
 /**
@@ -55,6 +50,7 @@ public class Registro extends Activity {
             crearUsuario.setPuntuacion(0);
             crearUsuario.setPuntuacionAnterior(0);
             crearUsuario.setCorreo(correo);
+            crearUsuario.setTono("");
             
             Controlador.getInstancia().ejecutaComando(ListaComandos.CREAR_USUARIO, crearUsuario);
             Controlador.getInstancia().ejecutaComando(ListaComandos.CARGAR_BBDD, null);

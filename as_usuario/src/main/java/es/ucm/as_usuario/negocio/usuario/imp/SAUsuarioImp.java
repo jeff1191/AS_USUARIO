@@ -7,18 +7,18 @@ package es.ucm.as_usuario.negocio.usuario.imp;
 import android.content.Intent;
 import android.net.Uri;
 
-import es.ucm.as_usuario.negocio.usuario.SAUsuario;
-
 import com.j256.ormlite.android.apptools.OpenHelperManager;
 import com.j256.ormlite.dao.Dao;
 
 import java.io.File;
 import java.sql.SQLException;
 import java.util.List;
+
 import es.ucm.as_usuario.integracion.DBHelper;
 import es.ucm.as_usuario.negocio.factoria.FactoriaSA;
 import es.ucm.as_usuario.negocio.suceso.SASuceso;
 import es.ucm.as_usuario.negocio.suceso.TransferTarea;
+import es.ucm.as_usuario.negocio.usuario.SAUsuario;
 import es.ucm.as_usuario.negocio.usuario.TransferUsuario;
 import es.ucm.as_usuario.negocio.usuario.Usuario;
 import es.ucm.as_usuario.presentacion.vista.Contexto;
@@ -124,12 +124,6 @@ public class SAUsuarioImp implements SAUsuario {
 			if (transferUsuario.getTono() != null)
 				usuario.setTono(transferUsuario.getTono());
 
-			if (transferUsuario.getNombreTutor() != null)
-				usuario.setNombreTutor(transferUsuario.getNombreTutor());
-
-			if (transferUsuario.getCorreoTutor() != null)
-				usuario.setCorreoTutor(transferUsuario.getCorreoTutor());
-
 			// se crea la fila en la tabla de la BBDD
 			daoUsuario.create(usuario);
 
@@ -167,10 +161,6 @@ public class SAUsuarioImp implements SAUsuario {
 					transferUsuario.setColor(u.getColor());
 				if (u.getTono() != null)
 					transferUsuario.setTono(u.getTono());
-				if (u.getNombreTutor() != null)
-					transferUsuario.setNombreTutor(u.getNombreTutor());
-				if (u.getCorreoTutor() != null)
-					transferUsuario.setCorreoTutor(u.getCorreoTutor());
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

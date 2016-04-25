@@ -10,7 +10,7 @@ public class Reto {
 	@DatabaseField(generatedId = true, columnName = "ID")
 	private Integer id;
 
-	@DatabaseField(columnName = "Texto")
+	@DatabaseField(columnName = "TEXTO")
 	private String texto;
 
 	@DatabaseField(columnName = "PREMIO")
