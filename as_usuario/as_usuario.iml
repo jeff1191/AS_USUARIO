@@ -98,8 +98,8 @@
     <orderEntry type="library" exported="" name="imagezoom-2.2.5" level="project" />
     <orderEntry type="library" exported="" name="support-annotations-22.2.0" level="project" />
     <orderEntry type="library" exported="" name="support-v4-22.2.0" level="project" />
-    <orderEntry type="library" exported="" name="itextg-5.5.9" level="project" />
     <orderEntry type="library" exported="" name="mail-1.4.7" level="project" />
+    <orderEntry type="library" exported="" name="itextg-5.5.9" level="project" />
     <orderEntry type="library" exported="" name="appcompat-v7-22.2.0" level="project" />
   </component>
 </module>

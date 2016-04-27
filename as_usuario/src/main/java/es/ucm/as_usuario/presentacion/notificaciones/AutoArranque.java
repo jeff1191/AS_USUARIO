@@ -5,6 +5,7 @@ package es.ucm.as_usuario.presentacion.notificaciones;
  *
  * Esta clase lanza el servicio de notificaciones cuando se enciende el dispositivo
  */
+
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -13,6 +14,8 @@ import android.util.Log;
 public class AutoArranque extends BroadcastReceiver{
     @Override
     public void onReceive(Context context, Intent intent) {
+        //context.stopService();
+        Log.e("notificaciones", "arranca el servicio desde autoarranque");
         Intent service = new Intent(context,  ServicioNotificaciones.class);
         context.startService(service);
     }

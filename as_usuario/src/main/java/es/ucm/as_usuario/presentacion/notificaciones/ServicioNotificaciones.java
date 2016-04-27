@@ -29,6 +29,7 @@ public class ServicioNotificaciones extends Service {
 
     @Override
     public void onDestroy() {
+        Log.d(this.getClass().getSimpleName(),"onDestroy()");
         super.onDestroy();
     }
 
@@ -46,15 +47,16 @@ public class ServicioNotificaciones extends Service {
         PendingIntent pi = PendingIntent.getBroadcast(getApplicationContext(), pendingId, i, PendingIntent.FLAG_ONE_SHOT);
 
         // Establecer la hora a la que cargara de BBDD las notificaciones
-        Integer h = 17;
-        Integer m = 36;
+        Integer h = 1;
+        Integer m = 3;
         Calendar horaNotificacionCal = Calendar.getInstance();
         horaNotificacionCal.set(Calendar.HOUR_OF_DAY, h);
         horaNotificacionCal.set(Calendar.MINUTE, m);
         horaNotificacionCal.set(Calendar.SECOND, 00);
+        //horaNotificacionCal.add(Calendar.DAY_OF_MONTH, 1); //Esto hace que se haga la dia siguiente
         long horaNotificacion = horaNotificacionCal.getTimeInMillis();
 
-        Log.e("notificaciones", "CargarNotificaciones a las " + h + ":" + m);
+        Log.e("notificaciones", "CargarNotificaciones a las " +  horaNotificacionCal.getTime().toString());
 
         setAlarm(am, horaNotificacion, pi);
 

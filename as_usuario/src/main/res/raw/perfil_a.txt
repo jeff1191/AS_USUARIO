@@ -1,6 +1,6 @@
 Esto es una prueba de una notificación larga para ver que se muestra todo el texto de la alarma
 20:55
-¿Esto es una prueba de una regunta larga para ver que se muestra todo el texto de la pregunta?
+¿Esto es una prueba de una pregunta larga para ver que se muestra todo el texto de la pregunta?
 20:56
 true
 ¡Vamos a desayunar!

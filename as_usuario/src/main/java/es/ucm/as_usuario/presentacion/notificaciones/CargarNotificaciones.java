@@ -71,12 +71,19 @@ public class CargarNotificaciones extends BroadcastReceiver {
                 StringTokenizer tokensPregunta = new StringTokenizer(horasMinutos.format
                         (tarea.getHoraPregunta()),":");
 
-                lanzarSuceso(context, Integer.parseInt(tokensAlarma.nextToken()),
-                        Integer.parseInt(tokensAlarma.nextToken()), tituloAlarma,
+                Integer horaAlarmaNotif = Integer.parseInt(tokensAlarma.nextToken());
+                Integer minutosAlarmaNotif =  Integer.parseInt(tokensAlarma.nextToken());
+                Integer horaPreguntaNotif = Integer.parseInt(tokensPregunta.nextToken());
+                Integer minutosPreguntaNotif =  Integer.parseInt(tokensPregunta.nextToken());
+
+                lanzarSuceso(context, horaAlarmaNotif, minutosAlarmaNotif, tituloAlarma,
                         tarea.getTextoAlarma(), "alarma", tarea.getId());
-                lanzarSuceso(context, Integer.parseInt(tokensPregunta.nextToken()),
-                        Integer.parseInt(tokensPregunta.nextToken()), tituloPregunta,
+                lanzarSuceso(context, horaPreguntaNotif, minutosPreguntaNotif, tituloPregunta,
                         tarea.getTextoPregunta(), "pregunta",tarea.getId());
+
+                if(i == tareas.size() - 1){//Guarda una alarma para el siguiente dia que vuelva a arrancar el servicio
+                    lanzarServicio(context, horaPreguntaNotif, minutosPreguntaNotif);
+                }
 
                 // Se actualizan las proximas horas de alarma y pregunta de esa tarea en base a la frecuencia
                 Date newAlarma = new Date(proximaNotificacion(tarea.getHoraAlarma(), tarea.getFrecuenciaTarea()));
@@ -86,13 +93,14 @@ public class CargarNotificaciones extends BroadcastReceiver {
                 Dao<Tarea, Integer> tareaDao = getHelper(context).getTareaDao();
                 tareaDao.update(tarea);
             }
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
-    public long lanzarSuceso
-            (Context context, Integer hora, Integer minutos, String titulo, String texto, String tipo, Integer idTarea) {
+    public void lanzarSuceso (Context context, Integer hora, Integer minutos, String titulo,
+                              String texto, String tipo, Integer idTarea) {
 
         AlarmManager am =( AlarmManager)context.getSystemService(Context.ALARM_SERVICE);
         Intent i;
@@ -136,7 +144,29 @@ public class CargarNotificaciones extends BroadcastReceiver {
 
         setAlarm(am,horaNotificacion,pi);
 
-        return horaNotificacion;
+    }
+
+    public void lanzarServicio(Context context, Integer hora, Integer minutos){
+        AlarmManager am =( AlarmManager)context.getSystemService(Context.ALARM_SERVICE);
+        Intent i = new Intent(context, AutoArranque.class);
+
+        long time = new Date().getTime();
+        String tmpStr = String.valueOf(time);
+        String last4Str = tmpStr.substring(tmpStr.length() - 5);
+        int pendingId = Integer.valueOf(last4Str);
+        PendingIntent pi = PendingIntent.getBroadcast(context, pendingId, i, PendingIntent.FLAG_ONE_SHOT);
+
+        Calendar horaNotificacionCal = Calendar.getInstance();
+        horaNotificacionCal.set(Calendar.HOUR_OF_DAY, hora);
+        horaNotificacionCal.set(Calendar.MINUTE, minutos+15);
+        horaNotificacionCal.set(Calendar.SECOND, 00);
+        horaNotificacionCal.add(Calendar.DAY_OF_MONTH, 1); //Esto hace que se haga la dia siguiente
+        long horaNotificacion = horaNotificacionCal.getTimeInMillis();
+
+        Log.e("notificaciones", "Activara el auto arranque " + horaNotificacionCal.getTime().toString());
+
+        setAlarm(am, horaNotificacion, pi);
+
     }
 
     private void setAlarm(AlarmManager am,long ms, PendingIntent pendingIntent){
