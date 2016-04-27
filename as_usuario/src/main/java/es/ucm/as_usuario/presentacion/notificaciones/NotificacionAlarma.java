@@ -32,8 +32,6 @@ public class NotificacionAlarma extends BroadcastReceiver {
 
         //Si los ids dan problemas, generarlos de otra manera y pasarselos aqui
 
-        Log.e("prueba", "Empieza a crear la notificacion alarma...");
-
         /*
         It gets current system time. Then I'm reading only last 4 digits from it.
          I'm using it to create unique id every time notification is displayed.
@@ -44,7 +42,6 @@ public class NotificacionAlarma extends BroadcastReceiver {
         String last4Str = tmpStr.substring(tmpStr.length() - 5);
         int notificationId = Integer.valueOf(last4Str);
 
-        Log.e("prueba", "Notificacion con el ID..." + notificationId);
 
         PendingIntent aux = PendingIntent.getBroadcast(context, notificationId+4, new Intent(), PendingIntent.FLAG_UPDATE_CURRENT);
 

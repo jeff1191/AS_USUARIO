@@ -31,10 +31,6 @@ import es.ucm.as_usuario.negocio.utils.Frecuencia;
  */
 public class CargarNotificaciones extends BroadcastReceiver {
 
-    private static final int MS_DIA = 86400000;
-    private static final int MS_SEMANA = 604800000;
-    private static final long MS_MES = 2592000000L;
-
     private DBHelper mDBHelper;
 
         private DBHelper getHelper(Context context) {
@@ -53,7 +49,10 @@ public class CargarNotificaciones extends BroadcastReceiver {
             // Se obtienen las tareas a recordar ese dia ordenadas por horas de manera ascendente
             QueryBuilder<Tarea, Integer> qb = getHelper(context).getTareaDao().queryBuilder();
             Date actual = new Date();
-            Date tomorrow = new Date(actual.getTime() + MS_DIA);
+            Calendar c = Calendar.getInstance();
+            c.setTime(actual);
+            c.add(Calendar.DAY_OF_MONTH, 1);
+            Date tomorrow = c.getTime();
             qb.where().between("HORA_ALARMA",actual, tomorrow );
             qb.orderBy("HORA_ALARMA", true);
             tareas = qb.query();
@@ -62,8 +61,7 @@ public class CargarNotificaciones extends BroadcastReceiver {
             String tituloPregunta = "Pregunta";
             for(int i = 0; i < tareas.size(); i++){
                 Tarea tarea = tareas.get(i);
-                Log.e("notificaciones", tarea.getTextoAlarma());
-                Log.e("notificaciones", tarea.getHoraAlarma().toString());
+
                 //Esto es para dividir el date en horas y minutos
                 SimpleDateFormat horasMinutos = new SimpleDateFormat("HH:mm");
                 StringTokenizer tokensAlarma = new StringTokenizer(horasMinutos.format
@@ -86,8 +84,11 @@ public class CargarNotificaciones extends BroadcastReceiver {
                 }
 
                 // Se actualizan las proximas horas de alarma y pregunta de esa tarea en base a la frecuencia
-                Date newAlarma = new Date(proximaNotificacion(tarea.getHoraAlarma(), tarea.getFrecuenciaTarea()));
-                Date newPregunta = new Date(proximaNotificacion(tarea.getHoraPregunta(), tarea.getFrecuenciaTarea()));
+                Calendar calendar = Calendar.getInstance();
+                calendar.setTime(tarea.getHoraAlarma());
+                Date newAlarma = proximaNotificacion(calendar, tarea.getFrecuenciaTarea());
+                calendar.setTime(tarea.getHoraPregunta());
+                Date newPregunta = proximaNotificacion(calendar, tarea.getFrecuenciaTarea());
                 tarea.setHoraAlarma(newAlarma);
                 tarea.setHoraPregunta(newPregunta);
                 Dao<Tarea, Integer> tareaDao = getHelper(context).getTareaDao();
@@ -157,13 +158,11 @@ public class CargarNotificaciones extends BroadcastReceiver {
         PendingIntent pi = PendingIntent.getBroadcast(context, pendingId, i, PendingIntent.FLAG_ONE_SHOT);
 
         Calendar horaNotificacionCal = Calendar.getInstance();
-        horaNotificacionCal.set(Calendar.HOUR_OF_DAY, hora);
-        horaNotificacionCal.set(Calendar.MINUTE, minutos+15);
+        horaNotificacionCal.set(Calendar.HOUR_OF_DAY, 1);
+        horaNotificacionCal.set(Calendar.MINUTE, 11);
         horaNotificacionCal.set(Calendar.SECOND, 00);
         horaNotificacionCal.add(Calendar.DAY_OF_MONTH, 1); //Esto hace que se haga la dia siguiente
         long horaNotificacion = horaNotificacionCal.getTimeInMillis();
-
-        Log.e("notificaciones", "Activara el auto arranque " + horaNotificacionCal.getTime().toString());
 
         setAlarm(am, horaNotificacion, pi);
 
@@ -184,17 +183,18 @@ public class CargarNotificaciones extends BroadcastReceiver {
     }
 
 
-    private long proximaNotificacion(Date old, Frecuencia frecuencia) {
-        long nuevo = old.getTime();
+    private Date proximaNotificacion(Calendar old, Frecuencia frecuencia) {
         switch (frecuencia) {
             case DIARIA:
-                nuevo += MS_DIA;
+                old.add(Calendar.DAY_OF_MONTH, 1);
+                break;
             case SEMANAL:
-                nuevo += MS_SEMANA;
+                old.add(Calendar.DAY_OF_MONTH, 7);
+                break;
             case MENSUAL:
-                nuevo += MS_MES;
+                old.add(Calendar.DAY_OF_MONTH, 30);
+                break;
         }
-        return nuevo;
+        return old.getTime();
     }
-
 }

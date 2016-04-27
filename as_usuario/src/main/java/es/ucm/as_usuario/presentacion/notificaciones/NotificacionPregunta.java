@@ -35,7 +35,6 @@ public class NotificacionPregunta extends BroadcastReceiver {
         //Si los ids dan problemas, generarlos de otra manera y pasarselos aqui
         //Tambien generar los ids de los pending intents??¿¿
 
-        Log.e("prueba", "Empieza a crear la notificacion pregunta...");
         /*
         It gets current system time. Then I'm reading only last 4 digits from it.
          I'm using it to create unique id every time notification is displayed.
@@ -46,7 +45,6 @@ public class NotificacionPregunta extends BroadcastReceiver {
         String last4Str = tmpStr.substring(tmpStr.length() - 5);
         int notificationId = Integer.valueOf(last4Str);
 
-        Log.e("prueba", "Notificacion con el ID..." + notificationId);
 
         Intent resSi = new Intent(context, GestorRespuestas.class);
         resSi.putExtra("respuesta", 1);

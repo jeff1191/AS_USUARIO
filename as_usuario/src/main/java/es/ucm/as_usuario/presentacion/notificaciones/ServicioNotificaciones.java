@@ -36,7 +36,6 @@ public class ServicioNotificaciones extends Service {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         //Tendriamos que pensar en tener to*do en una cola que la tendria que haber cogido de base de datos - esto es IMPORTANTE
-        Log.d("notificaciones","onStartCommand() SERVICIO");
 
         AlarmManager am =( AlarmManager) getApplicationContext().getSystemService(Context.ALARM_SERVICE);
         Intent i = new Intent(getApplicationContext(), CargarNotificaciones.class);
@@ -48,15 +47,13 @@ public class ServicioNotificaciones extends Service {
 
         // Establecer la hora a la que cargara de BBDD las notificaciones
         Integer h = 1;
-        Integer m = 3;
+        Integer m = 12;
         Calendar horaNotificacionCal = Calendar.getInstance();
         horaNotificacionCal.set(Calendar.HOUR_OF_DAY, h);
         horaNotificacionCal.set(Calendar.MINUTE, m);
         horaNotificacionCal.set(Calendar.SECOND, 00);
         //horaNotificacionCal.add(Calendar.DAY_OF_MONTH, 1); //Esto hace que se haga la dia siguiente
         long horaNotificacion = horaNotificacionCal.getTimeInMillis();
-
-        Log.e("notificaciones", "CargarNotificaciones a las " +  horaNotificacionCal.getTime().toString());
 
         setAlarm(am, horaNotificacion, pi);
 

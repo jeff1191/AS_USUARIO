@@ -14,8 +14,6 @@ import android.util.Log;
 public class AutoArranque extends BroadcastReceiver{
     @Override
     public void onReceive(Context context, Intent intent) {
-        //context.stopService();
-        Log.e("notificaciones", "arranca el servicio desde autoarranque");
         Intent service = new Intent(context,  ServicioNotificaciones.class);
         context.startService(service);
     }

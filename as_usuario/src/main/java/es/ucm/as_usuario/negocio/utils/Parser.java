@@ -144,6 +144,7 @@ public class Parser {
         SimpleDateFormat diaMes = new SimpleDateFormat("dd/MM/yyyy");
         ret.setTextoAlarma(textoAlarma);
         ret.setTextoPregunta(textoPregunta);
+        ret.setFrecuenciaTarea(Frecuencia.DIARIA);
         try {
             Date e = Calendar.getInstance().getTime();
             String concat = diaMes.format(e).toString();
