@@ -85,21 +85,16 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:id="@+id/imgYPunt"
-            android:gravity="center">
+            android:gravity="center"
+            android:layout_marginRight="40dp"
+            android:layout_marginLeft="40dp">
 
-            <!-- Espacio -->
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="2.5"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:gravity="center" />
 
             <!-- Puntuacion icono -->
             <ImageButton
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="0.75"
+                android:layout_weight="1"
                 android:id="@+id/puntuacionImg"
                 android:scaleType="fitCenter"
                 android:src="@drawable/puntuacion"
@@ -120,9 +115,19 @@
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="2.5"
+                android:layout_weight="2"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:gravity="center" />
+
+            <ImageButton
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:id="@+id/sincronizacion"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_action_refresh"
+                android:gravity="center"
+                android:onClick="sincronizar"/>
 
         </LinearLayout>
 

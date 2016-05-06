@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="es.ucm.as_usuario">
+    package="es.ucm.as">
 
     <!-- Permisos requeridos -->
     <uses-permission android:name="android.permission.WAKE_LOCK" />
@@ -19,47 +19,54 @@
         android:theme="@style/AS_tema_azul">
 
         <activity
-            android:name=".presentacion.vista.Bienvenido"
+            android:name="es.ucm.as.presentacion.vista.Bienvenido"
             android:label="@string/app_name"
-            android:theme="@android:style/Theme.NoTitleBar">
+            android:theme="@android:style/Theme.NoTitleBar"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
-        <activity android:name=".presentacion.vista.Decision" />
+        <activity android:name="es.ucm.as.presentacion.vista.Decision"/>
 
-        <activity android:name=".presentacion.vista.MainActivity" />
+        <activity android:name="es.ucm.as.presentacion.vista.MainActivity" android:screenOrientation="portrait"/>
 
         <activity
-            android:name=".presentacion.vista.Configuracion"
+            android:name="es.ucm.as.presentacion.vista.Configuracion"
+            android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan">
         </activity>
 
-        <activity android:name=".presentacion.vista.VerReto" />
+        <activity android:name="es.ucm.as.presentacion.vista.VerReto"
+            android:screenOrientation="portrait"/>
 
-        <activity android:name=".presentacion.vista.VerEventos" />
+        <activity android:name="es.ucm.as.presentacion.vista.VerEventos"
+            android:screenOrientation="portrait"/>
 
-        <activity android:name=".presentacion.vista.Ayuda" />
+        <activity android:name="es.ucm.as.presentacion.vista.Ayuda"
+            android:screenOrientation="portrait"/>
 
-        <activity android:name=".presentacion.vista.VerInforme" />
+        <activity android:name="es.ucm.as.presentacion.vista.VerInforme"
+            android:screenOrientation="portrait"/>
 
-        <activity android:name=".presentacion.vista.Registro"
+        <activity android:name="es.ucm.as.presentacion.vista.Registro"
+            android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan">
         </activity>
 
         <service
-            android:name=".presentacion.notificaciones.ServicioNotificaciones"
+            android:name="es.ucm.as.presentacion.notificaciones.ServicioNotificaciones"
             android:enabled="true"
             android:exported="true"
             android:process=":servicio_notificaciones" />
 
-        <receiver android:name=".presentacion.notificaciones.CargarNotificaciones" />
-        <receiver android:name=".presentacion.notificaciones.GestorRespuestas" />
-        <receiver android:name=".presentacion.notificaciones.NotificacionAlarma" />
-        <receiver android:name=".presentacion.notificaciones.NotificacionPregunta" />
-        <receiver android:name=".presentacion.notificaciones.AutoArranque" >
+        <receiver android:name="es.ucm.as.presentacion.notificaciones.CargarNotificaciones" />
+        <receiver android:name="es.ucm.as.presentacion.notificaciones.GestorRespuestas" />
+        <receiver android:name="es.ucm.as.presentacion.notificaciones.NotificacionAlarma" />
+        <receiver android:name="es.ucm.as.presentacion.notificaciones.NotificacionPregunta" />
+        <receiver android:name="es.ucm.as.presentacion.notificaciones.AutoArranque" >
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
