@@ -32,6 +32,9 @@ public class Usuario {
 	@DatabaseField(columnName = "TONO")
 	private String tono;
 
+	@DatabaseField(columnName = "CODIGO_SINCRONIZACION")
+	private String codigoSincronizacion;
+
 	public Integer getId() {		return this.id;	}
 
 	public String getNombre() {		return this.nombre;	}
@@ -86,4 +89,11 @@ public class Usuario {
 		this.color=nuevoColor;
 	}
 
+	public String getCodigoSincronizacion() {
+		return codigoSincronizacion;
+	}
+
+	public void setCodigoSincronizacion(String codigoSincronizacion) {
+		this.codigoSincronizacion = codigoSincronizacion;
+	}
 }

@@ -51,6 +51,7 @@ public class Registro extends Activity {
             crearUsuario.setPuntuacionAnterior(0);
             crearUsuario.setCorreo(correo);
             crearUsuario.setTono("");
+            crearUsuario.setCodigoSincronizacion(clave);
             
             Controlador.getInstancia().ejecutaComando(ListaComandos.CREAR_USUARIO, crearUsuario);
             Controlador.getInstancia().ejecutaComando(ListaComandos.CARGAR_BBDD, null);

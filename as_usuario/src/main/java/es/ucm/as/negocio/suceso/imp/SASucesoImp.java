@@ -80,7 +80,7 @@ public class SASucesoImp implements SASuceso {
     }
 
     @Override
-    public TransferReto verReto() {
+    public TransferReto consultarReto() {
         Dao<Reto, Integer> dao;
         Reto reto = new Reto();
         TransferReto tr = new TransferReto();
@@ -214,7 +214,7 @@ public class SASucesoImp implements SASuceso {
         }
     }
 
-    @Override
+    /*@Override
     public void cargarEventosBBDD() {
         Parser p = new Parser();
         Dao<Evento, Integer> eventoDao;
@@ -235,7 +235,6 @@ public class SASucesoImp implements SASuceso {
             }
         }
 
-        // elimina las tareas que el tutor ha deshabilitado o borrado
         ArrayList<Evento> eventosObsoletos = p.getEventosObsoletos();
         for (int i = 0; i < eventosObsoletos.size(); i++){
             try {
@@ -246,7 +245,7 @@ public class SASucesoImp implements SASuceso {
                 e.printStackTrace();
             }
         }
-    }
+    }*/
 
     public static File crearFichero(String nombreFichero) throws IOException {
         File ruta = getRuta();

@@ -124,6 +124,9 @@ public class SAUsuarioImp implements SAUsuario {
 			if (transferUsuario.getTono() != null)
 				usuario.setTono(transferUsuario.getTono());
 
+			if (transferUsuario.getCodigoSincronizacion() != null)
+				usuario.setCodigoSincronizacion(transferUsuario.getCodigoSincronizacion());
+
 			// se crea la fila en la tabla de la BBDD
 			daoUsuario.create(usuario);
 
@@ -161,6 +164,8 @@ public class SAUsuarioImp implements SAUsuario {
 					transferUsuario.setColor(u.getColor());
 				if (u.getTono() != null)
 					transferUsuario.setTono(u.getTono());
+				if (u.getCodigoSincronizacion() != null)
+					transferUsuario.setCodigoSincronizacion(u.getCodigoSincronizacion());
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

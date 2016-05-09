@@ -4,10 +4,6 @@
 package es.ucm.as.negocio.usuario;
 
 import java.io.Serializable;
-import java.util.List;
-
-import es.ucm.as.negocio.suceso.Evento;
-import es.ucm.as.negocio.suceso.Reto;
 
 public class TransferUsuario implements Serializable{
 
@@ -42,6 +38,7 @@ public class TransferUsuario implements Serializable{
 		this.color = usuario.getColor();
 		this.tono = usuario.getTono();
 		this.puntuacionAnterior = usuario.getPuntuacionAnterior();
+		this.codigoSincronizacion = usuario.getCodigoSincronizacion();
 	}
 
 	public Integer getId() {

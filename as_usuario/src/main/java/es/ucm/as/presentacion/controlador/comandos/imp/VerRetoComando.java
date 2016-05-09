@@ -13,7 +13,7 @@ public class VerRetoComando implements Command {
     @Override
     public Object ejecutaComando(Object datos) throws commandException {
         SASuceso ss= FactoriaSA.getInstancia().nuevoSASuceso();
-        TransferReto reto = ss.verReto();
+        TransferReto reto = ss.consultarReto();
         return reto;
     }
 }

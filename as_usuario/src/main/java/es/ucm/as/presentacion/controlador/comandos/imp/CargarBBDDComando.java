@@ -14,7 +14,7 @@ public class CargarBBDDComando implements Command {
         SASuceso saSuceso = FactoriaSA.getInstancia().nuevoSASuceso();
         saSuceso.cargarTareasBBDD();
         saSuceso.cargarRetoBBDD();
-        saSuceso.cargarEventosBBDD();
+      //  saSuceso.cargarEventosBBDD();
         return null;
     }
 }

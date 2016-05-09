@@ -108,7 +108,7 @@ public class Parser {
     }
 
     /* Lee de fichero y transforma en tareas que almacena en el ArrayList atributo de esta clase*/
-    public void readEventos() {
+    /*public void readEventos() {
         String alarma = "";
         String fecha = "";
         String habilitado = "";
@@ -135,7 +135,7 @@ public class Parser {
         } catch (Exception ex) {
 
         }
-    }
+    }*/
 
     /*A partir de dos Strings crea una pregunta con esos textos de alarma y pregunta*/
     public Tarea toTarea(String textoAlarma, String textoPregunta, String horaAlarma, String horaPregunta){
@@ -159,7 +159,7 @@ public class Parser {
         return ret;
     }
 
-    public Evento toEvento(String alarma, String fecha){
+    public Evento toEvento(String alarma, Date fecha){
         Evento ret = new Evento();
         ret.setTexto(alarma);
         ret.setFecha(fecha);

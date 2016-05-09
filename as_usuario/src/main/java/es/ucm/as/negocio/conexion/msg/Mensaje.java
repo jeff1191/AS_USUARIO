@@ -1,14 +1,13 @@
 package es.ucm.as.negocio.conexion.msg;
 
-        import java.io.Serializable;
-        import java.util.ArrayList;
-        import java.util.Date;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
-        import es.ucm.as.negocio.suceso.Evento;
-        import es.ucm.as.negocio.suceso.TransferEvento;
-        import es.ucm.as.negocio.suceso.TransferReto;
-        import es.ucm.as.negocio.suceso.TransferTarea;
-        import es.ucm.as.negocio.usuario.TransferUsuario;
+import es.ucm.as.negocio.suceso.TransferEvento;
+import es.ucm.as.negocio.suceso.TransferReto;
+import es.ucm.as.negocio.suceso.TransferTarea;
+import es.ucm.as.negocio.usuario.TransferUsuario;
 
 /**
  * Created by msalitu on 28/04/2016.
@@ -20,8 +19,8 @@ public class Mensaje implements Serializable{
     private String verificar;
     private TransferUsuario usuario;
     private TransferReto reto;
-    private ArrayList<TransferEvento> eventos;
-    private ArrayList<TransferTarea> tareas;
+    private List<TransferEvento> eventos;
+    private List<TransferTarea> tareas;
 
     public Mensaje(String verificar){
         this.verificar = verificar;
@@ -36,7 +35,7 @@ public class Mensaje implements Serializable{
     }
 
     public Mensaje(TransferUsuario usuario, TransferReto reto,
-                   ArrayList<TransferEvento> eventos, ArrayList<TransferTarea> tareas ){
+                   List<TransferEvento> eventos, List<TransferTarea> tareas ){
         this.usuario = usuario;
         this.reto = reto;
         this.eventos = eventos;
@@ -59,19 +58,19 @@ public class Mensaje implements Serializable{
         this.reto = reto;
     }
 
-    public ArrayList<TransferEvento> getEventos() {
+    public List<TransferEvento> getEventos() {
         return eventos;
     }
 
-    public void setEventos(ArrayList<TransferEvento> eventos) {
+    public void setEventos(List<TransferEvento> eventos) {
         this.eventos = eventos;
     }
 
-    public ArrayList<TransferTarea> getTareas() {
+    public List<TransferTarea> getTareas() {
         return tareas;
     }
 
-    public void setTareas(ArrayList<TransferTarea> tareas) {
+    public void setTareas(List<TransferTarea> tareas) {
         this.tareas = tareas;
     }
 

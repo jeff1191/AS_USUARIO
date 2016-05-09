@@ -21,7 +21,6 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
 import es.ucm.as.negocio.conexion.msg.Mensaje;
-import es.ucm.as.negocio.usuario.TransferUsuario;
 
 
 /**
@@ -35,6 +34,7 @@ public class ConectionManager {
 
     public ConectionManager(Mensaje mensaje){
         this.codigo = mensaje.getUsuario().getCodigoSincronizacion();
+        Log.e("prueba cod-> ", codigo);
         String ip = getIp();
         if (ip != null) {
             myClientTask = new MyClientTask(ip, 8080, mensaje);
@@ -72,15 +72,16 @@ public class ConectionManager {
 
         for (final Future<String> future : futures) {
             try {
-                if (future.get() != null) {
+                if (future.get() != null)
                     return future.get();
-                }
+
             } catch (InterruptedException e) {
                 e.printStackTrace();
             } catch (ExecutionException e) {
                 e.printStackTrace();
             }
         }
+        Log.e("prueba", "No ip");
         return null;
     }
 
@@ -99,11 +100,15 @@ public class ConectionManager {
                     ObjectOutputStream dataOutputStream = new ObjectOutputStream(
                             socket.getOutputStream());
                     dataOutputStream.writeObject(msgToServer);
+                    Log.e("prueba", msgToServer.getVerificar());
                     ObjectInputStream objectInputStream = new ObjectInputStream(socket.getInputStream());
                     Mensaje response = (Mensaje) objectInputStream.readObject();
-                    if(!response.getVerificar().equals("Permitido"))
+                    if(!response.getVerificar().equals("Permitido")) {
+                        Log.e("prueba", "no me permite");
                         return null;
+                    }
                     else {
+                        Log.e("prueba", "Permitido");
                         mOut = new PrintWriter(new BufferedWriter(new OutputStreamWriter(socket.getOutputStream())), true);
                         mOut.println("test");
                         mOut.flush();
