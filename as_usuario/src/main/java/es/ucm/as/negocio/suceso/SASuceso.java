@@ -15,5 +15,7 @@ public interface SASuceso {
     public List<TransferTarea> consultarTareas();
     public void cargarTareasBBDD();
     public String generarPDF() throws IOException, DocumentException;
-    public void guardarEventos(List<TransferEvento> eventosRespuesta) ;
+    public void guardarEventos(List<TransferEvento> eventosRespuesta);
+    public void gestionarRetoBBDD(TransferReto r);
+    public void eliminarRetoBBDD();
 }

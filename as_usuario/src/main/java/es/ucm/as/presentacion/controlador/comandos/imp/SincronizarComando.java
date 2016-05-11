@@ -60,8 +60,6 @@ public class SincronizarComando implements Command{
 
             ///////////////////////////////////////////////////////////////////////////////////////
 
-
-
             String ret = conectionManager.getResponse().getUsuario().getNombre();
             //Va el desmenuze
             Mensaje respuestaTutor = conectionManager.getResponse();
@@ -70,37 +68,43 @@ public class SincronizarComando implements Command{
             TransferReto retoActual = (TransferReto) FactoriaComandos.getInstancia()
                     .getCommand(ListaComandos.VER_RETO).ejecutaComando(null);
             TransferReto retoAU = new TransferReto();
-            if(retoDesdeT != null){ //Le llega algo (Uno nuevo o vuelve a empezar)
+            if(retoDesdeT != null){
                 if(retoActual != null){
-                    //Si ya hay un reto y difieren de algo: A modificar
-                    if(retoActual.getTexto() != retoDesdeT.getTexto()){
-                        if(retoActual.getPremio() != retoDesdeT.getPremio()){
-                            retoAU.setPremio(retoDesdeT.getPremio());
-                        }
-                        else{
+                    //Tiene un reto, ver si son diferente o no
+                    Integer dif = sonIguales(retoDesdeT, retoActual);
+                    switch (dif){
+                        case 0:
+                            FactoriaComandos.getInstancia()
+                                    .getCommand(ListaComandos.GESTIONAR_RETO).ejecutaComando(retoAU);
+                            return null;
+                        case 1:
+                            retoAU.setTexto(retoDesdeT.getTexto());
                             retoAU.setPremio(retoAU.getPremio());
-                        }
-                        retoAU.setTexto(retoDesdeT.getTexto());
-                        retoAU.setContador(0);
-                        retoAU.setSuperado(false);
+                            break;
+                        case 2:
+                            retoAU.setTexto(retoAU.getTexto());
+                            retoAU.setPremio(retoDesdeT.getPremio());
+                            break;
+                        case 3:
+                            retoAU.setTexto(retoDesdeT.getTexto());
+                            retoAU.setPremio(retoDesdeT.getPremio());
+                            break;
                     }
-                    if(retoActual.getPremio() != retoDesdeT.getPremio()){
-                        retoAU.setPremio(retoDesdeT.getPremio());
-                    }
-
                 }
                 else{
                     //Si no tiene un reto: A crear!!
                     retoAU.setPremio(retoDesdeT.getPremio());
                     retoAU.setTexto(retoDesdeT.getTexto());
-                    retoAU.setContador(0);
-                    retoAU.setSuperado(false);
-                    //Comando crea RETO
                 }
+                retoAU.setContador(0);
+                retoAU.setSuperado(false);
+                FactoriaComandos.getInstancia()
+                        .getCommand(ListaComandos.GESTIONAR_RETO).ejecutaComando(retoAU);
             }
             else if(retoDesdeT == null && retoActual != null){ // No le llega nada y ya hay algo
                 //Borrar el reto
-                //Comando borra RETO
+                FactoriaComandos.getInstancia()
+                        .getCommand(ListaComandos.ELIMINAR_RETO).ejecutaComando(null);
             }
 
             //Fin sync
@@ -112,4 +116,27 @@ public class SincronizarComando implements Command{
         }
         return null;
     }
+
+    public Integer sonIguales(TransferReto nuevo, TransferReto viejo){
+        Integer d = 0;
+
+        if(nuevo.getPremio() != viejo.getPremio() || nuevo.getTexto() != viejo.getTexto()){
+            //Hay algo diferente
+            if(nuevo.getPremio() != viejo.getPremio() && nuevo.getTexto() != viejo.getTexto()){
+                //Ambos diferentes
+                d = 3;
+            }
+            else if(nuevo.getPremio() != viejo.getPremio()){
+                //Premio diferente
+                d = 2;
+            }
+            else{
+                //Texto diferente
+                d = 1;
+            }
+        }
+
+        return d;
+    }
+
 }
