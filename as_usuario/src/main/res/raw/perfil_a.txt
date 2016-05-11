@@ -44,7 +44,7 @@ true
 13:39
 true
 ¡Revisa la mochila! Mete la agenda
-13:40
+11:40
 ¿Tienes la agenda?
 11:42
 true
