@@ -82,9 +82,6 @@ public class DispatcherImp extends Dispatcher{
                 Contexto.getInstancia().getContext().startActivity(intentR);
                 break;
 
-            case ListaComandos.RESPONDER_RETO:
-                break;
-
             case ListaComandos.VER_INFORME:
                 Intent intentTareas = new Intent(Contexto.getInstancia().getContext().getApplicationContext(), VerInforme.class);
                 ArrayList<Object> a = (ArrayList<Object>)datos;
@@ -114,9 +111,6 @@ public class DispatcherImp extends Dispatcher{
                 iPuntuacion.putExtra("puntuacion", (Integer)datos);
                 break;
 
-            case ListaComandos.CREAR_USUARIO:
-                break;
-
             case ListaComandos.CONSULTAR_USUARIO:
                 TransferUsuario transferUsuario = (TransferUsuario)datos;
                 Intent hayUsuario = new Intent(Contexto.getInstancia().getContext().getApplicationContext(), MainActivity.class);
@@ -130,14 +124,6 @@ public class DispatcherImp extends Dispatcher{
                 Contexto.getInstancia().getContext().startActivity(hayUsuario);
                 break;
 
-            case ListaComandos.CARGAR_BBDD:
-                break;
-
-            case ListaComandos.GENERAR_PDF:
-                break;
-
-            case ListaComandos.ENVIAR_CORREO:
-                break;
             case ListaComandos.GUARDAR_EVENTOS:
                 Intent iGuardarEvento = new Intent(Contexto.getInstancia().getContext().getApplicationContext(), MainActivity.class);
                 Contexto.getInstancia().getContext().startActivity(iGuardarEvento);
