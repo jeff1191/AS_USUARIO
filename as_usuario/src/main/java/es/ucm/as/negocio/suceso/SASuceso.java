@@ -14,8 +14,6 @@ public interface SASuceso {
     public Integer responderReto(Integer respuesta);
     public List<TransferTarea> consultarTareas();
     public void cargarTareasBBDD();
-    public void cargarRetoBBDD();
-   // public void cargarEventosBBDD();
     public String generarPDF() throws IOException, DocumentException;
     public void guardarEventos(List<TransferEvento> eventosRespuesta) ;
 }
