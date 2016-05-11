@@ -4,14 +4,19 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import es.ucm.as.R;
+import es.ucm.as.negocio.conexion.msg.Mensaje;
 import es.ucm.as.negocio.usuario.TransferUsuario;
 import es.ucm.as.presentacion.controlador.Controlador;
 import es.ucm.as.presentacion.controlador.ListaComandos;
+import es.ucm.as.presentacion.controlador.comandos.Command;
+import es.ucm.as.presentacion.controlador.comandos.exceptions.commandException;
+import es.ucm.as.presentacion.controlador.comandos.imp.SincronizarComando;
 import es.ucm.as.presentacion.notificaciones.ServicioNotificaciones;
 
 /**
@@ -42,36 +47,48 @@ public class Registro extends Activity {
         String correo = String.valueOf(correoUsuario.getText());
         String clave = String.valueOf(claveUsuario.getText());
 
-        if(datosValidos(nombre,correo,clave)){
-            TransferUsuario crearUsuario = new TransferUsuario();
-            crearUsuario.setNombre(nombre);
-            crearUsuario.setAvatar("");
-            crearUsuario.setColor("AS_theme_azul");
-            crearUsuario.setPuntuacion(0);
-            crearUsuario.setPuntuacionAnterior(0);
-            crearUsuario.setCorreo(correo);
-            crearUsuario.setTono("");
-            crearUsuario.setCodigoSincronizacion(clave);
-            
-            Controlador.getInstancia().ejecutaComando(ListaComandos.CREAR_USUARIO, crearUsuario);
-            Controlador.getInstancia().ejecutaComando(ListaComandos.CARGAR_BBDD, null);
-            startService(new Intent(this, ServicioNotificaciones.class));
-            
-            startActivity(new Intent(this, MainActivity.class));
-    }
-        /*
-        //De momento va a sacar un mensaje y pasara a la main activity
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Cuidado!")
-                .setMessage("No se ha podido establecer una conexion del usuario " + nombre + "con el correo" + correo +
-                        " y la clave " + clave + "con tu tutor asignado. No estas sincronizado, como estamos en " +
-                        "testing pasamos directamente a la Main Activity").show();*/
+        Command sincronizar = new SincronizarComando();
+        boolean sincroCorrecta = false;
+        try {
+            TransferUsuario transferUsuario = new TransferUsuario();
+            transferUsuario.setCodigoSincronizacion(clave);
+            Mensaje msg = new Mensaje("registro");
+            msg.setUsuario(transferUsuario);
+            sincroCorrecta = (boolean) sincronizar.ejecutaComando(msg);
+        } catch (commandException e) {
+            e.printStackTrace();
+        }
 
+        if(sincroCorrecta ){
+            if (datosValidos(nombre,correo,clave)) {
+                TransferUsuario crearUsuario = new TransferUsuario();
+                crearUsuario.setNombre(nombre);
+                crearUsuario.setAvatar("");
+                crearUsuario.setColor("AS_theme_azul");
+                crearUsuario.setPuntuacion(0);
+                crearUsuario.setPuntuacionAnterior(0);
+                crearUsuario.setCorreo(correo);
+                crearUsuario.setTono("");
+                crearUsuario.setCodigoSincronizacion(clave);
 
+                Controlador.getInstancia().ejecutaComando(ListaComandos.CREAR_USUARIO, crearUsuario);
+                Controlador.getInstancia().ejecutaComando(ListaComandos.CARGAR_BBDD, null);
+                startService(new Intent(this, ServicioNotificaciones.class));
+
+                startActivity(new Intent(this, MainActivity.class));
+            }
+        }else{
+            //De momento va a sacar un mensaje y pasara a la main activity
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setTitle("Error: clave incorrecta")
+                    .setMessage("No se ha podido establecer una conexion con tu tutor."+
+                            "Debes estar en la misma red WiFi que tu tutor para poder registrarte").show();
+            startActivity(new Intent(this, Registro.class));
+        }
     }
 
     private boolean datosValidos(String nombre, String correo, String clave) {
-        ////////////////////FALTARIA VALIDAR EL CÓDIGO //////////////////////////
+
         if(!nombre.toString().matches("") &&
                 !correo.toString().matches("")&&
                 !clave.toString().matches("")) {

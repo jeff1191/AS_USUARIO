@@ -24,23 +24,29 @@ import es.ucm.as.presentacion.controlador.comandos.factoria.FactoriaComandos;
 public class SincronizarComando implements Command{
     @Override
     public Object ejecutaComando(Object datos) throws commandException {
-        SAUsuario saUsuario = FactoriaSA.getInstancia().nuevoSAUsuario();
-        TransferUsuario usuario = saUsuario.consultarUsuario();
 
-        SASuceso saSuceso = FactoriaSA.getInstancia().nuevoSASuceso();
-        List<TransferTarea> tareas = saSuceso.consultarTareas();
+        Mensaje msg = (Mensaje) datos;
+        ConectionManager conectionManager;
 
-        List<TransferEvento> eventos = saSuceso.consultarEventos();
-        TransferReto reto = saSuceso.consultarReto();
+        if(msg == null) {
+            SAUsuario saUsuario = FactoriaSA.getInstancia().nuevoSAUsuario();
+            TransferUsuario usuario = saUsuario.consultarUsuario();
 
-        Mensaje mensajeEnvio = new Mensaje(usuario,reto,eventos,tareas);
+            SASuceso saSuceso = FactoriaSA.getInstancia().nuevoSASuceso();
+            List<TransferTarea> tareas = saSuceso.consultarTareas();
 
-        Log.e("pruebaaa", "Nombre envio-> " + usuario.getNombre());
-        Log.e("pruebaaa", "Codigo envio-> " + usuario.getCodigoSincronizacion());
+            List<TransferEvento> eventos = saSuceso.consultarEventos();
+            TransferReto reto = saSuceso.consultarReto();
 
-        ConectionManager conectionManager = new ConectionManager(mensajeEnvio);
+            Mensaje mensajeEnvio = new Mensaje(usuario, reto, eventos, tareas);
+
+            conectionManager = new ConectionManager(mensajeEnvio);
+
+        }else
+            conectionManager = new ConectionManager(msg);
+
+
         if(conectionManager.getResponse() != null) {
-
 
             // Problema nombre usuario nulooooooooooooooooooooooooooooooooooooooooooooooooooooooooo
 
