@@ -25,6 +25,7 @@ public class SincronizarComando implements Command{
     @Override
     public Object ejecutaComando(Object datos) throws commandException {
 
+        boolean terminado = false;
         Mensaje msg = (Mensaje) datos;
         ConectionManager conectionManager;
 
@@ -44,22 +45,17 @@ public class SincronizarComando implements Command{
 
         }else {
             conectionManager = new ConectionManager(msg);
-            Log.e("prueba", msg.getUsuario().getCodigoSincronizacion());
+            Log.e("prueba","Codigo envio -> "+ msg.getUsuario().getCodigoSincronizacion());
         }
 
         if(conectionManager.getResponse() != null) {
 
-            // Problema nombre usuario nulooooooooooooooooooooooooooooooooooooooooooooooooooooooooo
-
-
             if (conectionManager.getResponse().getUsuario() != null) {
                 if (conectionManager.getResponse().getUsuario().getNombre() != null)
-                    Log.e("pruebaaa", "respuesta-> " + conectionManager.getResponse().getUsuario().getNombre());
+                    Log.e("prueba", "respuesta 2 -> " + conectionManager.getResponse().getUsuario().getNombre());
                 else
-                    Log.e("pruebaaa", "transfer nombre nulo");
+                    Log.e("prueba", "transfer nombre nulo");
             }
-
-            ///////////////////////////////////////////////////////////////////////////////////////
 
             //Va el desmenuze
             Mensaje respuestaTutor = conectionManager.getResponse();
@@ -108,13 +104,14 @@ public class SincronizarComando implements Command{
             }
 
             //Fin sync
+            terminado = conectionManager.getResponse() != null;
             conectionManager.reset();
             Log.e("sync", "Sincronizacion acabada");
         }
         else{
             Log.e("pruebaaa", "respuesta nula");
         }
-        return conectionManager.getResponse() != null;
+        return terminado;
     }
 
     public Integer sonIguales(TransferReto nuevo, TransferReto viejo){
