@@ -196,56 +196,8 @@ public class SASucesoImp implements SASuceso {
                 e.printStackTrace();
             }
         }
-
-
     }
 
-    public void cargarRetoBBDD() {
-        Parser p = new Parser();
-        Dao<Reto, Integer> retoDao;
-        p.readReto();   // lee del fichero y obtiene el reto (texto y posible premio)
-        try {
-            retoDao = getHelper().getRetoDao();
-            Reto reto = p.getReto();
-            if (reto != null && !retoDao.idExists(1))
-                retoDao.create(reto);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
-    /*@Override
-    public void cargarEventosBBDD() {
-        Parser p = new Parser();
-        Dao<Evento, Integer> eventoDao;
-        p.readEventos();   // lee del fichero y convierte en activity_eventos
-
-        // crea las nuevas tareas en BBDD si hubiera
-        ArrayList<Evento> eventosBBDD = p.getEventos();
-        for (int i = 0; i < eventosBBDD.size(); i++){
-            try {
-                eventoDao = getHelper().getEventoDao();
-                if (eventoDao.queryForEq("TEXTO", eventosBBDD.get(i).getTexto()).size() == 0) {
-                    eventosBBDD.get(i).setAsistencia(false); // Al principio No va a ningun evento
-                    eventoDao.create(eventosBBDD.get(i));
-                }
-
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        }
-
-        ArrayList<Evento> eventosObsoletos = p.getEventosObsoletos();
-        for (int i = 0; i < eventosObsoletos.size(); i++){
-            try {
-                eventoDao = getHelper().getEventoDao();
-                if (eventoDao.queryForEq("TEXTO", eventosObsoletos.get(i).getTexto()).size() != 0)
-                    eventoDao.delete(eventoDao.queryForEq("TEXTO", eventosObsoletos.get(i).getTexto()));
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        }
-    }*/
 
     public static File crearFichero(String nombreFichero) throws IOException {
         File ruta = getRuta();
@@ -350,15 +302,17 @@ public class SASucesoImp implements SASuceso {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        document.add(new Paragraph("Texto: " + reto.getTexto(), paragraphFont));
-        if(reto.getPremio() != null)
-            document.add(new Paragraph("Premio: "+ reto.getPremio(), paragraphFont));
-        document.add(new Paragraph("Contador: " + reto.getContador().toString() + "/30" , paragraphFont));
-        if (reto.getSuperado())
-            document.add(new Paragraph("Superado" , paragraphFont));
-        else
-            document.add(new Paragraph("No superado" , paragraphFont));
-        document.add(new Paragraph("\n", paragraphFont));
+        if (reto != null) {
+            document.add(new Paragraph("Texto: " + reto.getTexto(), paragraphFont));
+            if (reto.getPremio() != null)
+                document.add(new Paragraph("Premio: " + reto.getPremio(), paragraphFont));
+            document.add(new Paragraph("Contador: " + reto.getContador().toString() + "/30", paragraphFont));
+            if (reto.getSuperado())
+                document.add(new Paragraph("Superado", paragraphFont));
+            else
+                document.add(new Paragraph("No superado", paragraphFont));
+            document.add(new Paragraph("\n", paragraphFont));
+        }
 
 
         // Insertamos una tabla con las tareas y sus puntuaciones.
