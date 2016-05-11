@@ -110,8 +110,8 @@ public class SASucesoImp implements SASuceso {
         Reto reto = new Reto();
         try {
             dao = getHelper().getRetoDao();
-            reto = (Reto) dao.queryForId(1);
-            if (!reto.equals(null)) {
+            if (dao.queryForAll().size() != 0) {
+                reto = dao.queryForAll().get(0);
                 //Si el activity_reto no esta superado y se puede incrementar o decrementar aun se modifica
                 if (!reto.getSuperado() && respuesta == -1 && reto.getContador() > 0 ||
                         !reto.getSuperado() && respuesta == 1 && reto.getContador() <= 30) {
