@@ -63,11 +63,13 @@ public class SincronizarComando implements Command{
                     .getCommand(ListaComandos.VER_RETO).ejecutaComando(null);
             TransferReto retoAU = new TransferReto();
             if(retoDesdeT != null){
+                Log.e("sync", "Reto con algo");
                 if(retoActual != null){
                     //Tiene un reto, ver si son diferente o no
                     Integer dif = sonIguales(retoDesdeT, retoActual);
                     switch (dif){
                         case 0:
+                            Log.e("sync", "no toca nada");
                             FactoriaComandos.getInstancia()
                                     .getCommand(ListaComandos.GESTIONAR_RETO).ejecutaComando(retoAU);
                             return null;
@@ -90,12 +92,14 @@ public class SincronizarComando implements Command{
                     retoAU.setPremio(retoDesdeT.getPremio());
                     retoAU.setTexto(retoDesdeT.getTexto());
                 }
+                Log.e("sync", "Va a meterlo");
                 retoAU.setContador(0);
                 retoAU.setSuperado(false);
                 FactoriaComandos.getInstancia()
                         .getCommand(ListaComandos.GESTIONAR_RETO).ejecutaComando(retoAU);
             }
             else if(retoDesdeT == null && retoActual != null){ // No le llega nada y ya hay algo
+                Log.e("sync", "Va a borrar el reto");
                 //Borrar el reto
                 FactoriaComandos.getInstancia()
                         .getCommand(ListaComandos.ELIMINAR_RETO).ejecutaComando(null);

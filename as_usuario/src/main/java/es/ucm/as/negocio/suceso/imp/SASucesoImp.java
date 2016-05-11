@@ -3,6 +3,7 @@ package es.ucm.as.negocio.suceso.imp;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Environment;
+import android.util.Log;
 
 import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Document;
@@ -445,7 +446,13 @@ public class SASucesoImp implements SASuceso {
             reto.setPremio(r.getPremio());
             reto.setContador(r.getContador());
             reto.setSuperado(r.getSuperado());
-            dao.update(reto);
+            if (dao.idExists(1)) {
+                Log.e("sync", "modifica en bbdd");
+                dao.update(reto);
+            } else {
+                Log.e("sync", "crea en bbdd");
+                dao.create(reto);
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -453,6 +460,7 @@ public class SASucesoImp implements SASuceso {
 
     @Override
     public void eliminarRetoBBDD() {
+        Log.e("sync", "elimina en bbdd");
 
         Dao<Reto, Integer> dao;
         try {
