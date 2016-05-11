@@ -3,6 +3,7 @@ package es.ucm.as.negocio.suceso.imp;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Environment;
+import android.util.Log;
 
 import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Document;
@@ -83,12 +84,13 @@ public class SASucesoImp implements SASuceso {
     public TransferReto consultarReto() {
         Dao<Reto, Integer> dao;
         Reto reto = new Reto();
-        TransferReto tr = new TransferReto();
+        TransferReto tr = null;
         try {
             dao = getHelper().getRetoDao();
 
-            if (dao.idExists(1)) {  // comprueba si hay algun activity_reto en la BBDD
-                reto = (Reto) dao.queryForId(1);
+            if (dao.queryForAll().size() != 0) {  // comprueba si hay algun activity_reto en la BBDD
+                reto =  dao.queryForAll().get(0);
+                tr = new TransferReto();
                 tr.setContador(reto.getContador());
                 tr.setId(reto.getId());
                 tr.setPremio(reto.getPremio());
@@ -108,8 +110,8 @@ public class SASucesoImp implements SASuceso {
         Reto reto = new Reto();
         try {
             dao = getHelper().getRetoDao();
-            reto = (Reto) dao.queryForId(1);
-            if (!reto.equals(null)) {
+            if (dao.queryForAll().size() != 0) {
+                reto = dao.queryForAll().get(0);
                 //Si el activity_reto no esta superado y se puede incrementar o decrementar aun se modifica
                 if (!reto.getSuperado() && respuesta == -1 && reto.getContador() > 0 ||
                         !reto.getSuperado() && respuesta == 1 && reto.getContador() <= 30) {
@@ -399,7 +401,14 @@ public class SASucesoImp implements SASuceso {
             reto.setPremio(r.getPremio());
             reto.setContador(r.getContador());
             reto.setSuperado(r.getSuperado());
-            dao.update(reto);
+            if (dao.queryForAll().size() != 0) {
+                Log.e("sync", "modifica en bbdd");
+                dao.delete(dao.queryForAll().get(0));
+                dao.create(reto);
+            } else {
+                Log.e("sync", "crea en bbdd");
+                dao.create(reto);
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -407,11 +416,12 @@ public class SASucesoImp implements SASuceso {
 
     @Override
     public void eliminarRetoBBDD() {
+        Log.e("sync", "elimina en bbdd");
 
         Dao<Reto, Integer> dao;
         try {
             dao = getHelper().getRetoDao();
-            dao.deleteById(1);
+            dao.delete(dao.queryForAll().get(0));
         } catch (SQLException e) {
             e.printStackTrace();
         }

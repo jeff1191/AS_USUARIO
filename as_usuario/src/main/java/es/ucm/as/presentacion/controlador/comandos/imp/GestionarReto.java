@@ -1,5 +1,7 @@
 package es.ucm.as.presentacion.controlador.comandos.imp;
 
+import android.util.Log;
+
 import es.ucm.as.negocio.factoria.FactoriaSA;
 import es.ucm.as.negocio.suceso.SASuceso;
 import es.ucm.as.negocio.suceso.TransferReto;
@@ -14,6 +16,7 @@ public class GestionarReto implements Command {
     @Override
     public Object ejecutaComando(Object datos) throws commandException {
         SASuceso saSuceso = FactoriaSA.getInstancia().nuevoSASuceso();
+        Log.e("sync", "seguimos");
         saSuceso.gestionarRetoBBDD((TransferReto) datos);
         return null;
     }
