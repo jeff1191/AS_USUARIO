@@ -1,10 +1,11 @@
 package es.ucm.as.presentacion.vista;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
-import android.support.v7.app.AlertDialog;
+
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -40,7 +41,6 @@ public class Registro extends Activity {
     }
 
     public void realizarRegistro(View v){
-        //Aqui es donde se deberia comprobar lo de la sincronizacion
 
         //Leer los datos del "fomulario"
         String nombre = String.valueOf(nombreUsuario.getText());
@@ -78,12 +78,8 @@ public class Registro extends Activity {
                 startActivity(new Intent(this, MainActivity.class));
             }
         }else{
-            //De momento va a sacar un mensaje y pasara a la main activity
-            AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setTitle("Error: clave incorrecta")
-                    .setMessage("No se ha podido establecer una conexion con tu tutor."+
-                            "Debes estar en la misma red WiFi que tu tutor para poder registrarte").show();
-            startActivity(new Intent(this, Registro.class));
+            mostrarMensajeError("Error: clave incorrecta\n" +
+            "Debes estar en la misma red WiFi que tu tutor para poder registrarte");
         }
     }
 
@@ -103,11 +99,10 @@ public class Registro extends Activity {
         return false;
     }
 
-
     private void mostrarMensajeError(String msg){
         Toast errorNombre =
                 Toast.makeText(getApplicationContext(),
-                        msg, Toast.LENGTH_SHORT);
+                        msg, Toast.LENGTH_LONG);
         errorNombre.show();
     }
 }

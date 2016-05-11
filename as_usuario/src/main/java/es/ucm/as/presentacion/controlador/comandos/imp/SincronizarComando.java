@@ -42,9 +42,10 @@ public class SincronizarComando implements Command{
 
             conectionManager = new ConectionManager(mensajeEnvio);
 
-        }else
+        }else {
             conectionManager = new ConectionManager(msg);
-
+            Log.e("prueba", msg.getUsuario().getCodigoSincronizacion());
+        }
 
         if(conectionManager.getResponse() != null) {
 
@@ -60,7 +61,6 @@ public class SincronizarComando implements Command{
 
             ///////////////////////////////////////////////////////////////////////////////////////
 
-            String ret = conectionManager.getResponse().getUsuario().getNombre();
             //Va el desmenuze
             Mensaje respuestaTutor = conectionManager.getResponse();
             TransferReto retoDesdeT =  respuestaTutor.getReto();
@@ -114,7 +114,7 @@ public class SincronizarComando implements Command{
         else{
             Log.e("pruebaaa", "respuesta nula");
         }
-        return null;
+        return conectionManager.getResponse() != null;
     }
 
     public Integer sonIguales(TransferReto nuevo, TransferReto viejo){

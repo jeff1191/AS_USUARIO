@@ -37,7 +37,6 @@ public class ConectionManager {
         String ip = getIp();
         if (ip != null) {
             myClientTask = new MyClientTask(ip, 8080, mensaje);
-
             try {
                 respuesta = myClientTask.execute().get();
             } catch (InterruptedException e) {
@@ -101,11 +100,10 @@ public class ConectionManager {
                     dataOutputStream.writeObject(msgToServer);
                     ObjectInputStream objectInputStream = new ObjectInputStream(socket.getInputStream());
                     Mensaje response = (Mensaje) objectInputStream.readObject();
-                    if(!response.getVerificar().equals("Permitido")) {
+                    if(!response.getVerificar().equals("Permitido") || !response.getVerificar().equals("registro")) {
                         Log.e("prueba", "no me permite");
                         return null;
-                    }
-                    else {
+                    }else{
                         Log.e("prueba", "Permitido");
                         mOut = new PrintWriter(new BufferedWriter(new OutputStreamWriter(socket.getOutputStream())), true);
                         mOut.println("test");
