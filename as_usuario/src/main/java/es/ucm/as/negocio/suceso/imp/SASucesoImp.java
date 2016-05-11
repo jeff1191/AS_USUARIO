@@ -94,9 +94,7 @@ public class SASucesoImp implements SASuceso {
                 tr.setPremio(reto.getPremio());
                 tr.setTexto(reto.getTexto());
                 tr.setSuperado(reto.getSuperado());
-            }else
-                return null;
-
+            }
         } catch (SQLException e) {
 
         }

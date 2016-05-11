@@ -13,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import es.ucm.as.R;
+import es.ucm.as.negocio.suceso.TransferReto;
 import es.ucm.as.presentacion.controlador.Controlador;
 import es.ucm.as.presentacion.controlador.ListaComandos;
 
@@ -40,7 +41,7 @@ public class VerReto extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reto);
 
-        Bundle bundle = getIntent().getExtras();
+        TransferReto reto = (TransferReto) getIntent().getExtras().getSerializable("reto");
 
         sup = (TextView) findViewById(R.id.tituloReto);
         tv = (TextView) findViewById(R.id.textoReto);
@@ -50,16 +51,16 @@ public class VerReto extends Activity {
         si = (Button) findViewById(R.id.si);
         no = (Button) findViewById(R.id.no);
 
-        if (bundle != null){
+        if (reto.getTexto() != null) {
             sup.setText("Reto");
-            tv.setText(bundle.getString("textReto"));
-            c.setText(((Integer) bundle.getInt("contadorReto")).toString()+"/30");
-            progreso.setProgress(bundle.getInt("contadorReto"));
+            tv.setText(reto.getTexto());
+            c.setText(reto.getContador().toString() + "/30");
+            progreso.setProgress(reto.getContador());
 
-            if(!bundle.getString("premioReto").equals(""))
-                premio.setText("Premio: " + bundle.getString("premioReto"));
+            if (reto.getPremio().equals(""))
+                premio.setText("Premio: " + reto.getPremio());
 
-            boolean superado = bundle.getBoolean("superadoReto");
+            boolean superado = reto.getSuperado();
 
             if (superado) {
                 si.setEnabled(false);
@@ -68,7 +69,7 @@ public class VerReto extends Activity {
                 no.setVisibility(View.INVISIBLE);
                 sup.setText("RETO SUPERADO");
             }
-        }else {
+        } else {
             si.setEnabled(false);
             si.setVisibility(View.INVISIBLE);
             no.setEnabled(false);
@@ -79,6 +80,7 @@ public class VerReto extends Activity {
             sup.setTextColor(Color.GRAY);
         }
     }
+
 
     public void volver(View v){
         Intent pantallaPrincipal = new Intent (getApplicationContext(), MainActivity.class);

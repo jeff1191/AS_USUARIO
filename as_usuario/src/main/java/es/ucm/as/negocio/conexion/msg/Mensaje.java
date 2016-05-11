@@ -36,6 +36,7 @@ public class Mensaje implements Serializable{
 
     public Mensaje(TransferUsuario usuario, TransferReto reto,
                    List<TransferEvento> eventos, List<TransferTarea> tareas ){
+        this.verificar = "";
         this.usuario = usuario;
         this.reto = reto;
         this.eventos = eventos;

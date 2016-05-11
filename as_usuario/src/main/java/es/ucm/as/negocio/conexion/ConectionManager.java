@@ -34,7 +34,6 @@ public class ConectionManager {
 
     public ConectionManager(Mensaje mensaje){
         this.codigo = mensaje.getUsuario().getCodigoSincronizacion();
-        Log.e("prueba cod-> ", codigo);
         String ip = getIp();
         if (ip != null) {
             myClientTask = new MyClientTask(ip, 8080, mensaje);
@@ -100,7 +99,6 @@ public class ConectionManager {
                     ObjectOutputStream dataOutputStream = new ObjectOutputStream(
                             socket.getOutputStream());
                     dataOutputStream.writeObject(msgToServer);
-                    Log.e("prueba", msgToServer.getVerificar());
                     ObjectInputStream objectInputStream = new ObjectInputStream(socket.getInputStream());
                     Mensaje response = (Mensaje) objectInputStream.readObject();
                     if(!response.getVerificar().equals("Permitido")) {

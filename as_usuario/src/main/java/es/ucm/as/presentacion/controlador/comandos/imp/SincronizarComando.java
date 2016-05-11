@@ -13,8 +13,10 @@ import es.ucm.as.negocio.suceso.TransferReto;
 import es.ucm.as.negocio.suceso.TransferTarea;
 import es.ucm.as.negocio.usuario.SAUsuario;
 import es.ucm.as.negocio.usuario.TransferUsuario;
+import es.ucm.as.presentacion.controlador.ListaComandos;
 import es.ucm.as.presentacion.controlador.comandos.Command;
 import es.ucm.as.presentacion.controlador.comandos.exceptions.commandException;
+import es.ucm.as.presentacion.controlador.comandos.factoria.FactoriaComandos;
 
 /**
  * Created by msalitu on 10/03/2016.
@@ -32,8 +34,9 @@ public class SincronizarComando implements Command{
         TransferReto reto = saSuceso.consultarReto();
 
         Mensaje mensajeEnvio = new Mensaje(usuario,reto,eventos,tareas);
-        Log.e("pruebaaa", usuario.getNombre());
-        Log.e("pruebaaa", usuario.getCodigoSincronizacion());
+
+        Log.e("pruebaaa", "Nombre envio-> " + usuario.getNombre());
+        Log.e("pruebaaa", "Codigo envio-> " + usuario.getCodigoSincronizacion());
 
         ConectionManager conectionManager = new ConectionManager(mensajeEnvio);
         if(conectionManager.getResponse() != null) {
@@ -44,7 +47,7 @@ public class SincronizarComando implements Command{
 
             if (conectionManager.getResponse().getUsuario() != null) {
                 if (conectionManager.getResponse().getUsuario().getNombre() != null)
-                    Log.e("pruebaaa", conectionManager.getResponse().getUsuario().getNombre());
+                    Log.e("pruebaaa", "respuesta-> " + conectionManager.getResponse().getUsuario().getNombre());
                 else
                     Log.e("pruebaaa", "transfer nombre nulo");
             }
@@ -53,8 +56,8 @@ public class SincronizarComando implements Command{
 
 
 
-            //String ret = conectionManager.getResponse().getUsuario().getNombre();
-            /*Va el desmenuze
+            String ret = conectionManager.getResponse().getUsuario().getNombre();
+            //Va el desmenuze
             Mensaje respuestaTutor = conectionManager.getResponse();
             TransferReto retoDesdeT =  respuestaTutor.getReto();
 
@@ -96,7 +99,7 @@ public class SincronizarComando implements Command{
 
             //Fin sync
             conectionManager.reset();
-            Log.e("sync", "Sincronizacion acabada");*/
+            Log.e("sync", "Sincronizacion acabada");
         }
         else{
             Log.e("pruebaaa", "respuesta nula");
