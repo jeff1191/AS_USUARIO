@@ -435,4 +435,34 @@ public class SASucesoImp implements SASuceso {
         }
     }
 
+    @Override
+    public void gestionarRetoBBDD(TransferReto r) {
+        Dao<Reto, Integer> dao;
+        Reto reto = new Reto();
+        try {
+            dao = getHelper().getRetoDao();
+            reto.setTexto(r.getTexto());
+            reto.setPremio(r.getPremio());
+            reto.setContador(r.getContador());
+            reto.setSuperado(r.getSuperado());
+            dao.update(reto);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void eliminarRetoBBDD() {
+
+        Dao<Reto, Integer> dao;
+        try {
+            dao = getHelper().getRetoDao();
+            dao.deleteById(1);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+
 }

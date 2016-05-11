@@ -9,8 +9,10 @@ import es.ucm.as.presentacion.controlador.comandos.imp.ConsultarUsuarioComando;
 import es.ucm.as.presentacion.controlador.comandos.imp.ConfiguracionComando;
 import es.ucm.as.presentacion.controlador.comandos.imp.CrearUsuarioComando;
 import es.ucm.as.presentacion.controlador.comandos.imp.EditarUsuarioComando;
+import es.ucm.as.presentacion.controlador.comandos.imp.EliminarReto;
 import es.ucm.as.presentacion.controlador.comandos.imp.EnviarCorreoComando;
 import es.ucm.as.presentacion.controlador.comandos.imp.GenerarPDFComando;
+import es.ucm.as.presentacion.controlador.comandos.imp.GestionarReto;
 import es.ucm.as.presentacion.controlador.comandos.imp.GuardarEventosComando;
 import es.ucm.as.presentacion.controlador.comandos.imp.ResponderRetoComando;
 import es.ucm.as.presentacion.controlador.comandos.imp.SincronizarComando;
@@ -71,6 +73,12 @@ public class FactoriaComandosImp extends FactoriaComandos {
                 break;
             case ListaComandos.SINCRONIZAR:
                 ret = new SincronizarComando();
+                break;
+            case ListaComandos.GESTIONAR_RETO:
+                ret = new GestionarReto();
+                break;
+            case ListaComandos.ELIMINAR_RETO:
+                ret = new EliminarReto();
                 break;
         }
 
