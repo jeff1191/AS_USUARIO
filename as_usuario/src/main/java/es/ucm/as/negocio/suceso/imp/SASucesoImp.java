@@ -84,12 +84,13 @@ public class SASucesoImp implements SASuceso {
     public TransferReto consultarReto() {
         Dao<Reto, Integer> dao;
         Reto reto = new Reto();
-        TransferReto tr = new TransferReto();
+        TransferReto tr = null;
         try {
             dao = getHelper().getRetoDao();
 
-            if (dao.idExists(1)) {  // comprueba si hay algun activity_reto en la BBDD
-                reto = (Reto) dao.queryForId(1);
+            if (dao.queryForAll().size() != 0) {  // comprueba si hay algun activity_reto en la BBDD
+                reto =  dao.queryForAll().get(0);
+                tr = new TransferReto();
                 tr.setContador(reto.getContador());
                 tr.setId(reto.getId());
                 tr.setPremio(reto.getPremio());
@@ -446,9 +447,10 @@ public class SASucesoImp implements SASuceso {
             reto.setPremio(r.getPremio());
             reto.setContador(r.getContador());
             reto.setSuperado(r.getSuperado());
-            if (dao.idExists(1)) {
+            if (dao.queryForAll().size() != 0) {
                 Log.e("sync", "modifica en bbdd");
-                dao.update(reto);
+                dao.delete(dao.queryForAll().get(0));
+                dao.create(reto);
             } else {
                 Log.e("sync", "crea en bbdd");
                 dao.create(reto);
@@ -465,7 +467,7 @@ public class SASucesoImp implements SASuceso {
         Dao<Reto, Integer> dao;
         try {
             dao = getHelper().getRetoDao();
-            dao.deleteById(1);
+            dao.delete(dao.queryForAll().get(0));
         } catch (SQLException e) {
             e.printStackTrace();
         }
