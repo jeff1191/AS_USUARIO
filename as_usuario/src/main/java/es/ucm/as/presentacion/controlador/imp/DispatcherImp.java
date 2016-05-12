@@ -29,28 +29,7 @@ public class DispatcherImp extends Dispatcher{
 
         switch(accion){
 
-            case ListaComandos.VER_EVENTOS:
-                Intent intent = new Intent(Contexto.getInstancia().getContext().getApplicationContext(), VerEventos.class);
-                List<TransferEvento> eventosModelo= (List<TransferEvento>) datos;
-                ArrayList<String> listaActividad= new ArrayList<String>();
-                ArrayList<Integer> listaIds = new ArrayList<Integer>();
-                boolean listaActivos[] = new boolean[eventosModelo.size()];
-                for(int i=0; i < eventosModelo.size(); i++){
-                    String addEvento= eventosModelo.get(i).getTexto() + " el " + eventosModelo.get(i).getFecha();
-                    listaActividad.add(addEvento);
-                    listaIds.add(eventosModelo.get(i).getId());
-                    listaActivos[i] = eventosModelo.get(i).getAsistencia();
-                }
-                //intent.putStringArrayListExtra("listaEventos", listaActividad);
-                //intent.putIntegerArrayListExtra("listaIds", listaIds);
-                //intent.put. putArrayListExtra("listaAsistencia", listaActivos);
-                Bundle b = new Bundle();
-                b.putIntegerArrayList("listaIds", listaIds);
-                b.putStringArrayList("listaEventos", listaActividad);
-                b.putBooleanArray("listaAsistencia", listaActivos);
-                intent.putExtras(b);
-                Contexto.getInstancia().getContext().startActivity(intent);
-                break;
+            // Usuario
 
             case ListaComandos.CONFIGURACION:
                 Intent intentConfiguracion = new Intent(Contexto.getInstancia().getContext().getApplicationContext(), Configuracion.class);
@@ -69,11 +48,44 @@ public class DispatcherImp extends Dispatcher{
                 Contexto.getInstancia().getContext().startActivity(intentEditarUsuario);
                 break;
 
+            case ListaComandos.ACTUALIZAR_PUNTUACION:
+                Intent iPuntuacion = new Intent(Contexto.getInstancia().getContext().getApplicationContext(), MainActivity.class);
+                iPuntuacion.putExtra("puntuacion", (Integer)datos);
+                break;
+
+            case ListaComandos.CONSULTAR_USUARIO:
+                TransferUsuario transferUsuario = (TransferUsuario)datos;
+                Intent hayUsuario = new Intent(Contexto.getInstancia().getContext().getApplicationContext(), MainActivity.class);
+                hayUsuario.putExtra("nombre", transferUsuario.getNombre());
+                hayUsuario.putExtra("correo", transferUsuario.getCorreo());
+                hayUsuario.putExtra("avatar", transferUsuario.getAvatar());
+                hayUsuario.putExtra("puntuacion", transferUsuario.getPuntuacion());
+                hayUsuario.putExtra("puntuacionAnterior", transferUsuario.getPuntuacionAnterior());
+                hayUsuario.putExtra("color", transferUsuario.getColor());
+                hayUsuario.putExtra("tono", transferUsuario.getTono());
+                Contexto.getInstancia().getContext().startActivity(hayUsuario);
+                break;
+
+            case ListaComandos.SINCRONIZAR:
+                boolean terminado = (boolean) datos;
+                Intent intentSincro = new Intent(Contexto.getInstancia().getContext().getApplicationContext(), MainActivity.class);
+                if(terminado)
+                    intentSincro.putExtra("sincronizacion", "true");
+                else
+                    intentSincro.putExtra("sincronizacion", "false");
+
+                Contexto.getInstancia().getContext().startActivity(intentSincro);
+                break;
+
+            // Ayuda
+
             case ListaComandos.AYUDA:
                 Intent intentAyuda = new Intent(Contexto.getInstancia().getContext().getApplicationContext(), Ayuda.class);
                 intentAyuda.putExtra("pantalla", (String)datos);
                 Contexto.getInstancia().getContext().startActivity(intentAyuda);
                 break;
+
+            // Reto
 
             case ListaComandos.VER_RETO:
                 Intent intentR = new Intent(Contexto.getInstancia().getContext().getApplicationContext(), VerReto.class);
@@ -81,6 +93,8 @@ public class DispatcherImp extends Dispatcher{
                 intentR.putExtra("reto", transferReto);
                 Contexto.getInstancia().getContext().startActivity(intentR);
                 break;
+
+            // Tareas
 
             case ListaComandos.VER_INFORME:
                 Intent intentTareas = new Intent(Contexto.getInstancia().getContext().getApplicationContext(), VerInforme.class);
@@ -106,27 +120,34 @@ public class DispatcherImp extends Dispatcher{
                 Contexto.getInstancia().getContext().startActivity(intentTareas);
                 break;
 
-            case ListaComandos.ACTUALIZAR_PUNTUACION:
-                Intent iPuntuacion = new Intent(Contexto.getInstancia().getContext().getApplicationContext(), MainActivity.class);
-                iPuntuacion.putExtra("puntuacion", (Integer)datos);
-                break;
-
-            case ListaComandos.CONSULTAR_USUARIO:
-                TransferUsuario transferUsuario = (TransferUsuario)datos;
-                Intent hayUsuario = new Intent(Contexto.getInstancia().getContext().getApplicationContext(), MainActivity.class);
-                hayUsuario.putExtra("nombre", transferUsuario.getNombre());
-                hayUsuario.putExtra("correo", transferUsuario.getCorreo());
-                hayUsuario.putExtra("avatar", transferUsuario.getAvatar());
-                hayUsuario.putExtra("puntuacion", transferUsuario.getPuntuacion());
-                hayUsuario.putExtra("puntuacionAnterior", transferUsuario.getPuntuacionAnterior());
-                hayUsuario.putExtra("color", transferUsuario.getColor());
-                hayUsuario.putExtra("tono", transferUsuario.getTono());
-                Contexto.getInstancia().getContext().startActivity(hayUsuario);
-                break;
+            // Eventos
 
             case ListaComandos.GUARDAR_EVENTOS:
                 Intent iGuardarEvento = new Intent(Contexto.getInstancia().getContext().getApplicationContext(), MainActivity.class);
                 Contexto.getInstancia().getContext().startActivity(iGuardarEvento);
+                break;
+
+            case ListaComandos.VER_EVENTOS:
+                Intent intent = new Intent(Contexto.getInstancia().getContext().getApplicationContext(), VerEventos.class);
+                List<TransferEvento> eventosModelo= (List<TransferEvento>) datos;
+                ArrayList<String> listaActividad= new ArrayList<String>();
+                ArrayList<Integer> listaIds = new ArrayList<Integer>();
+                boolean listaActivos[] = new boolean[eventosModelo.size()];
+                for(int i=0; i < eventosModelo.size(); i++){
+                    String addEvento= eventosModelo.get(i).getTexto() + " el " + eventosModelo.get(i).getFecha();
+                    listaActividad.add(addEvento);
+                    listaIds.add(eventosModelo.get(i).getId());
+                    listaActivos[i] = eventosModelo.get(i).getAsistencia();
+                }
+                //intent.putStringArrayListExtra("listaEventos", listaActividad);
+                //intent.putIntegerArrayListExtra("listaIds", listaIds);
+                //intent.put. putArrayListExtra("listaAsistencia", listaActivos);
+                Bundle b = new Bundle();
+                b.putIntegerArrayList("listaIds", listaIds);
+                b.putStringArrayList("listaEventos", listaActividad);
+                b.putBooleanArray("listaAsistencia", listaActivos);
+                intent.putExtras(b);
+                Contexto.getInstancia().getContext().startActivity(intent);
                 break;
         }
     }

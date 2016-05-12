@@ -22,8 +22,6 @@ public class TransferTarea implements Serializable{
 
 	private Date horaAlarma;
 
-	private Date fechaIni;
-
 	private Integer contador;
 
 	private Integer noSeguidos;
@@ -74,14 +72,6 @@ public class TransferTarea implements Serializable{
 
 	public void setHoraAlarma(Date horaAlarma) {
 		this.horaAlarma = horaAlarma;
-	}
-
-	public Date getFechaIni() {
-		return fechaIni;
-	}
-
-	public void setFechaIni(Date fechaIni) {
-		this.fechaIni = fechaIni;
 	}
 
 	public Integer getContador() {

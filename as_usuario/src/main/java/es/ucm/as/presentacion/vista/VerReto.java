@@ -51,23 +51,25 @@ public class VerReto extends Activity {
         si = (Button) findViewById(R.id.si);
         no = (Button) findViewById(R.id.no);
 
-        if (reto.getTexto() != null) {
-            sup.setText("Reto");
-            tv.setText(reto.getTexto());
-            c.setText(reto.getContador().toString() + "/30");
-            progreso.setProgress(reto.getContador());
+        if(reto != null){
+            if (reto.getTexto() != null) {
+                sup.setText("Reto");
+                tv.setText(reto.getTexto());
+                c.setText(reto.getContador().toString() + "/30");
+                progreso.setProgress(reto.getContador());
 
-            if (reto.getPremio().equals(""))
-                premio.setText("Premio: " + reto.getPremio());
+                if (!reto.getPremio().equals(""))
+                    premio.setText("Premio: " + reto.getPremio());
 
-            boolean superado = reto.getSuperado();
+                boolean superado = reto.getSuperado();
 
-            if (superado) {
-                si.setEnabled(false);
-                si.setVisibility(View.INVISIBLE);
-                no.setEnabled(false);
-                no.setVisibility(View.INVISIBLE);
-                sup.setText("RETO SUPERADO");
+                if (superado) {
+                    si.setEnabled(false);
+                    si.setVisibility(View.INVISIBLE);
+                    no.setEnabled(false);
+                    no.setVisibility(View.INVISIBLE);
+                    sup.setText("RETO SUPERADO");
+                }
             }
         } else {
             si.setEnabled(false);

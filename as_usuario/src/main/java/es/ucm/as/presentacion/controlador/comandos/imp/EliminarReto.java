@@ -13,7 +13,7 @@ public class EliminarReto implements Command {
     @Override
     public Object ejecutaComando(Object datos) throws commandException {
         SASuceso saSuceso = FactoriaSA.getInstancia().nuevoSASuceso();
-        saSuceso.eliminarRetoBBDD();
+        saSuceso.eliminarReto();
         return null;
     }
 }

@@ -3,7 +3,6 @@ package es.ucm.as.negocio.suceso.imp;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Environment;
-import android.util.Log;
 
 import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Document;
@@ -41,7 +40,6 @@ import es.ucm.as.negocio.suceso.TransferReto;
 import es.ucm.as.negocio.suceso.TransferTarea;
 import es.ucm.as.negocio.usuario.SAUsuario;
 import es.ucm.as.negocio.usuario.TransferUsuario;
-import es.ucm.as.negocio.utils.Parser;
 import es.ucm.as.presentacion.vista.Contexto;
 
 /**
@@ -165,37 +163,62 @@ public class SASucesoImp implements SASuceso {
         return transferTareas;
     }
 
+
     @Override
+    public void cargarTareas(List<TransferTarea> tareas) {
 
 
-    public void cargarTareasBBDD() {
-        Parser p = new Parser();
-        Dao<Tarea, Integer> tareaDao;
-        p.readTareas();   // lee del fichero y convierte en tareas
+            Dao<Tarea, Integer> tareaDao;
 
-        // crea las nuevas tareas en BBDD si hubiera
-        ArrayList<Tarea> tareasBBDD = p.getTareas();
-        for (int i = 0; i < tareasBBDD.size(); i++){
             try {
                 tareaDao = getHelper().getTareaDao();
-                if (tareaDao.queryForEq("TEXTO_ALARMA", tareasBBDD.get(i).getTextoAlarma()).size() == 0)
-                    tareaDao.create(tareasBBDD.get(i));
+
+                if(tareas != null) {
+                    for (int i = 0; i < tareas.size(); i++) {
+
+                        TransferTarea transfer = tareas.get(i);
+                        Tarea tarea = new Tarea();
+                        tarea.setTextoAlarma(transfer.getTextoAlarma());
+                        tarea.setHoraAlarma(transfer.getHoraAlarma());
+                        tarea.setTextoPregunta(transfer.getTextoPregunta());
+                        tarea.setHoraPregunta(transfer.getHoraPregunta());
+                        tarea.setContador(transfer.getContador());
+                        tarea.setMejorar(transfer.getMejorar());
+                        tarea.setNumNo(transfer.getNumNo());
+                        tarea.setNumSi(transfer.getNumSi());
+                        tarea.setNoSeguidos(transfer.getNoSeguidos());
+                        tarea.setFrecuenciaTarea(transfer.getFrecuenciaTarea());
+
+                        // Si alguno de los contadores no es 0 quiere decir que es no es una nueva tarea
+                        if (transfer.getNumNo() != 0 || transfer.getNumSi() != 0
+                                || transfer.getContador() != 0 || transfer.getNoSeguidos() != 0) {
+
+                            // Si ha habido modificaciones
+                            if (!tareaDao.equals(tarea)) {
+                                tarea = tareaDao.queryForEq("TEXTO_ALARMA", transfer.getTextoAlarma()).get(0);
+
+                                if (tarea.getHoraAlarma() != transfer.getHoraAlarma())
+                                    tarea.setHoraAlarma(transfer.getHoraAlarma());
+                                if (tarea.getTextoPregunta() != transfer.getTextoPregunta())
+                                    tarea.setTextoPregunta(transfer.getTextoPregunta());
+                                if (tarea.getHoraPregunta() != transfer.getHoraPregunta())
+                                    tarea.setHoraPregunta(transfer.getHoraPregunta());
+                                if (tarea.getMejorar() != transfer.getMejorar())
+                                    tarea.setMejorar(transfer.getMejorar());
+                                if (tarea.getFrecuenciaTarea() != transfer.getFrecuenciaTarea())
+                                    tarea.setFrecuenciaTarea(transfer.getFrecuenciaTarea());
+                            }
+                        }
+
+                        // En cualquier caso se crea o actualiza
+                        tareaDao.createOrUpdate(tarea);
+                    }
+                }
+
             } catch (SQLException e) {
                 e.printStackTrace();
             }
-        }
 
-        // elimina las tareas que el tutor ha deshabilitado o borrado
-        ArrayList<Tarea> tareasObsoletas = p.getTareasObsoletas();
-        for (int i = 0; i < tareasObsoletas.size(); i++){
-            try {
-                tareaDao = getHelper().getTareaDao();
-                if (tareaDao.queryForEq("TEXTO_ALARMA", tareasObsoletas.get(i).getTextoAlarma()).size() != 0)
-                    tareaDao.delete(tareaDao.queryForEq("TEXTO_ALARMA", tareasObsoletas.get(i).getTextoAlarma()));
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        }
     }
 
 
@@ -392,7 +415,7 @@ public class SASucesoImp implements SASuceso {
     }
 
     @Override
-    public void gestionarRetoBBDD(TransferReto r) {
+    public void crearReto(TransferReto r) {
         Dao<Reto, Integer> dao;
         Reto reto = new Reto();
         try {
@@ -413,7 +436,7 @@ public class SASucesoImp implements SASuceso {
     }
 
     @Override
-    public void eliminarRetoBBDD() {
+    public void eliminarReto() {
         Dao<Reto, Integer> dao;
         try {
             dao = getHelper().getRetoDao();
@@ -423,5 +446,42 @@ public class SASucesoImp implements SASuceso {
         }
     }
 
+
+    // Este metodo analiza si se debe crear/modificar/eliminar el reto existente despues de la sincronizacion
+    @Override
+    public void cargarReto(TransferReto nuevoReto) {
+
+        TransferReto retoActual = consultarReto();
+
+        // Llega un reto desde el tutor
+        if(nuevoReto.getTexto() != null){
+
+            // Si el usuario ya tenia reto
+            if(retoActual != null){
+
+                // Si se detecta algun cambio entre el reto que manda el tutor y el del usuario
+                // se machaca el reto del usuario
+                if (!nuevoReto.getTexto().equals(retoActual.getTexto()) ||
+                        !nuevoReto.getPremio().equals(retoActual.getPremio())){
+                    retoActual.setTexto(nuevoReto.getTexto());
+                    retoActual.setPremio(nuevoReto.getPremio());
+                    retoActual.setContador(0);
+                    retoActual.setSuperado(false);
+                    crearReto(retoActual);
+                }
+
+            } else{ //Si el usuario no tiene un reto: A crear!!
+                retoActual = new TransferReto();
+                retoActual.setPremio(nuevoReto.getPremio());
+                retoActual.setTexto(nuevoReto.getTexto());
+                retoActual.setContador(0);
+                retoActual.setSuperado(false);
+                crearReto(retoActual);
+            }
+
+            // Si no llega reto del tutor hay que borrar el del usuario si lo hubiera
+        } else if(nuevoReto.getTexto() == null && retoActual != null)
+            FactoriaSA.getInstancia().nuevoSASuceso().eliminarReto();
+    }
 
 }

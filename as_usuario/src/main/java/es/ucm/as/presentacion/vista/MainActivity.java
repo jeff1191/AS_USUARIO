@@ -30,7 +30,7 @@ public class MainActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        // Se accede a los datos del usuario de la BBDD
+
         Controlador.getInstancia().ejecutaComando(ListaComandos.ACTUALIZAR_PUNTUACION, null);
         Command c = FactoriaComandos.getInstancia().getCommand(ListaComandos.CONSULTAR_USUARIO);
         TransferUsuario usuario = new TransferUsuario();
@@ -56,10 +56,17 @@ public class MainActivity extends Activity {
 
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
-            if (bundle.getString("editarUsuario") != null)
-                nombrePrincipal.setText(bundle.getString("editarUsuario"));
-            if (bundle.getString("editarAvatar") != null && !bundle.getString("editarAvatar").equals(""))
-                imagenPerfil.setImageBitmap(BitmapFactory.decodeFile(bundle.getString("editarAvatar")));
+            if(bundle.getString("sincronizacion") == null) {
+                if (bundle.getString("editarUsuario") != null)
+                    nombrePrincipal.setText(bundle.getString("editarUsuario"));
+                if (bundle.getString("editarAvatar") != null && !bundle.getString("editarAvatar").equals(""))
+                    imagenPerfil.setImageBitmap(BitmapFactory.decodeFile(bundle.getString("editarAvatar")));
+            }else{
+                if(bundle.getString("sincronizacion").equals("true"))
+                    mostrarMensaje("Sincronización correcta");
+                else
+                    mostrarMensaje("Error en la sincronización. Debes estar en la misma red WiFi que tu profesor");
+            }
         }
 
         // Esto es para solventar un error al enviar el correo
@@ -154,5 +161,12 @@ public class MainActivity extends Activity {
         toast1.show();
 
         Controlador.getInstancia().ejecutaComando(ListaComandos.SINCRONIZAR, null);
+    }
+
+    private void mostrarMensaje(String msg){
+        Toast toast =
+                Toast.makeText(getApplicationContext(),
+                        msg, Toast.LENGTH_LONG);
+        toast.show();
     }
 }

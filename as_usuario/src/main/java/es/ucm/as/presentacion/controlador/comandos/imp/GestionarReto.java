@@ -17,7 +17,7 @@ public class GestionarReto implements Command {
     public Object ejecutaComando(Object datos) throws commandException {
         SASuceso saSuceso = FactoriaSA.getInstancia().nuevoSASuceso();
         Log.e("sync", "seguimos");
-        saSuceso.gestionarRetoBBDD((TransferReto) datos);
+        saSuceso.crearReto((TransferReto) datos);
         return null;
     }
 }

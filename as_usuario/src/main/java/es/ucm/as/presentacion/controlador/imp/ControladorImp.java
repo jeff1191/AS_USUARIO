@@ -18,7 +18,7 @@ public class ControladorImp extends Controlador {
             ret = comando.ejecutaComando(datos);
             actualizaVista(accion,ret);
         } catch (commandException e) {
-            // TODO Auto-generated catch block
+
             //AQUI SEGURAMENTE HAGA FALTA OTRO METOODO PARA QUE EL DISPATCHER LANCE ERROREs
 
         }

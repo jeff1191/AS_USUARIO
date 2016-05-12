@@ -71,11 +71,13 @@ public class Registro extends Activity {
                 crearUsuario.setCodigoSincronizacion(clave);
 
                 Controlador.getInstancia().ejecutaComando(ListaComandos.CREAR_USUARIO, crearUsuario);
-                Controlador.getInstancia().ejecutaComando(ListaComandos.CARGAR_BBDD, null);
                 startService(new Intent(this, ServicioNotificaciones.class));
 
                 startActivity(new Intent(this, MainActivity.class));
             }
+        }else{
+            mostrarMensajeError("Error en la sincronización. Debes estar en la misma red WiFi que " +
+                    "tu profesor o la clave es incorrecta");
         }
     }
 

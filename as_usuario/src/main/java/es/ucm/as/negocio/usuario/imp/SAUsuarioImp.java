@@ -53,10 +53,6 @@ public class SAUsuarioImp implements SAUsuario {
 		}
 		return datos;
 	}
-	
-	public void sincronizar() {
-		
-	}
 
 	/*
 	puntuacion = (10 * nºtareas positivas / nº tareas totales
@@ -67,6 +63,9 @@ public class SAUsuarioImp implements SAUsuario {
 		// Se cogen las tareas de la BBDD
 		SASuceso ss = FactoriaSA.getInstancia().nuevoSASuceso();
 		List<TransferTarea> tareas = ss.consultarTareas();
+		// Si no tiene ninguna la puntuacion es 5
+		if(tareas.size() == 0)
+			return 5;
 		// Se cuentan las positivas y se realiza el calculo
 		int positivas = 0;
 		for (int i = 0; i < tareas.size(); i++)
@@ -111,12 +110,12 @@ public class SAUsuarioImp implements SAUsuario {
 			if (transferUsuario.getPuntuacion() != null)
 				usuario.setPuntuacion(transferUsuario.getPuntuacion());
 			else
-				usuario.setPuntuacion(0);
+				usuario.setPuntuacion(5);
 
 			if (transferUsuario.getPuntuacionAnterior() != null)
 				usuario.setPuntuacionAnterior(transferUsuario.getPuntuacionAnterior());
 			else
-				usuario.setPuntuacionAnterior(0);
+				usuario.setPuntuacionAnterior(5);
 
 			if (transferUsuario.getColor() != null)
 				usuario.setColor(transferUsuario.getColor());
@@ -129,7 +128,6 @@ public class SAUsuarioImp implements SAUsuario {
 
 			// se crea la fila en la tabla de la BBDD
 			daoUsuario.create(usuario);
-
 
 		} catch (SQLException e) {
 			e.printStackTrace();

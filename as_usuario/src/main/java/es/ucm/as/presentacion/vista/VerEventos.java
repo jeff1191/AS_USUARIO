@@ -53,6 +53,7 @@ public class VerEventos  extends Activity{
 
 
             if(listaE.isEmpty()){
+                listaEventos.setVisibility(View.INVISIBLE);
                 titulo.setText("No tienes ningún evento");
                 titulo.setTextColor(Color.GRAY);
                 guardarCambios.setActivated(false);
