@@ -1,60 +1,35 @@
-Esto es una prueba de una notificación larga para ver que se muestra todo el texto de la alarma
-20:55
-¿Esto es una prueba de una pregunta larga para ver que se muestra todo el texto de la pregunta?
-20:56
+Alarma a las 9
+9:00
+Pregunta a las 9:10
+9:10
 true
-¡Vamos a desayunar!
-21:00
-¿Has desayunado? ¿Has dejado todo recogido?
-21:01
-true
-¡Es la hora del aseo! Tienes que: lavarte la cara, las axilas, etc.
-21:03
-¿Te has lavado antes de vestirte? Cara, Axilas...
-21:04
-true
-¡Es la hora del aseo! Tienes que: cepillarte los dientes
-21:05
-¿Te has lavado los dientes?
-21:07
-true
-¡Es la hora del aseo! Tienes que: ponerte desodorante y colonia
-18:24
-¿Te has puesto desodorante y colonia?
-18:25
-true
-¡Es la hora del aseo! Tienes que peinarte
-10:11
-¿Te has peinado?
-10:21
-true
-¡Ahora hay que vestirse! Ten en cuenta el clima que hace y la actividad que vayas a hacer hoy
+Alarma a las 10:30
+10:00
+Pregunta a las 10:35
 10:35
-¿Te has vestido adecuadamente? ¿La ropa que has elegido es la adecuada para la época del año en la que estás? ¿La ropa que has elegido es la adecuada para la actividad que vas a hacer?
-10:55
 true
-Mírate en el espejo y comprueba que te ves bien
-13:35
-¿Te has mirado en el espejo?
-13:36
-true
-¡Revisa la mochila! Comprueba que tienes todos los libros y los materiales necesarios
-13:38
-¿Has comprobado que en la mochila tengas todo lo necesario para el colegio? ¿Has repasado todas las asignaturas que tienes hoy? ¿Está todo el material?
-13:39
-true
-¡Revisa la mochila! Mete la agenda
-11:40
-¿Tienes la agenda?
-11:42
-true
-Coges el almuerzo y lo metes en la mochila
+Alarma a las 11
 11:00
-¿Has cogido el almuerzo y lo has metido en la mochila?
-11:10
+Pregunta a las 11:03
+11:03
 true
-¡Hay que salir de casa!.. Y coger el transporte adecuado
-11:20
-¿Has salido a la hora prevista?
-11:25
+Alarma a las 12
+12:00
+Pregunta a las 12:15
+12:15
+true
+Alarma a las 18
+18:00
+Pregunta a las 18:05
+18:05
+true
+Alarma a las 18:03
+18:03
+Pregunta a las 18:08
+18:08
+true
+Alarma a las 21:00
+21:00
+Pregunta a las 21:02
+21:02
 true
