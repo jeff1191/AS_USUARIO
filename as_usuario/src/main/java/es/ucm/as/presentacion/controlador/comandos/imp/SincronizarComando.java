@@ -38,6 +38,7 @@ public class SincronizarComando implements Command{
             List<TransferTarea> tareas = saSuceso.consultarTareas();
 
             List<TransferEvento> eventos = saSuceso.consultarEventos();
+
             TransferReto reto = saSuceso.consultarReto();
 
             Mensaje mensajeEnvio = new Mensaje(usuario, reto, eventos, tareas);

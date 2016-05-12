@@ -12,8 +12,8 @@ public class Evento {
 	@DatabaseField(generatedId = true, columnName = "ID")
 	private Integer id;
 
-	@DatabaseField(columnName = "TEXTO")
-	private String texto;
+	@DatabaseField(columnName = "NOMBRE")
+	private String nombre;
 
 	@DatabaseField(columnName = "FECHA", dataType = DataType.DATE_STRING, format = "dd-MM-yyyy HH:mm:ss")
 	private Date fecha;
@@ -32,12 +32,12 @@ public class Evento {
 		this.id = id;
 	}
 
-	public String getTexto() {
-		return texto;
+	public String getNombre() {
+		return nombre;
 	}
 
-	public void setTexto(String texto) {
-		this.texto = texto;
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
 	}
 
 	public Date getHoraAlarma() {

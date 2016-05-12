@@ -3,6 +3,7 @@ package es.ucm.as.negocio.suceso.imp;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Environment;
+import android.util.Log;
 
 import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Document;
@@ -70,7 +71,7 @@ public class SASucesoImp implements SASuceso {
             eventos = getHelper().getEventoDao();
             listaEventos= eventos.queryForAll();
             for(int i = 0; i < listaEventos.size(); i++)
-                transferEventos.add(new TransferEvento(listaEventos.get(i).getId(),listaEventos.get(i).getTexto(),
+                transferEventos.add(new TransferEvento(listaEventos.get(i).getId(),listaEventos.get(i).getNombre(),
                         listaEventos.get(i).getFecha(),listaEventos.get(i).getHoraAlarma(),listaEventos.get(i).getAsistencia()));
 
         } catch (SQLException e) {
@@ -404,9 +405,10 @@ public class SASucesoImp implements SASuceso {
                     FactoriaSA.getInstancia().nuevoSASuceso().eliminarEventos();
                     for(int i=0; i < eventosTutor.size();i++){
                         Evento nuevoEvento = new Evento();
-                        nuevoEvento.setTexto(eventosTutor.get(i).getTexto());
+                        nuevoEvento.setNombre(eventosTutor.get(i).getNombre());
                         nuevoEvento.setFecha(eventosTutor.get(i).getFecha());
                         nuevoEvento.setHoraAlarma(eventosTutor.get(i).getHoraAlarma());
+                        Log.e("SASuceso", eventosTutor.get(i).getAsistencia());
                         nuevoEvento.setAsistencia(eventosTutor.get(i).getAsistencia());
                         eventos.create(nuevoEvento);
                     }
@@ -418,7 +420,7 @@ public class SASucesoImp implements SASuceso {
                 if(eventosTutor.size() != 0){
                     for(int i=0; i < eventosTutor.size();i++){
                         Evento nuevoEvento = new Evento();
-                        nuevoEvento.setTexto(eventosTutor.get(i).getTexto());
+                        nuevoEvento.setNombre(eventosTutor.get(i).getNombre());
                         nuevoEvento.setFecha(eventosTutor.get(i).getFecha());
                         nuevoEvento.setHoraAlarma(eventosTutor.get(i).getHoraAlarma());
                         nuevoEvento.setAsistencia("NO");

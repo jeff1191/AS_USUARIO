@@ -11,16 +11,16 @@ public class TransferEvento implements Serializable {
     static final long serialVersionUID = 1L;
 
     private Integer id;
-    private String texto;
+    private String nombre;
     private Date fecha;
     private Date horaAlarma;
     private String asistencia;
 
     public TransferEvento(){    }
 
-    public TransferEvento(Integer id, String texto, Date fecha, Date horaAlarma, String asistencia){
+    public TransferEvento(Integer id, String nombre, Date fecha, Date horaAlarma, String asistencia){
         this.id = id;
-        this.texto = texto;
+        this.nombre = nombre;
         this.fecha = fecha;
         this.horaAlarma = horaAlarma;
         this.asistencia= asistencia;
@@ -34,12 +34,12 @@ public class TransferEvento implements Serializable {
         this.id = id;
     }
 
-    public String getTexto() {
-        return texto;
+    public String getNombre() {
+        return nombre;
     }
 
-    public void setTexto(String texto) {
-        this.texto = texto;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
     public Date getHoraAlarma() {

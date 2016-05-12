@@ -36,7 +36,7 @@ public class DispatcherImp extends Dispatcher{
                 ArrayList<Integer> listaIds = new ArrayList<Integer>();
                 ArrayList<String> listaActivos = new ArrayList<String>();
                 for(int i=0; i < eventosModelo.size(); i++){
-                    String addEvento= eventosModelo.get(i).getTexto() + " el " + eventosModelo.get(i).getFecha();
+                    String addEvento= eventosModelo.get(i).getNombre() + " el " + eventosModelo.get(i).getFecha();
                     listaActividad.add(addEvento);
                     listaIds.add(eventosModelo.get(i).getId());
                     listaActivos.add(eventosModelo.get(i).getAsistencia());
