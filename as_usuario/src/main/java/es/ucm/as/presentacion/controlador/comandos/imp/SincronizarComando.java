@@ -128,26 +128,8 @@ public class SincronizarComando implements Command{
     }
 
 
-    private void sincronizarEventos(List<TransferEvento> eventos){
-
-        List<TransferEvento> eventosBD = FactoriaSA.getInstancia().nuevoSASuceso().consultarEventos();
-        //Si tiene algo
-        if(eventosBD.size() != 0) {
-            //Y le llega algo de chicha
-            if(eventos.size() != 0){
-                FactoriaSA.getInstancia().nuevoSASuceso().eliminarEventos();
-                FactoriaSA.getInstancia().nuevoSASuceso().crearEventos(eventos);
-            }
-            else{
-                FactoriaSA.getInstancia().nuevoSASuceso().eliminarEventos();
-            }
-        }
-        else{
-            if(eventos.size() != 0){
-                FactoriaSA.getInstancia().nuevoSASuceso().crearEventos(eventos);
-            }
-        }
+    private void sincronizarEventos(List<TransferEvento> eventos) {
+        FactoriaSA.getInstancia().nuevoSASuceso().crearEventos(eventos);
     }
-
 
 }

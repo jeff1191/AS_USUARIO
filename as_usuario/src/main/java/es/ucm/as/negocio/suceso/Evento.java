@@ -22,7 +22,7 @@ public class Evento {
 	private Date horaAlarma;
 
 	@DatabaseField(columnName = "ASISTENCIA")
-	private boolean asistencia;
+	private String asistencia;
 
 	public Integer getId() {
 		return id;
@@ -56,11 +56,11 @@ public class Evento {
 		this.fecha = fecha;
 	}
 
-	public boolean getAsistencia() {
+	public String getAsistencia() {
 		return asistencia;
 	}
 
-	public void setAsistencia(boolean asistencia) {
+	public void setAsistencia(String asistencia) {
 		this.asistencia = asistencia;
 	}
 

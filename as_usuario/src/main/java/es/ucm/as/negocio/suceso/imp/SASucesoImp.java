@@ -396,13 +396,35 @@ public class SASucesoImp implements SASuceso {
         Dao<Evento, Integer> eventos;
         try {
             eventos = getHelper().getEventoDao();
-            for(int i=0; i < eventosTutor.size();i++){
-                Evento nuevoEvento = new Evento();
-                nuevoEvento.setTexto(eventosTutor.get(i).getTexto());
-                nuevoEvento.setFecha(eventosTutor.get(i).getFecha());
-                nuevoEvento.setHoraAlarma(eventosTutor.get(i).getHoraAlarma());
-                nuevoEvento.setAsistencia(eventosTutor.get(i).getAsistencia());
-                eventos.create(nuevoEvento);
+            List<TransferEvento> eventosBD = FactoriaSA.getInstancia().nuevoSASuceso().consultarEventos();
+            //Si ya hay algo en la BD
+            if(eventosBD.size() != 0) {
+                //Si le llega chicha
+                if(eventosTutor.size() != 0){
+                    FactoriaSA.getInstancia().nuevoSASuceso().eliminarEventos();
+                    for(int i=0; i < eventosTutor.size();i++){
+                        Evento nuevoEvento = new Evento();
+                        nuevoEvento.setTexto(eventosTutor.get(i).getTexto());
+                        nuevoEvento.setFecha(eventosTutor.get(i).getFecha());
+                        nuevoEvento.setHoraAlarma(eventosTutor.get(i).getHoraAlarma());
+                        nuevoEvento.setAsistencia(eventosTutor.get(i).getAsistencia());
+                        eventos.create(nuevoEvento);
+                    }
+                }
+                else
+                    FactoriaSA.getInstancia().nuevoSASuceso().eliminarEventos();
+            }
+            else{
+                if(eventosTutor.size() != 0){
+                    for(int i=0; i < eventosTutor.size();i++){
+                        Evento nuevoEvento = new Evento();
+                        nuevoEvento.setTexto(eventosTutor.get(i).getTexto());
+                        nuevoEvento.setFecha(eventosTutor.get(i).getFecha());
+                        nuevoEvento.setHoraAlarma(eventosTutor.get(i).getHoraAlarma());
+                        nuevoEvento.setAsistencia(eventosTutor.get(i).getAsistencia());
+                        eventos.create(nuevoEvento);
+                    }
+                }
             }
 
         } catch (SQLException e) {
@@ -416,7 +438,7 @@ public class SASucesoImp implements SASuceso {
         try {
             eventos = getHelper().getEventoDao();
             List<Evento> eventosBorrar = eventos.queryForAll();
-            for(int i=0; i < eventosBorrar.size();i++) {
+            for(int i= 0; i < eventosBorrar.size();i++) {
                 eventos.delete(eventosBorrar.get(i));
             }
         } catch (SQLException e) {
