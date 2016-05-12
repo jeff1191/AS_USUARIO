@@ -10,6 +10,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import es.ucm.as.R;
 import es.ucm.as.negocio.usuario.TransferUsuario;
@@ -147,6 +148,11 @@ public class MainActivity extends Activity {
     }
 
     public void sincronizar(View v){
+        Toast toast1 =
+                Toast.makeText(getApplicationContext(),
+                        "Sincronizando...", Toast.LENGTH_LONG);
+        toast1.show();
+
         Controlador.getInstancia().ejecutaComando(ListaComandos.SINCRONIZAR, null);
     }
 }

@@ -28,10 +28,7 @@ public class Mensaje implements Serializable{
 
     public Mensaje(){
         this.verificar = "";
-        usuario = new TransferUsuario();
-        reto = new TransferReto();
-        eventos = new ArrayList<TransferEvento>();
-        tareas = new ArrayList<TransferTarea>();
+        this.usuario = new TransferUsuario();
     }
 
     public Mensaje(TransferUsuario usuario, TransferReto reto,

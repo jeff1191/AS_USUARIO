@@ -76,9 +76,6 @@ public class Registro extends Activity {
 
                 startActivity(new Intent(this, MainActivity.class));
             }
-        }else{
-            mostrarMensajeError("Error: clave incorrecta\n" +
-            "Debes estar en la misma red WiFi que tu tutor para poder registrarte");
         }
     }
 

@@ -1,6 +1,7 @@
 package es.ucm.as.presentacion.controlador.comandos.imp;
 
 import android.util.Log;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -17,6 +18,7 @@ import es.ucm.as.presentacion.controlador.ListaComandos;
 import es.ucm.as.presentacion.controlador.comandos.Command;
 import es.ucm.as.presentacion.controlador.comandos.exceptions.commandException;
 import es.ucm.as.presentacion.controlador.comandos.factoria.FactoriaComandos;
+import es.ucm.as.presentacion.vista.Contexto;
 
 /**
  * Created by msalitu on 10/03/2016.
@@ -30,6 +32,7 @@ public class SincronizarComando implements Command{
         ConectionManager conectionManager;
 
         if(msg == null) {
+
             SAUsuario saUsuario = FactoriaSA.getInstancia().nuevoSAUsuario();
             TransferUsuario usuario = saUsuario.consultarUsuario();
 
@@ -57,87 +60,90 @@ public class SincronizarComando implements Command{
                     Log.e("prueba", "transfer nombre nulo");
             }
 
-            //Va el desmenuze
+            // Se procesa cada parte del mensaje
             Mensaje respuestaTutor = conectionManager.getResponse();
-            TransferReto retoDesdeT =  respuestaTutor.getReto();
+            sincronizarReto(respuestaTutor.getReto());
+            sincronizarTareas(respuestaTutor.getTareas());
+            sincronizarEventos(respuestaTutor.getEventos());
 
-            TransferReto retoActual = (TransferReto) FactoriaComandos.getInstancia()
+            //Fin sincronización correcta
+            terminado = conectionManager.getResponse() != null;
+            conectionManager.reset();
+            Log.e("sync", "Sincronizacion acabada");
+            Toast toast1 =
+                    Toast.makeText(Contexto.getInstancia().getContext().getApplicationContext(),
+                            "Sincronización correcta", Toast.LENGTH_LONG);
+            toast1.show();
+        }
+        else{
+            //Fin sincronización erronea
+            Log.e("pruebaaa", "respuesta nula");
+            Toast toast1 =
+                    Toast.makeText(Contexto.getInstancia().getContext().getApplicationContext(),
+                            "Error en la sincronización. Debes estar en la misma red WiFi que tu " +
+                                    "profesor", Toast.LENGTH_LONG);
+            toast1.show();
+        }
+
+        return terminado;
+    }
+
+
+    private void sincronizarReto(TransferReto retoTutor){
+        TransferReto retoActual = null;
+        try {
+            retoActual = (TransferReto) FactoriaComandos.getInstancia()
                     .getCommand(ListaComandos.VER_RETO).ejecutaComando(null);
-            TransferReto retoAU = new TransferReto();
-            if(retoDesdeT != null){
+
+            // Llega un reto desde el tutor
+            if(retoTutor != null){
                 Log.e("sync", "Reto con algo");
                 if(retoActual != null){
-                    //Tiene un reto, ver si son diferente o no
-                    Integer dif = sonIguales(retoDesdeT, retoActual);
-                    switch (dif){
-                        case 0:
-                            Log.e("sync", "no toca nada");
-                            FactoriaComandos.getInstancia()
-                                    .getCommand(ListaComandos.GESTIONAR_RETO).ejecutaComando(retoAU);
-                            return null;
-                        case 1:
-                            retoAU.setTexto(retoDesdeT.getTexto());
-                            retoAU.setPremio(retoAU.getPremio());
-                            break;
-                        case 2:
-                            retoAU.setTexto(retoAU.getTexto());
-                            retoAU.setPremio(retoDesdeT.getPremio());
-                            break;
-                        case 3:
-                            retoAU.setTexto(retoDesdeT.getTexto());
-                            retoAU.setPremio(retoDesdeT.getPremio());
-                            break;
+
+                    // Si se detecta algun cambio entre el reto que manda el tutor y el del usuario
+                    // se machaca el reto del usuario
+                    if (!retoTutor.getTexto().equals(retoActual.getTexto()) ||
+                            !retoTutor.getPremio().equals(retoActual.getPremio())){
+                        retoActual.setTexto(retoTutor.getTexto());
+                        retoActual.setPremio(retoTutor.getPremio());
+                        retoActual.setContador(0);
+                        retoActual.setSuperado(false);
+                        FactoriaComandos.getInstancia()
+                                .getCommand(ListaComandos.GESTIONAR_RETO).ejecutaComando(retoActual);
                     }
-                }
-                else{
+
+                } else{
                     //Si no tiene un reto: A crear!!
-                    retoAU.setPremio(retoDesdeT.getPremio());
-                    retoAU.setTexto(retoDesdeT.getTexto());
+                    Log.e("sync", "Creando reto");
+                    retoActual = new TransferReto();
+                    retoActual.setPremio(retoTutor.getPremio());
+                    retoActual.setTexto(retoTutor.getTexto());
+                    retoActual.setContador(0);
+                    retoActual.setSuperado(false);
+                    FactoriaComandos.getInstancia()
+                            .getCommand(ListaComandos.GESTIONAR_RETO).ejecutaComando(retoActual);
                 }
-                Log.e("sync", "Va a meterlo");
-                retoAU.setContador(0);
-                retoAU.setSuperado(false);
-                FactoriaComandos.getInstancia()
-                        .getCommand(ListaComandos.GESTIONAR_RETO).ejecutaComando(retoAU);
-            }
-            else if(retoDesdeT == null && retoActual != null){ // No le llega nada y ya hay algo
+
+                // Si no llega reto del tutor hay que borrar el del usuario si lo hubiera
+            } else if(retoTutor == null && retoActual != null){
                 Log.e("sync", "Va a borrar el reto");
-                //Borrar el reto
                 FactoriaComandos.getInstancia()
                         .getCommand(ListaComandos.ELIMINAR_RETO).ejecutaComando(null);
             }
 
-            //Fin sync
-            terminado = conectionManager.getResponse() != null;
-            conectionManager.reset();
-            Log.e("sync", "Sincronizacion acabada");
+        } catch (commandException e) {
+            e.printStackTrace();
         }
-        else{
-            Log.e("pruebaaa", "respuesta nula");
-        }
-        return terminado;
     }
 
-    public Integer sonIguales(TransferReto nuevo, TransferReto viejo){
-        Integer d = 0;
 
-        if(nuevo.getPremio() != viejo.getPremio() || nuevo.getTexto() != viejo.getTexto()){
-            //Hay algo diferente
-            if(nuevo.getPremio() != viejo.getPremio() && nuevo.getTexto() != viejo.getTexto()){
-                //Ambos diferentes
-                d = 3;
-            }
-            else if(nuevo.getPremio() != viejo.getPremio()){
-                //Premio diferente
-                d = 2;
-            }
-            else{
-                //Texto diferente
-                d = 1;
-            }
-        }
+    private void sincronizarTareas(List<TransferTarea> tareas){
 
-        return d;
+    }
+
+
+    private void sincronizarEventos(List<TransferEvento> eventos){
+
     }
 
 }
