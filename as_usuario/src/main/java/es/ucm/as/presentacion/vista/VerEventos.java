@@ -90,7 +90,7 @@ public class VerEventos  extends Activity{
                             Log.e("TRANSFER: ",eGuardar.getId() + " ACTIVO: " + eGuardar.getAsistencia());
                             eventosModificados.add(eGuardar);
                         }
-                    Controlador.getInstancia().ejecutaComando(ListaComandos.GUARDAR_EVENTOS,eventosModificados);
+                    Controlador.getInstancia().ejecutaComando(ListaComandos.MODIFICAR_EVENTOS,eventosModificados);
                     }
                 });
 

@@ -14,10 +14,8 @@ import es.ucm.as.negocio.suceso.TransferReto;
 import es.ucm.as.negocio.suceso.TransferTarea;
 import es.ucm.as.negocio.usuario.SAUsuario;
 import es.ucm.as.negocio.usuario.TransferUsuario;
-import es.ucm.as.presentacion.controlador.ListaComandos;
 import es.ucm.as.presentacion.controlador.comandos.Command;
 import es.ucm.as.presentacion.controlador.comandos.exceptions.commandException;
-import es.ucm.as.presentacion.controlador.comandos.factoria.FactoriaComandos;
 import es.ucm.as.presentacion.vista.Contexto;
 
 /**
@@ -90,47 +88,38 @@ public class SincronizarComando implements Command{
 
 
     private void sincronizarReto(TransferReto retoTutor){
-        TransferReto retoActual = null;
-        try {
-            retoActual = (TransferReto) FactoriaComandos.getInstancia()
-                    .getCommand(ListaComandos.VER_RETO).ejecutaComando(null);
+        TransferReto retoActual =  FactoriaSA.getInstancia().nuevoSASuceso().consultarReto();
 
-            // Llega un reto desde el tutor
-            if(retoTutor != null){
-                if(retoActual != null){
+        // Llega un reto desde el tutor
+        if(retoTutor != null){
+            if(retoActual != null){
 
-                    // Si se detecta algun cambio entre el reto que manda el tutor y el del usuario
-                    // se machaca el reto del usuario
-                    if (!retoTutor.getTexto().equals(retoActual.getTexto()) ||
-                            !retoTutor.getPremio().equals(retoActual.getPremio())){
-                        retoActual.setTexto(retoTutor.getTexto());
-                        retoActual.setPremio(retoTutor.getPremio());
-                        retoActual.setContador(0);
-                        retoActual.setSuperado(false);
-                        FactoriaComandos.getInstancia()
-                                .getCommand(ListaComandos.GESTIONAR_RETO).ejecutaComando(retoActual);
-                    }
-
-                } else{
-                    //Si no tiene un reto: A crear!!
-                    retoActual = new TransferReto();
-                    retoActual.setPremio(retoTutor.getPremio());
+                // Si se detecta algun cambio entre el reto que manda el tutor y el del usuario
+                // se machaca el reto del usuario
+                if (!retoTutor.getTexto().equals(retoActual.getTexto()) ||
+                        !retoTutor.getPremio().equals(retoActual.getPremio())){
                     retoActual.setTexto(retoTutor.getTexto());
+                    retoActual.setPremio(retoTutor.getPremio());
                     retoActual.setContador(0);
                     retoActual.setSuperado(false);
-                    FactoriaComandos.getInstancia()
-                            .getCommand(ListaComandos.GESTIONAR_RETO).ejecutaComando(retoActual);
+                    FactoriaSA.getInstancia().nuevoSASuceso().gestionarReto(retoActual);
                 }
 
-                // Si no llega reto del tutor hay que borrar el del usuario si lo hubiera
-            } else if(retoTutor == null && retoActual != null){
-                FactoriaComandos.getInstancia()
-                        .getCommand(ListaComandos.ELIMINAR_RETO).ejecutaComando(null);
+            } else{
+                //Si no tiene un reto: A crear!!
+                retoActual = new TransferReto();
+                retoActual.setPremio(retoTutor.getPremio());
+                retoActual.setTexto(retoTutor.getTexto());
+                retoActual.setContador(0);
+                retoActual.setSuperado(false);
+                FactoriaSA.getInstancia().nuevoSASuceso().gestionarReto(retoActual);
             }
 
-        } catch (commandException e) {
-            e.printStackTrace();
+            // Si no llega reto del tutor hay que borrar el del usuario si lo hubiera
+        } else if(retoTutor == null && retoActual != null){
+            FactoriaSA.getInstancia().nuevoSASuceso().eliminarReto();
         }
+
     }
 
 
@@ -141,6 +130,24 @@ public class SincronizarComando implements Command{
 
     private void sincronizarEventos(List<TransferEvento> eventos){
 
+        List<TransferEvento> eventosBD = FactoriaSA.getInstancia().nuevoSASuceso().consultarEventos();
+        //Si tiene algo
+        if(eventosBD.size() != 0) {
+            //Y le llega algo de chicha
+            if(eventos.size() != 0){
+                FactoriaSA.getInstancia().nuevoSASuceso().eliminarEventos();
+                FactoriaSA.getInstancia().nuevoSASuceso().crearEventos(eventos);
+            }
+            else{
+                FactoriaSA.getInstancia().nuevoSASuceso().eliminarEventos();
+            }
+        }
+        else{
+            if(eventos.size() != 0){
+                FactoriaSA.getInstancia().nuevoSASuceso().crearEventos(eventos);
+            }
+        }
     }
+
 
 }

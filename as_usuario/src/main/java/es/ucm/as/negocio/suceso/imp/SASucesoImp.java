@@ -3,7 +3,6 @@ package es.ucm.as.negocio.suceso.imp;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Environment;
-import android.util.Log;
 
 import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Document;
@@ -375,7 +374,7 @@ public class SASucesoImp implements SASuceso {
     }
 
     @Override
-    public void guardarEventos(List<TransferEvento> eventosRespuesta) {
+    public void modificarEventos(List<TransferEvento> eventosRespuesta) {
 
         Dao<Evento, Integer> eventos;
         try {
@@ -392,7 +391,41 @@ public class SASucesoImp implements SASuceso {
     }
 
     @Override
-    public void gestionarRetoBBDD(TransferReto r) {
+    public void crearEventos(List<TransferEvento> eventosTutor) {
+
+        Dao<Evento, Integer> eventos;
+        try {
+            eventos = getHelper().getEventoDao();
+            for(int i=0; i < eventosTutor.size();i++){
+                Evento nuevoEvento = new Evento();
+                nuevoEvento.setTexto(eventosTutor.get(i).getTexto());
+                nuevoEvento.setFecha(eventosTutor.get(i).getFecha());
+                nuevoEvento.setHoraAlarma(eventosTutor.get(i).getHoraAlarma());
+                nuevoEvento.setAsistencia(eventosTutor.get(i).getAsistencia());
+                eventos.create(nuevoEvento);
+            }
+
+        } catch (SQLException e) {
+
+        }
+    }
+
+    @Override
+    public void eliminarEventos(){
+        Dao<Evento, Integer> eventos;
+        try {
+            eventos = getHelper().getEventoDao();
+            List<Evento> eventosBorrar = eventos.queryForAll();
+            for(int i=0; i < eventosBorrar.size();i++) {
+                eventos.delete(eventosBorrar.get(i));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void gestionarReto(TransferReto r) {
         Dao<Reto, Integer> dao;
         Reto reto = new Reto();
         try {
@@ -413,7 +446,7 @@ public class SASucesoImp implements SASuceso {
     }
 
     @Override
-    public void eliminarRetoBBDD() {
+    public void eliminarReto() {
         Dao<Reto, Integer> dao;
         try {
             dao = getHelper().getRetoDao();

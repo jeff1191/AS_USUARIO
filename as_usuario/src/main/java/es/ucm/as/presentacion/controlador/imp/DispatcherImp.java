@@ -124,7 +124,7 @@ public class DispatcherImp extends Dispatcher{
                 Contexto.getInstancia().getContext().startActivity(hayUsuario);
                 break;
 
-            case ListaComandos.GUARDAR_EVENTOS:
+            case ListaComandos.MODIFICAR_EVENTOS:
                 Intent iGuardarEvento = new Intent(Contexto.getInstancia().getContext().getApplicationContext(), MainActivity.class);
                 Contexto.getInstancia().getContext().startActivity(iGuardarEvento);
                 break;
