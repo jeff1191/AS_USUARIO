@@ -421,7 +421,7 @@ public class SASucesoImp implements SASuceso {
                         nuevoEvento.setTexto(eventosTutor.get(i).getTexto());
                         nuevoEvento.setFecha(eventosTutor.get(i).getFecha());
                         nuevoEvento.setHoraAlarma(eventosTutor.get(i).getHoraAlarma());
-                        nuevoEvento.setAsistencia(eventosTutor.get(i).getAsistencia());
+                        nuevoEvento.setAsistencia("NO");
                         eventos.create(nuevoEvento);
                     }
                 }

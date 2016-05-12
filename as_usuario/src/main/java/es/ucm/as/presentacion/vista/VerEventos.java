@@ -44,6 +44,8 @@ public class VerEventos  extends Activity{
             ArrayList<String> listaAsistencia = bundle.getStringArrayList("listaAsistencia");
             final ArrayList<Boolean> asistencia= new ArrayList<>();
 
+            Log.e("boolean", listaE.size() + " " + listaAsistencia.size() + " " + listaAsistencia.get(0));
+
             for(int i=0; i < listaE.size(); i++) {
                  if(listaAsistencia.get(i).equals("SI"))
                         asistencia.add(true);
