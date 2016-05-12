@@ -24,37 +24,39 @@ import es.ucm.as.presentacion.controlador.comandos.factoria.FactoriaComandos;
 public class SincronizarComando implements Command{
     @Override
     public Object ejecutaComando(Object datos) throws commandException {
-        SAUsuario saUsuario = FactoriaSA.getInstancia().nuevoSAUsuario();
-        TransferUsuario usuario = saUsuario.consultarUsuario();
 
-        SASuceso saSuceso = FactoriaSA.getInstancia().nuevoSASuceso();
-        List<TransferTarea> tareas = saSuceso.consultarTareas();
+        boolean terminado = false;
+        Mensaje msg = (Mensaje) datos;
+        ConectionManager conectionManager;
 
-        List<TransferEvento> eventos = saSuceso.consultarEventos();
-        TransferReto reto = saSuceso.consultarReto();
+        if(msg == null) {
+            SAUsuario saUsuario = FactoriaSA.getInstancia().nuevoSAUsuario();
+            TransferUsuario usuario = saUsuario.consultarUsuario();
 
-        Mensaje mensajeEnvio = new Mensaje(usuario,reto,eventos,tareas);
+            SASuceso saSuceso = FactoriaSA.getInstancia().nuevoSASuceso();
+            List<TransferTarea> tareas = saSuceso.consultarTareas();
 
-        Log.e("pruebaaa", "Nombre envio-> " + usuario.getNombre());
-        Log.e("pruebaaa", "Codigo envio-> " + usuario.getCodigoSincronizacion());
+            List<TransferEvento> eventos = saSuceso.consultarEventos();
+            TransferReto reto = saSuceso.consultarReto();
 
-        ConectionManager conectionManager = new ConectionManager(mensajeEnvio);
+            Mensaje mensajeEnvio = new Mensaje(usuario, reto, eventos, tareas);
+
+            conectionManager = new ConectionManager(mensajeEnvio);
+
+        }else {
+            conectionManager = new ConectionManager(msg);
+            Log.e("prueba","Codigo envio -> "+ msg.getUsuario().getCodigoSincronizacion());
+        }
+
         if(conectionManager.getResponse() != null) {
-
-
-            // Problema nombre usuario nulooooooooooooooooooooooooooooooooooooooooooooooooooooooooo
-
 
             if (conectionManager.getResponse().getUsuario() != null) {
                 if (conectionManager.getResponse().getUsuario().getNombre() != null)
-                    Log.e("pruebaaa", "respuesta-> " + conectionManager.getResponse().getUsuario().getNombre());
+                    Log.e("prueba", "respuesta 2 -> " + conectionManager.getResponse().getUsuario().getNombre());
                 else
-                    Log.e("pruebaaa", "transfer nombre nulo");
+                    Log.e("prueba", "transfer nombre nulo");
             }
 
-            ///////////////////////////////////////////////////////////////////////////////////////
-
-            String ret = conectionManager.getResponse().getUsuario().getNombre();
             //Va el desmenuze
             Mensaje respuestaTutor = conectionManager.getResponse();
             TransferReto retoDesdeT =  respuestaTutor.getReto();
@@ -106,13 +108,14 @@ public class SincronizarComando implements Command{
             }
 
             //Fin sync
+            terminado = conectionManager.getResponse() != null;
             conectionManager.reset();
             Log.e("sync", "Sincronizacion acabada");
         }
         else{
             Log.e("pruebaaa", "respuesta nula");
         }
-        return null;
+        return terminado;
     }
 
     public Integer sonIguales(TransferReto nuevo, TransferReto viejo){

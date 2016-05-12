@@ -37,7 +37,6 @@ public class ConectionManager {
         String ip = getIp();
         if (ip != null) {
             myClientTask = new MyClientTask(ip, 8080, mensaje);
-
             try {
                 respuesta = myClientTask.execute().get();
             } catch (InterruptedException e) {
@@ -99,18 +98,19 @@ public class ConectionManager {
                     ObjectOutputStream dataOutputStream = new ObjectOutputStream(
                             socket.getOutputStream());
                     dataOutputStream.writeObject(msgToServer);
+                    Log.e("prueba", "envio 1 -> " + msgToServer.getVerificar());
+
                     ObjectInputStream objectInputStream = new ObjectInputStream(socket.getInputStream());
                     Mensaje response = (Mensaje) objectInputStream.readObject();
-                    if(!response.getVerificar().equals("Permitido")) {
-                        Log.e("prueba", "no me permite");
-                        return null;
-                    }
-                    else {
-                        Log.e("prueba", "Permitido");
+                    if(response.getVerificar().equals("Permitido") || response.getVerificar().equals("Permitido_registro")) {
+                        Log.e("prueba", "respuesta 1 -> " + response.getVerificar());
                         mOut = new PrintWriter(new BufferedWriter(new OutputStreamWriter(socket.getOutputStream())), true);
                         mOut.println("test");
                         mOut.flush();
                         return ip;
+                    }else{
+                        Log.e("prueba", "Respuesta 1 -> " + response.getVerificar());
+                        return null;
                     }
                 } catch (Exception ex) {
                     return null;
@@ -160,6 +160,8 @@ public class ConectionManager {
 
                 if(msgToServer != null)
                     dataOutputStream.writeObject(msgToServer);
+
+                Log.e("prueba", "envio 2 -> " + msgToServer.getVerificar());
 
                 response = (Mensaje) dataInputStream.readObject();
 
