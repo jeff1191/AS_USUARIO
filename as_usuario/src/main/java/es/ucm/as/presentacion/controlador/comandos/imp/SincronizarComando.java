@@ -97,7 +97,6 @@ public class SincronizarComando implements Command{
 
             // Llega un reto desde el tutor
             if(retoTutor != null){
-                Log.e("sync", "Reto con algo");
                 if(retoActual != null){
 
                     // Si se detecta algun cambio entre el reto que manda el tutor y el del usuario
@@ -114,7 +113,6 @@ public class SincronizarComando implements Command{
 
                 } else{
                     //Si no tiene un reto: A crear!!
-                    Log.e("sync", "Creando reto");
                     retoActual = new TransferReto();
                     retoActual.setPremio(retoTutor.getPremio());
                     retoActual.setTexto(retoTutor.getTexto());
@@ -126,7 +124,6 @@ public class SincronizarComando implements Command{
 
                 // Si no llega reto del tutor hay que borrar el del usuario si lo hubiera
             } else if(retoTutor == null && retoActual != null){
-                Log.e("sync", "Va a borrar el reto");
                 FactoriaComandos.getInstancia()
                         .getCommand(ListaComandos.ELIMINAR_RETO).ejecutaComando(null);
             }

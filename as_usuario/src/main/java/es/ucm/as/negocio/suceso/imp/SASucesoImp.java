@@ -402,11 +402,9 @@ public class SASucesoImp implements SASuceso {
             reto.setContador(r.getContador());
             reto.setSuperado(r.getSuperado());
             if (dao.queryForAll().size() != 0) {
-                Log.e("sync", "modifica en bbdd");
                 dao.delete(dao.queryForAll().get(0));
                 dao.create(reto);
             } else {
-                Log.e("sync", "crea en bbdd");
                 dao.create(reto);
             }
         } catch (SQLException e) {
@@ -416,8 +414,6 @@ public class SASucesoImp implements SASuceso {
 
     @Override
     public void eliminarRetoBBDD() {
-        Log.e("sync", "elimina en bbdd");
-
         Dao<Reto, Integer> dao;
         try {
             dao = getHelper().getRetoDao();
@@ -425,7 +421,6 @@ public class SASucesoImp implements SASuceso {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
     }
 
 
