@@ -218,7 +218,6 @@ public class SASucesoImp implements SASuceso {
                         // En cualquier caso se crea o actualiza
                         tareaDao.createOrUpdate(tarea);
                     }
-
                 }
 
             } catch (SQLException e) {
