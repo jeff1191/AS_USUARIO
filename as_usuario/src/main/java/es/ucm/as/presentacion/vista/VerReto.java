@@ -72,7 +72,7 @@ public class VerReto extends Activity {
             }
         } else {
             TextView noHay = (TextView) findViewById(R.id.noHay);
-            noHay.setText("No tienes ninguna tarea");
+            noHay.setText("No tienes ningún reto");
             noHay.setTextColor(Color.GRAY);
             si.setEnabled(false);
             si.setVisibility(View.INVISIBLE);

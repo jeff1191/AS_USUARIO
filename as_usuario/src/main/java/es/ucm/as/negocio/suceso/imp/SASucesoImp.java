@@ -435,7 +435,6 @@ public class SASucesoImp implements SASuceso {
                         nuevoEvento.setNombre(eventosTutor.get(i).getNombre());
                         nuevoEvento.setFecha(eventosTutor.get(i).getFecha());
                         nuevoEvento.setHoraAlarma(eventosTutor.get(i).getHoraAlarma());
-                        Log.e("SASuceso", eventosTutor.get(i).getAsistencia());
                         nuevoEvento.setAsistencia(eventosTutor.get(i).getAsistencia());
                         eventos.create(nuevoEvento);
                     }
@@ -515,7 +514,7 @@ public class SASucesoImp implements SASuceso {
         TransferReto retoActual = consultarReto();
 
         // Llega un reto desde el tutor
-        if(nuevoReto != null && nuevoReto.getTexto()!=null){
+        if(nuevoReto.getTexto()!= null){
 
             // Si el usuario ya tenia reto
             if(retoActual != null){
@@ -541,8 +540,9 @@ public class SASucesoImp implements SASuceso {
             }
 
             // Si no llega reto del tutor hay que borrar el del usuario si lo hubiera
-        } else if(nuevoReto == null && retoActual != null)
+        } else if(nuevoReto.getTexto()== null && retoActual != null) {
             FactoriaSA.getInstancia().nuevoSASuceso().eliminarReto();
+        }
     }
 
 }
