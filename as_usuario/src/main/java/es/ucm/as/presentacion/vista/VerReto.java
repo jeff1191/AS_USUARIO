@@ -53,7 +53,6 @@ public class VerReto extends Activity {
 
         if(reto != null){
             if (reto.getTexto() != null) {
-                sup.setText("Reto");
                 tv.setText(reto.getTexto());
                 c.setText(reto.getContador().toString() + "/30");
                 progreso.setProgress(reto.getContador());
@@ -72,14 +71,15 @@ public class VerReto extends Activity {
                 }
             }
         } else {
+            TextView noHay = (TextView) findViewById(R.id.noHay);
+            noHay.setText("No tienes ninguna tarea");
+            noHay.setTextColor(Color.GRAY);
             si.setEnabled(false);
             si.setVisibility(View.INVISIBLE);
             no.setEnabled(false);
             no.setVisibility(View.INVISIBLE);
             progreso = (ProgressBar) findViewById(R.id.progressBar);
             progreso.setVisibility(View.INVISIBLE);
-            sup.setText("No tienes ningún reto");
-            sup.setTextColor(Color.GRAY);
         }
     }
 

@@ -2,10 +2,12 @@ package es.ucm.as.presentacion.vista;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -33,9 +35,10 @@ public class VerInforme extends Activity{
         setContentView(R.layout.activity_informe);
 
         TextView titulo = (TextView)findViewById(R.id.tituloInforme);
-        titulo.setText("¿Cómo vas?");
 
         Bundle bundle = getIntent().getExtras();
+
+        titulo.setText("¿Cómo vas?");
 
         ImageView img = (ImageView)findViewById(R.id.flecha);
 
@@ -52,14 +55,7 @@ public class VerInforme extends Activity{
         TextView antes = (TextView)findViewById(R.id.puntuacionAnterior );
         antes.setText(puntAntes.toString());
 
-
         final ListView lista = (ListView) findViewById(R.id.listView);
-
-        LayoutInflater inflater = getLayoutInflater();
-        /*Se establece la fila cabecera, el problema es que no es sticky
-        View header = inflater.inflate(R.layout.list_header_tarea, lista, false);
-        lista.addHeaderView(header, null, false);
-        */
 
         ArrayList<String> t = getIntent().getStringArrayListExtra("titulos");
         ArrayList<Integer> s = getIntent().getIntegerArrayListExtra("si");
@@ -69,6 +65,20 @@ public class VerInforme extends Activity{
         if(t.size()!= 0){
             adapter = new ListViewAdapter(t, s, n, this.getApplicationContext());
             lista.setAdapter(adapter);
+        }else{
+            Button tarea = (Button) findViewById(R.id.tarea);
+            Button si = (Button) findViewById(R.id.si);
+            Button no = (Button) findViewById(R.id.no);
+            Button total = (Button) findViewById(R.id.total);
+
+            tarea.setVisibility(View.INVISIBLE);
+            si.setVisibility(View.INVISIBLE);
+            no.setVisibility(View.INVISIBLE);
+            total.setVisibility(View.INVISIBLE);
+
+            TextView noHay = (TextView) findViewById(R.id.noHay);
+            noHay.setText("No tienes ninguna tarea");
+            noHay.setTextColor(Color.GRAY);
         }
     }
 

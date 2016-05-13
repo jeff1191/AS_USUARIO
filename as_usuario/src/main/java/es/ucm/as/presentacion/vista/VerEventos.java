@@ -52,10 +52,16 @@ public class VerEventos  extends Activity{
             }
 
             if(listaE.isEmpty()){
+                TextView noHay = (TextView) findViewById(R.id.noHay);
                 listaEventos.setVisibility(View.INVISIBLE);
-                titulo.setText("No tienes ningún evento");
-                titulo.setTextColor(Color.GRAY);
-                guardarCambios.setActivated(false);
+                noHay.setText("No tienes ningún evento");
+                noHay.setTextColor(Color.GRAY);
+                Button evento = (Button) findViewById(R.id.evento);
+                Button voy = (Button) findViewById(R.id.voy);
+                guardarCambios.setEnabled(false);
+                guardarCambios.setVisibility(View.INVISIBLE);
+                evento.setVisibility(View.INVISIBLE);
+                voy.setVisibility(View.INVISIBLE);
             }
             else{
                 guardarCambios.setActivated(true);

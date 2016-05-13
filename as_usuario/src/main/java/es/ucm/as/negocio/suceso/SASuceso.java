@@ -1,6 +1,3 @@
-/**
- * 
- */
 package es.ucm.as.negocio.suceso;
 
 import com.itextpdf.text.DocumentException;
@@ -9,6 +6,7 @@ import java.io.IOException;
 import java.util.List;
 
 public interface SASuceso {
+
 
     // Reto
 

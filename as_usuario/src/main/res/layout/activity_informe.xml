@@ -150,6 +150,17 @@
 
                 </LinearLayout>
 
+                <!-- Aviso si no hay -->
+                <TextView
+                    android:layout_height="0dp"
+                    android:layout_width="match_parent"
+                    android:layout_weight="0.5"
+                    android:id="@+id/noHay"
+                    android:textStyle="italic"
+                    android:gravity="center"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    />
+
                 <!--  listheader  -->
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -214,7 +225,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:id="@+id/listView"
-                    android:layout_weight="5" />
+                    android:layout_weight="5"
+                    android:choiceMode="none"/>
 
             </LinearLayout>
 
