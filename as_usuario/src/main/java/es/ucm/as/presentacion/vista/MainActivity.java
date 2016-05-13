@@ -108,8 +108,8 @@ public class MainActivity extends Activity {
     }
 
     public void verInforme(View v){
-        Controlador.getInstancia().ejecutaComando(ListaComandos.GENERAR_PDF, null);
-        Controlador.getInstancia().ejecutaComando(ListaComandos.ACTUALIZAR_PUNTUACION, null);
+       // Controlador.getInstancia().ejecutaComando(ListaComandos.GENERAR_PDF, null);
+       // Controlador.getInstancia().ejecutaComando(ListaComandos.ACTUALIZAR_PUNTUACION, null);
         Controlador.getInstancia().ejecutaComando(ListaComandos.VER_INFORME, null);
     }
 

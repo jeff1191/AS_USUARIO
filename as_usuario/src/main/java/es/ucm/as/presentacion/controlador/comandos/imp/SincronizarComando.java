@@ -1,7 +1,6 @@
 package es.ucm.as.presentacion.controlador.comandos.imp;
 
 import android.util.Log;
-import android.widget.Toast;
 
 import java.util.List;
 
@@ -16,7 +15,6 @@ import es.ucm.as.negocio.usuario.SAUsuario;
 import es.ucm.as.negocio.usuario.TransferUsuario;
 import es.ucm.as.presentacion.controlador.comandos.Command;
 import es.ucm.as.presentacion.controlador.comandos.exceptions.commandException;
-import es.ucm.as.presentacion.vista.Contexto;
 
 /**
  * Created by msalitu on 10/03/2016.
@@ -41,6 +39,15 @@ public class SincronizarComando implements Command{
             List<TransferEvento> eventos = saSuceso.consultarEventos();
             TransferReto reto = saSuceso.consultarReto();
 
+            if(tareas == null){
+                Log.e("tareas", "ES NULO");
+            }
+            else{
+                Log.e("tareas", tareas.size()+"");
+            }
+
+            Log.e("aaaaaa", usuario.getPuntuacion()+" "+usuario.getPuntuacionAnterior()+" "+tareas.size());
+
             Mensaje mensajeEnvio = new Mensaje(usuario, reto, eventos, tareas);
 
             conectionManager = new ConectionManager(mensajeEnvio);
@@ -55,9 +62,10 @@ public class SincronizarComando implements Command{
 
             // Se procesa cada parte del mensaje
             Mensaje respuestaTutor = conectionManager.getResponse();
-            FactoriaSA.getInstancia().nuevoSASuceso().cargarReto(respuestaTutor.getReto());
-            FactoriaSA.getInstancia().nuevoSASuceso().cargarTareas(respuestaTutor.getTareas());
-            FactoriaSA.getInstancia().nuevoSASuceso().crearEventos(eventos);
+            SASuceso saSuceso = FactoriaSA.getInstancia().nuevoSASuceso();
+            saSuceso.cargarReto(respuestaTutor.getReto());
+            saSuceso.cargarTareas(respuestaTutor.getTareas());
+            saSuceso.crearEventos(respuestaTutor.getEventos());
 
             terminado = conectionManager.getResponse() != null;
             conectionManager.reset();

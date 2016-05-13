@@ -37,6 +37,8 @@ public class ServicioNotificaciones extends Service {
     public int onStartCommand(Intent intent, int flags, int startId) {
         //Tendriamos que pensar en tener to*do en una cola que la tendria que haber cogido de base de datos - esto es IMPORTANTE
 
+        Log.e("ServicioNot", "Se lanza serv");
+
         AlarmManager am =( AlarmManager) getApplicationContext().getSystemService(Context.ALARM_SERVICE);
         Intent i = new Intent(getApplicationContext(), CargarNotificaciones.class);
         long time = new Date().getTime();
@@ -53,6 +55,9 @@ public class ServicioNotificaciones extends Service {
         horaNotificacionCal.set(Calendar.MINUTE, m);
         horaNotificacionCal.set(Calendar.SECOND, 00);
         //horaNotificacionCal.add(Calendar.DAY_OF_MONTH, 1); //Esto hace que se haga la dia siguiente
+
+        Log.e("ServicioNot", "Se ejecutara a las " + horaNotificacionCal.getTime().toString());
+
         long horaNotificacion = horaNotificacionCal.getTimeInMillis();
 
         setAlarm(am, horaNotificacion, pi);

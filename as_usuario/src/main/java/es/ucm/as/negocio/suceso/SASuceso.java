@@ -10,13 +10,6 @@ import java.util.List;
 
 public interface SASuceso {
 
-    // Evento
-
-    public List<TransferEvento> consultarEventos();
-
-    public void guardarEventos(List<TransferEvento> eventosRespuesta);
-
-
     // Reto
 
     public TransferReto consultarReto();
@@ -49,5 +42,7 @@ public interface SASuceso {
     public void modificarEventos(List<TransferEvento> eventosRespuesta);
 
     public void eliminarEventos();
+
+    public List<TransferEvento> consultarEventos();
 
 }

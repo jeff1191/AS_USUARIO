@@ -3,6 +3,7 @@ package es.ucm.as.negocio.suceso.imp;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Environment;
+import android.util.Log;
 
 import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Document;
@@ -154,6 +155,7 @@ public class SASucesoImp implements SASuceso {
                 tt.setNoSeguidos(tareas.get(i).getNoSeguidos());
                 tt.setNumNo(tareas.get(i).getNumNo());
                 tt.setNumSi(tareas.get(i).getNumSi());
+                Log.e("SASuceso", "No seguidos: "+tareas.get(i).getNoSeguidos()+ " Sis: "+tareas.get(i).getNumSi()+" Nos:"+ tareas.get(i).getNumNo());
                 transferTareas.add(tt);
             }
 
@@ -170,9 +172,10 @@ public class SASucesoImp implements SASuceso {
 
             Dao<Tarea, Integer> tareaDao;
 
+
             try {
                 tareaDao = getHelper().getTareaDao();
-
+                Boolean[] visitados = new Boolean[tareaDao.queryForAll().size()+tareas.size()];
                 if(tareas != null) {
                     for (int i = 0; i < tareas.size(); i++) {
 
@@ -186,32 +189,31 @@ public class SASucesoImp implements SASuceso {
                         tarea.setMejorar(transfer.getMejorar());
                         tarea.setNumNo(transfer.getNumNo());
                         tarea.setNumSi(transfer.getNumSi());
-                        tarea.setNoSeguidos(transfer.getNoSeguidos());
                         tarea.setFrecuenciaTarea(transfer.getFrecuenciaTarea());
 
-                        // Si alguno de los contadores no es 0 quiere decir que es no es una nueva tarea
-                        if (transfer.getNumNo() != 0 || transfer.getNumSi() != 0
-                                || transfer.getContador() != 0 || transfer.getNoSeguidos() != 0) {
-
-                            // Si ha habido modificaciones
-                            if (!tareaDao.equals(tarea)) {
-                                tarea = tareaDao.queryForEq("TEXTO_ALARMA", transfer.getTextoAlarma()).get(0);
-
-                                if (tarea.getHoraAlarma() != transfer.getHoraAlarma())
-                                    tarea.setHoraAlarma(transfer.getHoraAlarma());
-                                if (tarea.getTextoPregunta() != transfer.getTextoPregunta())
-                                    tarea.setTextoPregunta(transfer.getTextoPregunta());
-                                if (tarea.getHoraPregunta() != transfer.getHoraPregunta())
-                                    tarea.setHoraPregunta(transfer.getHoraPregunta());
-                                if (tarea.getMejorar() != transfer.getMejorar())
-                                    tarea.setMejorar(transfer.getMejorar());
-                                if (tarea.getFrecuenciaTarea() != transfer.getFrecuenciaTarea())
-                                    tarea.setFrecuenciaTarea(transfer.getFrecuenciaTarea());
-                            }
+                        // Si existe en BBDD
+                        if (tareaDao.queryForEq("TEXTO_ALARMA", transfer.getTextoAlarma()).size()> 0) {
+                            tarea = tareaDao.queryForEq("TEXTO_ALARMA", transfer.getTextoAlarma()).get(0);
+                            if (tarea.getHoraAlarma() != transfer.getHoraAlarma())
+                                tarea.setHoraAlarma(transfer.getHoraAlarma());
+                            if (tarea.getTextoPregunta() != transfer.getTextoPregunta())
+                                tarea.setTextoPregunta(transfer.getTextoPregunta());
+                            if (tarea.getHoraPregunta() != transfer.getHoraPregunta())
+                                tarea.setHoraPregunta(transfer.getHoraPregunta());
+                            if (tarea.getMejorar() != transfer.getMejorar())
+                                tarea.setMejorar(transfer.getMejorar());
+                            if (tarea.getFrecuenciaTarea() != transfer.getFrecuenciaTarea())
+                                tarea.setFrecuenciaTarea(transfer.getFrecuenciaTarea());
                         }
 
                         // En cualquier caso se crea o actualiza
                         tareaDao.createOrUpdate(tarea);
+                        Integer id = tareaDao.queryForEq("TEXTO_ALARMA",tarea.getTextoAlarma()).get(0).getId();
+                        visitados[id]=true;
+                    }
+                    List<Tarea> misTareas = tareaDao.queryForAll();
+                    for (int i = 0; i < misTareas.size(); i++) {
+                        if(!visitados[misTareas.get(i).getId()]) tareaDao.deleteById(i);
                     }
                 }
 
@@ -425,7 +427,7 @@ public class SASucesoImp implements SASuceso {
             if(eventosBD.size() != 0) {
                 //Si le llega chicha
                 if(eventosTutor.size() != 0){
-                    FactoriaSA.getInstancia().nuevoSASuceso().eliminarEventos();
+                    eliminarEventos();
                     for(int i=0; i < eventosTutor.size();i++){
                         Evento nuevoEvento = new Evento();
                         nuevoEvento.setNombre(eventosTutor.get(i).getNombre());
@@ -437,10 +439,10 @@ public class SASucesoImp implements SASuceso {
                     }
                 }
                 else
-                    FactoriaSA.getInstancia().nuevoSASuceso().eliminarEventos();
+                    eliminarEventos();
             }
             else{
-                if(eventosTutor.size() != 0){
+                if(eventosTutor != null){
                     for(int i=0; i < eventosTutor.size();i++){
                         Evento nuevoEvento = new Evento();
                         nuevoEvento.setNombre(eventosTutor.get(i).getNombre());
@@ -511,7 +513,7 @@ public class SASucesoImp implements SASuceso {
         TransferReto retoActual = consultarReto();
 
         // Llega un reto desde el tutor
-        if(nuevoReto.getTexto() != null){
+        if(nuevoReto != null && nuevoReto.getTexto()!=null){
 
             // Si el usuario ya tenia reto
             if(retoActual != null){
@@ -537,7 +539,7 @@ public class SASucesoImp implements SASuceso {
             }
 
             // Si no llega reto del tutor hay que borrar el del usuario si lo hubiera
-        } else if(nuevoReto.getTexto() == null && retoActual != null)
+        } else if(nuevoReto == null && retoActual != null)
             FactoriaSA.getInstancia().nuevoSASuceso().eliminarReto();
     }
 

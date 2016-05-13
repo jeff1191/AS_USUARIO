@@ -7,6 +7,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
+import android.util.Log;
 
 import com.j256.ormlite.android.apptools.OpenHelperManager;
 import com.j256.ormlite.dao.Dao;
@@ -44,6 +45,7 @@ public class CargarNotificaciones extends BroadcastReceiver {
         //Lee las tareas de bbdd
         List<Tarea> tareas = new ArrayList<Tarea>();
         List<TransferTarea> transferTareas = new ArrayList<TransferTarea>();
+        Log.e("CargarNotificaciones", "Se cargan las notificaciones");
         try {
             // Se obtienen las tareas a recordar ese dia ordenadas por horas de manera ascendente
             QueryBuilder<Tarea, Integer> qb = getHelper(context).getTareaDao().queryBuilder();
@@ -58,6 +60,9 @@ public class CargarNotificaciones extends BroadcastReceiver {
 
             String tituloAlarma = "Alarma";
             String tituloPregunta = "Pregunta";
+
+            Log.e("CargarNotificaciones", tareas.size()+"");
+
             for(int i = 0; i < tareas.size(); i++){
                 Tarea tarea = tareas.get(i);
 
@@ -75,8 +80,10 @@ public class CargarNotificaciones extends BroadcastReceiver {
 
                 lanzarSuceso(context, horaAlarmaNotif, minutosAlarmaNotif, tituloAlarma,
                         tarea.getTextoAlarma(), "alarma", tarea.getId());
+                Log.e("CargarNotificaciones", "Se guarda la alarma "+tarea.getTextoAlarma()+" a las "+horaAlarmaNotif+":"+minutosAlarmaNotif);
                 lanzarSuceso(context, horaPreguntaNotif, minutosPreguntaNotif, tituloPregunta,
-                        tarea.getTextoPregunta(), "pregunta",tarea.getId());
+                        tarea.getTextoPregunta(), "pregunta", tarea.getId());
+                Log.e("CargarNotificaciones", "Se guarda la pregunta "+tarea.getTextoPregunta()+" a las "+horaPreguntaNotif+":"+minutosPreguntaNotif);
 
                 if(i == tareas.size() - 1){//Guarda una alarma para el siguiente dia que vuelva a arrancar el servicio
                     lanzarServicio(context, horaPreguntaNotif, minutosPreguntaNotif);

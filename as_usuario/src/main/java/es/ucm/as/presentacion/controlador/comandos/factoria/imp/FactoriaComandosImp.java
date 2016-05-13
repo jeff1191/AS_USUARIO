@@ -4,7 +4,6 @@ import es.ucm.as.presentacion.controlador.ListaComandos;
 import es.ucm.as.presentacion.controlador.comandos.Command;
 import es.ucm.as.presentacion.controlador.comandos.factoria.FactoriaComandos;
 import es.ucm.as.presentacion.controlador.comandos.imp.ActualizaPuntuacionComando;
-import es.ucm.as.presentacion.controlador.comandos.imp.CargarBBDDComando;
 import es.ucm.as.presentacion.controlador.comandos.imp.ConfiguracionComando;
 import es.ucm.as.presentacion.controlador.comandos.imp.ConsultarUsuarioComando;
 import es.ucm.as.presentacion.controlador.comandos.imp.CrearUsuarioComando;
@@ -56,9 +55,6 @@ public class FactoriaComandosImp extends FactoriaComandos {
                 break;
             case ListaComandos.CONSULTAR_USUARIO:
                 ret = new ConsultarUsuarioComando();
-                break;
-            case ListaComandos.CARGAR_BBDD:
-                ret = new CargarBBDDComando();
                 break;
             case ListaComandos.GENERAR_PDF:
                 ret = new GenerarPDFComando();

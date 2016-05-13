@@ -41,7 +41,6 @@ public class NotificacionAlarma extends BroadcastReceiver {
         String last4Str = tmpStr.substring(tmpStr.length() - 5);
         int notificationId = Integer.valueOf(last4Str);
 
-
         PendingIntent aux = PendingIntent.getBroadcast(context, notificationId+4, new Intent(), PendingIntent.FLAG_UPDATE_CURRENT);
 
         NotificationCompat.Builder n =
