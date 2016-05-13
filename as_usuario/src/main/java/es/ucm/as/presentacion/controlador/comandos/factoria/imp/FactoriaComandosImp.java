@@ -4,14 +4,13 @@ import es.ucm.as.presentacion.controlador.ListaComandos;
 import es.ucm.as.presentacion.controlador.comandos.Command;
 import es.ucm.as.presentacion.controlador.comandos.factoria.FactoriaComandos;
 import es.ucm.as.presentacion.controlador.comandos.imp.ActualizaPuntuacionComando;
-import es.ucm.as.presentacion.controlador.comandos.imp.ConsultarUsuarioComando;
+import es.ucm.as.presentacion.controlador.comandos.imp.CargarBBDDComando;
 import es.ucm.as.presentacion.controlador.comandos.imp.ConfiguracionComando;
+import es.ucm.as.presentacion.controlador.comandos.imp.ConsultarUsuarioComando;
 import es.ucm.as.presentacion.controlador.comandos.imp.CrearUsuarioComando;
 import es.ucm.as.presentacion.controlador.comandos.imp.EditarUsuarioComando;
-import es.ucm.as.presentacion.controlador.comandos.imp.EliminarReto;
 import es.ucm.as.presentacion.controlador.comandos.imp.EnviarCorreoComando;
 import es.ucm.as.presentacion.controlador.comandos.imp.GenerarPDFComando;
-import es.ucm.as.presentacion.controlador.comandos.imp.GestionarReto;
 import es.ucm.as.presentacion.controlador.comandos.imp.GuardarEventosComando;
 import es.ucm.as.presentacion.controlador.comandos.imp.ResponderRetoComando;
 import es.ucm.as.presentacion.controlador.comandos.imp.SincronizarComando;
@@ -58,23 +57,20 @@ public class FactoriaComandosImp extends FactoriaComandos {
             case ListaComandos.CONSULTAR_USUARIO:
                 ret = new ConsultarUsuarioComando();
                 break;
+            case ListaComandos.CARGAR_BBDD:
+                ret = new CargarBBDDComando();
+                break;
             case ListaComandos.GENERAR_PDF:
                 ret = new GenerarPDFComando();
                 break;
             case ListaComandos.ENVIAR_CORREO:
                 ret = new EnviarCorreoComando();
                 break;
-            case ListaComandos.GUARDAR_EVENTOS:
+            case ListaComandos.MODIFICAR_EVENTOS:
                 ret = new GuardarEventosComando();
                 break;
             case ListaComandos.SINCRONIZAR:
                 ret = new SincronizarComando();
-                break;
-            case ListaComandos.GESTIONAR_RETO:
-                ret = new GestionarReto();
-                break;
-            case ListaComandos.ELIMINAR_RETO:
-                ret = new EliminarReto();
                 break;
         }
 

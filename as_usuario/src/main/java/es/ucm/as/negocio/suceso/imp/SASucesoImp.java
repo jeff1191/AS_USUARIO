@@ -69,7 +69,7 @@ public class SASucesoImp implements SASuceso {
             eventos = getHelper().getEventoDao();
             listaEventos= eventos.queryForAll();
             for(int i = 0; i < listaEventos.size(); i++)
-                transferEventos.add(new TransferEvento(listaEventos.get(i).getId(),listaEventos.get(i).getTexto(),
+                transferEventos.add(new TransferEvento(listaEventos.get(i).getId(),listaEventos.get(i).getNombre(),
                         listaEventos.get(i).getFecha(),listaEventos.get(i).getHoraAlarma(),listaEventos.get(i).getAsistencia()));
 
         } catch (SQLException e) {
@@ -398,7 +398,7 @@ public class SASucesoImp implements SASuceso {
     }
 
     @Override
-    public void guardarEventos(List<TransferEvento> eventosRespuesta) {
+    public void modificarEventos(List<TransferEvento> eventosRespuesta) {
 
         Dao<Evento, Integer> eventos;
         try {
@@ -411,6 +411,63 @@ public class SASucesoImp implements SASuceso {
 
         } catch (SQLException e) {
 
+        }
+    }
+
+    @Override
+    public void crearEventos(List<TransferEvento> eventosTutor) {
+
+        Dao<Evento, Integer> eventos;
+        try {
+            eventos = getHelper().getEventoDao();
+            List<TransferEvento> eventosBD = FactoriaSA.getInstancia().nuevoSASuceso().consultarEventos();
+            //Si ya hay algo en la BD
+            if(eventosBD.size() != 0) {
+                //Si le llega chicha
+                if(eventosTutor.size() != 0){
+                    FactoriaSA.getInstancia().nuevoSASuceso().eliminarEventos();
+                    for(int i=0; i < eventosTutor.size();i++){
+                        Evento nuevoEvento = new Evento();
+                        nuevoEvento.setNombre(eventosTutor.get(i).getNombre());
+                        nuevoEvento.setFecha(eventosTutor.get(i).getFecha());
+                        nuevoEvento.setHoraAlarma(eventosTutor.get(i).getHoraAlarma());
+                        Log.e("SASuceso", eventosTutor.get(i).getAsistencia());
+                        nuevoEvento.setAsistencia(eventosTutor.get(i).getAsistencia());
+                        eventos.create(nuevoEvento);
+                    }
+                }
+                else
+                    FactoriaSA.getInstancia().nuevoSASuceso().eliminarEventos();
+            }
+            else{
+                if(eventosTutor.size() != 0){
+                    for(int i=0; i < eventosTutor.size();i++){
+                        Evento nuevoEvento = new Evento();
+                        nuevoEvento.setNombre(eventosTutor.get(i).getNombre());
+                        nuevoEvento.setFecha(eventosTutor.get(i).getFecha());
+                        nuevoEvento.setHoraAlarma(eventosTutor.get(i).getHoraAlarma());
+                        nuevoEvento.setAsistencia("NO");
+                        eventos.create(nuevoEvento);
+                    }
+                }
+            }
+
+        } catch (SQLException e) {
+
+        }
+    }
+
+    @Override
+    public void eliminarEventos(){
+        Dao<Evento, Integer> eventos;
+        try {
+            eventos = getHelper().getEventoDao();
+            List<Evento> eventosBorrar = eventos.queryForAll();
+            for(int i= 0; i < eventosBorrar.size();i++) {
+                eventos.delete(eventosBorrar.get(i));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
 

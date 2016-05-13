@@ -41,16 +41,15 @@ public class VerEventos  extends Activity{
         if(bundle.getStringArrayList("listaEventos") != null){
             ArrayList<String> listaE = bundle.getStringArrayList("listaEventos");
             final ArrayList<Integer> listaIds = bundle.getIntegerArrayList("listaIds");
-            boolean listaAsistencia[] = bundle.getBooleanArray("listaAsistencia");
+            ArrayList<String> listaAsistencia = bundle.getStringArrayList("listaAsistencia");
             final ArrayList<Boolean> asistencia= new ArrayList<>();
 
             for(int i=0; i < listaE.size(); i++) {
-                 if(listaAsistencia[i])
+                 if(listaAsistencia.get(i).equals("SI"))
                         asistencia.add(true);
                  else
                         asistencia.add(false);
             }
-
 
             if(listaE.isEmpty()){
                 listaEventos.setVisibility(View.INVISIBLE);
@@ -85,13 +84,13 @@ public class VerEventos  extends Activity{
                             TransferEvento eGuardar = new TransferEvento();
                             eGuardar.setId(listaIds.get(i));
                             if(adaptador.getActivos().get(i))
-                                eGuardar.setAsistencia(true);
+                                eGuardar.setAsistencia("SI");
                             else
-                                eGuardar.setAsistencia(false);
+                                eGuardar.setAsistencia("NO");
                             Log.e("TRANSFER: ",eGuardar.getId() + " ACTIVO: " + eGuardar.getAsistencia());
                             eventosModificados.add(eGuardar);
                         }
-                    Controlador.getInstancia().ejecutaComando(ListaComandos.GUARDAR_EVENTOS,eventosModificados);
+                    Controlador.getInstancia().ejecutaComando(ListaComandos.MODIFICAR_EVENTOS,eventosModificados);
                     }
                 });
 

@@ -14,10 +14,8 @@ import es.ucm.as.negocio.suceso.TransferReto;
 import es.ucm.as.negocio.suceso.TransferTarea;
 import es.ucm.as.negocio.usuario.SAUsuario;
 import es.ucm.as.negocio.usuario.TransferUsuario;
-import es.ucm.as.presentacion.controlador.ListaComandos;
 import es.ucm.as.presentacion.controlador.comandos.Command;
 import es.ucm.as.presentacion.controlador.comandos.exceptions.commandException;
-import es.ucm.as.presentacion.controlador.comandos.factoria.FactoriaComandos;
 import es.ucm.as.presentacion.vista.Contexto;
 
 /**
@@ -59,18 +57,13 @@ public class SincronizarComando implements Command{
             Mensaje respuestaTutor = conectionManager.getResponse();
             FactoriaSA.getInstancia().nuevoSASuceso().cargarReto(respuestaTutor.getReto());
             FactoriaSA.getInstancia().nuevoSASuceso().cargarTareas(respuestaTutor.getTareas());
-            sincronizarEventos(respuestaTutor.getEventos());
+            FactoriaSA.getInstancia().nuevoSASuceso().crearEventos(eventos);
 
             terminado = conectionManager.getResponse() != null;
             conectionManager.reset();
         }
 
         return terminado;
-    }
-
-
-    private void sincronizarEventos(List<TransferEvento> eventos){
-
     }
 
 }

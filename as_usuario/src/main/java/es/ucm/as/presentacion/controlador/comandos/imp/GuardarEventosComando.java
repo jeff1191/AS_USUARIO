@@ -17,7 +17,7 @@ public class GuardarEventosComando implements Command {
     public Object ejecutaComando(Object datos) throws commandException {
         SASuceso saSuceso = FactoriaSA.getInstancia().nuevoSASuceso();
         List<TransferEvento> eventosRespuesta= (List<TransferEvento>) datos;
-        saSuceso.guardarEventos(eventosRespuesta);
+        saSuceso.modificarEventos(eventosRespuesta);
         return null;
     }
 }

@@ -1,3 +1,6 @@
+/**
+ * 
+ */
 package es.ucm.as.negocio.suceso;
 
 import com.itextpdf.text.DocumentException;
@@ -37,5 +40,14 @@ public interface SASuceso {
     // Correo
 
     public String generarPDF() throws IOException, DocumentException;
+
+
+    // Evento
+
+    public void crearEventos(List<TransferEvento> eventosTutor);
+
+    public void modificarEventos(List<TransferEvento> eventosRespuesta);
+
+    public void eliminarEventos();
 
 }

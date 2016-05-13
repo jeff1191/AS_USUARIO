@@ -122,7 +122,7 @@ public class DispatcherImp extends Dispatcher{
 
             // Eventos
 
-            case ListaComandos.GUARDAR_EVENTOS:
+            case ListaComandos.MODIFICAR_EVENTOS:
                 Intent iGuardarEvento = new Intent(Contexto.getInstancia().getContext().getApplicationContext(), MainActivity.class);
                 Contexto.getInstancia().getContext().startActivity(iGuardarEvento);
                 break;
@@ -132,12 +132,12 @@ public class DispatcherImp extends Dispatcher{
                 List<TransferEvento> eventosModelo= (List<TransferEvento>) datos;
                 ArrayList<String> listaActividad= new ArrayList<String>();
                 ArrayList<Integer> listaIds = new ArrayList<Integer>();
-                boolean listaActivos[] = new boolean[eventosModelo.size()];
+                ArrayList<String> listaActivos = new ArrayList<String>();
                 for(int i=0; i < eventosModelo.size(); i++){
-                    String addEvento= eventosModelo.get(i).getTexto() + " el " + eventosModelo.get(i).getFecha();
+                    String addEvento= eventosModelo.get(i).getNombre() + " el " + eventosModelo.get(i).getFecha();
                     listaActividad.add(addEvento);
                     listaIds.add(eventosModelo.get(i).getId());
-                    listaActivos[i] = eventosModelo.get(i).getAsistencia();
+                    listaActivos.add(eventosModelo.get(i).getAsistencia());
                 }
                 //intent.putStringArrayListExtra("listaEventos", listaActividad);
                 //intent.putIntegerArrayListExtra("listaIds", listaIds);
@@ -145,7 +145,7 @@ public class DispatcherImp extends Dispatcher{
                 Bundle b = new Bundle();
                 b.putIntegerArrayList("listaIds", listaIds);
                 b.putStringArrayList("listaEventos", listaActividad);
-                b.putBooleanArray("listaAsistencia", listaActivos);
+                b.putStringArrayList("listaAsistencia", listaActivos);
                 intent.putExtras(b);
                 Contexto.getInstancia().getContext().startActivity(intent);
                 break;
