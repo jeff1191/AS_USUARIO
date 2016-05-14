@@ -155,7 +155,6 @@ public class SASucesoImp implements SASuceso {
                 tt.setNoSeguidos(tareas.get(i).getNoSeguidos());
                 tt.setNumNo(tareas.get(i).getNumNo());
                 tt.setNumSi(tareas.get(i).getNumSi());
-                Log.e("SASuceso", "No seguidos: "+tareas.get(i).getNoSeguidos()+ " Sis: "+tareas.get(i).getNumSi()+" Nos:"+ tareas.get(i).getNumNo());
                 transferTareas.add(tt);
             }
 
@@ -169,14 +168,24 @@ public class SASucesoImp implements SASuceso {
     @Override
     public void cargarTareas(List<TransferTarea> tareas) {
 
-
             Dao<Tarea, Integer> tareaDao;
-
 
             try {
                 tareaDao = getHelper().getTareaDao();
-                Boolean[] visitados = new Boolean[tareaDao.queryForAll().size()+tareas.size()];
+
                 if(tareas != null) {
+
+                    List<Tarea> misTareas = tareaDao.queryForAll();
+                    for(int j = 0; j < misTareas.size(); j++){
+                        boolean encontrado = false;
+                        for (int i = 0; i < tareas.size() && !encontrado; i++) {
+                            if (misTareas.get(j).getTextoAlarma().equals(tareas.get(i).getTextoAlarma()))
+                                encontrado = true;
+                        }
+                        if(!encontrado)
+                            tareaDao.deleteById(misTareas.get(j).getId());
+                    }
+
                     for (int i = 0; i < tareas.size(); i++) {
 
                         TransferTarea transfer = tareas.get(i);
@@ -208,21 +217,13 @@ public class SASucesoImp implements SASuceso {
 
                         // En cualquier caso se crea o actualiza
                         tareaDao.createOrUpdate(tarea);
-                        Integer id = tareaDao.queryForEq("TEXTO_ALARMA",tarea.getTextoAlarma()).get(0).getId();
-                        visitados[id]=true;
-                    }
-                    List<Tarea> misTareas = tareaDao.queryForAll();
-                    for (int i = 0; i < misTareas.size(); i++) {
-                        if(!visitados[misTareas.get(i).getId()]) tareaDao.deleteById(i);
                     }
                 }
 
             } catch (SQLException e) {
                 e.printStackTrace();
             }
-
     }
-
 
     public static File crearFichero(String nombreFichero) throws IOException {
         File ruta = getRuta();
@@ -433,7 +434,6 @@ public class SASucesoImp implements SASuceso {
                         nuevoEvento.setNombre(eventosTutor.get(i).getNombre());
                         nuevoEvento.setFecha(eventosTutor.get(i).getFecha());
                         nuevoEvento.setHoraAlarma(eventosTutor.get(i).getHoraAlarma());
-                        Log.e("SASuceso", eventosTutor.get(i).getAsistencia());
                         nuevoEvento.setAsistencia(eventosTutor.get(i).getAsistencia());
                         eventos.create(nuevoEvento);
                     }
@@ -513,7 +513,7 @@ public class SASucesoImp implements SASuceso {
         TransferReto retoActual = consultarReto();
 
         // Llega un reto desde el tutor
-        if(nuevoReto != null && nuevoReto.getTexto()!=null){
+        if(nuevoReto.getTexto()!= null){
 
             // Si el usuario ya tenia reto
             if(retoActual != null){
@@ -539,8 +539,9 @@ public class SASucesoImp implements SASuceso {
             }
 
             // Si no llega reto del tutor hay que borrar el del usuario si lo hubiera
-        } else if(nuevoReto == null && retoActual != null)
+        } else if(nuevoReto.getTexto()== null && retoActual != null) {
             FactoriaSA.getInstancia().nuevoSASuceso().eliminarReto();
+        }
     }
 
 }

@@ -63,9 +63,19 @@
             android:id="@+id/tituloReto"
             android:layout_gravity="center_horizontal"
             android:textStyle="bold"
+            android:text="Reto"
             android:gravity="center"
             android:textAlignment="gravity" />
 
+        <!-- Aviso si no hay -->
+        <TextView
+            android:layout_height="0dp"
+            android:layout_width="match_parent"
+            android:layout_weight="0.5"
+            android:id="@+id/noHay"
+            android:textStyle="italic"
+            android:gravity="center"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
 
         <TextView
             android:layout_width="match_parent"
