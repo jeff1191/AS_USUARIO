@@ -68,9 +68,10 @@ public class SAUsuarioImp implements SAUsuario {
 			return 5;
 		// Se cuentan las positivas y se realiza el calculo
 		int positivas = 0;
-		for (int i = 0; i < tareas.size(); i++)
+		for (int i = 0; i < tareas.size(); i++) {
 			if (tareas.get(i).getNumSi() - tareas.get(i).getNumNo() >= 0)
 				positivas++;
+		}
 		ret = 10*positivas/tareas.size();
 		// Se actualiza la puntuacion en la BBDD
 		Dao<Usuario, Integer> daoUsuario;
