@@ -21,6 +21,9 @@ public class Evento {
 	@DatabaseField(columnName = "HORA_ALARMA" ,dataType = DataType.DATE_STRING, format = "dd-MM-yyyy HH:mm:ss")
 	private Date horaAlarma;
 
+	@DatabaseField(columnName = "HORA_EVENTO", dataType = DataType.DATE_STRING, format = "dd-MM-yyyy HH:mm:ss")
+	private Date horaEvento;
+
 	@DatabaseField(columnName = "ASISTENCIA")
 	private String asistencia;
 
@@ -64,4 +67,11 @@ public class Evento {
 		this.asistencia = asistencia;
 	}
 
+	public Date getHoraEvento() {
+		return horaEvento;
+	}
+
+	public void setHoraEvento(Date horaEvento) {
+		this.horaEvento = horaEvento;
+	}
 }

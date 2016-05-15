@@ -3,7 +3,6 @@ package es.ucm.as.negocio.suceso.imp;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Environment;
-import android.util.Log;
 
 import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Document;
@@ -71,7 +70,8 @@ public class SASucesoImp implements SASuceso {
             listaEventos= eventos.queryForAll();
             for(int i = 0; i < listaEventos.size(); i++)
                 transferEventos.add(new TransferEvento(listaEventos.get(i).getId(),listaEventos.get(i).getNombre(),
-                        listaEventos.get(i).getFecha(),listaEventos.get(i).getHoraAlarma(),listaEventos.get(i).getAsistencia()));
+                        listaEventos.get(i).getFecha(),listaEventos.get(i).getHoraAlarma(),
+                        listaEventos.get(i).getAsistencia(), listaEventos.get(i).getHoraEvento()));
 
         } catch (SQLException e) {
 
@@ -435,6 +435,7 @@ public class SASucesoImp implements SASuceso {
                         nuevoEvento.setFecha(eventosTutor.get(i).getFecha());
                         nuevoEvento.setHoraAlarma(eventosTutor.get(i).getHoraAlarma());
                         nuevoEvento.setAsistencia(eventosTutor.get(i).getAsistencia());
+                        nuevoEvento.setHoraEvento(eventosTutor.get(i).getHoraEvento());
                         eventos.create(nuevoEvento);
                     }
                 }
@@ -448,6 +449,7 @@ public class SASucesoImp implements SASuceso {
                         nuevoEvento.setNombre(eventosTutor.get(i).getNombre());
                         nuevoEvento.setFecha(eventosTutor.get(i).getFecha());
                         nuevoEvento.setHoraAlarma(eventosTutor.get(i).getHoraAlarma());
+                        nuevoEvento.setHoraEvento(eventosTutor.get(i).getHoraEvento());
                         nuevoEvento.setAsistencia("NO");
                         eventos.create(nuevoEvento);
                     }

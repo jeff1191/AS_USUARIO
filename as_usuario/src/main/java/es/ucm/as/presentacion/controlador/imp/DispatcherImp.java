@@ -3,6 +3,7 @@ package es.ucm.as.presentacion.controlador.imp;
 import android.content.Intent;
 import android.os.Bundle;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -133,8 +134,10 @@ public class DispatcherImp extends Dispatcher{
                 ArrayList<String> listaActividad= new ArrayList<String>();
                 ArrayList<Integer> listaIds = new ArrayList<Integer>();
                 ArrayList<String> listaActivos = new ArrayList<String>();
+                SimpleDateFormat formatFecha = new SimpleDateFormat("dd-MM-yyyy");
+                SimpleDateFormat formatHora = new SimpleDateFormat("HH:mm");
                 for(int i=0; i < eventosModelo.size(); i++){
-                    String addEvento= eventosModelo.get(i).getNombre() + " el " + eventosModelo.get(i).getFecha();
+                    String addEvento= eventosModelo.get(i).getNombre() + " el " + formatFecha.format(eventosModelo.get(i).getFecha()) + " a las " + formatHora.format(eventosModelo.get(i).getHoraEvento());
                     listaActividad.add(addEvento);
                     listaIds.add(eventosModelo.get(i).getId());
                     listaActivos.add(eventosModelo.get(i).getAsistencia());
