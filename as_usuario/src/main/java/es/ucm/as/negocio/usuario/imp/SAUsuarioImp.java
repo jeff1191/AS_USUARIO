@@ -20,7 +20,7 @@ import es.ucm.as.negocio.suceso.SASuceso;
 import es.ucm.as.negocio.suceso.TransferTarea;
 import es.ucm.as.negocio.usuario.SAUsuario;
 import es.ucm.as.negocio.usuario.TransferUsuario;
-import es.ucm.as.negocio.usuario.Usuario;
+import es.ucm.as.integracion.Usuario;
 import es.ucm.as.presentacion.vista.Contexto;
 
 public class SAUsuarioImp implements SAUsuario {

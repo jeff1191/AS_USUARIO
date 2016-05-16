@@ -5,6 +5,8 @@ package es.ucm.as.negocio.usuario;
 
 import java.io.Serializable;
 
+import es.ucm.as.integracion.Usuario;
+
 public class TransferUsuario implements Serializable{
 
 	static final long serialVersionUID = 1L;

@@ -5,11 +5,6 @@ import android.database.sqlite.SQLiteDatabase;
 
 import java.sql.SQLException;
 
-import es.ucm.as.negocio.suceso.Reto;
-import es.ucm.as.negocio.suceso.Evento;
-import es.ucm.as.negocio.suceso.Tarea;
-import es.ucm.as.negocio.usuario.Usuario;
-
 import com.j256.ormlite.android.apptools.OrmLiteSqliteOpenHelper;
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.support.ConnectionSource;

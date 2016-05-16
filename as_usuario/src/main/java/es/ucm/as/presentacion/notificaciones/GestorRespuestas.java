@@ -12,7 +12,7 @@ import com.j256.ormlite.dao.Dao;
 import java.sql.SQLException;
 
 import es.ucm.as.integracion.DBHelper;
-import es.ucm.as.negocio.suceso.Tarea;
+import es.ucm.as.integracion.Tarea;
 import es.ucm.as.negocio.utils.Frecuencia;
 
 import static es.ucm.as.negocio.utils.Frecuencia.DIARIA;

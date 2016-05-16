@@ -22,7 +22,7 @@ import java.util.List;
 import java.util.StringTokenizer;
 
 import es.ucm.as.integracion.DBHelper;
-import es.ucm.as.negocio.suceso.Tarea;
+import es.ucm.as.integracion.Tarea;
 import es.ucm.as.negocio.suceso.TransferTarea;
 import es.ucm.as.negocio.utils.Frecuencia;
 
