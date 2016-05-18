@@ -22,9 +22,10 @@ import java.util.List;
 import java.util.StringTokenizer;
 
 import es.ucm.as.integracion.DBHelper;
+import es.ucm.as.integracion.Evento;
 import es.ucm.as.integracion.Tarea;
+import es.ucm.as.negocio.suceso.TransferEvento;
 import es.ucm.as.negocio.suceso.TransferTarea;
-import es.ucm.as.negocio.utils.Frecuencia;
 
 /**
  * Created by Juan Lu on 08/04/2016.
@@ -44,9 +45,18 @@ public class CargarNotificaciones extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
         //Lee las tareas de bbdd
         List<Tarea> tareas = new ArrayList<Tarea>();
+        //List<Tarea> tareas2 = new ArrayList<Tarea>();
         List<TransferTarea> transferTareas = new ArrayList<TransferTarea>();
-        Log.e("CargarNotificaciones", "Se cargan las notificaciones");
+        Log.e("CargarNotificaciones", "Se cargan las notificaciones de tareas");
+        //Lee los eventos de bbdd
+        List<Evento> eventos = new ArrayList<Evento>();
+        List<TransferEvento> transferEventos = new ArrayList<TransferEvento>();
+        Log.e("CargarNotificaciones", "Se cargan las notificaciones de los eventos");
         try {
+
+            Dao<Tarea, Integer> aux = getHelper(context).getTareaDao();
+
+            //Esto sirve si le ha metido tareas
             // Se obtienen las tareas a recordar ese dia ordenadas por horas de manera ascendente
             QueryBuilder<Tarea, Integer> qb = getHelper(context).getTareaDao().queryBuilder();
             Date actual = new Date();
@@ -54,12 +64,14 @@ public class CargarNotificaciones extends BroadcastReceiver {
             c.setTime(actual);
             c.add(Calendar.DAY_OF_MONTH, 1);
             Date tomorrow = c.getTime();
-            qb.where().between("HORA_ALARMA",actual, tomorrow );
+            Log.e("CargarNotificaciones", "Entre las "+ actual.toString() + " y las " + tomorrow.toString());
+            qb.where().between("HORA_ALARMA", actual, tomorrow);
             qb.orderBy("HORA_ALARMA", true);
             tareas = qb.query();
 
             String tituloAlarma = "Alarma";
             String tituloPregunta = "Pregunta";
+            String tituloEvento = "Evento";
 
             Log.e("CargarNotificaciones", tareas.size()+"");
 
@@ -80,26 +92,38 @@ public class CargarNotificaciones extends BroadcastReceiver {
 
                 lanzarSuceso(context, horaAlarmaNotif, minutosAlarmaNotif, tituloAlarma,
                         tarea.getTextoAlarma(), "alarma", tarea.getId());
-                Log.e("CargarNotificaciones", "Se guarda la alarma "+tarea.getTextoAlarma()+" a las "+horaAlarmaNotif+":"+minutosAlarmaNotif);
+                Log.e("CargarNotificaciones", "Se guarda la alarma " + tarea.getTextoAlarma() + " a las " + horaAlarmaNotif + ":" + minutosAlarmaNotif);
                 lanzarSuceso(context, horaPreguntaNotif, minutosPreguntaNotif, tituloPregunta,
                         tarea.getTextoPregunta(), "pregunta", tarea.getId());
-                Log.e("CargarNotificaciones", "Se guarda la pregunta "+tarea.getTextoPregunta()+" a las "+horaPreguntaNotif+":"+minutosPreguntaNotif);
+                Log.e("CargarNotificaciones", "Se guarda la pregunta " + tarea.getTextoPregunta() + " a las " + horaPreguntaNotif + ":" + minutosPreguntaNotif);
 
-                if(i == tareas.size() - 1){//Guarda una alarma para el siguiente dia que vuelva a arrancar el servicio
-                    lanzarServicio(context, horaPreguntaNotif, minutosPreguntaNotif);
-                }
-
-                // Se actualizan las proximas horas de alarma y pregunta de esa tarea en base a la frecuencia
-                Calendar calendar = Calendar.getInstance();
-                calendar.setTime(tarea.getHoraAlarma());
-                Date newAlarma = proximaNotificacion(calendar, tarea.getFrecuenciaTarea());
-                calendar.setTime(tarea.getHoraPregunta());
-                Date newPregunta = proximaNotificacion(calendar, tarea.getFrecuenciaTarea());
-                tarea.setHoraAlarma(newAlarma);
-                tarea.setHoraPregunta(newPregunta);
-                Dao<Tarea, Integer> tareaDao = getHelper(context).getTareaDao();
-                tareaDao.update(tarea);
             }
+
+            lanzarBucle(context);
+
+            // Se obtienen los eventos a recordar ese dia ordenadas por horas de manera ascendente
+            QueryBuilder<Evento, Integer> qbEvento = getHelper(context).getEventoDao().queryBuilder();
+            qbEvento.where().between("HORA_ALARMA",actual, tomorrow);
+            qbEvento.orderBy("HORA_ALARMA", true);
+            eventos = qbEvento.query();
+            for(int i = 0; i < eventos.size(); i++) {
+                Evento evento = eventos.get(i);
+
+                //Esto es para dividir el date en horas y minutos
+                SimpleDateFormat horasMinutosE = new SimpleDateFormat("HH:mm");
+                StringTokenizer tokensAlarmaE = new StringTokenizer(horasMinutosE.format
+                        (evento.getHoraAlarma()),":");
+
+                Integer horaAlarmaNotifE = Integer.parseInt(tokensAlarmaE.nextToken());
+                Integer minutosAlarmaNotifE =  Integer.parseInt(tokensAlarmaE.nextToken());
+
+                lanzarSuceso(context, horaAlarmaNotifE, minutosAlarmaNotifE, tituloEvento,
+                        evento.getNombre(), "evento", 0);
+                Log.e("CargarEventos", "Se guarda el evento " + evento.getNombre() +
+                        " a las " + horaAlarmaNotifE + ":" + minutosAlarmaNotifE);
+
+            }
+
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -111,10 +135,13 @@ public class CargarNotificaciones extends BroadcastReceiver {
 
         AlarmManager am =( AlarmManager)context.getSystemService(Context.ALARM_SERVICE);
         Intent i;
+
         if(tipo.equals("pregunta"))
             i = new Intent(context, NotificacionPregunta.class);
-        else // alarma
+        else if (tipo.equals("alarma"))
             i = new Intent(context, NotificacionAlarma.class);
+        else // evento
+            i = new Intent(context, NotificacionEvento.class);
 
         i.putExtra("titulo", titulo);
         i.putExtra("texto", texto);
@@ -153,9 +180,11 @@ public class CargarNotificaciones extends BroadcastReceiver {
 
     }
 
-    public void lanzarServicio(Context context, Integer hora, Integer minutos){
+    public void lanzarBucle(Context context){
+        Log.e("lanzarBucle", "Se mete para guardar la ultima not");
+
         AlarmManager am =( AlarmManager)context.getSystemService(Context.ALARM_SERVICE);
-        Intent i = new Intent(context, AutoArranque.class);
+        Intent i = new Intent(context, BucleNotificaciones.class);
 
         long time = new Date().getTime();
         String tmpStr = String.valueOf(time);
@@ -164,10 +193,9 @@ public class CargarNotificaciones extends BroadcastReceiver {
         PendingIntent pi = PendingIntent.getBroadcast(context, pendingId, i, PendingIntent.FLAG_ONE_SHOT);
 
         Calendar horaNotificacionCal = Calendar.getInstance();
-        horaNotificacionCal.set(Calendar.HOUR_OF_DAY, 1);
-        horaNotificacionCal.set(Calendar.MINUTE, 11);
+        horaNotificacionCal.set(Calendar.HOUR_OF_DAY, 23);
+        horaNotificacionCal.set(Calendar.MINUTE, 47);
         horaNotificacionCal.set(Calendar.SECOND, 00);
-        horaNotificacionCal.add(Calendar.DAY_OF_MONTH, 1); //Esto hace que se haga la dia siguiente
         long horaNotificacion = horaNotificacionCal.getTimeInMillis();
 
         setAlarm(am, horaNotificacion, pi);
@@ -188,19 +216,4 @@ public class CargarNotificaciones extends BroadcastReceiver {
         am.setExact(AlarmManager.RTC, ms, pi);
     }
 
-
-    private Date proximaNotificacion(Calendar old, Frecuencia frecuencia) {
-        switch (frecuencia) {
-            case DIARIA:
-                old.add(Calendar.DAY_OF_MONTH, 1);
-                break;
-            case SEMANAL:
-                old.add(Calendar.DAY_OF_MONTH, 7);
-                break;
-            case MENSUAL:
-                old.add(Calendar.DAY_OF_MONTH, 30);
-                break;
-        }
-        return old.getTime();
-    }
 }
