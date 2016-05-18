@@ -20,6 +20,7 @@ import java.util.Date;
 import java.util.List;
 
 import es.ucm.as.integracion.DBHelper;
+import es.ucm.as.integracion.Evento;
 import es.ucm.as.integracion.Tarea;
 import es.ucm.as.negocio.suceso.TransferTarea;
 import es.ucm.as.negocio.utils.Frecuencia;
@@ -41,10 +42,10 @@ public class BucleNotificaciones extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         List<Tarea> tareas = new ArrayList<Tarea>();
+        List<Evento> eventos = new ArrayList<Evento>();
         List<TransferTarea> transferTareas = new ArrayList<TransferTarea>();
         Log.e("BucleNotificaciones", "Se van a cambiar la fecha de las notificaciones");
         try {
-
             // Se obtienen las tareas a recordar ese dia ordenadas por horas de manera ascendente
             QueryBuilder<Tarea, Integer> qb = getHelper(context).getTareaDao().queryBuilder();
             Date actual = new Date();
@@ -55,12 +56,18 @@ public class BucleNotificaciones extends BroadcastReceiver {
             a.setTime(actual);
             a.add(Calendar.HOUR_OF_DAY, -20);
             Date todayBegin = a.getTime();
-            Log.e("BucleNotificaciones", "Entre las "+ todayBegin.toString() + " y las " + todayEnd.toString());
-            qb.where().between("HORA_ALARMA", todayBegin, todayEnd );
+            Log.e("BucleNotificaciones", "Entre las " + todayBegin.toString() + " y las " + todayEnd.toString());
+            qb.where().between("HORA_ALARMA", todayBegin, todayEnd);
             qb.orderBy("HORA_ALARMA", true);
             tareas = qb.query();
+            Log.e("BucleNotificaciones", "Tareas: "+ tareas.size() + "");
 
-            Log.e("BucleNotificaciones", tareas.size()+"");
+            QueryBuilder<Evento, Integer> qb2 = getHelper(context).getEventoDao().queryBuilder();
+            qb2.where().between("HORA_EVENTO", todayBegin, todayEnd);
+            qb2.orderBy("HORA_EVENTO", true);
+            eventos = qb2.query();
+            Log.e("BucleNotificaciones", "Eventos: " + eventos.size() + "");
+            Dao<Evento,Integer> daoE = getHelper(context).getEventoDao();
 
             for(int i = 0; i < tareas.size(); i++){
                 Tarea tarea = tareas.get(i);
@@ -75,6 +82,10 @@ public class BucleNotificaciones extends BroadcastReceiver {
                 tarea.setHoraPregunta(newPregunta);
                 Dao<Tarea, Integer> tareaDao = getHelper(context).getTareaDao();
                 tareaDao.update(tarea);
+            }
+
+            for(int i = 0; i < eventos.size(); i++){
+                daoE.deleteById(eventos.get(i).getId());
             }
 
             lanzarServicio(context);
