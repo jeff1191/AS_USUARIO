@@ -43,7 +43,7 @@ public class NotificacionEvento extends BroadcastReceiver {
                         .setVibrate(new long[]{200, 300, 200, 300, 200})
                         .setLights(Color.GREEN, 3000, 3000)
                         .setStyle(new NotificationCompat.BigTextStyle()
-                                .bigText("Hoy tienes el evento: " + intent.getExtras().getString("texto")+"!!")
+                                .bigText("Hoy tienes el evento " + intent.getExtras().getString("texto"))
                                 .setBigContentTitle(intent.getExtras().getString("titulo")));
 
 

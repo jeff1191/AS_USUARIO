@@ -45,7 +45,6 @@ public class CargarNotificaciones extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
         //Lee las tareas de bbdd
         List<Tarea> tareas = new ArrayList<Tarea>();
-        //List<Tarea> tareas2 = new ArrayList<Tarea>();
         List<TransferTarea> transferTareas = new ArrayList<TransferTarea>();
         Log.e("CargarNotificaciones", "Se cargan las notificaciones de tareas");
         //Lee los eventos de bbdd
@@ -54,9 +53,6 @@ public class CargarNotificaciones extends BroadcastReceiver {
         Log.e("CargarNotificaciones", "Se cargan las notificaciones de los eventos");
         try {
 
-            Dao<Tarea, Integer> aux = getHelper(context).getTareaDao();
-
-            //Esto sirve si le ha metido tareas
             // Se obtienen las tareas a recordar ese dia ordenadas por horas de manera ascendente
             QueryBuilder<Tarea, Integer> qb = getHelper(context).getTareaDao().queryBuilder();
             Date actual = new Date();
@@ -73,7 +69,7 @@ public class CargarNotificaciones extends BroadcastReceiver {
             String tituloPregunta = "Pregunta";
             String tituloEvento = "Evento";
 
-            Log.e("CargarNotificaciones", tareas.size()+"");
+            Log.e("CargarNotificaciones", "Tareas: " + tareas.size() + "");
 
             for(int i = 0; i < tareas.size(); i++){
                 Tarea tarea = tareas.get(i);
@@ -101,27 +97,40 @@ public class CargarNotificaciones extends BroadcastReceiver {
 
             lanzarBucle(context);
 
+            Dao<Evento,Integer> daoE = getHelper(context).getEventoDao();
+            for(int i = 0; i < daoE.queryForAll().size(); i++)
+                Log.e("CargarNotificaciones", daoE.queryForAll().get(i).getHoraAlarma().toString());
+
             // Se obtienen los eventos a recordar ese dia ordenadas por horas de manera ascendente
             QueryBuilder<Evento, Integer> qbEvento = getHelper(context).getEventoDao().queryBuilder();
             qbEvento.where().between("HORA_ALARMA",actual, tomorrow);
             qbEvento.orderBy("HORA_ALARMA", true);
             eventos = qbEvento.query();
+
+            Log.e("CargarNotificaciones", "Eventos: "+eventos.size()+"");
+
             for(int i = 0; i < eventos.size(); i++) {
                 Evento evento = eventos.get(i);
+                if(evento.getAsistencia().equals("SI")) {
+                    //Esto es para dividir el date en horas y minutos
+                    SimpleDateFormat horasMinutosE = new SimpleDateFormat("HH:mm");
+                    StringTokenizer tokensAlarmaE = new StringTokenizer(horasMinutosE.format
+                            (evento.getHoraAlarma()), ":");
+                    StringTokenizer tokensHoraE = new StringTokenizer(horasMinutosE.format
+                            (evento.getHoraEvento()), ":");
 
-                //Esto es para dividir el date en horas y minutos
-                SimpleDateFormat horasMinutosE = new SimpleDateFormat("HH:mm");
-                StringTokenizer tokensAlarmaE = new StringTokenizer(horasMinutosE.format
-                        (evento.getHoraAlarma()),":");
+                    Integer horaAlarmaNotifE = Integer.parseInt(tokensAlarmaE.nextToken());
+                    Integer minutosAlarmaNotifE = Integer.parseInt(tokensAlarmaE.nextToken());
+                    Integer horaE = Integer.parseInt(tokensHoraE.nextToken());
+                    Integer minutosE = Integer.parseInt(tokensHoraE.nextToken());
 
-                Integer horaAlarmaNotifE = Integer.parseInt(tokensAlarmaE.nextToken());
-                Integer minutosAlarmaNotifE =  Integer.parseInt(tokensAlarmaE.nextToken());
+                    String mensajeEvento = evento.getNombre() + " a las " + horaE + ":" + minutosE;
 
-                lanzarSuceso(context, horaAlarmaNotifE, minutosAlarmaNotifE, tituloEvento,
-                        evento.getNombre(), "evento", 0);
-                Log.e("CargarEventos", "Se guarda el evento " + evento.getNombre() +
-                        " a las " + horaAlarmaNotifE + ":" + minutosAlarmaNotifE);
-
+                    lanzarSuceso(context, horaAlarmaNotifE, minutosAlarmaNotifE, tituloEvento,
+                            mensajeEvento, "evento", 0);
+                    Log.e("CargarEventos", "Se guarda el evento " + mensajeEvento +
+                            " a las " + horaAlarmaNotifE + ":" + minutosAlarmaNotifE);
+                }
             }
 
 
