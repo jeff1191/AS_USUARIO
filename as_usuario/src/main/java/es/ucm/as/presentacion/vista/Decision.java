@@ -31,10 +31,11 @@ public class Decision extends Activity {
         Bundle bundle = getIntent().getExtras();
         if(bundle != null) {
             // Existe usuario en BBDD -> Consultar usuario y MainActivity
-            if (bundle.getBoolean("usuario"))
+            if (bundle.getBoolean("usuario")) {
+                Controlador.getInstancia().ejecutaComando(ListaComandos.ACTUALIZAR_PUNTUACION, null);
                 Controlador.getInstancia().ejecutaComando(ListaComandos.CONSULTAR_USUARIO, null);
 
-                // No existe usuario en BBDD -> Registro
+            }     // No existe usuario en BBDD -> Registro
             else {
                 Intent intent = new Intent().setClass(Decision.this, Registro.class);
                 intent.setFlags(intent.getFlags() | Intent.FLAG_ACTIVITY_NO_HISTORY);

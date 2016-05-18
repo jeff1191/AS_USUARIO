@@ -11,8 +11,7 @@ public class Contexto {
         return instancia;
     }
 
-    public Contexto() {
-    }
+    private Contexto() {}
 
     public Context getContext() {
         return actividadPrincipal;

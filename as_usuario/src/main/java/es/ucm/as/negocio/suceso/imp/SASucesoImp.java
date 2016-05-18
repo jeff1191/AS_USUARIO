@@ -3,6 +3,7 @@ package es.ucm.as.negocio.suceso.imp;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Environment;
+import android.util.Log;
 
 import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Document;
@@ -195,9 +196,9 @@ public class SASucesoImp implements SASuceso {
                         TransferTarea transfer = tareas.get(i);
                         Tarea tarea = new Tarea();
                         tarea.setTextoAlarma(transfer.getTextoAlarma());
-                        tarea.setHoraAlarma(arregloDatesTutor(transfer.getHoraAlarma()));
+                        tarea.setHoraAlarma(actualizaDatesTareas(transfer.getHoraAlarma()));
                         tarea.setTextoPregunta(transfer.getTextoPregunta());
-                        tarea.setHoraPregunta(arregloDatesTutor(transfer.getHoraPregunta()));
+                        tarea.setHoraPregunta(actualizaDatesTareas(transfer.getHoraPregunta()));
                         tarea.setContador(transfer.getContador());
                         tarea.setMejorar(transfer.getMejorar());
                         tarea.setNumNo(transfer.getNumNo());
@@ -208,11 +209,11 @@ public class SASucesoImp implements SASuceso {
                         if (tareaDao.queryForEq("TEXTO_ALARMA", transfer.getTextoAlarma()).size()> 0) {
                             tarea = tareaDao.queryForEq("TEXTO_ALARMA", transfer.getTextoAlarma()).get(0);
                             if (tarea.getHoraAlarma() != transfer.getHoraAlarma())
-                                tarea.setHoraAlarma(arregloDatesTutor(transfer.getHoraAlarma()));
+                                tarea.setHoraAlarma(actualizaDatesTareas(transfer.getHoraAlarma()));
                             if (tarea.getTextoPregunta() != transfer.getTextoPregunta())
                                 tarea.setTextoPregunta(transfer.getTextoPregunta());
                             if (tarea.getHoraPregunta() != transfer.getHoraPregunta())
-                                tarea.setHoraPregunta(arregloDatesTutor(transfer.getHoraPregunta()));
+                                tarea.setHoraPregunta(actualizaDatesTareas(transfer.getHoraPregunta()));
                             if (tarea.getMejorar() != transfer.getMejorar())
                                 tarea.setMejorar(transfer.getMejorar());
                             if (tarea.getFrecuenciaTarea() != transfer.getFrecuenciaTarea())
@@ -229,13 +230,15 @@ public class SASucesoImp implements SASuceso {
             }
     }
 
-    public Date arregloDatesTutor(Date a){
+    public Date actualizaDatesTareas(Date a){
+        Log.e("juanlu", a.toString());
         SimpleDateFormat horasMinutos = new SimpleDateFormat("HH:mm");
         StringTokenizer tokens = new StringTokenizer(horasMinutos.format
                 (a),":");
+
         Integer hora = Integer.parseInt(tokens.nextToken());
         Integer minutos =  Integer.parseInt(tokens.nextToken());
-
+        Log.e("juanlu", hora + ":" + minutos);
         Date horaActual = new Date();
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(horaActual);
@@ -243,7 +246,7 @@ public class SASucesoImp implements SASuceso {
         calendar.set(Calendar.MINUTE, minutos);
         calendar.set(Calendar.SECOND, 0);
         calendar.set(Calendar.MILLISECOND, 0);
-
+        Log.e("juanlu", calendar.getTime().toString());
         return calendar.getTime();
     }
 

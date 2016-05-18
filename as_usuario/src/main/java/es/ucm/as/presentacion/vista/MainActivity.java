@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.StrictMode;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -31,10 +30,10 @@ public class MainActivity extends Activity {
 
         if (getIntent().getExtras() != null) {
 
-            Controlador.getInstancia().ejecutaComando(ListaComandos.ACTUALIZAR_PUNTUACION, null);
             TransferUsuario usuario = (TransferUsuario) getIntent().getExtras().getSerializable("usuario");
 
             if (usuario != null) {
+                Controlador.getInstancia().ejecutaComando(ListaComandos.ACTUALIZAR_PUNTUACION, null);
                 // Completa los datos del usuario que se muestran en esta pantalla
                 Configuracion.temaActual = usuario.getColor();
                 cargarTema();
@@ -96,14 +95,17 @@ public class MainActivity extends Activity {
     }
 
     public void verEventos(View v){
+        Controlador.getInstancia().ejecutaComando(ListaComandos.ACTUALIZAR_PUNTUACION, null);
        Controlador.getInstancia().ejecutaComando(ListaComandos.VER_EVENTOS, null);
     }
 
     public void verReto(View v){
+        Controlador.getInstancia().ejecutaComando(ListaComandos.ACTUALIZAR_PUNTUACION, null);
         Controlador.getInstancia().ejecutaComando(ListaComandos.VER_RETO, null);
     }
 
     public void enviarCorreo(View v){
+        Controlador.getInstancia().ejecutaComando(ListaComandos.ACTUALIZAR_PUNTUACION, null);
         Controlador.getInstancia().ejecutaComando(ListaComandos.GENERAR_PDF, null);
         Controlador.getInstancia().ejecutaComando(ListaComandos.ENVIAR_CORREO, null);
     }

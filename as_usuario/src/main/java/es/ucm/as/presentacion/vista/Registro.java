@@ -46,6 +46,7 @@ public class Registro extends Activity {
             if (sincroCorrecta != null) {
                 Controlador.getInstancia().ejecutaComando(ListaComandos.CREAR_USUARIO, sincroCorrecta);
                 startService(new Intent(this, ServicioNotificaciones.class));
+                Controlador.getInstancia().ejecutaComando(ListaComandos.ACTUALIZAR_PUNTUACION, null);
                 Controlador.getInstancia().ejecutaComando(ListaComandos.CONSULTAR_USUARIO, null);
             }
         }
