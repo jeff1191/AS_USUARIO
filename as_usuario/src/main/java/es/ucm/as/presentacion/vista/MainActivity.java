@@ -17,9 +17,6 @@ import es.ucm.as.R;
 import es.ucm.as.negocio.usuario.TransferUsuario;
 import es.ucm.as.presentacion.controlador.Controlador;
 import es.ucm.as.presentacion.controlador.ListaComandos;
-import es.ucm.as.presentacion.controlador.comandos.Command;
-import es.ucm.as.presentacion.controlador.comandos.exceptions.commandException;
-import es.ucm.as.presentacion.controlador.comandos.factoria.FactoriaComandos;
 
 
 public class MainActivity extends Activity {
@@ -34,7 +31,7 @@ public class MainActivity extends Activity {
 
         if (getIntent().getExtras() != null) {
 
-          //  Controlador.getInstancia().ejecutaComando(ListaComandos.ACTUALIZAR_PUNTUACION, null);
+            Controlador.getInstancia().ejecutaComando(ListaComandos.ACTUALIZAR_PUNTUACION, null);
             TransferUsuario usuario = (TransferUsuario) getIntent().getExtras().getSerializable("usuario");
 
             if (usuario != null) {

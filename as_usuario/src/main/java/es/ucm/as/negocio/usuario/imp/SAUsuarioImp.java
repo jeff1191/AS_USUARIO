@@ -111,12 +111,12 @@ public class SAUsuarioImp implements SAUsuario {
 			if (transferUsuario.getPuntuacion() != null)
 				usuario.setPuntuacion(transferUsuario.getPuntuacion());
 			else
-				usuario.setPuntuacion(5);
+				usuario.setPuntuacion(10);
 
 			if (transferUsuario.getPuntuacionAnterior() != null)
 				usuario.setPuntuacionAnterior(transferUsuario.getPuntuacionAnterior());
 			else
-				usuario.setPuntuacionAnterior(5);
+				usuario.setPuntuacionAnterior(10);
 
 			if (transferUsuario.getColor() != null)
 				usuario.setColor(transferUsuario.getColor());
