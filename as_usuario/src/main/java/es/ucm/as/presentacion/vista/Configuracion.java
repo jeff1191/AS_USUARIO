@@ -72,15 +72,17 @@ public class Configuracion extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_configuracion);
         Bundle bundle = getIntent().getExtras();
+        TransferUsuario usuario = (TransferUsuario)bundle.getSerializable("usuario");
         editarNombre = (EditText)findViewById(R.id.editarNombre);
         aceptar = (Button)findViewById(R.id.envioNuevaConfig);
         spinnerColors = (Spinner) findViewById(R.id.cambiarColor);
         spinnerTono = (Spinner) findViewById(R.id.cambiarTono);
         imagenConfiguracion = (ImageView) findViewById(R.id.editarAvatar);
         tonoParcial=tonoActual;
-        temaActual=bundle.getString("temaConfiguracion");
+        temaActual=usuario.getColor();
         temaParcial=temaActual;
-        rutaImagen=bundle.getString("imagenConfiguracion");
+        rutaImagen=usuario.getAvatar();
+
         ////////Spinner color ///////
         nombresColoresSistema();
         ArrayAdapter<String> adapter_colores= new ArrayAdapter<String>(this,
@@ -157,32 +159,13 @@ public class Configuracion extends Activity {
 
             }
         });
-        ////////////////////////////////////////////////////
-        if(!bundle.getString("imagenConfiguracion").equals(""))
-            imagenConfiguracion.setImageBitmap(BitmapFactory.decodeFile(bundle.getString("imagenConfiguracion")));
+
+        if(!usuario.getAvatar().equals(""))
+            imagenConfiguracion.setImageBitmap(BitmapFactory.decodeFile(usuario.getAvatar()));
         else
             imagenConfiguracion.setImageResource(R.drawable.avatar);
 
-        editarNombre.setText(bundle.getString("nombreConfiguracion"));
-        frecActual=(Frecuencia)bundle.getSerializable("frecuenciaInformeConfiguracion");
-        if(frecActual == Frecuencia.DIARIA){
-            diaria.setChecked(true);
-            semanal.setChecked(false);
-            mensual.setChecked(false);
-        }
-        else
-            if(frecActual == Frecuencia.SEMANAL){
-                diaria.setChecked(false);
-                semanal.setChecked(true);
-                mensual.setChecked(false);
-            }
-            else
-                if(frecActual == Frecuencia.MENSUAL){
-                    diaria.setChecked(false);
-                    semanal.setChecked(false);
-                    mensual.setChecked(true);
-                }
-
+        editarNombre.setText(usuario.getNombre());
 
         aceptar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -194,9 +177,8 @@ public class Configuracion extends Activity {
                     tonoActual = tonoParcial;
                     editarUsuario.setColor(temaActual);
                     editarUsuario.setAvatar(rutaImagen);
-
                     Controlador.getInstancia().ejecutaComando(ListaComandos.EDITAR_USUARIO, editarUsuario);
-
+                    Controlador.getInstancia().ejecutaComando(ListaComandos.CONSULTAR_USUARIO, null);
                 }else{
                     Toast errorNombre =
                             Toast.makeText(getApplicationContext(),
@@ -204,7 +186,6 @@ public class Configuracion extends Activity {
 
                     errorNombre.show();
                 }
-
             }
         });
 
@@ -273,8 +254,7 @@ public class Configuracion extends Activity {
 
 
     public void volver(View v){
-        Intent pantallaPrincipal = new Intent (getApplicationContext(), MainActivity.class);
-        startActivity(pantallaPrincipal);
+        Controlador.getInstancia().ejecutaComando(ListaComandos.CONSULTAR_USUARIO, null);
     }
 
     public void ayuda(View v){

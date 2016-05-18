@@ -18,5 +18,6 @@ public class ListaComandos {
     public static final String ENVIAR_CORREO = "enviarCorreo";
     public static final String MODIFICAR_EVENTOS = "modificarEventos";
     public static final String SINCRONIZAR = "sincronizar";
-
+    public static final String HAY_USUARIO = "hayUsuario";
+    public static final String SINCRONIZAR_REGISTRO = "sincronizar_registro";
 }

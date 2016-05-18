@@ -8,6 +8,8 @@ import android.util.Log;
 import android.view.View;
 
 import es.ucm.as.R;
+import es.ucm.as.presentacion.controlador.Controlador;
+import es.ucm.as.presentacion.controlador.ListaComandos;
 import it.sephiroth.android.library.imagezoom.ImageViewTouch;
 import it.sephiroth.android.library.imagezoom.ImageViewTouchBase;
 
@@ -72,8 +74,7 @@ public class Ayuda extends Activity{
     }
 
     public void volver(View v){
-        Intent pantallaPrincipal = new Intent (getApplicationContext(), MainActivity.class);
-        startActivity(pantallaPrincipal);
+        Controlador.getInstancia().ejecutaComando(ListaComandos.CONSULTAR_USUARIO, null);
     }
 
     public void cargarTema(){

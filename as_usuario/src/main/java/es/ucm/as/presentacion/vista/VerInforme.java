@@ -83,8 +83,7 @@ public class VerInforme extends Activity{
     }
 
     public void volver(View v){
-        Intent pantallaPrincipal = new Intent (getApplicationContext(), MainActivity.class);
-        startActivity(pantallaPrincipal);
+        Controlador.getInstancia().ejecutaComando(ListaComandos.CONSULTAR_USUARIO, null);
     }
 
     public void ayuda(View v){

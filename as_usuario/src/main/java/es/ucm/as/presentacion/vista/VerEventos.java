@@ -99,19 +99,12 @@ public class VerEventos  extends Activity{
                     Controlador.getInstancia().ejecutaComando(ListaComandos.MODIFICAR_EVENTOS,eventosModificados);
                     }
                 });
-
-
             }
-
         }
-
-
-
     }
 
     public void volver(View v){
-        Intent pantallaPrincipal = new Intent (getApplicationContext(), MainActivity.class);
-        startActivity(pantallaPrincipal);
+       Controlador.getInstancia().ejecutaComando(ListaComandos.CONSULTAR_USUARIO, null);
     }
 
     public void ayuda(View v){

@@ -65,7 +65,7 @@ public class SAUsuarioImp implements SAUsuario {
 		List<TransferTarea> tareas = ss.consultarTareas();
 		// Si no tiene ninguna la puntuacion es 5
 		if(tareas.size() == 0)
-			return 5;
+			return 10;
 		// Se cuentan las positivas y se realiza el calculo
 		int positivas = 0;
 		for (int i = 0; i < tareas.size(); i++) {
@@ -187,8 +187,6 @@ public class SAUsuarioImp implements SAUsuario {
 			e.printStackTrace();
 		}
 
-		// Enviar correo abriendo aplicación/////////////////////////////////////////////////////
-
 		//Instanciamos un Intent del tipo ACTION_SEND
 		Intent emailIntent = new Intent(android.content.Intent.ACTION_SEND);
 		//Definimos la tipologia de datos del contenido dle Email en este caso text/html
@@ -209,10 +207,5 @@ public class SAUsuarioImp implements SAUsuario {
 		emailIntent.putExtra(Intent.EXTRA_STREAM, uri);
 
 		Contexto.getInstancia().getContext().startActivity(emailIntent);
-
-		///////////////////////////////////////////////////////////////////////////////////////////
-
 	}
-
-
 }

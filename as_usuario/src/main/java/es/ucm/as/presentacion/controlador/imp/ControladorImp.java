@@ -19,8 +19,6 @@ public class ControladorImp extends Controlador {
             actualizaVista(accion,ret);
         } catch (commandException e) {
 
-            //AQUI SEGURAMENTE HAGA FALTA OTRO METOODO PARA QUE EL DISPATCHER LANCE ERROREs
-
         }
     }
 

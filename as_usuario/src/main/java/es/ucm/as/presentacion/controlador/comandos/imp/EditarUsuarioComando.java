@@ -14,7 +14,6 @@ public class EditarUsuarioComando implements Command {
     public Object ejecutaComando(Object datos) throws commandException {
         SAUsuario saUsuario = FactoriaSA.getInstancia().nuevoSAUsuario();
         TransferUsuario editarUsuario = saUsuario.editarUsuario((TransferUsuario) datos);
-
         return editarUsuario;
     }
 }

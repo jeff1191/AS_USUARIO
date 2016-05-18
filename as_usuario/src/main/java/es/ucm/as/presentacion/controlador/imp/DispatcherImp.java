@@ -2,10 +2,14 @@ package es.ucm.as.presentacion.controlador.imp;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
+import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.net.ssl.CertPathTrustManagerParameters;
 
 import es.ucm.as.negocio.suceso.TransferEvento;
 import es.ucm.as.negocio.suceso.TransferReto;
@@ -16,7 +20,9 @@ import es.ucm.as.presentacion.controlador.ListaComandos;
 import es.ucm.as.presentacion.vista.Ayuda;
 import es.ucm.as.presentacion.vista.Configuracion;
 import es.ucm.as.presentacion.vista.Contexto;
+import es.ucm.as.presentacion.vista.Decision;
 import es.ucm.as.presentacion.vista.MainActivity;
+import es.ucm.as.presentacion.vista.Registro;
 import es.ucm.as.presentacion.vista.VerEventos;
 import es.ucm.as.presentacion.vista.VerInforme;
 import es.ucm.as.presentacion.vista.VerReto;
@@ -25,6 +31,8 @@ import es.ucm.as.presentacion.vista.VerReto;
  * Created by Jeffer on 02/03/2016.
  */
 public class DispatcherImp extends Dispatcher{
+
+
     @Override
     public void dispatch(String accion, Object datos) {
 
@@ -35,47 +43,59 @@ public class DispatcherImp extends Dispatcher{
             case ListaComandos.CONFIGURACION:
                 Intent intentConfiguracion = new Intent(Contexto.getInstancia().getContext().getApplicationContext(), Configuracion.class);
                 TransferUsuario conf = (TransferUsuario) datos;
-                intentConfiguracion.putExtra("nombreConfiguracion", conf.getNombre());
-                intentConfiguracion.putExtra("imagenConfiguracion", conf.getAvatar());
-                intentConfiguracion.putExtra("temaConfiguracion", conf.getColor());
+                intentConfiguracion.putExtra("usuario", conf);
                 Contexto.getInstancia().getContext().startActivity(intentConfiguracion);
-                break;
-
-            case ListaComandos.EDITAR_USUARIO:
-                Intent intentEditarUsuario = new Intent(Contexto.getInstancia().getContext().getApplicationContext(), MainActivity.class);
-                TransferUsuario editarUsuario = (TransferUsuario) datos;
-                intentEditarUsuario.putExtra("editarNombre", editarUsuario.getNombre());
-                intentEditarUsuario.putExtra("editarAvatar", editarUsuario.getAvatar());
-                Contexto.getInstancia().getContext().startActivity(intentEditarUsuario);
-                break;
-
-            case ListaComandos.ACTUALIZAR_PUNTUACION:
-                Intent iPuntuacion = new Intent(Contexto.getInstancia().getContext().getApplicationContext(), MainActivity.class);
-                iPuntuacion.putExtra("puntuacion", (Integer)datos);
                 break;
 
             case ListaComandos.CONSULTAR_USUARIO:
                 TransferUsuario transferUsuario = (TransferUsuario)datos;
-                Intent hayUsuario = new Intent(Contexto.getInstancia().getContext().getApplicationContext(), MainActivity.class);
-                hayUsuario.putExtra("nombre", transferUsuario.getNombre());
-                hayUsuario.putExtra("correo", transferUsuario.getCorreo());
-                hayUsuario.putExtra("avatar", transferUsuario.getAvatar());
-                hayUsuario.putExtra("puntuacion", transferUsuario.getPuntuacion());
-                hayUsuario.putExtra("puntuacionAnterior", transferUsuario.getPuntuacionAnterior());
-                hayUsuario.putExtra("color", transferUsuario.getColor());
-                hayUsuario.putExtra("tono", transferUsuario.getTono());
+                Intent consultarUsuario = new Intent(Contexto.getInstancia().getContext().getApplicationContext(), MainActivity.class);
+                consultarUsuario.putExtra("usuario", transferUsuario);
+                Contexto.getInstancia().getContext().startActivity(consultarUsuario);
+                break;
+
+            case ListaComandos.HAY_USUARIO:
+                Boolean usuario = (Boolean) datos;
+                Intent hayUsuario = new Intent(Contexto.getInstancia().getContext().getApplicationContext(), Decision.class);
+                hayUsuario.putExtra("usuario", usuario);
                 Contexto.getInstancia().getContext().startActivity(hayUsuario);
                 break;
 
             case ListaComandos.SINCRONIZAR:
-                boolean terminado = (boolean) datos;
-                Intent intentSincro = new Intent(Contexto.getInstancia().getContext().getApplicationContext(), MainActivity.class);
-                if(terminado)
-                    intentSincro.putExtra("sincronizacion", "true");
-                else
-                    intentSincro.putExtra("sincronizacion", "false");
+                TransferUsuario terminado = (TransferUsuario) datos;
+                if(terminado != null) {
+                    Intent intentSincro = new Intent(Contexto.getInstancia().getContext().getApplicationContext(), MainActivity.class);
+                    intentSincro.putExtra("usuario", terminado);
+                    Toast toast =
+                            Toast.makeText(Contexto.getInstancia().getContext().getApplicationContext(),
+                                    "Sincronización correcta", Toast.LENGTH_LONG);
+                    toast.show();
+                    Contexto.getInstancia().getContext().startActivity(intentSincro);
+                }else{
+                    Toast errorNombre =
+                            Toast.makeText(Contexto.getInstancia().getContext().getApplicationContext(),
+                                    "Error en la sincronización", Toast.LENGTH_LONG);
+                    errorNombre.show();
+                }
+                break;
 
-                Contexto.getInstancia().getContext().startActivity(intentSincro);
+            case ListaComandos.SINCRONIZAR_REGISTRO:
+                TransferUsuario terminadoPrim = (TransferUsuario) datos;
+                if(terminadoPrim != null) {
+                    Intent intentSincroPrim = new Intent(Contexto.getInstancia().getContext().getApplicationContext(), Registro.class);
+                    intentSincroPrim.putExtra("usuario", terminadoPrim);
+                    Toast toast =
+                            Toast.makeText(Contexto.getInstancia().getContext().getApplicationContext(),
+                                    "Registro completado correctamente", Toast.LENGTH_LONG);
+                    toast.show();
+                    Contexto.getInstancia().getContext().startActivity(intentSincroPrim);
+                }else{
+                    Toast errorNombre =
+                            Toast.makeText(Contexto.getInstancia().getContext().getApplicationContext(),
+                                    "Error en la sincronización. Debes estar en la misma red WiFi que " +
+                                            "tu profesor o la clave es incorrecta", Toast.LENGTH_LONG);
+                    errorNombre.show();
+                }
                 break;
 
             // Ayuda
@@ -142,9 +162,6 @@ public class DispatcherImp extends Dispatcher{
                     listaIds.add(eventosModelo.get(i).getId());
                     listaActivos.add(eventosModelo.get(i).getAsistencia());
                 }
-                //intent.putStringArrayListExtra("listaEventos", listaActividad);
-                //intent.putIntegerArrayListExtra("listaIds", listaIds);
-                //intent.put. putArrayListExtra("listaAsistencia", listaActivos);
                 Bundle b = new Bundle();
                 b.putIntegerArrayList("listaIds", listaIds);
                 b.putStringArrayList("listaEventos", listaActividad);
@@ -152,6 +169,7 @@ public class DispatcherImp extends Dispatcher{
                 intent.putExtras(b);
                 Contexto.getInstancia().getContext().startActivity(intent);
                 break;
+
         }
     }
 }

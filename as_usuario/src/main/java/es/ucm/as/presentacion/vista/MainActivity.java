@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.StrictMode;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -26,55 +27,41 @@ public class MainActivity extends Activity {
     private TextView nombrePrincipal;
     private TextView puntuacion;
     private ImageView imagenPerfil;
-    private int request_code;
+    private int REQUEST_CODE;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-        Controlador.getInstancia().ejecutaComando(ListaComandos.ACTUALIZAR_PUNTUACION, null);
-        Command c = FactoriaComandos.getInstancia().getCommand(ListaComandos.CONSULTAR_USUARIO);
-        TransferUsuario usuario = new TransferUsuario();
-        try {
-            usuario = (TransferUsuario) c.ejecutaComando(null);
-        } catch (commandException e) {
-            e.printStackTrace();
-        }
+        if (getIntent().getExtras() != null) {
 
-        // Completa los datos del usuario que se muestran en esta pantalla
-        Configuracion.temaActual = usuario.getColor();
-        cargarTema();
-        setContentView(R.layout.activity_main);
-        nombrePrincipal=(TextView)findViewById(R.id.nombreUser);
-        nombrePrincipal.setText(usuario.getNombre());
-        puntuacion = (TextView)findViewById(R.id.puntuacionUsuario);
-        puntuacion.setText(usuario.getPuntuacion()+"/10");
-        imagenPerfil= (ImageView) findViewById(R.id.avatar);
-        if(usuario.getAvatar() != null && !usuario.getAvatar().equals(""))
-            imagenPerfil.setImageBitmap(BitmapFactory.decodeFile(usuario.getAvatar()));
-        else
-            imagenPerfil.setImageResource(R.drawable.avatar);
+          //  Controlador.getInstancia().ejecutaComando(ListaComandos.ACTUALIZAR_PUNTUACION, null);
+            TransferUsuario usuario = (TransferUsuario) getIntent().getExtras().getSerializable("usuario");
 
-        Bundle bundle = getIntent().getExtras();
-        if (bundle != null) {
-            if(bundle.getString("sincronizacion") == null) {
-                if (bundle.getString("editarUsuario") != null)
-                    nombrePrincipal.setText(bundle.getString("editarUsuario"));
-                if (bundle.getString("editarAvatar") != null && !bundle.getString("editarAvatar").equals(""))
-                    imagenPerfil.setImageBitmap(BitmapFactory.decodeFile(bundle.getString("editarAvatar")));
-            }else{
-                if(bundle.getString("sincronizacion").equals("true"))
-                    mostrarMensaje("Sincronización correcta");
+            if (usuario != null) {
+                // Completa los datos del usuario que se muestran en esta pantalla
+                Configuracion.temaActual = usuario.getColor();
+                cargarTema();
+                setContentView(R.layout.activity_main);
+                nombrePrincipal = (TextView) findViewById(R.id.nombreUser);
+                nombrePrincipal.setText(usuario.getNombre());
+                puntuacion = (TextView) findViewById(R.id.puntuacionUsuario);
+                puntuacion.setText(usuario.getPuntuacion() + "/10");
+                imagenPerfil = (ImageView) findViewById(R.id.avatar);
+
+                if (usuario.getAvatar() != null && !usuario.getAvatar().equals(""))
+                    imagenPerfil.setImageBitmap(BitmapFactory.decodeFile(usuario.getAvatar()));
                 else
-                    mostrarMensaje("Error en la sincronización. Debes estar en la misma red WiFi que tu profesor");
+                    imagenPerfil.setImageResource(R.drawable.avatar);
             }
-        }
+
+        }else
+            Controlador.getInstancia().ejecutaComando(ListaComandos.CONSULTAR_USUARIO, null);
 
         // Esto es para solventar un error al enviar el correo
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
 
         super.onCreate(savedInstanceState);
-
     }
 
     @Override
@@ -92,9 +79,8 @@ public class MainActivity extends Activity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_settings)
             return true;
-        }
 
         return super.onOptionsItemSelected(item);
     }
@@ -108,7 +94,6 @@ public class MainActivity extends Activity {
     }
 
     public void verInforme(View v){
-        //Controlador.getInstancia().ejecutaComando(ListaComandos.GENERAR_PDF, null);
         Controlador.getInstancia().ejecutaComando(ListaComandos.ACTUALIZAR_PUNTUACION, null);
         Controlador.getInstancia().ejecutaComando(ListaComandos.VER_INFORME, null);
     }
@@ -128,7 +113,7 @@ public class MainActivity extends Activity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if ((requestCode == request_code) && (resultCode == RESULT_OK)){
+        if ((requestCode == REQUEST_CODE) && (resultCode == RESULT_OK)){
             Bundle bundle = data.getExtras();
             nombrePrincipal.setText(bundle.getString("nombreNuevo"));
         }
@@ -161,12 +146,5 @@ public class MainActivity extends Activity {
         toast1.show();
 
         Controlador.getInstancia().ejecutaComando(ListaComandos.SINCRONIZAR, null);
-    }
-
-    private void mostrarMensaje(String msg){
-        Toast toast =
-                Toast.makeText(getApplicationContext(),
-                        msg, Toast.LENGTH_LONG);
-        toast.show();
     }
 }
