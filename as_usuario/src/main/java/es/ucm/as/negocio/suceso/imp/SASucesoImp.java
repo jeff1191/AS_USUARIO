@@ -25,16 +25,20 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.StringTokenizer;
 
 import es.ucm.as.R;
 import es.ucm.as.integracion.DBHelper;
-import es.ucm.as.negocio.factoria.FactoriaSA;
 import es.ucm.as.integracion.Evento;
 import es.ucm.as.integracion.Reto;
-import es.ucm.as.negocio.suceso.SASuceso;
 import es.ucm.as.integracion.Tarea;
+import es.ucm.as.negocio.factoria.FactoriaSA;
+import es.ucm.as.negocio.suceso.SASuceso;
 import es.ucm.as.negocio.suceso.TransferEvento;
 import es.ucm.as.negocio.suceso.TransferReto;
 import es.ucm.as.negocio.suceso.TransferTarea;
@@ -191,9 +195,9 @@ public class SASucesoImp implements SASuceso {
                         TransferTarea transfer = tareas.get(i);
                         Tarea tarea = new Tarea();
                         tarea.setTextoAlarma(transfer.getTextoAlarma());
-                        tarea.setHoraAlarma(transfer.getHoraAlarma());
+                        tarea.setHoraAlarma(arregloDatesTutor(transfer.getHoraAlarma()));
                         tarea.setTextoPregunta(transfer.getTextoPregunta());
-                        tarea.setHoraPregunta(transfer.getHoraPregunta());
+                        tarea.setHoraPregunta(arregloDatesTutor(transfer.getHoraPregunta()));
                         tarea.setContador(transfer.getContador());
                         tarea.setMejorar(transfer.getMejorar());
                         tarea.setNumNo(transfer.getNumNo());
@@ -204,11 +208,11 @@ public class SASucesoImp implements SASuceso {
                         if (tareaDao.queryForEq("TEXTO_ALARMA", transfer.getTextoAlarma()).size()> 0) {
                             tarea = tareaDao.queryForEq("TEXTO_ALARMA", transfer.getTextoAlarma()).get(0);
                             if (tarea.getHoraAlarma() != transfer.getHoraAlarma())
-                                tarea.setHoraAlarma(transfer.getHoraAlarma());
+                                tarea.setHoraAlarma(arregloDatesTutor(transfer.getHoraAlarma()));
                             if (tarea.getTextoPregunta() != transfer.getTextoPregunta())
                                 tarea.setTextoPregunta(transfer.getTextoPregunta());
                             if (tarea.getHoraPregunta() != transfer.getHoraPregunta())
-                                tarea.setHoraPregunta(transfer.getHoraPregunta());
+                                tarea.setHoraPregunta(arregloDatesTutor(transfer.getHoraPregunta()));
                             if (tarea.getMejorar() != transfer.getMejorar())
                                 tarea.setMejorar(transfer.getMejorar());
                             if (tarea.getFrecuenciaTarea() != transfer.getFrecuenciaTarea())
@@ -223,6 +227,24 @@ public class SASucesoImp implements SASuceso {
             } catch (SQLException e) {
                 e.printStackTrace();
             }
+    }
+
+    public Date arregloDatesTutor(Date a){
+        SimpleDateFormat horasMinutos = new SimpleDateFormat("HH:mm");
+        StringTokenizer tokens = new StringTokenizer(horasMinutos.format
+                (a),":");
+        Integer hora = Integer.parseInt(tokens.nextToken());
+        Integer minutos =  Integer.parseInt(tokens.nextToken());
+
+        Date horaActual = new Date();
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(horaActual);
+        calendar.set(Calendar.HOUR_OF_DAY, hora);
+        calendar.set(Calendar.MINUTE, minutos);
+        calendar.set(Calendar.SECOND, 0);
+        calendar.set(Calendar.MILLISECOND, 0);
+
+        return calendar.getTime();
     }
 
     public static File crearFichero(String nombreFichero) throws IOException {

@@ -70,7 +70,7 @@ public class ListViewAdapter extends BaseAdapter {
         if(t >= 0)
             total.setTextColor(Color.parseColor("#2fb518"));
         else
-            total.setTextColor(Color.parseColor("#2fb518"));
+            total.setTextColor(Color.parseColor("#ff2825"));
         total.setText(t.toString());
 
         return itemView;

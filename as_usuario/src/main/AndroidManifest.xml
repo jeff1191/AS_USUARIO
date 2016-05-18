@@ -66,6 +66,8 @@
         <receiver android:name="es.ucm.as.presentacion.notificaciones.GestorRespuestas" />
         <receiver android:name="es.ucm.as.presentacion.notificaciones.NotificacionAlarma" />
         <receiver android:name="es.ucm.as.presentacion.notificaciones.NotificacionPregunta" />
+        <receiver android:name="es.ucm.as.presentacion.notificaciones.BucleNotificaciones" />
+        <receiver android:name="es.ucm.as.presentacion.notificaciones.NotificacionEvento" />
         <receiver android:name="es.ucm.as.presentacion.notificaciones.AutoArranque" >
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
