@@ -3,7 +3,6 @@ package es.ucm.as.negocio.suceso.imp;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Environment;
-import android.util.Log;
 
 import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Document;
@@ -32,6 +31,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.StringTokenizer;
+import java.util.TimeZone;
 
 import es.ucm.as.R;
 import es.ucm.as.integracion.DBHelper;
@@ -166,6 +166,7 @@ public class SASucesoImp implements SASuceso {
                 tt.setNumNo(tareas.get(i).getNumNo());
                 tt.setNumSi(tareas.get(i).getNumSi());
                 transferTareas.add(tt);
+
             }
 
         } catch (SQLException e) {
@@ -279,7 +280,6 @@ public class SASucesoImp implements SASuceso {
 
                 // y se actualiza en la BBDD
                 tareasDao.update(tarea);
-                Log.e("SASUCESO", "Respuesta guardada");
             }
         } catch (SQLException e) {
 
@@ -331,6 +331,7 @@ public class SASucesoImp implements SASuceso {
         calendar.set(Calendar.MINUTE, minutos);
         calendar.set(Calendar.SECOND, 0);
         calendar.set(Calendar.MILLISECOND, 0);
+        calendar.setTimeZone(TimeZone.getTimeZone("GMT+01:00"));
         return calendar.getTime();
     }
 

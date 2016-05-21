@@ -158,9 +158,6 @@ public class ConectionManager {
                     dataOutputStream.writeObject(msgToServer);
 
                 response = (Mensaje) dataInputStream.readObject();
-                for(int i = 0; i < response.getTareas().size();i++)
-                    Log.e("CONECTION-MAN", response.getTareas().get(i).getTextoAlarma() + " a las " + response.getTareas().get(i).getHoraAlarma().toString());
-
 
             } catch (UnknownHostException e) {
                 e.printStackTrace();

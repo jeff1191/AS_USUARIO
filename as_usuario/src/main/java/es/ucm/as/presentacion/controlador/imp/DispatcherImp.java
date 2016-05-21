@@ -46,7 +46,7 @@ public class DispatcherImp extends Dispatcher{
                 Intent intentConfiguracion = new Intent(Contexto.getInstancia().getContext().getApplicationContext(), Configuracion.class);
                 TransferUsuario conf = (TransferUsuario) datos;
                 intentConfiguracion.putExtra("usuario", conf);
-                intentConfiguracion.setFlags(intentConfiguracion.getFlags() | Intent.FLAG_ACTIVITY_NO_HISTORY);
+                intentConfiguracion.setFlags(intentConfiguracion.getFlags() | Intent.FLAG_ACTIVITY_NO_HISTORY | Intent.FLAG_ACTIVITY_NEW_TASK);
                 Contexto.getInstancia().getContext().startActivity(intentConfiguracion);
                 break;
 
@@ -54,7 +54,7 @@ public class DispatcherImp extends Dispatcher{
                 TransferUsuario transferUsuario = (TransferUsuario)datos;
                 Intent consultarUsuario = new Intent(Contexto.getInstancia().getContext().getApplicationContext(), MainActivity.class);
                 consultarUsuario.putExtra("usuario", transferUsuario);
-                consultarUsuario.setFlags(consultarUsuario.getFlags() | Intent.FLAG_ACTIVITY_NO_HISTORY);
+                consultarUsuario.setFlags(consultarUsuario.getFlags() | Intent.FLAG_ACTIVITY_NO_HISTORY | Intent.FLAG_ACTIVITY_NEW_TASK );
                 Contexto.getInstancia().getContext().startActivity(consultarUsuario);
                 break;
 
@@ -62,7 +62,7 @@ public class DispatcherImp extends Dispatcher{
                 Boolean usuario = (Boolean) datos;
                 Intent hayUsuario = new Intent(Contexto.getInstancia().getContext().getApplicationContext(), Decision.class);
                 hayUsuario.putExtra("usuario", usuario);
-                hayUsuario.setFlags(hayUsuario.getFlags() | Intent.FLAG_ACTIVITY_NO_HISTORY);
+                hayUsuario.setFlags(hayUsuario.getFlags() | Intent.FLAG_ACTIVITY_NO_HISTORY | Intent.FLAG_ACTIVITY_NEW_TASK);
                 Contexto.getInstancia().getContext().startActivity(hayUsuario);
                 break;
 
@@ -71,7 +71,7 @@ public class DispatcherImp extends Dispatcher{
                 if(terminado != null) {
                     Intent intentSincro = new Intent(Contexto.getInstancia().getContext().getApplicationContext(), MainActivity.class);
                     intentSincro.putExtra("usuario", terminado);
-                    intentSincro.setFlags(intentSincro.getFlags() | Intent.FLAG_ACTIVITY_NO_HISTORY);
+                    intentSincro.setFlags(intentSincro.getFlags() | Intent.FLAG_ACTIVITY_NO_HISTORY | Intent.FLAG_ACTIVITY_NEW_TASK);
                     Toast toast =
                             Toast.makeText(Contexto.getInstancia().getContext().getApplicationContext(),
                                     "Sincronización correcta", Toast.LENGTH_LONG);
@@ -83,6 +83,7 @@ public class DispatcherImp extends Dispatcher{
                     Contexto.getInstancia().getContext().stopService(service);
                     Contexto.getInstancia().getContext().startService(service);
 
+                    // Se vuelve a la MainActivity
                     Contexto.getInstancia().getContext().startActivity(intentSincro);
                 }else{
                     Toast errorNombre =
@@ -154,7 +155,7 @@ public class DispatcherImp extends Dispatcher{
                 intentTareas.putStringArrayListExtra("titulos", titulos);
                 intentTareas.putIntegerArrayListExtra("no", no);
                 intentTareas.putIntegerArrayListExtra("si", si);
-                intentTareas.setFlags(intentTareas.getFlags() | Intent.FLAG_ACTIVITY_NO_HISTORY);
+                intentTareas.setFlags(intentTareas.getFlags() | Intent.FLAG_ACTIVITY_NO_HISTORY |Intent.FLAG_ACTIVITY_NEW_TASK);
                 Contexto.getInstancia().getContext().startActivity(intentTareas);
                 break;
 
@@ -192,7 +193,6 @@ public class DispatcherImp extends Dispatcher{
                 intent.setFlags(intent.getFlags() | Intent.FLAG_ACTIVITY_NO_HISTORY);
                 Contexto.getInstancia().getContext().startActivity(intent);
                 break;
-
         }
     }
 }
