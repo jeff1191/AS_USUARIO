@@ -1,7 +1,5 @@
 package es.ucm.as.presentacion.controlador.comandos.imp;
 
-import android.util.Log;
-
 import java.util.List;
 
 import es.ucm.as.negocio.conexion.ConectionManager;

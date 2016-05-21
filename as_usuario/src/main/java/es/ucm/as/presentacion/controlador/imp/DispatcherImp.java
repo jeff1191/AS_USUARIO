@@ -76,6 +76,13 @@ public class DispatcherImp extends Dispatcher{
                             Toast.makeText(Contexto.getInstancia().getContext().getApplicationContext(),
                                     "Sincronización correcta", Toast.LENGTH_LONG);
                     toast.show();
+
+                    // Si la sincronizacion ha sido correcta se relanza el servicio de notificaciones
+                    Log.e("DISPATCHER", "SE VA A REINICIAR_SERVICIO_NOTIFICACIONES comando");
+                    Intent service = new Intent(Contexto.getInstancia().getContext(),  ServicioNotificaciones.class);
+                    Contexto.getInstancia().getContext().stopService(service);
+                    Contexto.getInstancia().getContext().startService(service);
+
                     Contexto.getInstancia().getContext().startActivity(intentSincro);
                 }else{
                     Toast errorNombre =
@@ -103,12 +110,6 @@ public class DispatcherImp extends Dispatcher{
                                             "tu profesor o la clave es incorrecta", Toast.LENGTH_LONG);
                     errorNombre.show();
                 }
-                break;
-
-            case ListaComandos.REINICIAR_SERVICIO_NOTIFICACIONES:
-                Intent service = new Intent(Contexto.getInstancia().getContext(),  ServicioNotificaciones.class);
-                Contexto.getInstancia().getContext().stopService(service);
-                Contexto.getInstancia().getContext().startService(service);
                 break;
 
             // Ayuda
@@ -155,6 +156,10 @@ public class DispatcherImp extends Dispatcher{
                 intentTareas.putIntegerArrayListExtra("si", si);
                 intentTareas.setFlags(intentTareas.getFlags() | Intent.FLAG_ACTIVITY_NO_HISTORY);
                 Contexto.getInstancia().getContext().startActivity(intentTareas);
+                break;
+
+            case ListaComandos.RESPONDER_TAREA:
+
                 break;
 
             // Eventos

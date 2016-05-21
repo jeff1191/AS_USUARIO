@@ -13,6 +13,8 @@ import android.util.Log;
 import java.util.Calendar;
 import java.util.Date;
 
+import es.ucm.as.presentacion.vista.Contexto;
+
 public class ServicioNotificaciones extends Service {
 
     @Override
@@ -38,7 +40,7 @@ public class ServicioNotificaciones extends Service {
         //Tendriamos que pensar en tener to*do en una cola que la tendria que haber cogido de base de datos - esto es IMPORTANTE
         Log.d("NOTIFICACIONES","se lanza el servicio");
         Log.e("servicioNot", "Se lanza serv");
-
+        Contexto.getInstancia().setContext(getApplicationContext());
         AlarmManager am =( AlarmManager) getApplicationContext().getSystemService(Context.ALARM_SERVICE);
         Intent i = new Intent(getApplicationContext(), CargarNotificaciones.class);
         long time = new Date().getTime();

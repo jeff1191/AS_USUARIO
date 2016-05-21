@@ -26,6 +26,7 @@ import es.ucm.as.integracion.Evento;
 import es.ucm.as.integracion.Tarea;
 import es.ucm.as.negocio.suceso.TransferEvento;
 import es.ucm.as.negocio.suceso.TransferTarea;
+import es.ucm.as.presentacion.vista.Contexto;
 
 /**
  * Created by Juan Lu on 08/04/2016.
@@ -43,6 +44,7 @@ public class CargarNotificaciones extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
+        Contexto.getInstancia().setContext(context);
         //Lee las tareas de bbdd
         List<Tarea> tareas = new ArrayList<Tarea>();
         List<TransferTarea> transferTareas = new ArrayList<TransferTarea>();

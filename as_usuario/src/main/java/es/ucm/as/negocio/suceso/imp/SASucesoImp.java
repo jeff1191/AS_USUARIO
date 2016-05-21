@@ -45,7 +45,12 @@ import es.ucm.as.negocio.suceso.TransferReto;
 import es.ucm.as.negocio.suceso.TransferTarea;
 import es.ucm.as.negocio.usuario.SAUsuario;
 import es.ucm.as.negocio.usuario.TransferUsuario;
+import es.ucm.as.negocio.utils.Frecuencia;
 import es.ucm.as.presentacion.vista.Contexto;
+
+import static es.ucm.as.negocio.utils.Frecuencia.DIARIA;
+import static es.ucm.as.negocio.utils.Frecuencia.MENSUAL;
+import static es.ucm.as.negocio.utils.Frecuencia.SEMANAL;
 
 /**
  * Created by Jeffer on 02/03/2016.
@@ -228,6 +233,89 @@ public class SASucesoImp implements SASuceso {
             } catch (SQLException e) {
                 e.printStackTrace();
             }
+    }
+
+    @Override
+    public void responderTarea(TransferTarea transferTarea) {
+        Dao<Tarea, Integer> tareasDao;
+        Tarea tarea;
+        try {
+            tareasDao = getHelper().getTareaDao();
+            tarea = tareasDao.queryForId(transferTarea.getId());
+            if(transferTarea != null && tarea != null) {
+                // si respondio que "si"***************************************************************
+                if (transferTarea.getNumSi() == 1) {
+                    tarea.setNumSi(tarea.getNumSi() + 1);
+                    tarea.setContador(tarea.getContador() + 1);
+                    tarea.setNoSeguidos(0); // se reinicia la cuenta de "no" seguidos
+
+                    // si mejora disminuye la frecuencia y se reinician los contadores
+                    if (tarea.getContador() == tarea.getMejorar()) {
+                        tarea.setFrecuenciaTarea(disminuirFrecuencia(tarea.getFrecuenciaTarea()));
+                        tarea.setContador(0);
+                        tarea.setNumSi(0);
+                        tarea.setNumNo(0);
+                    }
+                    /**********************************************************************************/
+
+
+                    // si respondio que "no"////////////////////////////////////////////////////////////
+                } else if(transferTarea.getNumNo() == 1){
+                    if (tarea.getNoSeguidos() >= 2) {    // si suma 3 "no" seguidos
+                        // Se le aumenta la frecuencia de nuevo
+                        tarea.setFrecuenciaTarea(aumentarFrecuencia(tarea.getFrecuenciaTarea()));
+                        // Se reinician los contadores
+                        tarea.setNumNo(0);
+                        tarea.setNumSi(0);
+                        tarea.setNoSeguidos(0);
+                        tarea.setContador(0);
+                    } else {                              // si aun no son 3 "no" seguidos
+                        tarea.setNumNo(tarea.getNumNo() + 1);
+                        tarea.setNoSeguidos(tarea.getNoSeguidos() + 1);
+                        tarea.setContador(tarea.getContador() - 1);
+                    }
+
+                }//////////////////////////////////////////////////////////////////////////////////////
+
+                // y se actualiza en la BBDD
+                tareasDao.update(tarea);
+                Log.e("SASUCESO", "Respuesta guardada");
+            }
+        } catch (SQLException e) {
+
+        }
+    }
+
+    private Frecuencia aumentarFrecuencia (Frecuencia frecuencia){
+        Frecuencia nueva = DIARIA;
+        switch (frecuencia){
+            case DIARIA:
+                nueva = DIARIA;
+                break;
+            case SEMANAL:
+                nueva = DIARIA;
+                break;
+            case MENSUAL:
+                nueva = SEMANAL;
+                break;
+        }
+        return nueva;
+    }
+
+    private Frecuencia disminuirFrecuencia (Frecuencia frecuencia){
+        Frecuencia nueva = MENSUAL;
+        switch (frecuencia){
+            case DIARIA:
+                nueva = SEMANAL;
+                break;
+            case SEMANAL:
+                nueva = MENSUAL;
+                break;
+            case MENSUAL:
+                nueva = MENSUAL;
+                break;
+        }
+        return nueva;
     }
 
     public Date actualizaDatesTareas(Date a){

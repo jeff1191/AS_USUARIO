@@ -159,7 +159,7 @@ public class ConectionManager {
 
                 response = (Mensaje) dataInputStream.readObject();
                 for(int i = 0; i < response.getTareas().size();i++)
-                    Log.e("juanlu", response.getTareas().get(i).getTextoAlarma() + " a las " + response.getTareas().get(i).getHoraAlarma().toString());
+                    Log.e("CONECTION-MAN", response.getTareas().get(i).getTextoAlarma() + " a las " + response.getTareas().get(i).getHoraAlarma().toString());
 
 
             } catch (UnknownHostException e) {

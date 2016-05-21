@@ -27,6 +27,8 @@ public interface SASuceso {
 
     public void cargarTareas(List<TransferTarea> tareas);
 
+    public void responderTarea(TransferTarea transferTarea);
+
 
     // Correo
 
@@ -42,5 +44,4 @@ public interface SASuceso {
     public void eliminarEventos();
 
     public List<TransferEvento> consultarEventos();
-
 }
