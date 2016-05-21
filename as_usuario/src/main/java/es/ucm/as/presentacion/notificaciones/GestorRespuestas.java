@@ -27,15 +27,6 @@ import static es.ucm.as.negocio.utils.Frecuencia.SEMANAL;
  */
 public class GestorRespuestas extends BroadcastReceiver {
 
-    private DBHelper mDBHelper;
-
-    private DBHelper getHelper(Context context) {
-        if (mDBHelper == null) {
-            mDBHelper = OpenHelperManager.getHelper(context, DBHelper.class);
-        }
-        return mDBHelper;
-    }
-
     @Override
     public void onReceive(Context context, Intent intent) {
 
@@ -58,12 +49,7 @@ public class GestorRespuestas extends BroadcastReceiver {
 
         NotificationManager notificationManager =
                 (NotificationManager) context.getSystemService(context.NOTIFICATION_SERVICE);
-
-        Log.e("comando", "Va a cerrar la notifiacion ..." + idNot);
-
         notificationManager.cancel(idNot);
-
-        Log.e("comando", "Responde a la tarea " + idTarea + " con respuesta " + respuesta);
 
         Controlador.getInstancia().ejecutaComando(ListaComandos.RESPONDER_TAREA, transferTarea);
     }

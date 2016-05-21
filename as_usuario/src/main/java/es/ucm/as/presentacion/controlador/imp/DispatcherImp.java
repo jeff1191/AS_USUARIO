@@ -3,10 +3,12 @@ package es.ucm.as.presentacion.controlador.imp;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.net.ssl.CertPathTrustManagerParameters;
@@ -18,6 +20,7 @@ import es.ucm.as.negocio.usuario.TransferUsuario;
 import es.ucm.as.presentacion.controlador.Controlador;
 import es.ucm.as.presentacion.controlador.Dispatcher;
 import es.ucm.as.presentacion.controlador.ListaComandos;
+import es.ucm.as.presentacion.notificaciones.CargarNotificaciones;
 import es.ucm.as.presentacion.notificaciones.ServicioNotificaciones;
 import es.ucm.as.presentacion.vista.Ayuda;
 import es.ucm.as.presentacion.vista.Configuracion;
@@ -159,8 +162,27 @@ public class DispatcherImp extends Dispatcher{
                 Contexto.getInstancia().getContext().startActivity(intentTareas);
                 break;
 
-            case ListaComandos.RESPONDER_TAREA:
+            case ListaComandos.CONSULTAR_TAREAS_HOY:
+                Intent consultarTareasHoy = new Intent(Contexto.getInstancia().getContext().getApplicationContext(), CargarNotificaciones.class);
+                List<TransferTarea>tareas = (List<TransferTarea>)datos;
 
+                ArrayList<String> txAlarma = new ArrayList<String>();
+                ArrayList<Date> halarma = new ArrayList<>();
+                ArrayList<String> txPregunta = new ArrayList<String>();
+                ArrayList<Date> hPregunta = new ArrayList<>();
+
+                for(int j = 1; j < tareas.size(); j++){
+                    TransferTarea tt = (TransferTarea)tareas.get(j);
+                    txAlarma.add(tt.getTextoAlarma());
+                    halarma.add(tt.getHoraAlarma());
+                    txPregunta.add(tt.getTextoPregunta());
+                    hPregunta.add(tt.getHoraPregunta());
+                }
+                consultarTareasHoy.putExtra("txalarma", txAlarma);
+                consultarTareasHoy.putExtra("halarma", halarma);
+                consultarTareasHoy.putExtra("txpregunta", txPregunta);
+                consultarTareasHoy.putExtra("hpregunta", hPregunta);
+                Contexto.getInstancia().getContext().startActivity(consultarTareasHoy);
                 break;
 
             // Eventos

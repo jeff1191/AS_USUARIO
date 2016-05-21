@@ -8,6 +8,7 @@ import com.j256.ormlite.field.DatabaseField;
 
 import java.util.Date;
 
+import es.ucm.as.negocio.suceso.TransferTarea;
 import es.ucm.as.negocio.utils.Frecuencia;
 
 public class Tarea {
@@ -140,6 +141,22 @@ public class Tarea {
 
 	public void setNumNo(Integer numNo) {
 		this.numNo = numNo;
+	}
+	
+	public TransferTarea getTransfer(){
+		TransferTarea transferTarea = new TransferTarea();
+		transferTarea.setId( getId());
+		transferTarea.setContador( getContador());
+		transferTarea.setTextoPregunta( getTextoPregunta());
+		transferTarea.setTextoAlarma( getTextoAlarma());
+		transferTarea.setHoraPregunta( getHoraPregunta());
+		transferTarea.setHoraAlarma( getHoraAlarma());
+		transferTarea.setMejorar( getMejorar());
+		transferTarea.setFrecuenciaTarea( getFrecuenciaTarea());
+		transferTarea.setNoSeguidos( getNoSeguidos());
+		transferTarea.setNumNo( getNumNo());
+		transferTarea.setNumSi( getNumSi());
+		return transferTarea;
 	}
 
 }

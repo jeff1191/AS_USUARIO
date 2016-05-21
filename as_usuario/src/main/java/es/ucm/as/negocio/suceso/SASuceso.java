@@ -5,6 +5,8 @@ import com.itextpdf.text.DocumentException;
 import java.io.IOException;
 import java.util.List;
 
+import es.ucm.as.negocio.usuario.TransferUsuario;
+
 public interface SASuceso {
 
 
@@ -29,6 +31,7 @@ public interface SASuceso {
 
     public void responderTarea(TransferTarea transferTarea);
 
+    public List<TransferTarea> consultarTareasHoy(TransferUsuario transferUsuario);
 
     // Correo
 
@@ -44,4 +47,5 @@ public interface SASuceso {
     public void eliminarEventos();
 
     public List<TransferEvento> consultarEventos();
+
 }

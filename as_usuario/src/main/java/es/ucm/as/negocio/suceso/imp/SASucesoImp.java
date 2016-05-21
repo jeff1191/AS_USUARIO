@@ -3,6 +3,7 @@ package es.ucm.as.negocio.suceso.imp;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Environment;
+import android.util.Log;
 
 import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Document;
@@ -19,6 +20,7 @@ import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 import com.j256.ormlite.android.apptools.OpenHelperManager;
 import com.j256.ormlite.dao.Dao;
+import com.j256.ormlite.stmt.QueryBuilder;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -149,25 +151,9 @@ public class SASucesoImp implements SASuceso {
         try {
 
             tareasDao = getHelper().getTareaDao();
-
             tareas = tareasDao.queryForAll();
-            for(int i = 0; i < tareas.size(); i++){
-
-                TransferTarea tt = new TransferTarea();
-                tt.setId(tareas.get(i).getId());
-                tt.setContador(tareas.get(i).getContador());
-                tt.setTextoPregunta(tareas.get(i).getTextoPregunta());
-                tt.setTextoAlarma(tareas.get(i).getTextoAlarma());
-                tt.setHoraPregunta(tareas.get(i).getHoraPregunta());
-                tt.setHoraAlarma(tareas.get(i).getHoraAlarma());
-                tt.setMejorar(tareas.get(i).getMejorar());
-                tt.setFrecuenciaTarea(tareas.get(i).getFrecuenciaTarea());
-                tt.setNoSeguidos(tareas.get(i).getNoSeguidos());
-                tt.setNumNo(tareas.get(i).getNumNo());
-                tt.setNumSi(tareas.get(i).getNumSi());
-                transferTareas.add(tt);
-
-            }
+            for(int i = 0; i < tareas.size(); i++)
+                transferTareas.add(tareas.get(i).getTransfer());
 
         } catch (SQLException e) {
 
@@ -284,6 +270,33 @@ public class SASucesoImp implements SASuceso {
         } catch (SQLException e) {
 
         }
+    }
+
+    @Override
+    public List<TransferTarea> consultarTareasHoy(TransferUsuario transferUsuario) {
+
+        List<TransferTarea> transferTareas = new ArrayList<TransferTarea>();
+
+        try {
+            Date actual = new Date();
+            Calendar c = Calendar.getInstance();
+            c.setTime(actual);
+            c.add(Calendar.DAY_OF_MONTH, 1);
+            Date tomorrow = c.getTime();
+
+            QueryBuilder<Tarea, Integer> qb = getHelper().getTareaDao().queryBuilder();
+            qb.where().between("HORA_ALARMA", actual, tomorrow);
+            qb.orderBy("HORA_ALARMA", true);
+            List<Tarea> tareas = qb.query();
+
+            for (int i = 0; i < tareas.size(); i++)
+                transferTareas.add(tareas.get(i).getTransfer());
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return transferTareas;
     }
 
     private Frecuencia aumentarFrecuencia (Frecuencia frecuencia){

@@ -1,7 +1,6 @@
 package es.ucm.as.negocio.conexion;
 
 import android.os.AsyncTask;
-import android.util.Log;
 
 import java.io.BufferedWriter;
 import java.io.IOException;

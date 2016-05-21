@@ -21,4 +21,5 @@ public class ListaComandos {
     public static final String HAY_USUARIO = "hayUsuario";
     public static final String SINCRONIZAR_REGISTRO = "sincronizar_registro";
     public static final String RESPONDER_TAREA = "responder_tarea";
+    public static final String CONSULTAR_TAREAS_HOY = "consultarTareasHoy";
 }

@@ -52,7 +52,6 @@ public class CargarNotificaciones extends BroadcastReceiver {
         //Lee los eventos de bbdd
         List<Evento> eventos = new ArrayList<Evento>();
         List<TransferEvento> transferEventos = new ArrayList<TransferEvento>();
-        Log.e("CargarNotificaciones", "Se cargan las notificaciones de los eventos");
         try {
 
             // Se obtienen las tareas a recordar ese dia ordenadas por horas de manera ascendente
@@ -134,12 +133,11 @@ public class CargarNotificaciones extends BroadcastReceiver {
                             " a las " + horaAlarmaNotifE + ":" + minutosAlarmaNotifE);
                 }
             }
-
-
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
+
 
     public void lanzarSuceso (Context context, Integer hora, Integer minutos, String titulo,
                               String texto, String tipo, Integer idTarea) {
