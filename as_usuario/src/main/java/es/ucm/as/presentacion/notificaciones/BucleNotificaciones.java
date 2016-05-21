@@ -60,13 +60,11 @@ public class BucleNotificaciones extends BroadcastReceiver {
             qb.where().between("HORA_ALARMA", todayBegin, todayEnd);
             qb.orderBy("HORA_ALARMA", true);
             tareas = qb.query();
-            Log.e("BucleNotificaciones", "Tareas: "+ tareas.size() + "");
 
             QueryBuilder<Evento, Integer> qb2 = getHelper(context).getEventoDao().queryBuilder();
             qb2.where().between("HORA_EVENTO", todayBegin, todayEnd);
             qb2.orderBy("HORA_EVENTO", true);
             eventos = qb2.query();
-            Log.e("BucleNotificaciones", "Eventos: " + eventos.size() + "");
             Dao<Evento,Integer> daoE = getHelper(context).getEventoDao();
 
             for(int i = 0; i < tareas.size(); i++){

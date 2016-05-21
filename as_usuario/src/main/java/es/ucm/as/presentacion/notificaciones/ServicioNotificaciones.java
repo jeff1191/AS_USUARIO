@@ -23,20 +23,20 @@ public class ServicioNotificaciones extends Service {
 
     @Override
     public void onCreate() {
-        Log.d(this.getClass().getSimpleName(),"onCreate()");
+        Log.d("NOTIFICACIONES","se crea el servicio");
         super.onCreate();
     }
 
     @Override
     public void onDestroy() {
-        Log.d(this.getClass().getSimpleName(),"onDestroy()");
+        Log.d("NOTIFICACIONES","se destruye el servicio");
         super.onDestroy();
     }
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         //Tendriamos que pensar en tener to*do en una cola que la tendria que haber cogido de base de datos - esto es IMPORTANTE
-
+        Log.d("NOTIFICACIONES","se lanza el servicio");
         Log.e("servicioNot", "Se lanza serv");
 
         AlarmManager am =( AlarmManager) getApplicationContext().getSystemService(Context.ALARM_SERVICE);

@@ -15,8 +15,10 @@ import es.ucm.as.negocio.suceso.TransferEvento;
 import es.ucm.as.negocio.suceso.TransferReto;
 import es.ucm.as.negocio.suceso.TransferTarea;
 import es.ucm.as.negocio.usuario.TransferUsuario;
+import es.ucm.as.presentacion.controlador.Controlador;
 import es.ucm.as.presentacion.controlador.Dispatcher;
 import es.ucm.as.presentacion.controlador.ListaComandos;
+import es.ucm.as.presentacion.notificaciones.ServicioNotificaciones;
 import es.ucm.as.presentacion.vista.Ayuda;
 import es.ucm.as.presentacion.vista.Configuracion;
 import es.ucm.as.presentacion.vista.Contexto;
@@ -101,6 +103,12 @@ public class DispatcherImp extends Dispatcher{
                                             "tu profesor o la clave es incorrecta", Toast.LENGTH_LONG);
                     errorNombre.show();
                 }
+                break;
+
+            case ListaComandos.REINICIAR_SERVICIO_NOTIFICACIONES:
+                Intent service = new Intent(Contexto.getInstancia().getContext(),  ServicioNotificaciones.class);
+                Contexto.getInstancia().getContext().stopService(service);
+                Contexto.getInstancia().getContext().startService(service);
                 break;
 
             // Ayuda

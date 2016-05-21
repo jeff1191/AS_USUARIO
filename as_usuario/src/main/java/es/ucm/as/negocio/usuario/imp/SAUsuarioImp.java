@@ -14,6 +14,7 @@ import java.io.File;
 import java.sql.SQLException;
 import java.util.List;
 
+import es.ucm.as.R;
 import es.ucm.as.integracion.DBHelper;
 import es.ucm.as.negocio.factoria.FactoriaSA;
 import es.ucm.as.negocio.suceso.SASuceso;
@@ -123,6 +124,8 @@ public class SAUsuarioImp implements SAUsuario {
 
 			if (transferUsuario.getTono() != null)
 				usuario.setTono(transferUsuario.getTono());
+			else
+				usuario.setTono(R.raw.defecto);
 
 			if (transferUsuario.getCodigoSincronizacion() != null)
 				usuario.setCodigoSincronizacion(transferUsuario.getCodigoSincronizacion());
@@ -163,6 +166,8 @@ public class SAUsuarioImp implements SAUsuario {
 					transferUsuario.setColor(u.getColor());
 				if (u.getTono() != null)
 					transferUsuario.setTono(u.getTono());
+				else
+					transferUsuario.setTono(R.raw.defecto);
 				if (u.getCodigoSincronizacion() != null)
 					transferUsuario.setCodigoSincronizacion(u.getCodigoSincronizacion());
 			}

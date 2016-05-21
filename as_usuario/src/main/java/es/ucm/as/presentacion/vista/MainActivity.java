@@ -145,5 +145,6 @@ public class MainActivity extends Activity {
         toast1.show();
 
         Controlador.getInstancia().ejecutaComando(ListaComandos.SINCRONIZAR, null);
+        Controlador.getInstancia().ejecutaComando(ListaComandos.REINICIAR_SERVICIO_NOTIFICACIONES, null);
     }
 }

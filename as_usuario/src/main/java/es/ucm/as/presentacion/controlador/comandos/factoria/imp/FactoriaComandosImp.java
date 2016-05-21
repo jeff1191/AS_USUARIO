@@ -12,6 +12,7 @@ import es.ucm.as.presentacion.controlador.comandos.imp.EnviarCorreoComando;
 import es.ucm.as.presentacion.controlador.comandos.imp.GenerarPDFComando;
 import es.ucm.as.presentacion.controlador.comandos.imp.GuardarEventosComando;
 import es.ucm.as.presentacion.controlador.comandos.imp.HayUsuarioComando;
+import es.ucm.as.presentacion.controlador.comandos.imp.ReiniciarServicioNotificaciones;
 import es.ucm.as.presentacion.controlador.comandos.imp.ResponderRetoComando;
 import es.ucm.as.presentacion.controlador.comandos.imp.SincronizarComando;
 import es.ucm.as.presentacion.controlador.comandos.imp.SincronizarRegistroComando;
@@ -75,6 +76,9 @@ public class FactoriaComandosImp extends FactoriaComandos {
                 break;
             case ListaComandos.HAY_USUARIO:
                 ret = new HayUsuarioComando();
+                break;
+            case ListaComandos.REINICIAR_SERVICIO_NOTIFICACIONES:
+                ret = new ReiniciarServicioNotificaciones();
                 break;
         }
 

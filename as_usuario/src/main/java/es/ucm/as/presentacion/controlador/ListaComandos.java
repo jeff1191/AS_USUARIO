@@ -20,4 +20,5 @@ public class ListaComandos {
     public static final String SINCRONIZAR = "sincronizar";
     public static final String HAY_USUARIO = "hayUsuario";
     public static final String SINCRONIZAR_REGISTRO = "sincronizar_registro";
+    public static final String REINICIAR_SERVICIO_NOTIFICACIONES = "reiniciar_servicio_notificaciones";
 }

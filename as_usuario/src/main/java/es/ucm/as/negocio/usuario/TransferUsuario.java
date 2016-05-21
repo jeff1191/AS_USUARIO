@@ -23,7 +23,7 @@ public class TransferUsuario implements Serializable{
 
 	private String color;
 
-	private String tono;
+	private Integer tono;
 
     private String codigoSincronizacion;
 
@@ -91,11 +91,11 @@ public class TransferUsuario implements Serializable{
 		this.color = color;
 	}
 
-	public String getTono() {
+	public Integer getTono() {
 		return tono;
 	}
 
-	public void setTono(String tono) {
+	public void setTono(Integer tono) {
 		this.tono = tono;
 	}
 

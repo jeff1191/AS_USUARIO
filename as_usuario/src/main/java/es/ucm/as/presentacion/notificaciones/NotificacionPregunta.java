@@ -29,16 +29,6 @@ public class NotificacionPregunta extends BroadcastReceiver {
         String texto = bundle.getString("texto");
         Integer idTarea = bundle.getInt("idTarea");
 
-        //Hay que mirar lo del SONIDO y la VIBRACION
-        //Encontrar una foto mas pequeña para el logo en las notificaciones o poner otra imagen
-        //Si los ids dan problemas, generarlos de otra manera y pasarselos aqui
-        //Tambien generar los ids de los pending intents??¿¿
-
-        /*
-        It gets current system time. Then I'm reading only last 4 digits from it.
-         I'm using it to create unique id every time notification is displayed.
-         So the probability of getting same or reset of notification id will be avoided.
-         */
         long time = new Date().getTime();
         String tmpStr = String.valueOf(time);
         String last4Str = tmpStr.substring(tmpStr.length() - 5);

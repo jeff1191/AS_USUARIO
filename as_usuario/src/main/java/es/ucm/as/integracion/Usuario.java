@@ -30,7 +30,7 @@ public class Usuario {
 	private String color;
 
 	@DatabaseField(columnName = "TONO")
-	private String tono;
+	private Integer tono;
 
 	@DatabaseField(columnName = "CODIGO_SINCRONIZACION")
 	private String codigoSincronizacion;
@@ -67,7 +67,7 @@ public class Usuario {
 		return this.color;
 	}
 
-	public String getTono() {
+	public Integer getTono() {
 		return this.tono;
 	}
 
@@ -83,7 +83,7 @@ public class Usuario {
 
 	public void setPuntuacion(Integer nuevaPuntuacion) {this.puntuacion=nuevaPuntuacion;	}
 
-	public void setTono(String nuevoTono) {		this.tono=nuevoTono;	}
+	public void setTono(Integer nuevoTono) {		this.tono=nuevoTono;	}
 
 	public void setColor(String nuevoColor) {
 		this.color=nuevoColor;

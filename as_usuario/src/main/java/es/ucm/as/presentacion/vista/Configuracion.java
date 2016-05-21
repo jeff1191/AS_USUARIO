@@ -8,6 +8,8 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.media.AudioManager;
+import android.media.SoundPool;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -18,8 +20,6 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -31,7 +31,6 @@ import java.io.IOException;
 
 import es.ucm.as.R;
 import es.ucm.as.negocio.usuario.TransferUsuario;
-import es.ucm.as.negocio.utils.Frecuencia;
 import es.ucm.as.presentacion.controlador.Controlador;
 import es.ucm.as.presentacion.controlador.ListaComandos;
 
@@ -42,30 +41,34 @@ import es.ucm.as.presentacion.controlador.ListaComandos;
  */
 public class Configuracion extends Activity {
 
-    private static final int REQUEST_IMAGE_CAPTURE =3;
     private static final int SELECCIONAR_GALERIA = 2;
     private static final int CAMARA = 1;
+
+    private int DEFECTO;
+    private int FROZEN;
+    private int MARIO;
+    private int STARWARS;
+    private int TERMINATOR;
+
+    private SoundPool sndPool;
+
     private EditText editarNombre;
     private Button aceptar;
-    private Button color;
-    private Button tono;
-    private RadioButton diaria;
-    private RadioButton semanal;
-    private RadioButton mensual;
-    private RadioGroup rdgGrupo;
-    private Frecuencia frecActual;
+
     static String temaActual="AS_theme_azul";
-    static String tonoActual="tono1";
+    static int tonoActual;
     private String[] nombresColores={ "Azul", "Rojo", "Rosa", "Verde",
             "Negro"};
-    private String[] nombresTonos = { "Tono 1", "Tono 2", "Tono 3", "Tono 4",
-            "Tono 5"};
+    private String[] nombresTonos = { "Defecto", "Frozen", "Mario Bross", "StarWars",
+            "Terminator"};
     private Spinner spinnerColors;
     private Spinner spinnerTono;
     private String temaParcial;
-    private String tonoParcial;
+    private int tonoParcial;
     private ImageView imagenConfiguracion;
     private String rutaImagen="";
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         cargarTema();
@@ -78,10 +81,19 @@ public class Configuracion extends Activity {
         spinnerColors = (Spinner) findViewById(R.id.cambiarColor);
         spinnerTono = (Spinner) findViewById(R.id.cambiarTono);
         imagenConfiguracion = (ImageView) findViewById(R.id.editarAvatar);
+        tonoActual = usuario.getTono();
         tonoParcial=tonoActual;
         temaActual=usuario.getColor();
         temaParcial=temaActual;
         rutaImagen=usuario.getAvatar();
+
+        // Para que se reproduzca el sonido al seleccionar el botón de aceptar
+        sndPool = new SoundPool(16, AudioManager.STREAM_MUSIC, 100);
+        DEFECTO = sndPool.load(getApplicationContext(), R.raw.defecto, 1);
+        FROZEN = sndPool.load(getApplicationContext(), R.raw.frozen, 1);;
+        MARIO = sndPool.load(getApplicationContext(), R.raw.mario, 1);;
+        STARWARS = sndPool.load(getApplicationContext(), R.raw.starwars, 1);;
+        TERMINATOR = sndPool.load(getApplicationContext(), R.raw.terminator, 1);;
 
         ////////Spinner color ///////
         nombresColoresSistema();
@@ -123,7 +135,8 @@ public class Configuracion extends Activity {
             }
         });
         //////////////Spinner tonos///////////////////
-        nombresTonosSistema();
+
+        nombresTonosSistema(usuario.getTono());
         ArrayAdapter<String> adapter_tonos = new ArrayAdapter<String>(this,
                 android.R.layout.simple_spinner_item, nombresTonos);
         adapter_tonos
@@ -136,28 +149,24 @@ public class Configuracion extends Activity {
                 String selState = (String) spinnerTono.getSelectedItem();
                 String tonoSeleccionado = (String) spinnerTono.getSelectedItem();
                 switch (tonoSeleccionado){
-                    case "Tono 1":
-                        tonoParcial="tono1";
+                    case "Defecto":
+                        tonoParcial = DEFECTO;
                         break;
-                    case "Tono 2":
-                        tonoParcial="tono2";
+                    case "Frozen":
+                        tonoParcial = FROZEN;
                         break;
-                    case "Tono 3":
-                        tonoParcial="tono3";
+                    case "Mario Bross":
+                        tonoParcial = MARIO;
                         break;
-                    case "Tono 4":
-                        tonoParcial="tono4";
+                    case "StarWars":
+                        tonoParcial = STARWARS;
                         break;
-                    case "Tono 5":
-                        tonoParcial="tono5";
-                        break;
+                    case "Terminator":
+                        tonoParcial = TERMINATOR;
                 }
             }
-
             @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
+            public void onNothingSelected(AdapterView<?> parent) {}
         });
 
         if(!usuario.getAvatar().equals(""))
@@ -177,38 +186,65 @@ public class Configuracion extends Activity {
                     tonoActual = tonoParcial;
                     editarUsuario.setColor(temaActual);
                     editarUsuario.setAvatar(rutaImagen);
+                    editarUsuario.setTono(tonoActual);
+                    sndPool.play(tonoActual, 1.0f, 1.0f, 1, 0, 1.0f);
+                    Toast.makeText(getApplicationContext(),
+                            "Estás escuchando el tono que has elegido para las notificaciones AS"
+                            , Toast.LENGTH_LONG).show();
+
                     Controlador.getInstancia().ejecutaComando(ListaComandos.EDITAR_USUARIO, editarUsuario);
                     Controlador.getInstancia().ejecutaComando(ListaComandos.CONSULTAR_USUARIO, null);
                 }else{
                     Toast errorNombre =
                             Toast.makeText(getApplicationContext(),
-                                    "No puede estar vacío el campo nombre", Toast.LENGTH_SHORT);
+                                    "El campo del nombre no puede estar vacío", Toast.LENGTH_SHORT);
 
                     errorNombre.show();
                 }
             }
         });
-
-
     }
 
-    private void nombresTonosSistema() {
-        switch (tonoActual){
-            case "tono1":
-                nombresTonos[0]="Tono 1"; nombresTonos[1]="Tono 2";nombresTonos[2]="Tono 3";nombresTonos[3]="Tono 4";nombresTonos[4]="Tono 5";
-                break;
-            case "tono2":
-                nombresTonos[0]="Tono 2"; nombresTonos[1]="Tono 1";nombresTonos[2]="Tono 3";nombresTonos[3]="Tono 4";nombresTonos[4]="Tono 5";
-                break;
-            case "tono3":
-                nombresTonos[0]="Tono 3"; nombresTonos[1]="Tono 1";nombresTonos[2]="Tono 2";nombresTonos[3]="Tono 4";nombresTonos[4]="Tono 5";
-                break;
-            case "tono4":
-                nombresTonos[0]="Tono 4"; nombresTonos[1]="Tono 1";nombresTonos[2]="Tono 2";nombresTonos[3]="Tono 3";nombresTonos[4]="Tono 5";
-                break;
-            case "tono5":
-                nombresTonos[0]="Tono 5"; nombresTonos[1]="Tono 1";nombresTonos[2]="Tono 2";nombresTonos[3]="Tono 3";nombresTonos[4]="Tono 4";
-                break;
+    private void nombresTonosSistema(int tono) {
+        if(tono == DEFECTO) {
+            nombresTonos[0] = "Defecto";
+            nombresTonos[1] = "Frozen";
+            nombresTonos[2] = "Mario Bross";
+            nombresTonos[3] = "StarWars";
+            nombresTonos[4] = "Terminator";
+            return;
+        }
+        if(tono == FROZEN) {
+            nombresTonos[0] = "Frozen";
+            nombresTonos[1] = "Defecto";
+            nombresTonos[2] = "Mario Bross";
+            nombresTonos[3] = "StarWars";
+            nombresTonos[4] = "Terminator";
+            return;
+        }
+        if(tono == MARIO) {
+            nombresTonos[0] = "Mario Bross";
+            nombresTonos[1] = "Defecto";
+            nombresTonos[2] = "Frozen";
+            nombresTonos[3] = "StarWars";
+            nombresTonos[4] = "Terminator";
+            return;
+        }
+        if(tono == STARWARS) {
+            nombresTonos[0] = "StarWars";
+            nombresTonos[1] = "Defecto";
+            nombresTonos[2] = "Frozen";
+            nombresTonos[3] = "Mario Bross";
+            nombresTonos[4] = "Terminator";
+            return;
+        }
+        if(tono == TERMINATOR) {
+            nombresTonos[0] = "Terminator";
+            nombresTonos[1] = "Defecto";
+            nombresTonos[2] = "Frozen";
+            nombresTonos[3] = "Mario Bross";
+            nombresTonos[4] = "StarWars";
+            return;
         }
     }
 

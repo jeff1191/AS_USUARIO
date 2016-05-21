@@ -68,7 +68,7 @@ public class Registro extends Activity {
             crearUsuario.setPuntuacion(0);
             crearUsuario.setPuntuacionAnterior(0);
             crearUsuario.setCorreo(correo);
-            crearUsuario.setTono("");
+            crearUsuario.setTono(R.raw.defecto);
             crearUsuario.setCodigoSincronizacion(clave);
 
             Mensaje msg = new Mensaje("registro");

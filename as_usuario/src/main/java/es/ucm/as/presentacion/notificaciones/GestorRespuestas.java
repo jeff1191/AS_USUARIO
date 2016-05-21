@@ -109,10 +109,13 @@ public class GestorRespuestas extends BroadcastReceiver {
         switch (frecuencia){
             case DIARIA:
                 nueva = DIARIA;
+                break;
             case SEMANAL:
                 nueva = DIARIA;
+                break;
             case MENSUAL:
                 nueva = SEMANAL;
+                break;
         }
         return nueva;
     }
@@ -122,10 +125,13 @@ public class GestorRespuestas extends BroadcastReceiver {
         switch (frecuencia){
             case DIARIA:
                 nueva = SEMANAL;
+                break;
             case SEMANAL:
                 nueva = MENSUAL;
+                break;
             case MENSUAL:
                 nueva = MENSUAL;
+                break;
         }
         return nueva;
     }

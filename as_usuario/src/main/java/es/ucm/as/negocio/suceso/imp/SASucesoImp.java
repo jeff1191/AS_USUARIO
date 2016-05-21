@@ -231,14 +231,11 @@ public class SASucesoImp implements SASuceso {
     }
 
     public Date actualizaDatesTareas(Date a){
-        Log.e("juanlu", a.toString());
         SimpleDateFormat horasMinutos = new SimpleDateFormat("HH:mm");
         StringTokenizer tokens = new StringTokenizer(horasMinutos.format
                 (a),":");
-
         Integer hora = Integer.parseInt(tokens.nextToken());
         Integer minutos =  Integer.parseInt(tokens.nextToken());
-        Log.e("juanlu", hora + ":" + minutos);
         Date horaActual = new Date();
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(horaActual);
@@ -246,7 +243,6 @@ public class SASucesoImp implements SASuceso {
         calendar.set(Calendar.MINUTE, minutos);
         calendar.set(Calendar.SECOND, 0);
         calendar.set(Calendar.MILLISECOND, 0);
-        Log.e("juanlu", calendar.getTime().toString());
         return calendar.getTime();
     }
 

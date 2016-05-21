@@ -19,11 +19,7 @@ import es.ucm.as.R;
 public class NotificacionEvento extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
-        /*
-        It gets current system time. Then I'm reading only last 4 digits from it.
-         I'm using it to create unique id every time notification is displayed.
-         So the probability of getting same or reset of notification id will be avoided.
-         */
+
         long time = new Date().getTime();
         String tmpStr = String.valueOf(time);
         String last4Str = tmpStr.substring(tmpStr.length() - 5);
