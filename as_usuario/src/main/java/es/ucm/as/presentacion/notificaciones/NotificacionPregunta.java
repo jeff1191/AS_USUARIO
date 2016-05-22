@@ -8,8 +8,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.NotificationCompat;
+import android.util.Log;
 
 import java.util.Date;
 
@@ -28,6 +30,8 @@ public class NotificacionPregunta extends BroadcastReceiver {
         String titulo = bundle.getString("titulo");
         String texto = bundle.getString("texto");
         Integer idTarea = bundle.getInt("idTarea");
+        Integer tono = bundle.getInt("tono");
+        Log.e("tono", "not pregunta " + tono);
 
         long time = new Date().getTime();
         String tmpStr = String.valueOf(time);
@@ -54,6 +58,7 @@ public class NotificacionPregunta extends BroadcastReceiver {
                         .setContentTitle(titulo)    //Titulo
                         .setContentText("Revisa las notificaciones anteriores")
                         .setLargeIcon(BitmapFactory.decodeResource(context.getResources(), R.drawable.logo_notificacion))
+                        .setSound(Uri.parse("android.resource://" + context.getPackageName() + "/" + tono))
                         .addAction(R.drawable.ic_done_white, "Si", contestaSi)
                         .addAction(R.drawable.ic_clear_white, "No", contestaNo)
                         .setPriority(Notification.PRIORITY_MAX)
@@ -62,7 +67,6 @@ public class NotificacionPregunta extends BroadcastReceiver {
                         .setStyle(new NotificationCompat.BigTextStyle()
                                 .bigText(texto)
                                 .setBigContentTitle(titulo));
-        //.setSound(Uri.parse("android.resource://" + context.getPackageName() + "/" + R.raw.silbido))
 
         NotificationManager notificationManager =
                 (NotificationManager) context.getSystemService(context.NOTIFICATION_SERVICE);

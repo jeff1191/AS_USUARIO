@@ -14,6 +14,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -88,6 +89,7 @@ public class Configuracion extends Activity {
         rutaImagen=usuario.getAvatar();
 
         // Para que se reproduzca el sonido al seleccionar el botón de aceptar
+        // Se deben de cargar los sonidos aqui, en el metodo onCreate
         sndPool = new SoundPool(16, AudioManager.STREAM_MUSIC, 100);
         DEFECTO = sndPool.load(getApplicationContext(), R.raw.defecto, 1);
         FROZEN = sndPool.load(getApplicationContext(), R.raw.frozen, 1);;
@@ -112,15 +114,12 @@ public class Configuracion extends Activity {
                     case "Azul":
                         temaParcial="AS_theme_azul";
                     break;
-
                     case "Rojo":
                         temaParcial="AS_theme_rojo";
                         break;
-
                     case "Rosa":
                         temaParcial="AS_theme_rosa";
                         break;
-
                     case "Verde":
                         temaParcial="AS_theme_verde";
                         break;
@@ -183,13 +182,14 @@ public class Configuracion extends Activity {
                     TransferUsuario editarUsuario = new TransferUsuario();
                     editarUsuario.setNombre(String.valueOf(editarNombre.getText()));
                     temaActual = temaParcial;
-                    tonoActual = tonoParcial;
+                    tonoActual = playidToBBDDId(tonoParcial);
                     editarUsuario.setColor(temaActual);
                     editarUsuario.setAvatar(rutaImagen);
                     editarUsuario.setTono(tonoActual);
-                    sndPool.play(tonoActual, 1.0f, 1.0f, 1, 0, 1.0f);
+                    sndPool.play(tonoParcial, 1.0f, 1.0f, 1, 0, 1.0f);
                     Toast.makeText(getApplicationContext(),
-                            "Estás escuchando el tono que has elegido para las notificaciones AS"
+                            "Estás escuchando el tono que has elegido." +
+                                    "Se actualizará la próxima vez que sincronices con tu profesor"
                             , Toast.LENGTH_LONG).show();
 
                     Controlador.getInstancia().ejecutaComando(ListaComandos.EDITAR_USUARIO, editarUsuario);
@@ -205,40 +205,41 @@ public class Configuracion extends Activity {
         });
     }
 
+    // Este metodo ordena los elementos del spinner de tonos segun el que haya en BBDD
     private void nombresTonosSistema(int tono) {
-        if(tono == DEFECTO) {
+        if(tono == R.raw.defecto) {
             nombresTonos[0] = "Defecto";
             nombresTonos[1] = "Frozen";
             nombresTonos[2] = "Mario Bross";
             nombresTonos[3] = "StarWars";
             nombresTonos[4] = "Terminator";
-            return;
+            return ;
         }
-        if(tono == FROZEN) {
+        if(tono == R.raw.frozen) {
             nombresTonos[0] = "Frozen";
             nombresTonos[1] = "Defecto";
             nombresTonos[2] = "Mario Bross";
             nombresTonos[3] = "StarWars";
             nombresTonos[4] = "Terminator";
-            return;
+            return ;
         }
-        if(tono == MARIO) {
+        if(tono == R.raw.mario) {
             nombresTonos[0] = "Mario Bross";
             nombresTonos[1] = "Defecto";
             nombresTonos[2] = "Frozen";
             nombresTonos[3] = "StarWars";
             nombresTonos[4] = "Terminator";
-            return;
+            return ;
         }
-        if(tono == STARWARS) {
+        if(tono == R.raw.starwars) {
             nombresTonos[0] = "StarWars";
             nombresTonos[1] = "Defecto";
             nombresTonos[2] = "Frozen";
             nombresTonos[3] = "Mario Bross";
             nombresTonos[4] = "Terminator";
-            return;
+            return ;
         }
-        if(tono == TERMINATOR) {
+        if(tono == R.raw.terminator) {
             nombresTonos[0] = "Terminator";
             nombresTonos[1] = "Defecto";
             nombresTonos[2] = "Frozen";
@@ -246,6 +247,22 @@ public class Configuracion extends Activity {
             nombresTonos[4] = "StarWars";
             return;
         }
+    }
+
+    // Este metodo es necesario para guardar en BBDD el id correcto del sonido elegido
+    private Integer playidToBBDDId(int tono) {
+        if(tono == DEFECTO)
+            return R.raw.defecto;
+        if(tono == FROZEN)
+            return R.raw.frozen;
+        if(tono == MARIO)
+            return R.raw.mario;
+        if(tono == STARWARS)
+            return R.raw.starwars;
+        if(tono == TERMINATOR)
+            return R.raw.terminator;
+        else
+            return R.raw.defecto;
     }
 
     private void nombresColoresSistema() {

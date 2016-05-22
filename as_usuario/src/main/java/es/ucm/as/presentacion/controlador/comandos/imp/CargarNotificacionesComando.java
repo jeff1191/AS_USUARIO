@@ -4,6 +4,7 @@ import android.util.Log;
 
 import java.util.List;
 
+import es.ucm.as.negocio.conexion.msg.Mensaje;
 import es.ucm.as.negocio.factoria.FactoriaSA;
 import es.ucm.as.negocio.suceso.SASuceso;
 import es.ucm.as.negocio.suceso.TransferTarea;
@@ -15,11 +16,17 @@ import es.ucm.as.presentacion.controlador.comandos.exceptions.commandException;
 /**
  * Created by msalitu on 10/03/2016.
  */
-public class ConsultarTareasHoyComando implements Command{
+public class CargarNotificacionesComando implements Command{
     @Override
     public Object ejecutaComando(Object datos) throws commandException {
-        SASuceso su = FactoriaSA.getInstancia().nuevoSASuceso();
-        List<TransferTarea> tareas = su.consultarTareasHoy((TransferUsuario)datos);
-        return tareas;
+        SASuceso ss = FactoriaSA.getInstancia().nuevoSASuceso();
+        SAUsuario su = FactoriaSA.getInstancia().nuevoSAUsuario();
+        List<TransferTarea> tareas = ss.consultarTareasHoy((TransferUsuario)datos);
+        TransferUsuario usuario = su.consultarUsuario();
+
+        Mensaje msg = new Mensaje();
+        msg.setTareas(tareas);
+        msg.setUsuario(usuario);
+        return msg;
     }
 }

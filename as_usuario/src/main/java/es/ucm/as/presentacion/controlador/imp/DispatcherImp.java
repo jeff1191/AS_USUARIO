@@ -3,7 +3,6 @@ package es.ucm.as.presentacion.controlador.imp;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
@@ -11,13 +10,12 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import javax.net.ssl.CertPathTrustManagerParameters;
-
+import es.ucm.as.R;
+import es.ucm.as.negocio.conexion.msg.Mensaje;
 import es.ucm.as.negocio.suceso.TransferEvento;
 import es.ucm.as.negocio.suceso.TransferReto;
 import es.ucm.as.negocio.suceso.TransferTarea;
 import es.ucm.as.negocio.usuario.TransferUsuario;
-import es.ucm.as.presentacion.controlador.Controlador;
 import es.ucm.as.presentacion.controlador.Dispatcher;
 import es.ucm.as.presentacion.controlador.ListaComandos;
 import es.ucm.as.presentacion.notificaciones.CargarNotificaciones;
@@ -83,6 +81,7 @@ public class DispatcherImp extends Dispatcher{
                     // Si la sincronizacion ha sido correcta se relanza el servicio de notificaciones
                     Log.e("DISPATCHER", "SE VA A REINICIAR_SERVICIO_NOTIFICACIONES comando");
                     Intent service = new Intent(Contexto.getInstancia().getContext(),  ServicioNotificaciones.class);
+                    service.putExtra("tono", terminado.getTono());
                     Contexto.getInstancia().getContext().stopService(service);
                     Contexto.getInstancia().getContext().startService(service);
 
@@ -162,9 +161,10 @@ public class DispatcherImp extends Dispatcher{
                 Contexto.getInstancia().getContext().startActivity(intentTareas);
                 break;
 
-            case ListaComandos.CONSULTAR_TAREAS_HOY:
+            case ListaComandos.CARGAR_NOTIFICACIONES:
                 Intent consultarTareasHoy = new Intent(Contexto.getInstancia().getContext().getApplicationContext(), CargarNotificaciones.class);
-                List<TransferTarea>tareas = (List<TransferTarea>)datos;
+                Mensaje msg = (Mensaje) datos;
+                List<TransferTarea>tareas = msg.getTareas();
 
                 ArrayList<String> txAlarma = new ArrayList<String>();
                 ArrayList<Date> halarma = new ArrayList<>();
@@ -182,7 +182,9 @@ public class DispatcherImp extends Dispatcher{
                 consultarTareasHoy.putExtra("halarma", halarma);
                 consultarTareasHoy.putExtra("txpregunta", txPregunta);
                 consultarTareasHoy.putExtra("hpregunta", hPregunta);
-                Contexto.getInstancia().getContext().startActivity(consultarTareasHoy);
+                //consultarTareasHoy.putExtra("tono", msg.getUsuario().getTono());
+                consultarTareasHoy.putExtra("tono" , R.raw.starwars);
+                Contexto.getInstancia().getContext().sendBroadcast(consultarTareasHoy);
                 break;
 
             // Eventos

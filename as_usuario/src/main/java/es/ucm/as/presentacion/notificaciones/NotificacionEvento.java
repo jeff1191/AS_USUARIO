@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.net.Uri;
 import android.support.v4.app.NotificationCompat;
 
 import java.util.Date;
@@ -35,6 +36,7 @@ public class NotificacionEvento extends BroadcastReceiver {
                         .setAutoCancel(true)
                         .setPriority(NotificationCompat.PRIORITY_MAX)
                         .setLargeIcon(BitmapFactory.decodeResource(context.getResources(), R.drawable.logo_notificacion))
+                        .setSound(Uri.parse("android.resource://" + context.getPackageName() + "/" + intent.getExtras().getInt("tono")))
                         .setContentIntent(aux)
                         .setVibrate(new long[]{200, 300, 200, 300, 200})
                         .setLights(Color.GREEN, 3000, 3000)

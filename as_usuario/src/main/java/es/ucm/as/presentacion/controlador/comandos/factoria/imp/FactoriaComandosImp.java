@@ -5,7 +5,7 @@ import es.ucm.as.presentacion.controlador.comandos.Command;
 import es.ucm.as.presentacion.controlador.comandos.factoria.FactoriaComandos;
 import es.ucm.as.presentacion.controlador.comandos.imp.ActualizaPuntuacionComando;
 import es.ucm.as.presentacion.controlador.comandos.imp.ConfiguracionComando;
-import es.ucm.as.presentacion.controlador.comandos.imp.ConsultarTareasHoyComando;
+import es.ucm.as.presentacion.controlador.comandos.imp.CargarNotificacionesComando;
 import es.ucm.as.presentacion.controlador.comandos.imp.ConsultarUsuarioComando;
 import es.ucm.as.presentacion.controlador.comandos.imp.CrearUsuarioComando;
 import es.ucm.as.presentacion.controlador.comandos.imp.EditarUsuarioComando;
@@ -81,8 +81,8 @@ public class FactoriaComandosImp extends FactoriaComandos {
             case ListaComandos.RESPONDER_TAREA:
                 ret = new ResponderTareaComando();
                 break;
-            case ListaComandos.CONSULTAR_TAREAS_HOY:
-                ret = new ConsultarTareasHoyComando();
+            case ListaComandos.CARGAR_NOTIFICACIONES:
+                ret = new CargarNotificacionesComando();
                 break;
         }
 

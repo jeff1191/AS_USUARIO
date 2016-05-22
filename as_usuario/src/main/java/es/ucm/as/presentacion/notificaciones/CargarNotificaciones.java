@@ -21,6 +21,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.StringTokenizer;
 
+import es.ucm.as.R;
 import es.ucm.as.integracion.DBHelper;
 import es.ucm.as.integracion.Evento;
 import es.ucm.as.integracion.Tarea;
@@ -42,9 +43,16 @@ public class CargarNotificaciones extends BroadcastReceiver {
         return mDBHelper;
     }
 
+
     @Override
     public void onReceive(Context context, Intent intent) {
         Contexto.getInstancia().setContext(context);
+        Integer tono = R.raw.defecto;;
+        if(intent.getExtras() != null)
+           tono = intent.getExtras().getInt("tono");
+
+        Log.e("tono", "cargar notificaciones " + tono);
+
         //Lee las tareas de bbdd
         List<Tarea> tareas = new ArrayList<Tarea>();
         List<TransferTarea> transferTareas = new ArrayList<TransferTarea>();
@@ -88,10 +96,10 @@ public class CargarNotificaciones extends BroadcastReceiver {
                 Integer minutosPreguntaNotif =  Integer.parseInt(tokensPregunta.nextToken());
 
                 lanzarSuceso(context, horaAlarmaNotif, minutosAlarmaNotif, tituloAlarma,
-                        tarea.getTextoAlarma(), "alarma", tarea.getId());
+                        tarea.getTextoAlarma(), "alarma", tarea.getId(), tono);
                 Log.e("CargarNotificaciones", "Se guarda la alarma " + tarea.getTextoAlarma() + " a las " + horaAlarmaNotif + ":" + minutosAlarmaNotif);
                 lanzarSuceso(context, horaPreguntaNotif, minutosPreguntaNotif, tituloPregunta,
-                        tarea.getTextoPregunta(), "pregunta", tarea.getId());
+                        tarea.getTextoPregunta(), "pregunta", tarea.getId(), tono);
                 Log.e("CargarNotificaciones", "Se guarda la pregunta " + tarea.getTextoPregunta() + " a las " + horaPreguntaNotif + ":" + minutosPreguntaNotif);
 
             }
@@ -128,7 +136,7 @@ public class CargarNotificaciones extends BroadcastReceiver {
                     String mensajeEvento = evento.getNombre() + " a las " + horaE + ":" + minutosE;
 
                     lanzarSuceso(context, horaAlarmaNotifE, minutosAlarmaNotifE, tituloEvento,
-                            mensajeEvento, "evento", 0);
+                            mensajeEvento, "evento", 0, tono);
                     Log.e("CargarEventos", "Se guarda el evento " + mensajeEvento +
                             " a las " + horaAlarmaNotifE + ":" + minutosAlarmaNotifE);
                 }
@@ -140,7 +148,7 @@ public class CargarNotificaciones extends BroadcastReceiver {
 
 
     public void lanzarSuceso (Context context, Integer hora, Integer minutos, String titulo,
-                              String texto, String tipo, Integer idTarea) {
+                              String texto, String tipo, Integer idTarea, Integer tono) {
 
         AlarmManager am =( AlarmManager)context.getSystemService(Context.ALARM_SERVICE);
         Intent i;
@@ -152,6 +160,7 @@ public class CargarNotificaciones extends BroadcastReceiver {
         else // evento
             i = new Intent(context, NotificacionEvento.class);
 
+        i.putExtra("tono", tono );
         i.putExtra("titulo", titulo);
         i.putExtra("texto", texto);
         i.putExtra("idTarea", idTarea);

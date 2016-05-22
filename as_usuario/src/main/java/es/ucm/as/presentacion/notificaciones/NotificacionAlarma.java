@@ -9,6 +9,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.net.Uri;
 import android.support.v4.app.NotificationCompat;
+import android.util.Log;
 
 import java.util.Date;
 
@@ -33,6 +34,8 @@ public class NotificacionAlarma extends BroadcastReceiver {
         String tmpStr = String.valueOf(time);
         String last4Str = tmpStr.substring(tmpStr.length() - 5);
         int notificationId = Integer.valueOf(last4Str);
+        Log.e("tono", "not alarma " + intent.getExtras().getInt("tono"));
+        Log.e("tono", R.raw.starwars+"");
 
         PendingIntent aux = PendingIntent.getBroadcast(context, notificationId+4, new Intent(), PendingIntent.FLAG_UPDATE_CURRENT);
 
@@ -47,7 +50,7 @@ public class NotificacionAlarma extends BroadcastReceiver {
                         .setContentIntent(aux)
                         .setVibrate(new long[]{200, 300, 200, 300, 200})
                         .setLights(Color.YELLOW, 3000, 3000)
-                        .setSound(Uri.parse("android.resource://" + context.getPackageName() + "/" + R.raw.frozen))
+                        .setSound(Uri.parse("android.resource://" + context.getPackageName() + "/" + intent.getExtras().getInt("tono")))
                         .setStyle(new NotificationCompat.BigTextStyle()
                                   .bigText(intent.getExtras().getString("texto"))
                                   .setBigContentTitle(intent.getExtras().getString("titulo")));
