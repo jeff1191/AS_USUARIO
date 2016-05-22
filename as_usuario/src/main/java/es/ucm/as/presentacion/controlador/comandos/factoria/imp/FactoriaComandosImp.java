@@ -4,6 +4,7 @@ import es.ucm.as.presentacion.controlador.ListaComandos;
 import es.ucm.as.presentacion.controlador.comandos.Command;
 import es.ucm.as.presentacion.controlador.comandos.factoria.FactoriaComandos;
 import es.ucm.as.presentacion.controlador.comandos.imp.ActualizaPuntuacionComando;
+import es.ucm.as.presentacion.controlador.comandos.imp.ActualizarNotificacionTareaComando;
 import es.ucm.as.presentacion.controlador.comandos.imp.ConfiguracionComando;
 import es.ucm.as.presentacion.controlador.comandos.imp.ConsultarUsuarioComando;
 import es.ucm.as.presentacion.controlador.comandos.imp.CrearUsuarioComando;
@@ -83,6 +84,9 @@ public class FactoriaComandosImp extends FactoriaComandos {
                 break;
             case ListaComandos.ACTUALIZAR_NOTIFICACIONES:
                 ret = new ActualizarNotificacionesComando();
+                break;
+            case ListaComandos.ACTUALIZAR_NOTIFICACION_TAREA:
+                ret = new ActualizarNotificacionTareaComando();
                 break;
         }
 

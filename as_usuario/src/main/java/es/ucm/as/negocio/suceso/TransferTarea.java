@@ -3,6 +3,8 @@
  */
 package es.ucm.as.negocio.suceso;
 
+import android.app.PendingIntent;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -33,6 +35,10 @@ public class TransferTarea implements Serializable{
 	private Integer numSi;
 
 	private Integer numNo;
+
+	private Integer notificacionAlarma;
+
+	private Integer notificacionPregunta;
 
 	public Integer getId() {
 		return id;
@@ -120,5 +126,21 @@ public class TransferTarea implements Serializable{
 
 	public void setNumNo(Integer numNo) {
 		this.numNo = numNo;
+	}
+
+	public Integer getNotificacionAlarma() {
+		return notificacionAlarma;
+	}
+
+	public void setNotificacionAlarma(Integer notificacionAlarma) {
+		this.notificacionAlarma = notificacionAlarma;
+	}
+
+	public Integer getNotificacionPregunta() {
+		return notificacionPregunta;
+	}
+
+	public void setNotificacionPregunta(Integer notificacionPregunta) {
+		this.notificacionPregunta = notificacionPregunta;
 	}
 }

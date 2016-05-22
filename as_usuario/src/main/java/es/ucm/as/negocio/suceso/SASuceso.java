@@ -35,6 +35,8 @@ public interface SASuceso {
 
     public void actualizarNotificaciones();
 
+    public void actualizarNotificacionTarea(TransferTarea transferTarea);
+
 
     // Correo
 

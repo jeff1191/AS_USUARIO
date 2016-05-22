@@ -22,4 +22,5 @@ public class ListaComandos {
     public static final String SINCRONIZAR_REGISTRO = "sincronizar_registro";
     public static final String RESPONDER_TAREA = "responder_tarea";
     public static final String ACTUALIZAR_NOTIFICACIONES = "actualizarNotificaciones";
+    public static final String ACTUALIZAR_NOTIFICACION_TAREA = "actualizarNotificacionTarea";
 }

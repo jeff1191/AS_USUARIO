@@ -46,6 +46,12 @@ public class Tarea {
 	@DatabaseField(columnName = "NUM_NO")
 	private Integer numNo;
 
+	@DatabaseField(columnName = "NOTIFICACION_ALARMA")
+	private Integer notificacionAlarma;
+
+	@DatabaseField(columnName = "NOTIFICACION_PREGUNTA")
+	private Integer notificacionPregunta;
+
 	public Tarea(){
 		this.contador = 0;
 		this.noSeguidos = 0;
@@ -142,7 +148,23 @@ public class Tarea {
 	public void setNumNo(Integer numNo) {
 		this.numNo = numNo;
 	}
-	
+
+	public Integer getNotificacionAlarma() {
+		return notificacionAlarma;
+	}
+
+	public void setNotificacionAlarma(Integer notificacionAlarma) {
+		this.notificacionAlarma = notificacionAlarma;
+	}
+
+	public Integer getNotificacionPregunta() {
+		return notificacionPregunta;
+	}
+
+	public void setNotificacionPregunta(Integer notificacionPregunta) {
+		this.notificacionPregunta = notificacionPregunta;
+	}
+
 	public TransferTarea getTransfer(){
 		TransferTarea transferTarea = new TransferTarea();
 		transferTarea.setId( getId());
@@ -156,6 +178,8 @@ public class Tarea {
 		transferTarea.setNoSeguidos( getNoSeguidos());
 		transferTarea.setNumNo( getNumNo());
 		transferTarea.setNumSi( getNumSi());
+		transferTarea.setNotificacionAlarma(getNotificacionAlarma());
+		transferTarea.setNotificacionPregunta(getNotificacionPregunta());
 		return transferTarea;
 	}
 

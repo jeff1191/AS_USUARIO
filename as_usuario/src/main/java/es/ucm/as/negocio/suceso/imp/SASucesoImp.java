@@ -237,6 +237,8 @@ public class SASucesoImp implements SASuceso {
                                 tarea.setMejorar(transfer.getMejorar());
                             if (tarea.getFrecuenciaTarea() != transfer.getFrecuenciaTarea())
                                 tarea.setFrecuenciaTarea(transfer.getFrecuenciaTarea());
+
+                            Log.e("servicio", "la tarea existe en bbdd sus pending son " + tarea.getNotificacionAlarma() + " " + tarea.getNotificacionPregunta());
                         }
 
                         // En cualquier caso se crea o actualiza
@@ -352,6 +354,21 @@ public class SASucesoImp implements SASuceso {
                 eventoDao.deleteById(eventos.get(i).getId());
 
 
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void actualizarNotificacionTarea(TransferTarea transferTarea) {
+        try {
+            Dao<Tarea, Integer> tareaDao = getHelper().getTareaDao();
+            Tarea tarea = tareaDao.queryForId(transferTarea.getId());
+            if(transferTarea.getNotificacionAlarma() != null)
+                tarea.setNotificacionAlarma(transferTarea.getNotificacionAlarma());
+            if(transferTarea.getNotificacionPregunta() != null)
+                tarea.setNotificacionPregunta(transferTarea.getNotificacionPregunta());
+            tareaDao.update(tarea);
         } catch (SQLException e) {
             e.printStackTrace();
         }

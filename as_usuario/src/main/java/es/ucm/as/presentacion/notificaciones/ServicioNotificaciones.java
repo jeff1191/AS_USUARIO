@@ -12,7 +12,10 @@ import android.util.Log;
 
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
+import es.ucm.as.negocio.conexion.msg.Mensaje;
+import es.ucm.as.negocio.suceso.TransferTarea;
 import es.ucm.as.presentacion.vista.Contexto;
 
 public class ServicioNotificaciones extends Service {
@@ -25,29 +28,49 @@ public class ServicioNotificaciones extends Service {
 
     @Override
     public void onCreate() {
-        Log.d("NOTIFICACIONES","se crea el servicio");
+        Log.e("servicio","se crea el servicio");
         super.onCreate();
     }
 
     @Override
     public void onDestroy() {
-        Log.d("NOTIFICACIONES","se destruye el servicio");
+        Log.e("servicio","se destruye el servicio");
         super.onDestroy();
     }
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         //Tendriamos que pensar en tener to*do en una cola que la tendria que haber cogido de base de datos - esto es IMPORTANTE
-        Log.d("NOTIFICACIONES","se lanza el servicio");
-        Log.e("servicioNot", "Se lanza serv");
+        Log.e("servicio","se lanza el servicio");
         Contexto.getInstancia().setContext(getApplicationContext());
         AlarmManager am =( AlarmManager) getApplicationContext().getSystemService(Context.ALARM_SERVICE);
         Intent i = new Intent(getApplicationContext(), CargarNotificaciones.class);
 
+        Mensaje info;
         if(intent.getExtras() == null)
-            Log.e("servicio", "no me llega msg");
-        else
-            i.putExtra("info", intent.getExtras().getSerializable("info"));
+            Log.e("servicio", "no le llega info a traves del bundle");
+        else {
+            info = (Mensaje)intent.getExtras().getSerializable("info");
+            List<TransferTarea> tareas = info.getTareas();
+
+            // Elimina las alarmas que hay actualmente para sobreescribir con las nuevas
+            for(int j = 0; j < tareas.size(); j++){
+                if(tareas.get(j).getNotificacionAlarma() != null) {
+                    Log.e("servicio", "cancela la notificacion alarma de " + tareas.get(j).getId() + " id " + tareas.get(j).getNotificacionAlarma());
+                    PendingIntent pendingIntent = PendingIntent.getBroadcast(Contexto.getInstancia().getContext(),
+                            tareas.get(j).getNotificacionAlarma(), new Intent(Contexto.getInstancia().getContext(), NotificacionAlarma.class), PendingIntent.FLAG_ONE_SHOT);
+                    am.cancel(pendingIntent);
+                    pendingIntent.cancel();
+                    Log.e("servicio", "cancela la notificacion pregunta de " + tareas.get(j).getId() + " id " + tareas.get(j).getNotificacionPregunta());
+                    PendingIntent pendingIntentPreg = PendingIntent.getBroadcast(Contexto.getInstancia().getContext(),
+                            tareas.get(j).getNotificacionPregunta(), new Intent(Contexto.getInstancia().getContext(), NotificacionPregunta.class), PendingIntent.FLAG_ONE_SHOT);
+                    am.cancel(pendingIntentPreg);
+                    pendingIntentPreg.cancel();
+                }
+            }
+            i.putExtra("info",info);
+        }
+
 
         long time = new Date().getTime();
         String tmpStr = String.valueOf(time);
@@ -63,11 +86,10 @@ public class ServicioNotificaciones extends Service {
         horaNotificacionCal.set(Calendar.MINUTE, m);
         horaNotificacionCal.set(Calendar.SECOND, 00);
 
-        //Log.e("ServicioNot", "Se ejecutara a las " + horaNotificacionCal.getTime().toString());
-
         long horaNotificacion = horaNotificacionCal.getTimeInMillis();
-
         setAlarm(am, horaNotificacion, pi);
+
+        Log.e("ServicioNot", "Se ejecutara a las " + horaNotificacionCal.getTime().toString());
 
         return START_NOT_STICKY;
     }

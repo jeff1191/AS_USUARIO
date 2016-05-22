@@ -21,6 +21,8 @@ import es.ucm.as.R;
 import es.ucm.as.negocio.conexion.msg.Mensaje;
 import es.ucm.as.negocio.suceso.TransferEvento;
 import es.ucm.as.negocio.suceso.TransferTarea;
+import es.ucm.as.presentacion.controlador.Controlador;
+import es.ucm.as.presentacion.controlador.ListaComandos;
 import es.ucm.as.presentacion.vista.Contexto;
 
 /**
@@ -34,76 +36,76 @@ public class CargarNotificaciones extends BroadcastReceiver {
         // Se modifica el contexto para poder usar el singleton para responder desde una notificacion
         // con un comando
         Contexto.getInstancia().setContext(context);
+
+        // Se accede a la informacion de BBDD a traves de un bundle
         Mensaje info = (Mensaje) intent.getExtras().getSerializable("info");
-        if (info == null)
-            Log.e("CargarNotificaciones", "Info nula");
-        else{
-            Log.e("CargarNotificaciones", "Info NO nula");
+        if (info != null){
+            Integer tono = info.getUsuario().getTono();
+            List<TransferTarea> tareas = info.getTareas();
+            List<TransferEvento> eventos = info.getEventos();
 
-        Integer tono = info.getUsuario().getTono();
-        //Coge las tareas de bbdd
-        List<TransferTarea> tareas = info.getTareas();
-        //Coge los eventos de bbdd
-        List<TransferEvento> eventos = info.getEventos();
+            String tituloAlarma = "Alarma";
+            String tituloPregunta = "Pregunta";
+            String tituloEvento = "Evento";
 
-        String tituloAlarma = "Alarma";
-        String tituloPregunta = "Pregunta";
-        String tituloEvento = "Evento";
+            Log.e("CargarNotificaciones", "Tareas: " + tareas.size() + "");
 
-        Log.e("CargarNotificaciones", "Tareas: " + tareas.size() + "");
-
-        for (int i = 0; i < tareas.size(); i++) {
-            TransferTarea tarea = tareas.get(i);
-
-            //Esto es para dividir el date en horas y minutos
-            SimpleDateFormat horasMinutos = new SimpleDateFormat("HH:mm");
-            StringTokenizer tokensAlarma = new StringTokenizer(horasMinutos.format
-                    (tarea.getHoraAlarma()), ":");
-            StringTokenizer tokensPregunta = new StringTokenizer(horasMinutos.format
-                    (tarea.getHoraPregunta()), ":");
-
-            Integer horaAlarmaNotif = Integer.parseInt(tokensAlarma.nextToken());
-            Integer minutosAlarmaNotif = Integer.parseInt(tokensAlarma.nextToken());
-            Integer horaPreguntaNotif = Integer.parseInt(tokensPregunta.nextToken());
-            Integer minutosPreguntaNotif = Integer.parseInt(tokensPregunta.nextToken());
-
-            lanzarSuceso(context, horaAlarmaNotif, minutosAlarmaNotif, tituloAlarma,
-                    tarea.getTextoAlarma(), "alarma", tarea.getId(), tono);
-            Log.e("CargarNotificaciones", "Se guarda la alarma " + tarea.getTextoAlarma() + " a las " + horaAlarmaNotif + ":" + minutosAlarmaNotif);
-            lanzarSuceso(context, horaPreguntaNotif, minutosPreguntaNotif, tituloPregunta,
-                    tarea.getTextoPregunta(), "pregunta", tarea.getId(), tono);
-            Log.e("CargarNotificaciones", "Se guarda la pregunta " + tarea.getTextoPregunta() + " a las " + horaPreguntaNotif + ":" + minutosPreguntaNotif);
-
-        }
-
-        lanzarBucle(context);
-
-        Log.e("CargarNotificaciones", "Eventos: " + tareas.size() + "");
-
-        for (int i = 0; i < eventos.size(); i++) {
-            TransferEvento evento = eventos.get(i);
-            if (evento.getAsistencia().equals("SI")) {
+            for (int i = 0; i < tareas.size(); i++) {
+                TransferTarea tarea = tareas.get(i);
+                Log.e("CargarNot", "id tarea " + tarea.getId().toString());
                 //Esto es para dividir el date en horas y minutos
-                SimpleDateFormat horasMinutosE = new SimpleDateFormat("HH:mm");
-                StringTokenizer tokensAlarmaE = new StringTokenizer(horasMinutosE.format
-                        (evento.getHoraAlarma()), ":");
-                StringTokenizer tokensHoraE = new StringTokenizer(horasMinutosE.format
-                        (evento.getHoraEvento()), ":");
+                SimpleDateFormat horasMinutos = new SimpleDateFormat("HH:mm");
+                StringTokenizer tokensAlarma = new StringTokenizer(horasMinutos.format
+                        (tarea.getHoraAlarma()), ":");
+                StringTokenizer tokensPregunta = new StringTokenizer(horasMinutos.format
+                        (tarea.getHoraPregunta()), ":");
 
-                Integer horaAlarmaNotifE = Integer.parseInt(tokensAlarmaE.nextToken());
-                Integer minutosAlarmaNotifE = Integer.parseInt(tokensAlarmaE.nextToken());
-                Integer horaE = Integer.parseInt(tokensHoraE.nextToken());
-                Integer minutosE = Integer.parseInt(tokensHoraE.nextToken());
+                Integer horaAlarmaNotif = Integer.parseInt(tokensAlarma.nextToken());
+                Integer minutosAlarmaNotif = Integer.parseInt(tokensAlarma.nextToken());
+                Integer horaPreguntaNotif = Integer.parseInt(tokensPregunta.nextToken());
+                Integer minutosPreguntaNotif = Integer.parseInt(tokensPregunta.nextToken());
 
-                String mensajeEvento = evento.getNombre() + " a las " + horaE + ":" + minutosE;
+                lanzarSuceso(context, horaAlarmaNotif, minutosAlarmaNotif, tituloAlarma,
+                        tarea.getTextoAlarma(), "alarma", tarea.getId(), tono);
+                Log.e("CargarNotificaciones", "Se guarda la alarma " + tarea.getTextoAlarma() +
+                        " a las " + horaAlarmaNotif + ":" + minutosAlarmaNotif);
+                lanzarSuceso(context, horaPreguntaNotif, minutosPreguntaNotif, tituloPregunta,
+                        tarea.getTextoPregunta(), "pregunta", tarea.getId(), tono);
+                Log.e("CargarNotificaciones", "Se guarda la pregunta " + tarea.getTextoPregunta() +
+                        " a las " + horaPreguntaNotif + ":" + minutosPreguntaNotif);
 
-                lanzarSuceso(context, horaAlarmaNotifE, minutosAlarmaNotifE, tituloEvento,
-                        mensajeEvento, "evento", 0, tono);
-                Log.e("CargarEventos", "Se guarda el evento " + mensajeEvento +
-                        " a las " + horaAlarmaNotifE + ":" + minutosAlarmaNotifE);
+            }
+
+            // Esto carga la clase BucleNotificaciones, importante para que la fecha de las tareas
+            // se actualice a ultima hora
+            lanzarBucle(context);
+
+            Log.e("CargarNotificaciones", "Eventos: " + tareas.size() + "");
+
+            for (int i = 0; i < eventos.size(); i++) {
+                TransferEvento evento = eventos.get(i);
+                if (evento.getAsistencia().equals("SI")) {
+                    //Esto es para dividir el date en horas y minutos
+                    SimpleDateFormat horasMinutosE = new SimpleDateFormat("HH:mm");
+                    StringTokenizer tokensAlarmaE = new StringTokenizer(horasMinutosE.format
+                            (evento.getHoraAlarma()), ":");
+                    StringTokenizer tokensHoraE = new StringTokenizer(horasMinutosE.format
+                            (evento.getHoraEvento()), ":");
+
+                    Integer horaAlarmaNotifE = Integer.parseInt(tokensAlarmaE.nextToken());
+                    Integer minutosAlarmaNotifE = Integer.parseInt(tokensAlarmaE.nextToken());
+                    Integer horaE = Integer.parseInt(tokensHoraE.nextToken());
+                    Integer minutosE = Integer.parseInt(tokensHoraE.nextToken());
+
+                    String mensajeEvento = evento.getNombre() + " a las " + horaE + ":" + minutosE;
+
+                    lanzarSuceso(context, horaAlarmaNotifE, minutosAlarmaNotifE, tituloEvento,
+                            mensajeEvento, "evento", 0, tono);
+                    Log.e("CargarEventos", "Se guarda el evento " + mensajeEvento +
+                            " a las " + horaAlarmaNotifE + ":" + minutosAlarmaNotifE);
+                }
             }
         }
-    }
     }
 
 
@@ -125,15 +127,24 @@ public class CargarNotificaciones extends BroadcastReceiver {
         i.putExtra("texto", texto);
         i.putExtra("idTarea", idTarea);
 
-         /*
-        It gets current system time. Then I'm reading only last 4 digits from it.
-         I'm using it to create unique id every time notification is displayed.
-         So the probability of getting same or reset of notification id will be avoided.
-         */
+        /* Coge los 4 ultimos digitos de la fecha actual del sistema para formar el pending id
+        con ellos, de esta manera se asegura que son unicos */
         long time = new Date().getTime();
         String tmpStr = String.valueOf(time);
         String last4Str = tmpStr.substring(tmpStr.length() - 5);
         int pendingId = Integer.valueOf(last4Str);
+
+        // Se ejecuta este comando para que se guarde en BBDD el pendingIntent ID
+        TransferTarea transferTarea = new TransferTarea();
+        transferTarea.setId(idTarea);
+        if(tipo.equals("alarma")) {
+            transferTarea.setNotificacionAlarma(pendingId);
+            Log.e("servicio", "GUarda la notificacion alarma de " + transferTarea.getId() + " id " + transferTarea.getNotificacionAlarma());
+        }else if(tipo.equals("pregunta")) {
+            transferTarea.setNotificacionPregunta(pendingId);
+            Log.e("servicio", "GUarda la notificacion pregunta de " + transferTarea.getId() + " id " + transferTarea.getNotificacionPregunta());
+        }
+        Controlador.getInstancia().ejecutaComando(ListaComandos.ACTUALIZAR_NOTIFICACION_TAREA, transferTarea);
 
         PendingIntent pi = PendingIntent.getBroadcast(context, pendingId, i, PendingIntent.FLAG_ONE_SHOT);
 
