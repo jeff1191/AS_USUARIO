@@ -71,7 +71,6 @@ public class ServicioNotificaciones extends Service {
             i.putExtra("info",info);
         }
 
-
         long time = new Date().getTime();
         String tmpStr = String.valueOf(time);
         String last4Str = tmpStr.substring(tmpStr.length() - 5);
@@ -89,7 +88,7 @@ public class ServicioNotificaciones extends Service {
         long horaNotificacion = horaNotificacionCal.getTimeInMillis();
         setAlarm(am, horaNotificacion, pi);
 
-        Log.e("ServicioNot", "Se ejecutara a las " + horaNotificacionCal.getTime().toString());
+        Log.e("ServicioNot", "Se cargaran las notificaciones a las " + horaNotificacionCal.getTime().toString());
 
         return START_NOT_STICKY;
     }

@@ -23,4 +23,5 @@ public class ListaComandos {
     public static final String RESPONDER_TAREA = "responder_tarea";
     public static final String ACTUALIZAR_NOTIFICACIONES = "actualizarNotificaciones";
     public static final String ACTUALIZAR_NOTIFICACION_TAREA = "actualizarNotificacionTarea";
+    public static final String INFO = "info";
 }

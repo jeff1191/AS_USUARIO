@@ -13,6 +13,7 @@ import es.ucm.as.presentacion.controlador.comandos.imp.EnviarCorreoComando;
 import es.ucm.as.presentacion.controlador.comandos.imp.GenerarPDFComando;
 import es.ucm.as.presentacion.controlador.comandos.imp.GuardarEventosComando;
 import es.ucm.as.presentacion.controlador.comandos.imp.HayUsuarioComando;
+import es.ucm.as.presentacion.controlador.comandos.imp.InfoComando;
 import es.ucm.as.presentacion.controlador.comandos.imp.ResponderRetoComando;
 import es.ucm.as.presentacion.controlador.comandos.imp.ResponderTareaComando;
 import es.ucm.as.presentacion.controlador.comandos.imp.SincronizarComando;
@@ -87,6 +88,9 @@ public class FactoriaComandosImp extends FactoriaComandos {
                 break;
             case ListaComandos.ACTUALIZAR_NOTIFICACION_TAREA:
                 ret = new ActualizarNotificacionTareaComando();
+                break;
+            case ListaComandos.INFO:
+                ret = new InfoComando();
                 break;
         }
 

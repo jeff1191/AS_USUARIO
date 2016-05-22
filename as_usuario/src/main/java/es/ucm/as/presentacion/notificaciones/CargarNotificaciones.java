@@ -78,7 +78,7 @@ public class CargarNotificaciones extends BroadcastReceiver {
 
             // Esto carga la clase BucleNotificaciones, importante para que la fecha de las tareas
             // se actualice a ultima hora
-            lanzarBucle(context);
+            lanzarBucle(context, info);
 
             Log.e("CargarNotificaciones", "Eventos: " + tareas.size() + "");
 
@@ -137,13 +137,10 @@ public class CargarNotificaciones extends BroadcastReceiver {
         // Se ejecuta este comando para que se guarde en BBDD el pendingIntent ID
         TransferTarea transferTarea = new TransferTarea();
         transferTarea.setId(idTarea);
-        if(tipo.equals("alarma")) {
+        if(tipo.equals("alarma"))
             transferTarea.setNotificacionAlarma(pendingId);
-            Log.e("servicio", "GUarda la notificacion alarma de " + transferTarea.getId() + " id " + transferTarea.getNotificacionAlarma());
-        }else if(tipo.equals("pregunta")) {
+        else if(tipo.equals("pregunta"))
             transferTarea.setNotificacionPregunta(pendingId);
-            Log.e("servicio", "GUarda la notificacion pregunta de " + transferTarea.getId() + " id " + transferTarea.getNotificacionPregunta());
-        }
         Controlador.getInstancia().ejecutaComando(ListaComandos.ACTUALIZAR_NOTIFICACION_TAREA, transferTarea);
 
         PendingIntent pi = PendingIntent.getBroadcast(context, pendingId, i, PendingIntent.FLAG_ONE_SHOT);
@@ -164,16 +161,16 @@ public class CargarNotificaciones extends BroadcastReceiver {
             horaNotificacionCal.add(Calendar.DAY_OF_MONTH, 1);
             horaNotificacion = horaNotificacionCal.getTimeInMillis();
         }
-
         setAlarm(am,horaNotificacion,pi);
 
     }
 
-    public void lanzarBucle(Context context){
+    public void lanzarBucle(Context context, Mensaje info){
         Log.e("lanzarBucle", "Se mete para guardar la ultima not");
 
         AlarmManager am =( AlarmManager)context.getSystemService(Context.ALARM_SERVICE);
         Intent i = new Intent(context, BucleNotificaciones.class);
+
         long time = new Date().getTime();
         String tmpStr = String.valueOf(time);
         String last4Str = tmpStr.substring(tmpStr.length() - 5);
@@ -185,6 +182,8 @@ public class CargarNotificaciones extends BroadcastReceiver {
         horaNotificacionCal.set(Calendar.MINUTE, 47);
         horaNotificacionCal.set(Calendar.SECOND, 00);
         long horaNotificacion = horaNotificacionCal.getTimeInMillis();
+        Log.e("cargarNot", "A las 23:47 se actualizaran las horas de notificacion");
+
 
         setAlarm(am, horaNotificacion, pi);
 

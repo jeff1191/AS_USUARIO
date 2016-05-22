@@ -100,7 +100,7 @@ public class DispatcherImp extends Dispatcher{
                     intentSincroPrim.putExtra("usuario", infoRegistro.getUsuario());
                     intentSincroPrim.setFlags(intentSincroPrim.getFlags() | Intent.FLAG_ACTIVITY_NO_HISTORY);
 
-                    Log.e("DISPATCHER", "SE VA A INICIAR_SERVICIO_NOTIFICACIONES Regisrtro");
+                    Log.e("DISPATCHER", "SE VA A INICIAR_SERVICIO_NOTIFICACIONES Registro");
                     Intent serviceRegistro = new Intent(Contexto.getInstancia().getContext(),  ServicioNotificaciones.class);
                     serviceRegistro.putExtra("info", infoRegistro);
                     Contexto.getInstancia().getContext().stopService(serviceRegistro);

@@ -237,8 +237,6 @@ public class SASucesoImp implements SASuceso {
                                 tarea.setMejorar(transfer.getMejorar());
                             if (tarea.getFrecuenciaTarea() != transfer.getFrecuenciaTarea())
                                 tarea.setFrecuenciaTarea(transfer.getFrecuenciaTarea());
-
-                            Log.e("servicio", "la tarea existe en bbdd sus pending son " + tarea.getNotificacionAlarma() + " " + tarea.getNotificacionPregunta());
                         }
 
                         // En cualquier caso se crea o actualiza
