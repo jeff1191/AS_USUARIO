@@ -163,7 +163,6 @@ public class CargarNotificaciones extends BroadcastReceiver {
 
         AlarmManager am =( AlarmManager)context.getSystemService(Context.ALARM_SERVICE);
         Intent i = new Intent(context, BucleNotificaciones.class);
-
         long time = new Date().getTime();
         String tmpStr = String.valueOf(time);
         String last4Str = tmpStr.substring(tmpStr.length() - 5);

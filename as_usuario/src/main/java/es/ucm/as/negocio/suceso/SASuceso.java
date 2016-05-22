@@ -33,6 +33,8 @@ public interface SASuceso {
 
     public List<TransferTarea> consultarTareasNotificaciones();
 
+    public void actualizarNotificaciones();
+
 
     // Correo
 

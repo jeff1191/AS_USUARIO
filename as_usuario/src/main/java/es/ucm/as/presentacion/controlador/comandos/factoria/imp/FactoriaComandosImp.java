@@ -20,6 +20,7 @@ import es.ucm.as.presentacion.controlador.comandos.imp.VerAyudaComando;
 import es.ucm.as.presentacion.controlador.comandos.imp.VerEventosComando;
 import es.ucm.as.presentacion.controlador.comandos.imp.VerInformeComando;
 import es.ucm.as.presentacion.controlador.comandos.imp.VerRetoComando;
+import es.ucm.as.presentacion.controlador.comandos.imp.ActualizarNotificacionesComando;
 
 /**
  * Created by Jeffer on 02/03/2016.
@@ -79,6 +80,9 @@ public class FactoriaComandosImp extends FactoriaComandos {
                 break;
             case ListaComandos.RESPONDER_TAREA:
                 ret = new ResponderTareaComando();
+                break;
+            case ListaComandos.ACTUALIZAR_NOTIFICACIONES:
+                ret = new ActualizarNotificacionesComando();
                 break;
         }
 

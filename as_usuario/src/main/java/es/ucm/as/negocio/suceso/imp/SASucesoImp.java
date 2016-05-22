@@ -325,6 +325,53 @@ public class SASucesoImp implements SASuceso {
         return transferTareas;
     }
 
+    @Override
+    public void actualizarNotificaciones() {
+
+        try {
+            Dao<Tarea, Integer> tareaDao = getHelper().getTareaDao();
+            List<Tarea> tareas = tareaDao.queryForAll();
+            for(int i = 0; i < tareas.size(); i++){
+                Tarea tarea = tareas.get(i);
+
+                // Se actualizan las proximas horas de alarma y pregunta de esa tarea en base a la frecuencia
+                Calendar calendar = Calendar.getInstance();
+                calendar.setTime(tarea.getHoraAlarma());
+                Date newAlarma = proximaNotificacion(calendar, tarea.getFrecuenciaTarea());
+                calendar.setTime(tarea.getHoraPregunta());
+                Date newPregunta = proximaNotificacion(calendar, tarea.getFrecuenciaTarea());
+                tarea.setHoraAlarma(newAlarma);
+                tarea.setHoraPregunta(newPregunta);
+
+                tareaDao.update(tarea);
+            }
+
+            Dao<Evento, Integer> eventoDao = getHelper().getEventoDao();
+            List<Evento> eventos = eventoDao.queryForAll();
+            for(int i = 0; i < eventos.size(); i++)
+                eventoDao.deleteById(eventos.get(i).getId());
+
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private Date proximaNotificacion(Calendar old, Frecuencia frecuencia) {
+        switch (frecuencia) {
+            case DIARIA:
+                old.add(Calendar.DAY_OF_MONTH, 1);
+                break;
+            case SEMANAL:
+                old.add(Calendar.DAY_OF_MONTH, 7);
+                break;
+            case MENSUAL:
+                old.add(Calendar.DAY_OF_MONTH, 30);
+                break;
+        }
+        return old.getTime();
+    }
+
     private Frecuencia aumentarFrecuencia (Frecuencia frecuencia){
         Frecuencia nueva = DIARIA;
         switch (frecuencia){
