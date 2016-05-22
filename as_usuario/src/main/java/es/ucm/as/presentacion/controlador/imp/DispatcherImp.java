@@ -7,10 +7,9 @@ import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
-import es.ucm.as.R;
+
 import es.ucm.as.negocio.conexion.msg.Mensaje;
 import es.ucm.as.negocio.suceso.TransferEvento;
 import es.ucm.as.negocio.suceso.TransferReto;
@@ -18,7 +17,6 @@ import es.ucm.as.negocio.suceso.TransferTarea;
 import es.ucm.as.negocio.usuario.TransferUsuario;
 import es.ucm.as.presentacion.controlador.Dispatcher;
 import es.ucm.as.presentacion.controlador.ListaComandos;
-import es.ucm.as.presentacion.notificaciones.CargarNotificaciones;
 import es.ucm.as.presentacion.notificaciones.ServicioNotificaciones;
 import es.ucm.as.presentacion.vista.Ayuda;
 import es.ucm.as.presentacion.vista.Configuracion;
@@ -68,10 +66,10 @@ public class DispatcherImp extends Dispatcher{
                 break;
 
             case ListaComandos.SINCRONIZAR:
-                TransferUsuario terminado = (TransferUsuario) datos;
-                if(terminado != null) {
+                Mensaje info = (Mensaje) datos;
+                if(info != null) {
                     Intent intentSincro = new Intent(Contexto.getInstancia().getContext().getApplicationContext(), MainActivity.class);
-                    intentSincro.putExtra("usuario", terminado);
+                    intentSincro.putExtra("usuario", info.getUsuario());
                     intentSincro.setFlags(intentSincro.getFlags() | Intent.FLAG_ACTIVITY_NO_HISTORY | Intent.FLAG_ACTIVITY_NEW_TASK);
                     Toast toast =
                             Toast.makeText(Contexto.getInstancia().getContext().getApplicationContext(),
@@ -81,7 +79,7 @@ public class DispatcherImp extends Dispatcher{
                     // Si la sincronizacion ha sido correcta se relanza el servicio de notificaciones
                     Log.e("DISPATCHER", "SE VA A REINICIAR_SERVICIO_NOTIFICACIONES comando");
                     Intent service = new Intent(Contexto.getInstancia().getContext(),  ServicioNotificaciones.class);
-                    service.putExtra("tono", terminado.getTono());
+                    service.putExtra("info", info);
                     Contexto.getInstancia().getContext().stopService(service);
                     Contexto.getInstancia().getContext().startService(service);
 
@@ -96,15 +94,24 @@ public class DispatcherImp extends Dispatcher{
                 break;
 
             case ListaComandos.SINCRONIZAR_REGISTRO:
-                TransferUsuario terminadoPrim = (TransferUsuario) datos;
-                if(terminadoPrim != null) {
+                Mensaje infoRegistro = (Mensaje) datos;
+                if(infoRegistro != null) {
                     Intent intentSincroPrim = new Intent(Contexto.getInstancia().getContext().getApplicationContext(), Registro.class);
-                    intentSincroPrim.putExtra("usuario", terminadoPrim);
+                    intentSincroPrim.putExtra("usuario", infoRegistro.getUsuario());
                     intentSincroPrim.setFlags(intentSincroPrim.getFlags() | Intent.FLAG_ACTIVITY_NO_HISTORY);
+
+                    Log.e("DISPATCHER", "SE VA A INICIAR_SERVICIO_NOTIFICACIONES Regisrtro");
+                    Intent serviceRegistro = new Intent(Contexto.getInstancia().getContext(),  ServicioNotificaciones.class);
+                    serviceRegistro.putExtra("info", infoRegistro);
+                    Contexto.getInstancia().getContext().stopService(serviceRegistro);
+                    Contexto.getInstancia().getContext().startService(serviceRegistro);
+
                     Toast toast =
                             Toast.makeText(Contexto.getInstancia().getContext().getApplicationContext(),
                                     "Registro completado correctamente", Toast.LENGTH_LONG);
                     toast.show();
+
+                    // Se vuelve a la clase registro para que compruebe si la creacion fue bien
                     Contexto.getInstancia().getContext().startActivity(intentSincroPrim);
                 }else{
                     Toast errorNombre =
@@ -161,31 +168,6 @@ public class DispatcherImp extends Dispatcher{
                 Contexto.getInstancia().getContext().startActivity(intentTareas);
                 break;
 
-            case ListaComandos.CARGAR_NOTIFICACIONES:
-                Intent consultarTareasHoy = new Intent(Contexto.getInstancia().getContext().getApplicationContext(), CargarNotificaciones.class);
-                Mensaje msg = (Mensaje) datos;
-                List<TransferTarea>tareas = msg.getTareas();
-
-                ArrayList<String> txAlarma = new ArrayList<String>();
-                ArrayList<Date> halarma = new ArrayList<>();
-                ArrayList<String> txPregunta = new ArrayList<String>();
-                ArrayList<Date> hPregunta = new ArrayList<>();
-
-                for(int j = 1; j < tareas.size(); j++){
-                    TransferTarea tt = (TransferTarea)tareas.get(j);
-                    txAlarma.add(tt.getTextoAlarma());
-                    halarma.add(tt.getHoraAlarma());
-                    txPregunta.add(tt.getTextoPregunta());
-                    hPregunta.add(tt.getHoraPregunta());
-                }
-                consultarTareasHoy.putExtra("txalarma", txAlarma);
-                consultarTareasHoy.putExtra("halarma", halarma);
-                consultarTareasHoy.putExtra("txpregunta", txPregunta);
-                consultarTareasHoy.putExtra("hpregunta", hPregunta);
-                //consultarTareasHoy.putExtra("tono", msg.getUsuario().getTono());
-                consultarTareasHoy.putExtra("tono" , R.raw.starwars);
-                Contexto.getInstancia().getContext().sendBroadcast(consultarTareasHoy);
-                break;
 
             // Eventos
 

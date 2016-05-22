@@ -43,7 +43,12 @@ public class ServicioNotificaciones extends Service {
         Contexto.getInstancia().setContext(getApplicationContext());
         AlarmManager am =( AlarmManager) getApplicationContext().getSystemService(Context.ALARM_SERVICE);
         Intent i = new Intent(getApplicationContext(), CargarNotificaciones.class);
-        i.putExtra("tono", intent.getExtras().getInt("tono"));
+
+        if(intent.getExtras() == null)
+            Log.e("servicio", "no me llega msg");
+        else
+            i.putExtra("info", intent.getExtras().getSerializable("info"));
+
         long time = new Date().getTime();
         String tmpStr = String.valueOf(time);
         String last4Str = tmpStr.substring(tmpStr.length() - 5);

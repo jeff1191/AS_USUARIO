@@ -27,11 +27,11 @@ public class SincronizarRegistroComando implements Command{
         Mensaje msg = (Mensaje) datos;
         ConectionManager conectionManager;
         conectionManager = new ConectionManager(msg);
+        SASuceso saSuceso = FactoriaSA.getInstancia().nuevoSASuceso();
 
         if(conectionManager.getResponse() != null) {
             // Se procesa cada parte del mensaje
             Mensaje respuestaTutor = conectionManager.getResponse();
-            SASuceso saSuceso = FactoriaSA.getInstancia().nuevoSASuceso();
             saSuceso.cargarReto(respuestaTutor.getReto());
             saSuceso.cargarTareas(respuestaTutor.getTareas());
             saSuceso.crearEventos(respuestaTutor.getEventos());
@@ -39,8 +39,15 @@ public class SincronizarRegistroComando implements Command{
             terminado = conectionManager.getResponse() != null;
             conectionManager.reset();
         }
-        if(terminado)
-            return msg.getUsuario();
+
+        if(terminado) {
+            Mensaje info = new Mensaje();
+            info.setUsuario(msg.getUsuario());
+            info.setTareas(saSuceso.consultarTareasNotificaciones());
+            info.setReto(saSuceso.consultarReto());
+            info.setEventos(saSuceso.consultarEventosNotificaciones());
+            return info;
+        }
         else
             return null;
     }

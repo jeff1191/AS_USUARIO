@@ -31,7 +31,6 @@ public class NotificacionPregunta extends BroadcastReceiver {
         String texto = bundle.getString("texto");
         Integer idTarea = bundle.getInt("idTarea");
         Integer tono = bundle.getInt("tono");
-        Log.e("tono", "not pregunta " + tono);
 
         long time = new Date().getTime();
         String tmpStr = String.valueOf(time);

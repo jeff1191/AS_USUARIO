@@ -8,6 +8,8 @@ import com.j256.ormlite.field.DatabaseField;
 
 import java.util.Date;
 
+import es.ucm.as.negocio.suceso.TransferEvento;
+
 public class Evento {
 	@DatabaseField(generatedId = true, columnName = "ID")
 	private Integer id;
@@ -73,5 +75,16 @@ public class Evento {
 
 	public void setHoraEvento(Date horaEvento) {
 		this.horaEvento = horaEvento;
+	}
+
+	public TransferEvento getTransfer(){
+		TransferEvento ret = new TransferEvento();
+		ret.setAsistencia(ret.getAsistencia());
+		ret.setNombre(ret.getNombre());
+		ret.setFecha(ret.getFecha());
+		ret.setHoraAlarma(ret.getHoraAlarma());
+		ret.setHoraEvento(ret.getHoraEvento());
+		ret.setId(ret.getId());
+		return ret;
 	}
 }

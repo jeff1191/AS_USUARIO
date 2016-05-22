@@ -17,7 +17,6 @@ public class CrearUsuarioComando implements Command{
     public Object ejecutaComando(Object datos) throws commandException {
         SAUsuario su = FactoriaSA.getInstancia().nuevoSAUsuario();
         su.crearUsuario((TransferUsuario)datos);
-        Log.e("maria", "usuario creado");
         return null;
     }
 }

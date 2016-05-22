@@ -58,7 +58,6 @@
 
         <service
             android:name="es.ucm.as.presentacion.notificaciones.ServicioNotificaciones"
-            android:enabled="true"
             android:exported="true"
             android:process=":servicio_notificaciones" />
 

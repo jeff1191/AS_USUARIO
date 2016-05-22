@@ -23,7 +23,7 @@ public class MainActivity extends Activity {
     private TextView nombrePrincipal;
     private TextView puntuacion;
     private ImageView imagenPerfil;
-    private int REQUEST_CODE;
+    private int REQUEST_CODE = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

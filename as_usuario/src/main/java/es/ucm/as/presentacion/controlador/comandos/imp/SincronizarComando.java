@@ -50,8 +50,14 @@ public class SincronizarComando implements Command{
             conectionManager.reset();
         }
 
-        if (terminado)
-            return usuario;
+        if (terminado){
+            Mensaje info = new Mensaje();
+            info.setUsuario(saUsuario.consultarUsuario());
+            info.setTareas(saSuceso.consultarTareasNotificaciones());
+            info.setReto(saSuceso.consultarReto());
+            info.setEventos(saSuceso.consultarEventosNotificaciones());
+            return info;
+        }
         else
             return null;
     }

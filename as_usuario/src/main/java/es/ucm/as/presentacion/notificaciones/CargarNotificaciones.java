@@ -9,22 +9,16 @@ import android.content.Intent;
 import android.os.Build;
 import android.util.Log;
 
-import com.j256.ormlite.android.apptools.OpenHelperManager;
-import com.j256.ormlite.dao.Dao;
-import com.j256.ormlite.stmt.QueryBuilder;
-
-import java.sql.SQLException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
+
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.StringTokenizer;
 
 import es.ucm.as.R;
-import es.ucm.as.integracion.DBHelper;
-import es.ucm.as.integracion.Evento;
-import es.ucm.as.integracion.Tarea;
+
+import es.ucm.as.negocio.conexion.msg.Mensaje;
 import es.ucm.as.negocio.suceso.TransferEvento;
 import es.ucm.as.negocio.suceso.TransferTarea;
 import es.ucm.as.presentacion.vista.Contexto;
@@ -34,116 +28,82 @@ import es.ucm.as.presentacion.vista.Contexto;
  */
 public class CargarNotificaciones extends BroadcastReceiver {
 
-    private DBHelper mDBHelper;
-
-        private DBHelper getHelper(Context context) {
-        if (mDBHelper == null) {
-            mDBHelper = OpenHelperManager.getHelper(context, DBHelper.class);
-        }
-        return mDBHelper;
-    }
-
 
     @Override
     public void onReceive(Context context, Intent intent) {
+        // Se modifica el contexto para poder usar el singleton para responder desde una notificacion
+        // con un comando
         Contexto.getInstancia().setContext(context);
-        Integer tono = R.raw.defecto;;
-        if(intent.getExtras() != null)
-           tono = intent.getExtras().getInt("tono");
+        Mensaje info = (Mensaje) intent.getExtras().getSerializable("info");
+        if (info == null)
+            Log.e("CargarNotificaciones", "Info nula");
+        else{
+            Log.e("CargarNotificaciones", "Info NO nula");
 
-        Log.e("tono", "cargar notificaciones " + tono);
+        Integer tono = info.getUsuario().getTono();
+        //Coge las tareas de bbdd
+        List<TransferTarea> tareas = info.getTareas();
+        //Coge los eventos de bbdd
+        List<TransferEvento> eventos = info.getEventos();
 
-        //Lee las tareas de bbdd
-        List<Tarea> tareas = new ArrayList<Tarea>();
-        List<TransferTarea> transferTareas = new ArrayList<TransferTarea>();
-        Log.e("CargarNotificaciones", "Se cargan las notificaciones de tareas");
-        //Lee los eventos de bbdd
-        List<Evento> eventos = new ArrayList<Evento>();
-        List<TransferEvento> transferEventos = new ArrayList<TransferEvento>();
-        try {
+        String tituloAlarma = "Alarma";
+        String tituloPregunta = "Pregunta";
+        String tituloEvento = "Evento";
 
-            // Se obtienen las tareas a recordar ese dia ordenadas por horas de manera ascendente
-            QueryBuilder<Tarea, Integer> qb = getHelper(context).getTareaDao().queryBuilder();
-            Date actual = new Date();
-            Calendar c = Calendar.getInstance();
-            c.setTime(actual);
-            c.add(Calendar.DAY_OF_MONTH, 1);
-            Date tomorrow = c.getTime();
-            Log.e("CargarNotificaciones", "Entre las "+ actual.toString() + " y las " + tomorrow.toString());
-            qb.where().between("HORA_ALARMA", actual, tomorrow);
-            qb.orderBy("HORA_ALARMA", true);
-            tareas = qb.query();
+        Log.e("CargarNotificaciones", "Tareas: " + tareas.size() + "");
 
-            String tituloAlarma = "Alarma";
-            String tituloPregunta = "Pregunta";
-            String tituloEvento = "Evento";
+        for (int i = 0; i < tareas.size(); i++) {
+            TransferTarea tarea = tareas.get(i);
 
-            Log.e("CargarNotificaciones", "Tareas: " + tareas.size() + "");
+            //Esto es para dividir el date en horas y minutos
+            SimpleDateFormat horasMinutos = new SimpleDateFormat("HH:mm");
+            StringTokenizer tokensAlarma = new StringTokenizer(horasMinutos.format
+                    (tarea.getHoraAlarma()), ":");
+            StringTokenizer tokensPregunta = new StringTokenizer(horasMinutos.format
+                    (tarea.getHoraPregunta()), ":");
 
-            for(int i = 0; i < tareas.size(); i++){
-                Tarea tarea = tareas.get(i);
+            Integer horaAlarmaNotif = Integer.parseInt(tokensAlarma.nextToken());
+            Integer minutosAlarmaNotif = Integer.parseInt(tokensAlarma.nextToken());
+            Integer horaPreguntaNotif = Integer.parseInt(tokensPregunta.nextToken());
+            Integer minutosPreguntaNotif = Integer.parseInt(tokensPregunta.nextToken());
 
-                //Esto es para dividir el date en horas y minutos
-                SimpleDateFormat horasMinutos = new SimpleDateFormat("HH:mm");
-                StringTokenizer tokensAlarma = new StringTokenizer(horasMinutos.format
-                        (tarea.getHoraAlarma()),":");
-                StringTokenizer tokensPregunta = new StringTokenizer(horasMinutos.format
-                        (tarea.getHoraPregunta()),":");
+            lanzarSuceso(context, horaAlarmaNotif, minutosAlarmaNotif, tituloAlarma,
+                    tarea.getTextoAlarma(), "alarma", tarea.getId(), tono);
+            Log.e("CargarNotificaciones", "Se guarda la alarma " + tarea.getTextoAlarma() + " a las " + horaAlarmaNotif + ":" + minutosAlarmaNotif);
+            lanzarSuceso(context, horaPreguntaNotif, minutosPreguntaNotif, tituloPregunta,
+                    tarea.getTextoPregunta(), "pregunta", tarea.getId(), tono);
+            Log.e("CargarNotificaciones", "Se guarda la pregunta " + tarea.getTextoPregunta() + " a las " + horaPreguntaNotif + ":" + minutosPreguntaNotif);
 
-                Integer horaAlarmaNotif = Integer.parseInt(tokensAlarma.nextToken());
-                Integer minutosAlarmaNotif =  Integer.parseInt(tokensAlarma.nextToken());
-                Integer horaPreguntaNotif = Integer.parseInt(tokensPregunta.nextToken());
-                Integer minutosPreguntaNotif =  Integer.parseInt(tokensPregunta.nextToken());
-
-                lanzarSuceso(context, horaAlarmaNotif, minutosAlarmaNotif, tituloAlarma,
-                        tarea.getTextoAlarma(), "alarma", tarea.getId(), tono);
-                Log.e("CargarNotificaciones", "Se guarda la alarma " + tarea.getTextoAlarma() + " a las " + horaAlarmaNotif + ":" + minutosAlarmaNotif);
-                lanzarSuceso(context, horaPreguntaNotif, minutosPreguntaNotif, tituloPregunta,
-                        tarea.getTextoPregunta(), "pregunta", tarea.getId(), tono);
-                Log.e("CargarNotificaciones", "Se guarda la pregunta " + tarea.getTextoPregunta() + " a las " + horaPreguntaNotif + ":" + minutosPreguntaNotif);
-
-            }
-
-            lanzarBucle(context);
-
-            Dao<Evento,Integer> daoE = getHelper(context).getEventoDao();
-            for(int i = 0; i < daoE.queryForAll().size(); i++)
-                Log.e("CargarNotificaciones", daoE.queryForAll().get(i).getHoraAlarma().toString());
-
-            // Se obtienen los eventos a recordar ese dia ordenadas por horas de manera ascendente
-            QueryBuilder<Evento, Integer> qbEvento = getHelper(context).getEventoDao().queryBuilder();
-            qbEvento.where().between("HORA_ALARMA",actual, tomorrow);
-            qbEvento.orderBy("HORA_ALARMA", true);
-            eventos = qbEvento.query();
-
-            Log.e("CargarNotificaciones", "Eventos: "+eventos.size()+"");
-
-            for(int i = 0; i < eventos.size(); i++) {
-                Evento evento = eventos.get(i);
-                if(evento.getAsistencia().equals("SI")) {
-                    //Esto es para dividir el date en horas y minutos
-                    SimpleDateFormat horasMinutosE = new SimpleDateFormat("HH:mm");
-                    StringTokenizer tokensAlarmaE = new StringTokenizer(horasMinutosE.format
-                            (evento.getHoraAlarma()), ":");
-                    StringTokenizer tokensHoraE = new StringTokenizer(horasMinutosE.format
-                            (evento.getHoraEvento()), ":");
-
-                    Integer horaAlarmaNotifE = Integer.parseInt(tokensAlarmaE.nextToken());
-                    Integer minutosAlarmaNotifE = Integer.parseInt(tokensAlarmaE.nextToken());
-                    Integer horaE = Integer.parseInt(tokensHoraE.nextToken());
-                    Integer minutosE = Integer.parseInt(tokensHoraE.nextToken());
-
-                    String mensajeEvento = evento.getNombre() + " a las " + horaE + ":" + minutosE;
-
-                    lanzarSuceso(context, horaAlarmaNotifE, minutosAlarmaNotifE, tituloEvento,
-                            mensajeEvento, "evento", 0, tono);
-                    Log.e("CargarEventos", "Se guarda el evento " + mensajeEvento +
-                            " a las " + horaAlarmaNotifE + ":" + minutosAlarmaNotifE);
-                }
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
         }
+
+        lanzarBucle(context);
+
+        Log.e("CargarNotificaciones", "Eventos: " + tareas.size() + "");
+
+        for (int i = 0; i < eventos.size(); i++) {
+            TransferEvento evento = eventos.get(i);
+            if (evento.getAsistencia().equals("SI")) {
+                //Esto es para dividir el date en horas y minutos
+                SimpleDateFormat horasMinutosE = new SimpleDateFormat("HH:mm");
+                StringTokenizer tokensAlarmaE = new StringTokenizer(horasMinutosE.format
+                        (evento.getHoraAlarma()), ":");
+                StringTokenizer tokensHoraE = new StringTokenizer(horasMinutosE.format
+                        (evento.getHoraEvento()), ":");
+
+                Integer horaAlarmaNotifE = Integer.parseInt(tokensAlarmaE.nextToken());
+                Integer minutosAlarmaNotifE = Integer.parseInt(tokensAlarmaE.nextToken());
+                Integer horaE = Integer.parseInt(tokensHoraE.nextToken());
+                Integer minutosE = Integer.parseInt(tokensHoraE.nextToken());
+
+                String mensajeEvento = evento.getNombre() + " a las " + horaE + ":" + minutosE;
+
+                lanzarSuceso(context, horaAlarmaNotifE, minutosAlarmaNotifE, tituloEvento,
+                        mensajeEvento, "evento", 0, tono);
+                Log.e("CargarEventos", "Se guarda el evento " + mensajeEvento +
+                        " a las " + horaAlarmaNotifE + ":" + minutosAlarmaNotifE);
+            }
+        }
+    }
     }
 
 

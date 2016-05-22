@@ -34,6 +34,7 @@ public class Registro extends Activity {
             + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Log.e("REGISTRO", "OnCreate");
         super.onCreate(savedInstanceState);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         setContentView(R.layout.activity_registro);
@@ -42,6 +43,7 @@ public class Registro extends Activity {
         claveUsuario = (EditText) findViewById(R.id.claveRegistro);
 
         if(getIntent().getExtras() != null) {
+            Log.e("REGISTRO", "bundle con cosas");
             TransferUsuario sincroCorrecta = (TransferUsuario) getIntent().getExtras().getSerializable("usuario");
             if (sincroCorrecta != null) {
                 Controlador.getInstancia().ejecutaComando(ListaComandos.CREAR_USUARIO, sincroCorrecta);
@@ -49,6 +51,8 @@ public class Registro extends Activity {
                 Controlador.getInstancia().ejecutaComando(ListaComandos.ACTUALIZAR_PUNTUACION, null);
                 Controlador.getInstancia().ejecutaComando(ListaComandos.CONSULTAR_USUARIO, null);
             }
+        }else{
+            Log.e("REGISTRO", "bundle vacio VOY A SINCRONIZAR POR PRIMERA VEZ");
         }
     }
 
@@ -73,7 +77,7 @@ public class Registro extends Activity {
 
             Mensaje msg = new Mensaje("registro");
             msg.setUsuario(crearUsuario);
-
+            Log.e("REGISTRO", "A SINCRONIZAR!");
             Controlador.getInstancia().ejecutaComando(ListaComandos.SINCRONIZAR_REGISTRO, msg);
         }
     }

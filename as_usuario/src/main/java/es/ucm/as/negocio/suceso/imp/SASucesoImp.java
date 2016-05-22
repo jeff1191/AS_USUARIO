@@ -91,6 +91,33 @@ public class SASucesoImp implements SASuceso {
         return transferEventos;
     }
 
+    // Se obtienen los eventos a recordar ese dia ordenadas por horas de manera ascendente
+    @Override
+    public List<TransferEvento> consultarEventosNotificaciones() {
+        List<TransferEvento> eventos = new ArrayList<>();
+        try {
+            Dao<Evento,Integer> daoE = getHelper().getEventoDao();
+
+            Date actual = new Date();
+            Calendar c = Calendar.getInstance();
+            c.setTime(actual);
+            c.add(Calendar.DAY_OF_MONTH, 1);
+            Date tomorrow = c.getTime();
+
+            QueryBuilder<Evento, Integer> qbEvento = daoE.queryBuilder();
+            qbEvento.where().between("HORA_ALARMA",actual, tomorrow);
+            qbEvento.orderBy("HORA_ALARMA", true);
+            List<Evento> events = qbEvento.query();
+
+            for (int i = 0; i < events.size(); i++)
+                eventos.add(events.get(i).getTransfer());
+
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        return eventos;
+    }
+
     @Override
     public TransferReto consultarReto() {
         Dao<Reto, Integer> dao;
@@ -272,11 +299,10 @@ public class SASucesoImp implements SASuceso {
         }
     }
 
+    // Se buscan en BBDD las tareas comprendidas entre la hora actual y el dia siquiente
     @Override
-    public List<TransferTarea> consultarTareasHoy(TransferUsuario transferUsuario) {
-
-        List<TransferTarea> transferTareas = new ArrayList<TransferTarea>();
-
+    public List<TransferTarea> consultarTareasNotificaciones() {
+        ArrayList<TransferTarea> transferTareas = new ArrayList<>();
         try {
             Date actual = new Date();
             Calendar c = Calendar.getInstance();
@@ -284,18 +310,18 @@ public class SASucesoImp implements SASuceso {
             c.add(Calendar.DAY_OF_MONTH, 1);
             Date tomorrow = c.getTime();
 
+            Log.e("CargarNotificaciones", "Entre las "+ actual.toString() + " y las " + tomorrow.toString());
             QueryBuilder<Tarea, Integer> qb = getHelper().getTareaDao().queryBuilder();
             qb.where().between("HORA_ALARMA", actual, tomorrow);
             qb.orderBy("HORA_ALARMA", true);
             List<Tarea> tareas = qb.query();
 
-            for (int i = 0; i < tareas.size(); i++)
+            for(int i = 0; i < tareas.size(); i++)
                 transferTareas.add(tareas.get(i).getTransfer());
 
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
         return transferTareas;
     }
 
