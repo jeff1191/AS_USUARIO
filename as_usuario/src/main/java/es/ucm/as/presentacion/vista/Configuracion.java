@@ -188,8 +188,8 @@ public class Configuracion extends Activity {
                     editarUsuario.setTono(tonoActual);
                     sndPool.play(tonoParcial, 1.0f, 1.0f, 1, 0, 1.0f);
                     Toast.makeText(getApplicationContext(),
-                            "Estás escuchando el tono que has elegido." +
-                                    "Se actualizará la próxima vez que sincronices con tu profesor"
+                            "Estás escuchando el tono que has elegido. Las notificaciones sonarán " +
+                                    "así a partir de la próxima vez que sincronices con tu profesor"
                             , Toast.LENGTH_LONG).show();
 
                     Controlador.getInstancia().ejecutaComando(ListaComandos.EDITAR_USUARIO, editarUsuario);

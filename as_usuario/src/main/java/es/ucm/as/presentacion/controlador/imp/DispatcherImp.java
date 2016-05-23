@@ -1,10 +1,12 @@
 package es.ucm.as.presentacion.controlador.imp;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
 
+import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -45,7 +47,7 @@ public class DispatcherImp extends Dispatcher{
                 Intent intentConfiguracion = new Intent(Contexto.getInstancia().getContext().getApplicationContext(), Configuracion.class);
                 TransferUsuario conf = (TransferUsuario) datos;
                 intentConfiguracion.putExtra("usuario", conf);
-                intentConfiguracion.setFlags(intentConfiguracion.getFlags() | Intent.FLAG_ACTIVITY_NO_HISTORY | Intent.FLAG_ACTIVITY_NEW_TASK);
+                intentConfiguracion.setFlags(intentConfiguracion.getFlags() | Intent.FLAG_ACTIVITY_NEW_TASK);
                 Contexto.getInstancia().getContext().startActivity(intentConfiguracion);
                 break;
 
@@ -53,7 +55,7 @@ public class DispatcherImp extends Dispatcher{
                 TransferUsuario transferUsuario = (TransferUsuario)datos;
                 Intent consultarUsuario = new Intent(Contexto.getInstancia().getContext().getApplicationContext(), MainActivity.class);
                 consultarUsuario.putExtra("usuario", transferUsuario);
-                consultarUsuario.setFlags(consultarUsuario.getFlags() | Intent.FLAG_ACTIVITY_NO_HISTORY | Intent.FLAG_ACTIVITY_NEW_TASK );
+                consultarUsuario.setFlags(consultarUsuario.getFlags() | Intent.FLAG_ACTIVITY_NEW_TASK );
                 Contexto.getInstancia().getContext().startActivity(consultarUsuario);
                 break;
 
@@ -122,12 +124,36 @@ public class DispatcherImp extends Dispatcher{
                 }
                 break;
 
+            case ListaComandos.ENVIAR_CORREO:
+                TransferUsuario usuario1 = (TransferUsuario)datos;
+                //Instanciamos un Intent del tipo ACTION_SEND
+                Intent emailIntent = new Intent(android.content.Intent.ACTION_SEND);
+                //Definimos la tipologia de datos del contenido dle Email en este caso text/html
+                emailIntent.setType("application/pdf");
+                // Indicamos con un Array de tipo String las direcciones de correo a las cuales
+                //queremos enviar el texto
+                emailIntent.putExtra(Intent.EXTRA_EMAIL, new String[]{usuario1.getCorreo()});
+                // Definimos un titulo para el Email
+                emailIntent.putExtra(android.content.Intent.EXTRA_TITLE, "Informe AS");
+                // Definimos un Asunto para el Email
+                emailIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Informe AS");
+                // Obtenemos la referencia al texto y lo pasamos al Email Intent
+                emailIntent.putExtra(android.content.Intent.EXTRA_TEXT, "¡Hola " + usuario1.getNombre() + "!\n " +
+                        "Este es tu progreso hasta el momento. Sigue esforzándote para continuar mejorando."
+                        + "\n¡Ánimo!" + "\n\nEnviado desde AS");
+
+                Uri uri = Uri.parse( new File("file://" + "/sdcard/Download/AS/Informe.pdf").toString());
+                emailIntent.putExtra(Intent.EXTRA_STREAM, uri);
+                emailIntent.setFlags(emailIntent.getFlags()| Intent.FLAG_ACTIVITY_NEW_TASK);
+                Contexto.getInstancia().getContext().startActivity(emailIntent);
+                break;
+
             // Ayuda
 
             case ListaComandos.AYUDA:
                 Intent intentAyuda = new Intent(Contexto.getInstancia().getContext().getApplicationContext(), Ayuda.class);
                 intentAyuda.putExtra("pantalla", (String)datos);
-                intentAyuda.setFlags(intentAyuda.getFlags() | Intent.FLAG_ACTIVITY_NO_HISTORY);
+                intentAyuda.setFlags(intentAyuda.getFlags() | Intent.FLAG_ACTIVITY_NO_HISTORY | Intent.FLAG_ACTIVITY_NEW_TASK);
                 Contexto.getInstancia().getContext().startActivity(intentAyuda);
                 break;
 
@@ -137,7 +163,7 @@ public class DispatcherImp extends Dispatcher{
                 Intent intentR = new Intent(Contexto.getInstancia().getContext().getApplicationContext(), VerReto.class);
                 TransferReto transferReto = (TransferReto)datos;
                 intentR.putExtra("reto", transferReto);
-                intentR.setFlags(intentR.getFlags() | Intent.FLAG_ACTIVITY_NO_HISTORY);
+                intentR.setFlags(intentR.getFlags() | Intent.FLAG_ACTIVITY_NO_HISTORY | Intent.FLAG_ACTIVITY_NEW_TASK);
                 Contexto.getInstancia().getContext().startActivity(intentR);
                 break;
 
@@ -173,7 +199,7 @@ public class DispatcherImp extends Dispatcher{
 
             case ListaComandos.MODIFICAR_EVENTOS:
                 Intent iGuardarEvento = new Intent(Contexto.getInstancia().getContext().getApplicationContext(), MainActivity.class);
-                iGuardarEvento.setFlags(iGuardarEvento.getFlags() | Intent.FLAG_ACTIVITY_NO_HISTORY);
+                iGuardarEvento.setFlags(iGuardarEvento.getFlags() | Intent.FLAG_ACTIVITY_NO_HISTORY | Intent.FLAG_ACTIVITY_NEW_TASK);
                 Contexto.getInstancia().getContext().startActivity(iGuardarEvento);
                 break;
 
@@ -196,7 +222,7 @@ public class DispatcherImp extends Dispatcher{
                 b.putStringArrayList("listaEventos", listaActividad);
                 b.putStringArrayList("listaAsistencia", listaActivos);
                 intent.putExtras(b);
-                intent.setFlags(intent.getFlags() | Intent.FLAG_ACTIVITY_NO_HISTORY);
+                intent.setFlags(intent.getFlags() | Intent.FLAG_ACTIVITY_NO_HISTORY | Intent.FLAG_ACTIVITY_NEW_TASK);
                 Contexto.getInstancia().getContext().startActivity(intent);
                 break;
         }

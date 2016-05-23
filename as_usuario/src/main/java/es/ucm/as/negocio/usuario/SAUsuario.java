@@ -11,6 +11,4 @@ public interface SAUsuario {
 	void crearUsuario(TransferUsuario transferUsuario);
 
 	TransferUsuario consultarUsuario();
-
-	void enviarCorreo();
 }

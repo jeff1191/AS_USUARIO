@@ -12,7 +12,6 @@ public class EnviarCorreoComando implements Command{
     @Override
     public Object ejecutaComando(Object datos) throws commandException {
         SAUsuario saUsuario = FactoriaSA.getInstancia().nuevoSAUsuario();
-        saUsuario.enviarCorreo();
-        return null;
+        return saUsuario.consultarUsuario();
     }
 }

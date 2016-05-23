@@ -168,7 +168,7 @@ public class CargarNotificaciones extends BroadcastReceiver {
     public void lanzarBucle(Context context, Mensaje info){
         Log.e("lanzarBucle", "Se mete para guardar la ultima not");
 
-        AlarmManager am =( AlarmManager)context.getSystemService(Context.ALARM_SERVICE);
+        AlarmManager am =(AlarmManager)context.getSystemService(Context.ALARM_SERVICE);
         Intent i = new Intent(context, BucleNotificaciones.class);
 
         long time = new Date().getTime();

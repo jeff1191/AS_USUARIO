@@ -176,41 +176,4 @@ public class SAUsuarioImp implements SAUsuario {
 		}
 		return transferUsuario;
 	}
-
-	@Override
-	public void enviarCorreo() {
-
-		String mail = "";
-		String name = "";
-		Dao<Usuario, Integer> daoUsuario;
-		try {
-			daoUsuario = getHelper().getUsuarioDao();
-			Usuario u = daoUsuario.queryForId(1);
-			mail= u.getCorreo();
-			name = u.getNombre();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-
-		//Instanciamos un Intent del tipo ACTION_SEND
-		Intent emailIntent = new Intent(android.content.Intent.ACTION_SEND);
-		//Definimos la tipologia de datos del contenido dle Email en este caso text/html
-		emailIntent.setType("application/pdf");
-		// Indicamos con un Array de tipo String las direcciones de correo a las cuales
-		//queremos enviar el texto
-		emailIntent.putExtra(Intent.EXTRA_EMAIL, new String[]{mail});
-		// Definimos un titulo para el Email
-		emailIntent.putExtra(android.content.Intent.EXTRA_TITLE, "Informe AS");
-		// Definimos un Asunto para el Email
-		emailIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Informe AS");
-		// Obtenemos la referencia al texto y lo pasamos al Email Intent
-		emailIntent.putExtra(android.content.Intent.EXTRA_TEXT, "¡Hola " + name + "!\n " +
-				"Este es tu progreso hasta el momento. Sigue esforzándote para continuar mejorando."
-		+ "\n¡Ánimo!" + "\n\nEnviado desde AS");
-
-		Uri uri = Uri.parse( new File("file://" + "/sdcard/Download/AS/Informe.pdf").toString());
-		emailIntent.putExtra(Intent.EXTRA_STREAM, uri);
-
-		Contexto.getInstancia().getContext().startActivity(emailIntent);
-	}
 }
