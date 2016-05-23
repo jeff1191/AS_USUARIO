@@ -4,13 +4,10 @@
 package es.ucm.as.negocio.usuario.imp;
 
 
-import android.content.Intent;
-import android.net.Uri;
 
 import com.j256.ormlite.android.apptools.OpenHelperManager;
 import com.j256.ormlite.dao.Dao;
 
-import java.io.File;
 import java.sql.SQLException;
 import java.util.List;
 

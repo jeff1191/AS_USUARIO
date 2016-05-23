@@ -14,9 +14,6 @@ import es.ucm.as.negocio.conexion.msg.Mensaje;
 import es.ucm.as.negocio.usuario.TransferUsuario;
 import es.ucm.as.presentacion.controlador.Controlador;
 import es.ucm.as.presentacion.controlador.ListaComandos;
-import es.ucm.as.presentacion.controlador.comandos.Command;
-import es.ucm.as.presentacion.controlador.comandos.exceptions.commandException;
-import es.ucm.as.presentacion.controlador.comandos.imp.SincronizarComando;
 import es.ucm.as.presentacion.notificaciones.ServicioNotificaciones;
 
 /**

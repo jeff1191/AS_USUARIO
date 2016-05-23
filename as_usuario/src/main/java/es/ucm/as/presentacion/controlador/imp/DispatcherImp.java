@@ -134,7 +134,7 @@ public class DispatcherImp extends Dispatcher{
                 //queremos enviar el texto
                 emailIntent.putExtra(Intent.EXTRA_EMAIL, new String[]{usuario1.getCorreo()});
                 // Definimos un titulo para el Email
-                emailIntent.putExtra(android.content.Intent.EXTRA_TITLE, "Informe AS");
+                emailIntent.putExtra(android.content.Intent.EXTRA_TITLE, "Informe generado por AS");
                 // Definimos un Asunto para el Email
                 emailIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Informe AS");
                 // Obtenemos la referencia al texto y lo pasamos al Email Intent
@@ -144,7 +144,7 @@ public class DispatcherImp extends Dispatcher{
 
                 Uri uri = Uri.parse( new File("file://" + "/sdcard/Download/AS/Informe.pdf").toString());
                 emailIntent.putExtra(Intent.EXTRA_STREAM, uri);
-                emailIntent.setFlags(emailIntent.getFlags()| Intent.FLAG_ACTIVITY_NEW_TASK);
+                emailIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 Contexto.getInstancia().getContext().startActivity(emailIntent);
                 break;
 
