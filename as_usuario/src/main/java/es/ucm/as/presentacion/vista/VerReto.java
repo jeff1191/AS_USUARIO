@@ -93,12 +93,11 @@ public class VerReto extends Activity {
 
     public void responderRetoNO(View v){
 
-        Controlador.getInstancia().ejecutaComando(ListaComandos.RESPONDER_RETO, -1);
-
         // si el progreso es 0 no se hace nada
         if (progreso.getProgress() > 0){
             progreso.incrementProgressBy(-1);
             contInt = progreso.getProgress();
+            Controlador.getInstancia().ejecutaComando(ListaComandos.RESPONDER_RETO, -1);
         }
 
         c.setText(contInt.toString() + "/30");
