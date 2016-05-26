@@ -14,7 +14,9 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import es.ucm.as.integracion.Evento;
 import es.ucm.as.negocio.conexion.msg.Mensaje;
+import es.ucm.as.negocio.suceso.TransferEvento;
 import es.ucm.as.negocio.suceso.TransferTarea;
 import es.ucm.as.presentacion.vista.Contexto;
 
@@ -53,6 +55,7 @@ public class ServicioNotificaciones extends Service {
         else {
             info = (Mensaje)intent.getExtras().getSerializable("info");
             List<TransferTarea> tareas = info.getTareas();
+            List<TransferEvento> eventos = info.getEventos();
 
             // Elimina las alarmas que hay actualmente para sobreescribir con las nuevas
             for(int j = 0; j < tareas.size(); j++){

@@ -79,12 +79,12 @@ public class Evento {
 
 	public TransferEvento getTransfer(){
 		TransferEvento ret = new TransferEvento();
-		ret.setAsistencia(ret.getAsistencia());
-		ret.setNombre(ret.getNombre());
-		ret.setFecha(ret.getFecha());
-		ret.setHoraAlarma(ret.getHoraAlarma());
-		ret.setHoraEvento(ret.getHoraEvento());
-		ret.setId(ret.getId());
+		ret.setAsistencia(getAsistencia());
+		ret.setNombre(getNombre());
+		ret.setFecha(getFecha());
+		ret.setHoraAlarma(getHoraAlarma());
+		ret.setHoraEvento(getHoraEvento());
+		ret.setId(getId());
 		return ret;
 	}
 }

@@ -80,11 +80,11 @@ public class CargarNotificaciones extends BroadcastReceiver {
             // se actualice a ultima hora
             lanzarBucle(context, info);
 
-            Log.e("CargarNotificaciones", "Eventos: " + tareas.size() + "");
+            Log.e("CargarNotificaciones", "Eventos: " + eventos.size() + "");
 
             for (int i = 0; i < eventos.size(); i++) {
                 TransferEvento evento = eventos.get(i);
-                if (evento.getAsistencia().equals("SI")) {
+               // if (evento.getAsistencia().equals("SI")) {
                     //Esto es para dividir el date en horas y minutos
                     SimpleDateFormat horasMinutosE = new SimpleDateFormat("HH:mm");
                     StringTokenizer tokensAlarmaE = new StringTokenizer(horasMinutosE.format
@@ -104,7 +104,6 @@ public class CargarNotificaciones extends BroadcastReceiver {
                     Log.e("CargarEventos", "Se guarda el evento " + mensajeEvento +
                             " a las " + horaAlarmaNotifE + ":" + minutosAlarmaNotifE);
                 }
-            }
         }
     }
 
