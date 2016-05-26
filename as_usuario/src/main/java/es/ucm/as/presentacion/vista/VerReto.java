@@ -42,11 +42,11 @@ public class VerReto extends Activity {
 
         TransferReto reto = (TransferReto) getIntent().getExtras().getSerializable("reto");
 
-        sup = (TextView) findViewById(R.id.tituloReto);
+       /* sup = (TextView) findViewById(R.id.tituloReto);
         tv = (TextView) findViewById(R.id.textoReto);
         premio = (TextView) findViewById(R.id.premioReto);
         c = (TextView) findViewById(R.id.cont);
-        progreso = (ProgressBar) findViewById(R.id.progressBar);
+        progreso = (ProgressBar) findViewById(R.id.progressBar);*/
         si = (Button) findViewById(R.id.si);
         no = (Button) findViewById(R.id.no);
 
