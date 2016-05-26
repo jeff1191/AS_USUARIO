@@ -209,7 +209,7 @@ public class Configuracion extends Activity {
         if(tono == R.raw.defecto) {
             nombresTonos[0] = "Defecto";
             nombresTonos[1] = "Frozen";
-            nombresTonos[2] = "Mario Bross";
+            nombresTonos[2] = "Mario Bros";
             nombresTonos[3] = "StarWars";
             nombresTonos[4] = "Terminator";
             return ;
@@ -217,13 +217,13 @@ public class Configuracion extends Activity {
         if(tono == R.raw.frozen) {
             nombresTonos[0] = "Frozen";
             nombresTonos[1] = "Defecto";
-            nombresTonos[2] = "Mario Bross";
+            nombresTonos[2] = "Mario Bros";
             nombresTonos[3] = "StarWars";
             nombresTonos[4] = "Terminator";
             return ;
         }
         if(tono == R.raw.mario) {
-            nombresTonos[0] = "Mario Bross";
+            nombresTonos[0] = "Mario Bros";
             nombresTonos[1] = "Defecto";
             nombresTonos[2] = "Frozen";
             nombresTonos[3] = "StarWars";
@@ -234,7 +234,7 @@ public class Configuracion extends Activity {
             nombresTonos[0] = "StarWars";
             nombresTonos[1] = "Defecto";
             nombresTonos[2] = "Frozen";
-            nombresTonos[3] = "Mario Bross";
+            nombresTonos[3] = "Mario Bros";
             nombresTonos[4] = "Terminator";
             return ;
         }
@@ -242,7 +242,7 @@ public class Configuracion extends Activity {
             nombresTonos[0] = "Terminator";
             nombresTonos[1] = "Defecto";
             nombresTonos[2] = "Frozen";
-            nombresTonos[3] = "Mario Bross";
+            nombresTonos[3] = "Mario Bros";
             nombresTonos[4] = "StarWars";
             return;
         }
