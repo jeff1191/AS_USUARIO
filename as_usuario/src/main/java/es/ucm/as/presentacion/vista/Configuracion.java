@@ -59,7 +59,7 @@ public class Configuracion extends Activity {
     static int tonoActual;
     private String[] nombresColores={ "Azul", "Rojo", "Rosa", "Verde",
             "Negro"};
-    private String[] nombresTonos = { "Defecto", "Frozen", "Mario Bross", "StarWars",
+    private String[] nombresTonos = { "Defecto", "Frozen", "Mario Bros", "StarWars",
             "Terminator"};
     private Spinner spinnerColors;
     private Spinner spinnerTono;
@@ -91,10 +91,10 @@ public class Configuracion extends Activity {
         // Se deben de cargar los sonidos aqui, en el metodo onCreate
         sndPool = new SoundPool(16, AudioManager.STREAM_MUSIC, 100);
         DEFECTO = sndPool.load(getApplicationContext(), R.raw.defecto, 1);
-        FROZEN = sndPool.load(getApplicationContext(), R.raw.frozen, 1);;
-        MARIO = sndPool.load(getApplicationContext(), R.raw.mario, 1);;
-        STARWARS = sndPool.load(getApplicationContext(), R.raw.starwars, 1);;
-        TERMINATOR = sndPool.load(getApplicationContext(), R.raw.terminator, 1);;
+        FROZEN = sndPool.load(getApplicationContext(), R.raw.frozen, 1);
+        MARIO = sndPool.load(getApplicationContext(), R.raw.mario, 1);
+        STARWARS = sndPool.load(getApplicationContext(), R.raw.starwars, 1);
+        TERMINATOR = sndPool.load(getApplicationContext(), R.raw.terminator, 1);
 
         ////////Spinner color ///////
         nombresColoresSistema();
@@ -153,7 +153,7 @@ public class Configuracion extends Activity {
                     case "Frozen":
                         tonoParcial = FROZEN;
                         break;
-                    case "Mario Bross":
+                    case "Mario Bros":
                         tonoParcial = MARIO;
                         break;
                     case "StarWars":

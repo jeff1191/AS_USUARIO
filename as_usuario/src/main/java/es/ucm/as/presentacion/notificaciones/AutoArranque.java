@@ -4,6 +4,7 @@ package es.ucm.as.presentacion.notificaciones;
  * Created by msalitu on 08/04/2016.
  *
  * Esta clase lanza el servicio de notificaciones cuando se enciende el dispositivo
+ *
  */
 
 import android.content.BroadcastReceiver;
