@@ -43,6 +43,7 @@ public class ServicioNotificaciones extends Service {
         //Tendriamos que pensar en tener to*do en una cola que la tendria que haber cogido de base de datos - esto es IMPORTANTE
         Log.e("servicio","se lanza el servicio");
         Contexto.getInstancia().setContext(getApplicationContext());
+
         AlarmManager am =( AlarmManager) getApplicationContext().getSystemService(Context.ALARM_SERVICE);
         Intent i = new Intent(getApplicationContext(), CargarNotificaciones.class);
 
