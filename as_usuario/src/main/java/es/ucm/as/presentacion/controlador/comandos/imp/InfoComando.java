@@ -1,5 +1,9 @@
 package es.ucm.as.presentacion.controlador.comandos.imp;
 
+import android.util.Log;
+
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import es.ucm.as.negocio.conexion.ConectionManager;
@@ -20,16 +24,24 @@ import es.ucm.as.presentacion.controlador.comandos.exceptions.commandException;
 public class InfoComando implements Command{
     @Override
     public Object ejecutaComando(Object datos) throws commandException {
-
+        Log.e("finde", "Se ejecuta info");
         // Se crea el mensaje consultando la info en BBDD
         SAUsuario saUsuario = FactoriaSA.getInstancia().nuevoSAUsuario();
         SASuceso saSuceso = FactoriaSA.getInstancia().nuevoSASuceso();
 
         Mensaje info = new Mensaje();
         info.setUsuario(saUsuario.consultarUsuario());
-        info.setTareas(saSuceso.consultarTareasNotificaciones());
         info.setReto(saSuceso.consultarReto());
         info.setEventos(saSuceso.consultarEventosNotificaciones());
+
+        if(Calendar.SATURDAY != Calendar.getInstance().get(Calendar.DAY_OF_WEEK) &&
+                Calendar.SUNDAY != Calendar.getInstance().get(Calendar.DAY_OF_WEEK) )
+            info.setTareas(saSuceso.consultarTareasNotificaciones());
+        else {
+            Log.e("finde", "Es finde!! No hay tareas!");
+            List<TransferTarea> tareas = new ArrayList<>();
+            info.setTareas(tareas);
+        }
         return info;
     }
 }

@@ -330,7 +330,18 @@ public class SASucesoImp implements SASuceso {
 
         try {
             Dao<Tarea, Integer> tareaDao = getHelper().getTareaDao();
-            List<Tarea> tareas = tareaDao.queryForAll();
+
+            Date actual = new Date();
+            Calendar c = Calendar.getInstance();
+            c.setTime(actual);
+            c.add(Calendar.DAY_OF_MONTH, -1);
+            Date ayer = c.getTime();
+
+            QueryBuilder<Tarea, Integer> qb = getHelper().getTareaDao().queryBuilder();
+            qb.where().between("HORA_ALARMA", ayer, actual);
+            qb.orderBy("HORA_ALARMA", true);
+            List<Tarea> tareas = qb.query();
+
             for(int i = 0; i < tareas.size(); i++){
                 Tarea tarea = tareas.get(i);
 

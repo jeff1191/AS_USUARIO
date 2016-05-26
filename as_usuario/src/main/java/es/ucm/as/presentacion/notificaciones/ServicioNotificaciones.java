@@ -22,7 +22,7 @@ public class ServicioNotificaciones extends Service {
 
     @Override
     public IBinder onBind(Intent intent) {
-
+        Log.e("servicio","on bind");
         return null;
     }
 
