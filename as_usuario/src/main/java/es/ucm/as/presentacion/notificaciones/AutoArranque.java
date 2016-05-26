@@ -21,18 +21,6 @@ public class AutoArranque extends BroadcastReceiver{
         Contexto.getInstancia().setContext(context);
 
         Controlador.getInstancia().ejecutaComando(ListaComandos.INFO, null);
-        /*
-        Mensaje info = (Mensaje) intent.getExtras().getSerializable("info");
 
-        Intent service = new Intent(context,  ServicioNotificaciones.class);
-        Command c = new InfoComando();
-        try {
-            Mensaje info = (Mensaje) c.ejecutaComando(null);
-            service.putExtra("info", info);
-        } catch (commandException e) {
-            e.printStackTrace();
-        }
-        Log.e("servicio", "InfoComando carga la info ");
-        context.startService(service);*/
     }
 }
