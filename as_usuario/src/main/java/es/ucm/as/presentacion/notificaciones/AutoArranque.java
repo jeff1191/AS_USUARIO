@@ -9,17 +9,21 @@ package es.ucm.as.presentacion.notificaciones;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
 
-import es.ucm.as.negocio.conexion.msg.Mensaje;
-import es.ucm.as.presentacion.controlador.comandos.Command;
-import es.ucm.as.presentacion.controlador.comandos.exceptions.commandException;
-import es.ucm.as.presentacion.controlador.comandos.imp.InfoComando;
+import es.ucm.as.presentacion.controlador.Controlador;
+import es.ucm.as.presentacion.controlador.ListaComandos;
 import es.ucm.as.presentacion.vista.Contexto;
 
 public class AutoArranque extends BroadcastReceiver{
     @Override
     public void onReceive(Context context, Intent intent) {
+
+        Contexto.getInstancia().setContext(context);
+
+        Controlador.getInstancia().ejecutaComando(ListaComandos.INFO, null);
+        /*
+        Mensaje info = (Mensaje) intent.getExtras().getSerializable("info");
+
         Intent service = new Intent(context,  ServicioNotificaciones.class);
         Command c = new InfoComando();
         try {
@@ -29,6 +33,6 @@ public class AutoArranque extends BroadcastReceiver{
             e.printStackTrace();
         }
         Log.e("servicio", "InfoComando carga la info ");
-        context.startService(service);
+        context.startService(service);*/
     }
 }

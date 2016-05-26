@@ -225,6 +225,13 @@ public class DispatcherImp extends Dispatcher{
                 intent.setFlags(intent.getFlags() | Intent.FLAG_ACTIVITY_NO_HISTORY | Intent.FLAG_ACTIVITY_NEW_TASK);
                 Contexto.getInstancia().getContext().startActivity(intent);
                 break;
+
+            case ListaComandos.INFO:
+                Mensaje ms = (Mensaje) datos;
+                Intent service = new Intent( Contexto.getInstancia().getContext(),  ServicioNotificaciones.class);
+                service.putExtra("info", ms);
+                Contexto.getInstancia().getContext().startService(service);
+                break;
         }
     }
 }
