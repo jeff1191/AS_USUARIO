@@ -9,33 +9,22 @@ import android.content.Intent;
 import android.os.Build;
 import android.util.Log;
 
-import com.j256.ormlite.android.apptools.OpenHelperManager;
-import com.j256.ormlite.dao.Dao;
-import com.j256.ormlite.stmt.QueryBuilder;
-
-import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
 
-import es.ucm.as.integracion.DBHelper;
-import es.ucm.as.integracion.Evento;
-import es.ucm.as.integracion.Tarea;
-import es.ucm.as.negocio.conexion.msg.Mensaje;
-import es.ucm.as.negocio.suceso.TransferTarea;
-import es.ucm.as.negocio.utils.Frecuencia;
 import es.ucm.as.presentacion.controlador.Controlador;
 import es.ucm.as.presentacion.controlador.ListaComandos;
+import es.ucm.as.presentacion.vista.Contexto;
 
 /**
  * Created by Juan Lu on 27/04/2016.
  */
 public class BucleNotificaciones extends BroadcastReceiver {
 
-
     @Override
     public void onReceive(Context context, Intent intent) {
+
+        Contexto.getInstancia().setContext(context);
 
         Controlador.getInstancia().ejecutaComando(ListaComandos.ACTUALIZAR_NOTIFICACIONES, null);
         Log.e("bucleNotifi", "onReceive del bucle");
