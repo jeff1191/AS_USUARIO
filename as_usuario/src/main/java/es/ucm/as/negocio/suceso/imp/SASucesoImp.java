@@ -432,7 +432,6 @@ public class SASucesoImp implements SASuceso {
         calendar.set(Calendar.MINUTE, minutos);
         calendar.set(Calendar.SECOND, 0);
         calendar.set(Calendar.MILLISECOND, 0);
-        calendar.setTimeZone(TimeZone.getTimeZone("GMT+01:00"));
         return calendar.getTime();
     }
 
