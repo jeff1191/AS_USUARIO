@@ -33,7 +33,6 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.StringTokenizer;
-import java.util.TimeZone;
 
 import es.ucm.as.R;
 import es.ucm.as.integracion.DBHelper;
@@ -670,13 +669,15 @@ public class SASucesoImp implements SASuceso {
                 if(eventosTutor.size() != 0){
                     eliminarEventos();
                     for(int i=0; i < eventosTutor.size();i++){
-                        Evento nuevoEvento = new Evento();
-                        nuevoEvento.setNombre(eventosTutor.get(i).getNombre());
-                        nuevoEvento.setFecha(eventosTutor.get(i).getFecha());
-                        nuevoEvento.setHoraAlarma(eventosTutor.get(i).getHoraAlarma());
-                        nuevoEvento.setAsistencia(eventosTutor.get(i).getAsistencia());
-                        nuevoEvento.setHoraEvento(eventosTutor.get(i).getHoraEvento());
-                        eventos.create(nuevoEvento);
+                        if(Calendar.getInstance().getTime().before(eventosTutor.get(i).getFecha())) {
+                            Evento nuevoEvento = new Evento();
+                            nuevoEvento.setNombre(eventosTutor.get(i).getNombre());
+                            nuevoEvento.setFecha(eventosTutor.get(i).getFecha());
+                            nuevoEvento.setHoraAlarma(eventosTutor.get(i).getHoraAlarma());
+                            nuevoEvento.setAsistencia(eventosTutor.get(i).getAsistencia());
+                            nuevoEvento.setHoraEvento(eventosTutor.get(i).getHoraEvento());
+                            eventos.create(nuevoEvento);
+                        }
                     }
                 }
                 else
@@ -685,13 +686,15 @@ public class SASucesoImp implements SASuceso {
             else{
                 if(eventosTutor != null){
                     for(int i=0; i < eventosTutor.size();i++){
-                        Evento nuevoEvento = new Evento();
-                        nuevoEvento.setNombre(eventosTutor.get(i).getNombre());
-                        nuevoEvento.setFecha(eventosTutor.get(i).getFecha());
-                        nuevoEvento.setHoraAlarma(eventosTutor.get(i).getHoraAlarma());
-                        nuevoEvento.setHoraEvento(eventosTutor.get(i).getHoraEvento());
-                        nuevoEvento.setAsistencia("NO");
-                        eventos.create(nuevoEvento);
+                        if(Calendar.getInstance().getTime().before(eventosTutor.get(i).getFecha())) {
+                            Evento nuevoEvento = new Evento();
+                            nuevoEvento.setNombre(eventosTutor.get(i).getNombre());
+                            nuevoEvento.setFecha(eventosTutor.get(i).getFecha());
+                            nuevoEvento.setHoraAlarma(eventosTutor.get(i).getHoraAlarma());
+                            nuevoEvento.setHoraEvento(eventosTutor.get(i).getHoraEvento());
+                            nuevoEvento.setAsistencia("NO");
+                            eventos.create(nuevoEvento);
+                        }
                     }
                 }
             }
