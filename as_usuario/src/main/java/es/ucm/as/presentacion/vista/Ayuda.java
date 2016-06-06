@@ -73,7 +73,7 @@ public class Ayuda extends Activity{
     }
 
     public void volver(View v){
-        Controlador.getInstancia().ejecutaComando(ListaComandos.CONSULTAR_USUARIO, null);
+        finish();
     }
 
     public void cargarTema(){

@@ -64,7 +64,7 @@ public class DispatcherImp extends Dispatcher{
                 Boolean usuario = (Boolean) datos;
                 Intent hayUsuario = new Intent(Contexto.getInstancia().getContext().getApplicationContext(), Decision.class);
                 hayUsuario.putExtra("usuario", usuario);
-                hayUsuario.setFlags(hayUsuario.getFlags() | Intent.FLAG_ACTIVITY_NO_HISTORY | Intent.FLAG_ACTIVITY_NEW_TASK);
+                hayUsuario.setFlags(hayUsuario.getFlags() | Intent.FLAG_ACTIVITY_NEW_TASK);
                 Contexto.getInstancia().getContext().startActivity(hayUsuario);
                 break;
 
@@ -73,7 +73,7 @@ public class DispatcherImp extends Dispatcher{
                 if(info != null) {
                     Intent intentSincro = new Intent(Contexto.getInstancia().getContext().getApplicationContext(), MainActivity.class);
                     intentSincro.putExtra("usuario", info.getUsuario());
-                    intentSincro.setFlags(intentSincro.getFlags() | Intent.FLAG_ACTIVITY_NO_HISTORY | Intent.FLAG_ACTIVITY_NEW_TASK);
+                    intentSincro.setFlags(intentSincro.getFlags() | Intent.FLAG_ACTIVITY_NEW_TASK);
                     Toast toast =
                             Toast.makeText(Contexto.getInstancia().getContext().getApplicationContext(),
                                     "Sincronización correcta", Toast.LENGTH_LONG);
@@ -154,7 +154,7 @@ public class DispatcherImp extends Dispatcher{
             case ListaComandos.AYUDA:
                 Intent intentAyuda = new Intent(Contexto.getInstancia().getContext().getApplicationContext(), Ayuda.class);
                 intentAyuda.putExtra("pantalla", (String)datos);
-                intentAyuda.setFlags(intentAyuda.getFlags() | Intent.FLAG_ACTIVITY_NO_HISTORY | Intent.FLAG_ACTIVITY_NEW_TASK);
+                intentAyuda.setFlags(intentAyuda.getFlags() | Intent.FLAG_ACTIVITY_NEW_TASK);
                 Contexto.getInstancia().getContext().startActivity(intentAyuda);
                 break;
 
@@ -164,7 +164,7 @@ public class DispatcherImp extends Dispatcher{
                 Intent intentR = new Intent(Contexto.getInstancia().getContext().getApplicationContext(), VerReto.class);
                 TransferReto transferReto = (TransferReto)datos;
                 intentR.putExtra("reto", transferReto);
-                intentR.setFlags(intentR.getFlags() | Intent.FLAG_ACTIVITY_NO_HISTORY | Intent.FLAG_ACTIVITY_NEW_TASK);
+                intentR.setFlags(intentR.getFlags() | Intent.FLAG_ACTIVITY_NEW_TASK);
                 Contexto.getInstancia().getContext().startActivity(intentR);
                 break;
 
@@ -191,7 +191,7 @@ public class DispatcherImp extends Dispatcher{
                 intentTareas.putStringArrayListExtra("titulos", titulos);
                 intentTareas.putIntegerArrayListExtra("no", no);
                 intentTareas.putIntegerArrayListExtra("si", si);
-                intentTareas.setFlags(intentTareas.getFlags() | Intent.FLAG_ACTIVITY_NO_HISTORY |Intent.FLAG_ACTIVITY_NEW_TASK);
+                intentTareas.setFlags(intentTareas.getFlags() |Intent.FLAG_ACTIVITY_NEW_TASK);
                 Contexto.getInstancia().getContext().startActivity(intentTareas);
                 break;
 
@@ -200,7 +200,7 @@ public class DispatcherImp extends Dispatcher{
 
             case ListaComandos.MODIFICAR_EVENTOS:
                 Intent iGuardarEvento = new Intent(Contexto.getInstancia().getContext().getApplicationContext(), MainActivity.class);
-                iGuardarEvento.setFlags(iGuardarEvento.getFlags() | Intent.FLAG_ACTIVITY_NO_HISTORY | Intent.FLAG_ACTIVITY_NEW_TASK);
+                iGuardarEvento.setFlags(iGuardarEvento.getFlags() | Intent.FLAG_ACTIVITY_NEW_TASK);
                 Contexto.getInstancia().getContext().startActivity(iGuardarEvento);
                 break;
 
@@ -223,7 +223,7 @@ public class DispatcherImp extends Dispatcher{
                 b.putStringArrayList("listaEventos", listaActividad);
                 b.putStringArrayList("listaAsistencia", listaActivos);
                 intent.putExtras(b);
-                intent.setFlags(intent.getFlags() | Intent.FLAG_ACTIVITY_NO_HISTORY | Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent.setFlags(intent.getFlags() | Intent.FLAG_ACTIVITY_NEW_TASK);
                 Contexto.getInstancia().getContext().startActivity(intent);
                 break;
 

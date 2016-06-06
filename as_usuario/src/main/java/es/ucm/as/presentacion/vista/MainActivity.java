@@ -90,17 +90,14 @@ public class MainActivity extends Activity {
     }
 
     public void verInforme(View v){
-        Controlador.getInstancia().ejecutaComando(ListaComandos.ACTUALIZAR_PUNTUACION, null);
         Controlador.getInstancia().ejecutaComando(ListaComandos.VER_INFORME, null);
     }
 
     public void verEventos(View v){
-        Controlador.getInstancia().ejecutaComando(ListaComandos.ACTUALIZAR_PUNTUACION, null);
        Controlador.getInstancia().ejecutaComando(ListaComandos.VER_EVENTOS, null);
     }
 
     public void verReto(View v){
-        Controlador.getInstancia().ejecutaComando(ListaComandos.ACTUALIZAR_PUNTUACION, null);
         Controlador.getInstancia().ejecutaComando(ListaComandos.VER_RETO, null);
     }
 
@@ -143,7 +140,7 @@ public class MainActivity extends Activity {
                 Toast.makeText(getApplicationContext(),
                         "Sincronizando...", Toast.LENGTH_LONG);
         toast1.show();
-
+        Controlador.getInstancia().ejecutaComando(ListaComandos.ACTUALIZAR_PUNTUACION, null);
         Controlador.getInstancia().ejecutaComando(ListaComandos.SINCRONIZAR, null);
     }
 }

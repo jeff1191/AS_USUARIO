@@ -103,7 +103,7 @@ public class VerEventos  extends Activity{
     }
 
     public void volver(View v){
-       Controlador.getInstancia().ejecutaComando(ListaComandos.CONSULTAR_USUARIO, null);
+       finish();
     }
 
     public void ayuda(View v){

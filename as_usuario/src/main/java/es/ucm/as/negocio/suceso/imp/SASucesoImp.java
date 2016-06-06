@@ -266,6 +266,7 @@ public class SASucesoImp implements SASuceso {
                     // si mejora disminuye la frecuencia y se reinician los contadores
                     if (tarea.getContador() == tarea.getMejorar()) {
                         tarea.setFrecuenciaTarea(disminuirFrecuencia(tarea.getFrecuenciaTarea()));
+                        tarea.setMejorar(mejorarSegunFrecuencia(tarea.getFrecuenciaTarea()));
                         tarea.setContador(0);
                         tarea.setNumSi(0);
                         tarea.setNumNo(0);
@@ -278,6 +279,7 @@ public class SASucesoImp implements SASuceso {
                     if (tarea.getNoSeguidos() >= 2) {    // si suma 3 "no" seguidos
                         // Se le aumenta la frecuencia de nuevo
                         tarea.setFrecuenciaTarea(aumentarFrecuencia(tarea.getFrecuenciaTarea()));
+                        tarea.setMejorar(mejorarSegunFrecuencia(tarea.getFrecuenciaTarea()));
                         // Se reinician los contadores
                         tarea.setNumNo(0);
                         tarea.setNumSi(0);
@@ -297,6 +299,22 @@ public class SASucesoImp implements SASuceso {
         } catch (SQLException e) {
 
         }
+    }
+
+    private Integer mejorarSegunFrecuencia(Frecuencia frecuencia) {
+        Integer nuevoMejorar = 30;
+        switch (frecuencia){
+            case DIARIA:
+                nuevoMejorar = 30;
+                break;
+            case SEMANAL:
+                nuevoMejorar = 6;
+                break;
+            case MENSUAL:
+                nuevoMejorar = 3;
+                break;
+        }
+        return nuevoMejorar;
     }
 
     // Se buscan en BBDD las tareas comprendidas entre la hora actual y el dia siquiente
@@ -398,6 +416,7 @@ public class SASucesoImp implements SASuceso {
         return old.getTime();
     }
 
+    // En esta versión se ha decidido que la frecuencia siempre se aumenta a DIARIA
     private Frecuencia aumentarFrecuencia (Frecuencia frecuencia){
         Frecuencia nueva = DIARIA;
         switch (frecuencia){
@@ -408,7 +427,7 @@ public class SASucesoImp implements SASuceso {
                 nueva = DIARIA;
                 break;
             case MENSUAL:
-                nueva = SEMANAL;
+                nueva = DIARIA;
                 break;
         }
         return nueva;
