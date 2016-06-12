@@ -31,9 +31,6 @@ import es.ucm.as.presentacion.vista.VerEventos;
 import es.ucm.as.presentacion.vista.VerInforme;
 import es.ucm.as.presentacion.vista.VerReto;
 
-/**
- * Created by Jeffer on 02/03/2016.
- */
 public class DispatcherImp extends Dispatcher{
 
 

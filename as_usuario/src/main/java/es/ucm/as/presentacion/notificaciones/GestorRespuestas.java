@@ -10,9 +10,6 @@ import es.ucm.as.presentacion.controlador.Controlador;
 import es.ucm.as.presentacion.controlador.ListaComandos;
 import es.ucm.as.presentacion.vista.Contexto;
 
-/**
- * Created by Juan Lu on 10/03/2016.
- */
 public class GestorRespuestas extends BroadcastReceiver {
 
     @Override

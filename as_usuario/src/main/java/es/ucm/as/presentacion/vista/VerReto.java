@@ -19,7 +19,6 @@ import es.ucm.as.presentacion.controlador.ListaComandos;
 /**
  * Clase para que se muestre el activity_reto
  *
- * Created by Juan Lu on 25/02/2016.
  */
 public class VerReto extends Activity {
 

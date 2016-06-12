@@ -24,9 +24,6 @@ import es.ucm.as.presentacion.controlador.comandos.imp.VerInformeComando;
 import es.ucm.as.presentacion.controlador.comandos.imp.VerRetoComando;
 import es.ucm.as.presentacion.controlador.comandos.imp.actualizarNotificacionesComando;
 
-/**
- * Created by Jeffer on 02/03/2016.
- */
 public class FactoriaComandosImp extends FactoriaComandos {
     @Override
     public Command getCommand(String comando) {

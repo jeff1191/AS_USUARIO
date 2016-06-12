@@ -20,7 +20,6 @@ import es.ucm.as.presentacion.controlador.ListaComandos;
 /**
  * Clase para que se vean los activity_eventos temporales
  *
- * Created by msalitu on 09/03/2015.
  */
 public class VerInforme extends Activity{
 

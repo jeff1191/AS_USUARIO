@@ -20,7 +20,6 @@ import es.ucm.as.presentacion.controlador.ListaComandos;
 /**
  * Clase para que se vean los activity_eventos temporales
  *
- * Created by Juan Lu on 25/02/2016.
  */
 public class VerEventos  extends Activity{
     private ListView listaEventos;
@@ -65,7 +64,6 @@ public class VerEventos  extends Activity{
             else{
                 guardarCambios.setActivated(true);
                 titulo.setText("Próximos eventos");
-                //ArrayAdapter<String> adaptador = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, listaE);
                 final AdaptadorEventos adaptador = new AdaptadorEventos(this);
                 adaptador.setDatos(listaE);
                 adaptador.setDatosCheck(asistencia);
@@ -92,7 +90,6 @@ public class VerEventos  extends Activity{
                                 eGuardar.setAsistencia("SI");
                             else
                                 eGuardar.setAsistencia("NO");
-                            Log.e("TRANSFER: ",eGuardar.getId() + " ACTIVO: " + eGuardar.getAsistencia());
                             eventosModificados.add(eGuardar);
                         }
                     Controlador.getInstancia().ejecutaComando(ListaComandos.MODIFICAR_EVENTOS,eventosModificados);

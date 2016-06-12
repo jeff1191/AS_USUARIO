@@ -10,9 +10,7 @@ import es.ucm.as.R;
 import it.sephiroth.android.library.imagezoom.ImageViewTouch;
 import it.sephiroth.android.library.imagezoom.ImageViewTouchBase;
 
-/**
- * Created by msalitu on 08/03/2016.
- */
+
 public class Ayuda extends Activity{
     ImageViewTouch mImage;
 
@@ -29,7 +27,7 @@ public class Ayuda extends Activity{
 
                     @Override
                     public void onSingleTapConfirmed() {
-                        Log.d("LOG_TAG", "onSingleTapConfirmed");
+                        //Log.d("LOG_TAG", "onSingleTapConfirmed");
                     }
                 }
         );
@@ -39,7 +37,7 @@ public class Ayuda extends Activity{
 
                     @Override
                     public void onDoubleTap() {
-                        Log.d("LOG_TAG", "onDoubleTap");
+                        //Log.d("LOG_TAG", "onDoubleTap");
                     }
                 }
         );
@@ -49,7 +47,7 @@ public class Ayuda extends Activity{
 
                     @Override
                     public void onDrawableChanged(Drawable drawable) {
-                        Log.i("LOG_TAG", "onBitmapChanged: " + drawable);
+                        //Log.i("LOG_TAG", "onBitmapChanged: " + drawable);
                     }
                 }
         );

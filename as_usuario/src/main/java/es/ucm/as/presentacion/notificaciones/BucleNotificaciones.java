@@ -17,7 +17,6 @@ import es.ucm.as.presentacion.controlador.ListaComandos;
 import es.ucm.as.presentacion.vista.Contexto;
 
 /**
- * Created by Juan Lu on 27/04/2016.
  */
 public class BucleNotificaciones extends BroadcastReceiver {
 
@@ -27,7 +26,6 @@ public class BucleNotificaciones extends BroadcastReceiver {
         Contexto.getInstancia().setContext(context);
 
         Controlador.getInstancia().ejecutaComando(ListaComandos.ACTUALIZAR_NOTIFICACIONES, null);
-        Log.e("bucleNotifi", "onReceive del bucle");
         AlarmManager am = (AlarmManager)context.getSystemService(Context.ALARM_SERVICE);
         Intent i = new Intent(context, AutoArranque.class);
 
@@ -43,7 +41,6 @@ public class BucleNotificaciones extends BroadcastReceiver {
         horaNotificacionCal.set(Calendar.SECOND, 00);
         horaNotificacionCal.add(Calendar.DAY_OF_MONTH, 1); //Esto hace que se haga la dia siguiente
         long horaNotificacion = horaNotificacionCal.getTimeInMillis();
-        Log.e("bucleNotifi", "autoarranque a las " + horaNotificacionCal.getTime().toString());
         setAlarm(am, horaNotificacion, pi);
     }
 

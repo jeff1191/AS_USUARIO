@@ -14,9 +14,6 @@ import java.util.ArrayList;
 
 import es.ucm.as.R;
 
-/**
- * Created by Jeffer on 14/04/2016.
- */
 public class AdaptadorEventos extends BaseAdapter {
 
     private ArrayList<String> nombresUsuarios = new ArrayList<String>();

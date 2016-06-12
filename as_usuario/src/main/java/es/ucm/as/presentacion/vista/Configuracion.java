@@ -37,7 +37,6 @@ import es.ucm.as.presentacion.controlador.ListaComandos;
 /**
  * Clase asociada a la vista de activity_configuracion
  *
- * Created by Juan Lu on 24/02/2016.
  */
 public class Configuracion extends Activity {
 

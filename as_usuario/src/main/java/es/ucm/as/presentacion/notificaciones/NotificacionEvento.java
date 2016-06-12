@@ -14,9 +14,6 @@ import java.util.Date;
 
 import es.ucm.as.R;
 
-/**
- * Created by Juan Lu on 17/05/2016.
- */
 public class NotificacionEvento extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {

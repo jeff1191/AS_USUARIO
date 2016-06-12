@@ -53,9 +53,6 @@ import static es.ucm.as.negocio.utils.Frecuencia.DIARIA;
 import static es.ucm.as.negocio.utils.Frecuencia.MENSUAL;
 import static es.ucm.as.negocio.utils.Frecuencia.SEMANAL;
 
-/**
- * Created by Jeffer on 02/03/2016.
- */
 public class SASucesoImp implements SASuceso {
 
     private final static String NOMBRE_DOCUMENTO = "Informe.pdf";
@@ -327,7 +324,6 @@ public class SASucesoImp implements SASuceso {
             c.add(Calendar.DAY_OF_MONTH, 1);
             Date tomorrow = c.getTime();
 
-            Log.e("CargarNotificaciones", "Entre las "+ actual.toString() + " y las " + tomorrow.toString());
             QueryBuilder<Tarea, Integer> qb = getHelper().getTareaDao().queryBuilder();
             qb.where().between("HORA_ALARMA", actual, tomorrow);
             qb.orderBy("HORA_ALARMA", true);
@@ -502,7 +498,6 @@ public class SASucesoImp implements SASuceso {
 
         Document document = new Document();
         File f = crearFichero(NOMBRE_DOCUMENTO);
-        Log.e("path", f.getAbsolutePath());
         PdfWriter.getInstance(document, new FileOutputStream(f.getAbsolutePath()));
         document.open();
         Font titleFont = FontFactory.getFont(FontFactory.HELVETICA, 20, Font.BOLD);
@@ -736,7 +731,7 @@ public class SASucesoImp implements SASuceso {
         TransferReto retoActual = consultarReto();
 
         // Llega un reto desde el tutor
-        if(nuevoReto != null){
+        if(nuevoReto.getTexto() != null){
 
             // Si el usuario ya tenia reto
             if(retoActual != null){
@@ -762,8 +757,8 @@ public class SASucesoImp implements SASuceso {
             }
 
             // Si no llega reto del tutor hay que borrar el del usuario si lo hubiera
-        } else if(nuevoReto == null && retoActual != null) {
-            FactoriaSA.getInstancia().nuevoSASuceso().eliminarReto();
+        } else if(nuevoReto.getTexto() == null && retoActual != null) {
+            eliminarReto();
         }
     }
 

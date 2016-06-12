@@ -8,9 +8,6 @@ import es.ucm.as.presentacion.controlador.Controlador;
 import es.ucm.as.presentacion.controlador.ListaComandos;
 
 
-/**
- * Created by msalitu on 17/03/2016.
- */
 public class Decision extends Activity {
 
     @Override

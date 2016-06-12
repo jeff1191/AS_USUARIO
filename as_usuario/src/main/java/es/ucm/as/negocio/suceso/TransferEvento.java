@@ -3,9 +3,6 @@ package es.ucm.as.negocio.suceso;
 import java.io.Serializable;
 import java.util.Date;
 
-/**
- * Created by Jeffer on 04/03/2016.
- */
 public class TransferEvento implements Serializable {
 
     static final long serialVersionUID = 1L;

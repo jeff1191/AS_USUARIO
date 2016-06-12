@@ -6,9 +6,6 @@ import es.ucm.as.presentacion.controlador.comandos.Command;
 import es.ucm.as.presentacion.controlador.comandos.exceptions.commandException;
 import es.ucm.as.presentacion.controlador.comandos.factoria.FactoriaComandos;
 
-/**
- * Created by Jeffer on 02/03/2016.
- */
 public class ControladorImp extends Controlador {
     @Override
     public void ejecutaComando(String accion, Object datos) {

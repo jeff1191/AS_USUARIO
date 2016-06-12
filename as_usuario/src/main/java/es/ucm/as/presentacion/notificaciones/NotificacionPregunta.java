@@ -16,9 +16,6 @@ import java.util.Date;
 
 import es.ucm.as.R;
 
-/**
- * Created by Juan Lu on 10/03/2016.
- */
 public class NotificacionPregunta extends BroadcastReceiver {
 
     @Override

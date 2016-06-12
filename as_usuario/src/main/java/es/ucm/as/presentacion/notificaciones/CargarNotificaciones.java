@@ -48,11 +48,9 @@ public class CargarNotificaciones extends BroadcastReceiver {
             String tituloPregunta = "Pregunta";
             String tituloEvento = "Evento";
 
-            Log.e("CargarNotificaciones", "Tareas: " + tareas.size() + "");
 
             for (int i = 0; i < tareas.size(); i++) {
                 TransferTarea tarea = tareas.get(i);
-                Log.e("CargarNot", "id tarea " + tarea.getId().toString());
                 //Esto es para dividir el date en horas y minutos
                 SimpleDateFormat horasMinutos = new SimpleDateFormat("HH:mm");
                 StringTokenizer tokensAlarma = new StringTokenizer(horasMinutos.format
@@ -67,20 +65,14 @@ public class CargarNotificaciones extends BroadcastReceiver {
 
                 lanzarSuceso(context, horaAlarmaNotif, minutosAlarmaNotif, tituloAlarma,
                         tarea.getTextoAlarma(), "alarma", tarea.getId(), tono);
-                Log.e("CargarNotificaciones", "Se guarda la alarma " + tarea.getTextoAlarma() +
-                        " a las " + horaAlarmaNotif + ":" + minutosAlarmaNotif);
                 lanzarSuceso(context, horaPreguntaNotif, minutosPreguntaNotif, tituloPregunta,
                         tarea.getTextoPregunta(), "pregunta", tarea.getId(), tono);
-                Log.e("CargarNotificaciones", "Se guarda la pregunta " + tarea.getTextoPregunta() +
-                        " a las " + horaPreguntaNotif + ":" + minutosPreguntaNotif);
 
             }
 
             // Esto carga la clase BucleNotificaciones, importante para que la fecha de las tareas
             // se actualice a ultima hora
             lanzarBucle(context, info);
-
-            Log.e("CargarNotificaciones", "Eventos: " + eventos.size() + "");
 
             for (int i = 0; i < eventos.size(); i++) {
                 TransferEvento evento = eventos.get(i);
@@ -101,8 +93,6 @@ public class CargarNotificaciones extends BroadcastReceiver {
 
                     lanzarSuceso(context, horaAlarmaNotifE, minutosAlarmaNotifE, tituloEvento,
                             mensajeEvento, "evento", 0, tono);
-                    Log.e("CargarEventos", "Se guarda el evento " + mensajeEvento +
-                            " a las " + horaAlarmaNotifE + ":" + minutosAlarmaNotifE);
                 }
         }
     }
@@ -181,11 +171,8 @@ public class CargarNotificaciones extends BroadcastReceiver {
         horaNotificacionCal.set(Calendar.MINUTE, 47);
         horaNotificacionCal.set(Calendar.SECOND, 00);
         long horaNotificacion = horaNotificacionCal.getTimeInMillis();
-        Log.e("cargarNot", "A las 23:47 se actualizaran las horas de notificacion");
-
 
         setAlarm(am, horaNotificacion, pi);
-
     }
 
     private void setAlarm(AlarmManager am,long ms, PendingIntent pendingIntent){

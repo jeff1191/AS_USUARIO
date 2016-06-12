@@ -23,7 +23,6 @@ import es.ucm.as.R;
  *
  * El servicio hay que arrancarlo de alguna manera.... ver mas info acerca de eso, lo mejor seria cuando se inicia la app
  *
- * Created by Juan Lu on 09/03/2016.
  */
 public class NotificacionAlarma extends BroadcastReceiver {
 

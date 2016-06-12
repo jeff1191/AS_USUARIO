@@ -1,8 +1,6 @@
 package es.ucm.as.presentacion.controlador;
 
-/**
- * Created by Jeffer on 02/03/2016.
- */
+
 public class ListaComandos {
     public static final String RESPONDER_RETO = "responderReto";
     public static final String VER_RETO = "verReto";

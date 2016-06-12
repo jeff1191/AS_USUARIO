@@ -22,9 +22,6 @@ import java.util.concurrent.Future;
 import es.ucm.as.negocio.conexion.msg.Mensaje;
 
 
-/**
- * Created by msalitu on 05/05/2016.
- */
 public class ConectionManager {
 
     protected static String codigo;
@@ -61,7 +58,7 @@ public class ConectionManager {
         final List<Future<String>> futures = new ArrayList<Future<String>>() ;
 
         for (int i = 0; i <= 255; i++) {
-            String ip = "192.168.1."+i;
+            String ip = "192.168.0."+i;
             futures.add(checkIfPortIsOpen(es, ip, port, timeout));
         }
 

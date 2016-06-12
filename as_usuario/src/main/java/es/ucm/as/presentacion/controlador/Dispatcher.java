@@ -2,9 +2,6 @@ package es.ucm.as.presentacion.controlador;
 
 import es.ucm.as.presentacion.controlador.imp.DispatcherImp;
 
-/**
- * Created by Jeffer on 02/03/2016.
- */
 public abstract class Dispatcher  {
     private static Dispatcher dispatcher;
 
