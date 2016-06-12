@@ -516,7 +516,7 @@ public class SASucesoImp implements SASuceso {
         document.add(new Paragraph("\n", paragraphFont));
 
         // Insertamos el logo
-        Bitmap bitmap = BitmapFactory.decodeResource(Contexto.getInstancia().getContext().getResources(), R.drawable.logo);
+        Bitmap bitmap = BitmapFactory.decodeResource(Contexto.getInstancia().getContext().getResources(), R.drawable.logo_informe);
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.JPEG, 50, stream);
         Image imagen = Image.getInstance(stream.toByteArray());
