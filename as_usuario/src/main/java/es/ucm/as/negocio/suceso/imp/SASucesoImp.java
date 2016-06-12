@@ -475,12 +475,9 @@ public class SASucesoImp implements SASuceso {
     public static File getRuta() {
         // El fichero será almacenado en un directorio dentro del directorio Descargas
         File ruta = null;
-        if (Environment.MEDIA_MOUNTED.equals(Environment
-                .getExternalStorageState())) {
+        if (Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState())) {
             ruta = new File(
-                    Environment
-                            .getExternalStoragePublicDirectory(
-                                    Environment.DIRECTORY_DOWNLOADS),
+                    Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS),
                     NOMBRE_DIRECTORIO);
 
             if (ruta != null) {
@@ -490,6 +487,8 @@ public class SASucesoImp implements SASuceso {
                     }
                 }
             }
+        } else {
+
         }
         return ruta;
     }
@@ -504,6 +503,7 @@ public class SASucesoImp implements SASuceso {
 
         Document document = new Document();
         File f = crearFichero(NOMBRE_DOCUMENTO);
+        Log.e("path", f.getAbsolutePath());
         PdfWriter.getInstance(document, new FileOutputStream(f.getAbsolutePath()));
         document.open();
         Font titleFont = FontFactory.getFont(FontFactory.HELVETICA, 20, Font.BOLD);
