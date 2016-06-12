@@ -2,81 +2,81 @@
 <items version="2" >
 
     <item
-        jar="C:\Users\msalitu\.AndroidStudio1.5\AS_USUARIO\as_usuario\libs\additionnal.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="bd9e8dc422bb8c8405359947fe9f4282b49f57f4">
-        <dex dex="C:\Users\msalitu\.AndroidStudio1.5\AS_USUARIO\as_usuario\build\intermediates\pre-dexed\release\additionnal-81f5ba096e6fc48ab42470ab026a9fee2c0eac72.jar" />
-    </item>
-    <item
-        jar="C:\Users\msalitu\.AndroidStudio1.5\AS_USUARIO\as_usuario\build\intermediates\exploded-aar\com.android.support\support-v4\22.2.0\jars\classes.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="1ee588ff2c4daf7b97c1cbf922a6c7f027285c2f">
-        <dex dex="C:\Users\msalitu\.AndroidStudio1.5\AS_USUARIO\as_usuario\build\intermediates\pre-dexed\release\classes-4a66538e334276eb152d894a5db8f675f80c4316.jar" />
-    </item>
-    <item
-        jar="C:\Users\msalitu\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\22.2.0\support-annotations-22.2.0.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="66b42a1f3eb7676070b7ef7f14b603483aecbee1">
-        <dex dex="C:\Users\msalitu\.AndroidStudio1.5\AS_USUARIO\as_usuario\build\intermediates\pre-dexed\release\support-annotations-22.2.0-9b69a3243cfe512a92270e78c0f499c5ecbf7da6.jar" />
-    </item>
-    <item
-        jar="C:\Users\msalitu\.gradle\caches\modules-2\files-2.1\javax.activation\activation\1.1\e6cb541461c2834bdea3eb920f1884d1eb508b50\activation-1.1.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="e6cb541461c2834bdea3eb920f1884d1eb508b50">
-        <dex dex="C:\Users\msalitu\.AndroidStudio1.5\AS_USUARIO\as_usuario\build\intermediates\pre-dexed\release\activation-1.1-8c7fa8f5dd0252f0caf97d4880ad4ab06871cea1.jar" />
-    </item>
-    <item
-        jar="C:\Users\msalitu\.gradle\caches\modules-2\files-2.1\com.j256.ormlite\ormlite-android\4.48\afa06f539a4026c10b247386312aa67404b80a16\ormlite-android-4.48.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="afa06f539a4026c10b247386312aa67404b80a16">
-        <dex dex="C:\Users\msalitu\.AndroidStudio1.5\AS_USUARIO\as_usuario\build\intermediates\pre-dexed\release\ormlite-android-4.48-f5f7009f4ad00f61f41866e6d4acb4b63deefeb6.jar" />
-    </item>
-    <item
-        jar="C:\Users\msalitu\.gradle\caches\modules-2\files-2.1\com.j256.ormlite\ormlite-core\4.48\e579bd2905d0399af5029aaaf9817d5fa0ca88a5\ormlite-core-4.48.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="e579bd2905d0399af5029aaaf9817d5fa0ca88a5">
-        <dex dex="C:\Users\msalitu\.AndroidStudio1.5\AS_USUARIO\as_usuario\build\intermediates\pre-dexed\release\ormlite-core-4.48-d2ae5a2c17ab15c4e4982bd4e2ce0b92afd4379b.jar" />
-    </item>
-    <item
-        jar="C:\Users\msalitu\.AndroidStudio1.5\AS_USUARIO\as_usuario\build\intermediates\exploded-aar\com.android.support\support-v4\22.2.0\jars\libs\internal_impl-22.2.0.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="57f2ab85c164ff1676ec64dee787981c046fab79">
-        <dex dex="C:\Users\msalitu\.AndroidStudio1.5\AS_USUARIO\as_usuario\build\intermediates\pre-dexed\release\internal_impl-22.2.0-78c1f37c66bf4eaba8ea2660b60cd679ac64e911.jar" />
-    </item>
-    <item
-        jar="C:\Users\msalitu\.gradle\caches\modules-2\files-2.1\javax.mail\mail\1.4.7\9add058589d5d85adeb625859bf2c5eeaaedf12d\mail-1.4.7.jar"
+        jar="C:\Users\Juan Lu\.gradle\caches\modules-2\files-2.1\javax.mail\mail\1.4.7\9add058589d5d85adeb625859bf2c5eeaaedf12d\mail-1.4.7.jar"
         jumboMode="false"
         revision="22.0.1"
         sha1="9add058589d5d85adeb625859bf2c5eeaaedf12d">
-        <dex dex="C:\Users\msalitu\.AndroidStudio1.5\AS_USUARIO\as_usuario\build\intermediates\pre-dexed\release\mail-1.4.7-6c24c5c025d7726a7ee036505cf5d2e6c978b190.jar" />
+        <dex dex="C:\Users\Juan Lu\git\AS_USUARIO\as_usuario\build\intermediates\pre-dexed\debug\mail-1.4.7-55a19768f3efe76dbb957b63cd3255a25bd9b953.jar" />
     </item>
     <item
-        jar="C:\Users\msalitu\.gradle\caches\modules-2\files-2.1\com.itextpdf\itextg\5.5.9\3580383b2c7db8fa2fee1ffbe1993017a9ea296e\itextg-5.5.9.jar"
+        jar="C:\Users\Juan Lu\.gradle\caches\modules-2\files-2.1\com.itextpdf\itextg\5.5.9\3580383b2c7db8fa2fee1ffbe1993017a9ea296e\itextg-5.5.9.jar"
         jumboMode="false"
         revision="22.0.1"
         sha1="3580383b2c7db8fa2fee1ffbe1993017a9ea296e">
-        <dex dex="C:\Users\msalitu\.AndroidStudio1.5\AS_USUARIO\as_usuario\build\intermediates\pre-dexed\release\itextg-5.5.9-d55f8dc4beebc400b9de9722adb8f79255532b88.jar" />
+        <dex dex="C:\Users\Juan Lu\git\AS_USUARIO\as_usuario\build\intermediates\pre-dexed\debug\itextg-5.5.9-041a1db288b2c08ea4e395a6627e9ed8cbd788a7.jar" />
     </item>
     <item
-        jar="C:\Users\msalitu\.AndroidStudio1.5\AS_USUARIO\as_usuario\build\intermediates\exploded-aar\it.sephiroth.android.library.imagezoom\imagezoom\2.2.5\jars\classes.jar"
+        jar="C:\Users\Juan Lu\git\AS_USUARIO\as_usuario\libs\additionnal.jar"
         jumboMode="false"
         revision="22.0.1"
-        sha1="406557a6f4369568e5515f8a3c66c97b23f21534">
-        <dex dex="C:\Users\msalitu\.AndroidStudio1.5\AS_USUARIO\as_usuario\build\intermediates\pre-dexed\release\classes-0c62b2b74e887038fc67c134001b02e22989147b.jar" />
+        sha1="bd9e8dc422bb8c8405359947fe9f4282b49f57f4">
+        <dex dex="C:\Users\Juan Lu\git\AS_USUARIO\as_usuario\build\intermediates\pre-dexed\debug\additionnal-47fe09d43b40bacf3f241f8d0cc05fdeb428f844.jar" />
     </item>
     <item
-        jar="C:\Users\msalitu\.AndroidStudio1.5\AS_USUARIO\as_usuario\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.0\jars\classes.jar"
+        jar="C:\Users\Juan Lu\.gradle\caches\modules-2\files-2.1\com.j256.ormlite\ormlite-android\4.48\afa06f539a4026c10b247386312aa67404b80a16\ormlite-android-4.48.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="afa06f539a4026c10b247386312aa67404b80a16">
+        <dex dex="C:\Users\Juan Lu\git\AS_USUARIO\as_usuario\build\intermediates\pre-dexed\debug\ormlite-android-4.48-38436e29c4cabe5d99ed785b5aa089897c114a2e.jar" />
+    </item>
+    <item
+        jar="C:\Users\Juan Lu\git\AS_USUARIO\as_usuario\build\intermediates\exploded-aar\com.android.support\support-v4\22.2.0\jars\classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="1ee588ff2c4daf7b97c1cbf922a6c7f027285c2f">
+        <dex dex="C:\Users\Juan Lu\git\AS_USUARIO\as_usuario\build\intermediates\pre-dexed\debug\classes-e6dc2087471c0bb88846bd3620270868fd360d1a.jar" />
+    </item>
+    <item
+        jar="C:\Users\Juan Lu\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\22.2.0\support-annotations-22.2.0.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="66b42a1f3eb7676070b7ef7f14b603483aecbee1">
+        <dex dex="C:\Users\Juan Lu\git\AS_USUARIO\as_usuario\build\intermediates\pre-dexed\debug\support-annotations-22.2.0-85161731f1f35ed4ad301b2f3fba0b9b134f4962.jar" />
+    </item>
+    <item
+        jar="C:\Users\Juan Lu\git\AS_USUARIO\as_usuario\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.0\jars\classes.jar"
         jumboMode="false"
         revision="22.0.1"
         sha1="73753982da6bde518f3a4c6b372749981d14d1a0">
-        <dex dex="C:\Users\msalitu\.AndroidStudio1.5\AS_USUARIO\as_usuario\build\intermediates\pre-dexed\release\classes-1c12803c81aa2ff61e223d50c657af7093609773.jar" />
+        <dex dex="C:\Users\Juan Lu\git\AS_USUARIO\as_usuario\build\intermediates\pre-dexed\debug\classes-ea681a8d9e3bf9131a432140fc19c8c4028ee507.jar" />
+    </item>
+    <item
+        jar="C:\Users\Juan Lu\git\AS_USUARIO\as_usuario\build\intermediates\exploded-aar\com.android.support\support-v4\22.2.0\jars\libs\internal_impl-22.2.0.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="57f2ab85c164ff1676ec64dee787981c046fab79">
+        <dex dex="C:\Users\Juan Lu\git\AS_USUARIO\as_usuario\build\intermediates\pre-dexed\debug\internal_impl-22.2.0-b090f43af6836a6cddb665f3ba1c375e1ab65754.jar" />
+    </item>
+    <item
+        jar="C:\Users\Juan Lu\.gradle\caches\modules-2\files-2.1\com.j256.ormlite\ormlite-core\4.48\e579bd2905d0399af5029aaaf9817d5fa0ca88a5\ormlite-core-4.48.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="e579bd2905d0399af5029aaaf9817d5fa0ca88a5">
+        <dex dex="C:\Users\Juan Lu\git\AS_USUARIO\as_usuario\build\intermediates\pre-dexed\debug\ormlite-core-4.48-587876fa7725cf5d96cf20e671188cf4fd750951.jar" />
+    </item>
+    <item
+        jar="C:\Users\Juan Lu\.gradle\caches\modules-2\files-2.1\javax.activation\activation\1.1\e6cb541461c2834bdea3eb920f1884d1eb508b50\activation-1.1.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="e6cb541461c2834bdea3eb920f1884d1eb508b50">
+        <dex dex="C:\Users\Juan Lu\git\AS_USUARIO\as_usuario\build\intermediates\pre-dexed\debug\activation-1.1-87e67b10b7ebd52dcb74e7526c3456fb040009be.jar" />
+    </item>
+    <item
+        jar="C:\Users\Juan Lu\git\AS_USUARIO\as_usuario\build\intermediates\exploded-aar\it.sephiroth.android.library.imagezoom\imagezoom\2.2.5\jars\classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="406557a6f4369568e5515f8a3c66c97b23f21534">
+        <dex dex="C:\Users\Juan Lu\git\AS_USUARIO\as_usuario\build\intermediates\pre-dexed\debug\classes-155afe867a8902b3bf2a371cd62facb84f19123b.jar" />
     </item>
 
 </items>

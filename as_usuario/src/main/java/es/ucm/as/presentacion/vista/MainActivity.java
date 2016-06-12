@@ -8,6 +8,7 @@ import android.os.StrictMode;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -23,6 +24,7 @@ public class MainActivity extends Activity {
     private TextView nombrePrincipal;
     private TextView puntuacion;
     private ImageView imagenPerfil;
+    private ImageButton sync;
     private int REQUEST_CODE = 1;
 
     @Override
@@ -136,11 +138,16 @@ public class MainActivity extends Activity {
     }
 
     public void sincronizar(View v){
+        sync = (ImageButton) findViewById(R.id.sincronizacion);
+        sync.setClickable(false);
+        sync.setEnabled(false);
         Toast toast1 =
                 Toast.makeText(getApplicationContext(),
                         "Sincronizando...", Toast.LENGTH_LONG);
         toast1.show();
         Controlador.getInstancia().ejecutaComando(ListaComandos.ACTUALIZAR_PUNTUACION, null);
         Controlador.getInstancia().ejecutaComando(ListaComandos.SINCRONIZAR, null);
+        sync.setClickable(true);
+        sync.setEnabled(true);
     }
 }

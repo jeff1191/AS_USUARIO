@@ -7,8 +7,6 @@ import android.util.Log;
 import android.view.View;
 
 import es.ucm.as.R;
-import es.ucm.as.presentacion.controlador.Controlador;
-import es.ucm.as.presentacion.controlador.ListaComandos;
 import it.sephiroth.android.library.imagezoom.ImageViewTouch;
 import it.sephiroth.android.library.imagezoom.ImageViewTouchBase;
 
@@ -61,13 +59,16 @@ public class Ayuda extends Activity{
                 mImage.setImageResource(R.drawable.ayuda_main);
                 break;
             case "activity_reto":
-                mImage.setImageResource(R.drawable.ayuda_main);
+                mImage.setImageResource(R.drawable.ayuda_reto);
+                break;
+            case "activity_eventos":
+                mImage.setImageResource(R.drawable.ayuda_evento);
                 break;
             case "configuracion":
-                mImage.setImageResource(R.drawable.ayuda_main);
+                mImage.setImageResource(R.drawable.ayuda_conf);
                 break;
             case "activity_informe":
-                mImage.setImageResource(R.drawable.ayuda_main);
+                mImage.setImageResource(R.drawable.ayuda_tareas);
                 break;
         }
     }
