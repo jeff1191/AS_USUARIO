@@ -197,7 +197,7 @@ public class SASucesoImp implements SASuceso {
             try {
                 tareaDao = getHelper().getTareaDao();
 
-                if(tareas != null) {
+                if(tareas != null && tareas.size() > 1) {
 
                     List<Tarea> misTareas = tareaDao.queryForAll();
                     for(int j = 0; j < misTareas.size(); j++){
@@ -451,8 +451,7 @@ public class SASucesoImp implements SASuceso {
 
     public Date actualizaDatesTareas(Date a){
         SimpleDateFormat horasMinutos = new SimpleDateFormat("HH:mm");
-        StringTokenizer tokens = new StringTokenizer(horasMinutos.format
-                (a),":");
+        StringTokenizer tokens = new StringTokenizer(horasMinutos.format(a),":");
         Integer hora = Integer.parseInt(tokens.nextToken());
         Integer minutos =  Integer.parseInt(tokens.nextToken());
         Date horaActual = new Date();
@@ -533,29 +532,8 @@ public class SASucesoImp implements SASuceso {
         table.addCell("Anterior\n" + puntuacionAnterior );
         table.addCell("Actual\n" + puntuacion);
 
-        /*///////////////////////Se me resiste el tam de la flechita///////////////////////////////
-
-        // Flecha roja
-        Bitmap bitmapRojo = BitmapFactory.decodeResource(Contexto.getInstancia().getContext().getResources(), R.drawable.flecharoja_informe);
-        ByteArrayOutputStream streamRojo = new ByteArrayOutputStream();
-        bitmapRojo.compress(Bitmap.CompressFormat.JPEG, 100, streamRojo);
-        Image imagenRojo = Image.getInstance(streamRojo.toByteArray());
-       // imagenRojo.scaleToFit(25f, 25f);
-        // Flecha verde
-        Bitmap bitmapVerde = BitmapFactory.decodeResource(Contexto.getInstancia().getContext().getResources(), R.drawable.flechaverde_informe);
-        ByteArrayOutputStream streamVerde = new ByteArrayOutputStream();
-        bitmapVerde.compress(Bitmap.CompressFormat.JPEG, 100, streamVerde);
-        Image imagenVerde = Image.getInstance(streamVerde.toByteArray());
-        //imagenVerde.scaleToFit(25f, 25f);
-        if (puntuacion - puntuacionAnterior >= 0)
-            table.addCell(Image.getInstance(imagenVerde));
-        else
-            table.addCell(Image.getInstance(imagenRojo));
-        *///////////////////////////////////////////////////////////////////////////////////////////
-
         document.add(table);
         document.add(new Paragraph("\n", paragraphFont));
-
 
         // Mostramos el activity_reto
         document.add(new Paragraph("Reto", chapterFont));
@@ -755,7 +733,7 @@ public class SASucesoImp implements SASuceso {
         TransferReto retoActual = consultarReto();
 
         // Llega un reto desde el tutor
-        if(nuevoReto.getTexto()!= null){
+        if(nuevoReto != null){
 
             // Si el usuario ya tenia reto
             if(retoActual != null){
@@ -781,7 +759,7 @@ public class SASucesoImp implements SASuceso {
             }
 
             // Si no llega reto del tutor hay que borrar el del usuario si lo hubiera
-        } else if(nuevoReto.getTexto()== null && retoActual != null) {
+        } else if(nuevoReto == null && retoActual != null) {
             FactoriaSA.getInstancia().nuevoSASuceso().eliminarReto();
         }
     }
