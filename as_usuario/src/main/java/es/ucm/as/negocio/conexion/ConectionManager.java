@@ -58,7 +58,7 @@ public class ConectionManager {
         final List<Future<String>> futures = new ArrayList<Future<String>>() ;
 
         for (int i = 0; i <= 255; i++) {
-            String ip = "192.168.0."+i;
+            String ip = "192.168.1."+i;
             futures.add(checkIfPortIsOpen(es, ip, port, timeout));
         }
 

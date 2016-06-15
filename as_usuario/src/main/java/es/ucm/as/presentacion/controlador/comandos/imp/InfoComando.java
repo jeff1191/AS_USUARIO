@@ -39,8 +39,8 @@ public class InfoComando implements Command{
             info.setTareas(saSuceso.consultarTareasNotificaciones());
         else {
             Log.e("finde", "Es finde!! No hay tareas!");
-            List<TransferTarea> tareas = new ArrayList<>();
-            info.setTareas(tareas);
+            info.setTareas(saSuceso.consultarTareasNotificacionesFinde());
+
         }
         return info;
     }

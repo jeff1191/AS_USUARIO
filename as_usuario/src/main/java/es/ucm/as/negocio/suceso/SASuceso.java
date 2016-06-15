@@ -54,4 +54,6 @@ public interface SASuceso {
     public List<TransferEvento> consultarEventos();
 
     public List<TransferEvento> consultarEventosNotificaciones();
+
+    public List<TransferTarea> consultarTareasNotificacionesFinde();
 }

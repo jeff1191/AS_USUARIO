@@ -1,8 +1,8 @@
 <component name="libraryTable">
   <library name="imagezoom-2.2.5">
     <CLASSES>
-      <root url="file://$PROJECT_DIR$/as_usuario/build/intermediates/exploded-aar/it.sephiroth.android.library.imagezoom/imagezoom/2.2.5/res" />
       <root url="jar://$PROJECT_DIR$/as_usuario/build/intermediates/exploded-aar/it.sephiroth.android.library.imagezoom/imagezoom/2.2.5/jars/classes.jar!/" />
+      <root url="file://$PROJECT_DIR$/as_usuario/build/intermediates/exploded-aar/it.sephiroth.android.library.imagezoom/imagezoom/2.2.5/res" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

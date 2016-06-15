@@ -115,6 +115,64 @@ public class SASucesoImp implements SASuceso {
     }
 
     @Override
+    public List<TransferTarea> consultarTareasNotificacionesFinde() {
+
+        try {
+            // Tareas que estan puestas que se avisen en sabado o domingo
+            Date actual = new Date();
+            Calendar c = Calendar.getInstance();
+            c.setTime(actual);
+            c.add(Calendar.DAY_OF_MONTH, 1);
+            Date tomorrow = c.getTime();
+            Dao<Tarea, Integer> tareaDao = getHelper().getTareaDao();
+            QueryBuilder<Tarea, Integer> qb = tareaDao.queryBuilder();
+            qb.where().between("HORA_ALARMA", actual, tomorrow);
+            qb.orderBy("HORA_ALARMA", true);
+            List<Tarea> tareas = qb.query();
+
+            // Para todas las tareas actualizamos su fecha al lunes
+            for(int i = 0; i < tareas.size(); i++){
+                Tarea tarea = tareas.get(i);
+                if(Calendar.SATURDAY == Calendar.getInstance().get(Calendar.DAY_OF_WEEK)) {
+                    Calendar alarma = Calendar.getInstance();
+                    alarma.setTime(tarea.getHoraAlarma());
+                    Log.e("SASuceso", "Antes alarma" + alarma.getTime().toString());
+                    alarma.add(Calendar.DAY_OF_MONTH, 2);
+                    Log.e("SASuceso","Despues alarma" +  alarma.getTime().toString());
+                    Calendar pregunta = Calendar.getInstance();
+                    pregunta.setTime(tarea.getHoraPregunta());
+                    Log.e("SASuceso", "Antes pregunta" + pregunta.getTime().toString());
+                    pregunta.add(Calendar.DAY_OF_MONTH, 2);
+                    Log.e("SASuceso","Despues pregunta" +  pregunta.getTime().toString());
+                    tarea.setHoraAlarma(alarma.getTime());
+                    tarea.setHoraPregunta(pregunta.getTime());
+                    tareaDao.update(tarea);
+                }
+                else if(Calendar.SUNDAY == Calendar.getInstance().get(Calendar.DAY_OF_WEEK)) {
+                    Calendar alarma = Calendar.getInstance();
+                    alarma.setTime(tarea.getHoraAlarma());
+                    Log.e("SASuceso", "Antes alarma" + alarma.getTime().toString());
+                    alarma.add(Calendar.DAY_OF_MONTH, 1);
+                    Log.e("SASuceso","Despues alarma" +  alarma.getTime().toString());
+                    Calendar pregunta = Calendar.getInstance();
+                    pregunta.setTime(tarea.getHoraPregunta());
+                    Log.e("SASuceso", "Antes pregunta" + pregunta.getTime().toString());
+                    pregunta.add(Calendar.DAY_OF_MONTH, 1);
+                    Log.e("SASuceso","Despues pregunta" +  pregunta.getTime().toString());
+                    tarea.setHoraAlarma(alarma.getTime());
+                    tarea.setHoraPregunta(pregunta.getTime());
+                    tareaDao.update(tarea);
+                }
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        // Devuelve un array vacio para que no se ejecuten notificaciones el finde
+        return new ArrayList<TransferTarea>();
+    }
+
+    @Override
     public TransferReto consultarReto() {
         Dao<Reto, Integer> dao;
         Reto reto = new Reto();

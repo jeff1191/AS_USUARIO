@@ -140,7 +140,7 @@ public class CargarNotificaciones extends BroadcastReceiver {
         horaNotificacionCal.set(Calendar.MINUTE, minutos);
         horaNotificacionCal.set(Calendar.SECOND, 0);
         horaNotificacionCal.set(Calendar.MILLISECOND, 0);
-
+        Log.e("lanzarBucle", "Guarda notificacion a las "+ titulo + " "+ horaNotificacionCal.toString());
         long horaActual = horaActualCal.getTimeInMillis();
         long horaNotificacion = horaNotificacionCal.getTimeInMillis();
 
@@ -155,7 +155,7 @@ public class CargarNotificaciones extends BroadcastReceiver {
     }
 
     public void lanzarBucle(Context context, Mensaje info){
-        Log.e("lanzarBucle", "Se mete para guardar la ultima not");
+        Log.e("lanzarBucle", "Se mete para guardar la ultima not hoy a las 23.47");
 
         AlarmManager am =(AlarmManager)context.getSystemService(Context.ALARM_SERVICE);
         Intent i = new Intent(context, BucleNotificaciones.class);
