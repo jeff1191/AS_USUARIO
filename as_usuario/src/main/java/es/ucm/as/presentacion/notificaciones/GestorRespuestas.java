@@ -37,7 +37,7 @@ public class GestorRespuestas extends BroadcastReceiver {
         NotificationManager notificationManager =
                 (NotificationManager) context.getSystemService(context.NOTIFICATION_SERVICE);
         notificationManager.cancel(idNot);
-
         Controlador.getInstancia().ejecutaComando(ListaComandos.RESPONDER_TAREA, transferTarea);
+        Controlador.getInstancia().ejecutaComando(ListaComandos.ACTUALIZAR_PUNTUACION, null);
     }
 }

@@ -35,7 +35,6 @@ public class MainActivity extends Activity {
             TransferUsuario usuario = (TransferUsuario) getIntent().getExtras().getSerializable("usuario");
 
             if (usuario != null) {
-                Controlador.getInstancia().ejecutaComando(ListaComandos.ACTUALIZAR_PUNTUACION, null);
                 // Completa los datos del usuario que se muestran en esta pantalla
                 Configuracion.temaActual = usuario.getColor();
                 cargarTema();
@@ -104,7 +103,6 @@ public class MainActivity extends Activity {
     }
 
     public void enviarCorreo(View v){
-        Controlador.getInstancia().ejecutaComando(ListaComandos.ACTUALIZAR_PUNTUACION, null);
         Controlador.getInstancia().ejecutaComando(ListaComandos.GENERAR_PDF, null);
         Controlador.getInstancia().ejecutaComando(ListaComandos.ENVIAR_CORREO, null);
     }
@@ -150,4 +148,5 @@ public class MainActivity extends Activity {
         sync.setClickable(true);
         sync.setEnabled(true);
     }
+
 }

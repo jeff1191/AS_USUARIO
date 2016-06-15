@@ -5,6 +5,8 @@ package es.ucm.as.negocio.usuario.imp;
 
 
 
+import android.util.Log;
+
 import com.j256.ormlite.android.apptools.OpenHelperManager;
 import com.j256.ormlite.dao.Dao;
 
@@ -75,13 +77,14 @@ public class SAUsuarioImp implements SAUsuario {
 		Dao<Usuario, Integer> daoUsuario;
 		try {
 			daoUsuario = getHelper().getUsuarioDao();
-			Usuario usuario = daoUsuario.queryForId(1);
+			Usuario usuario = daoUsuario.queryForAll().get(0);
 			usuario.setPuntuacionAnterior(usuario.getPuntuacion());
 			usuario.setPuntuacion(ret);
 			daoUsuario.update(usuario);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		Log.e("SASuceso", "actualiza puntuacion" + ret.toString());
 		return ret;
 	}
 
@@ -137,6 +140,7 @@ public class SAUsuarioImp implements SAUsuario {
 
 	@Override
 	public TransferUsuario consultarUsuario() {
+        Log.e("SASuceso", "consultarUsuario");
 		Dao<Usuario, Integer> daoUsuario;
 		TransferUsuario transferUsuario = new TransferUsuario();
 		try {
