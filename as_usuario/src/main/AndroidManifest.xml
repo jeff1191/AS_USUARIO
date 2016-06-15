@@ -53,8 +53,7 @@
             android:screenOrientation="portrait"/>
 
         <activity android:name="es.ucm.as.presentacion.vista.Registro"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan">
+            android:screenOrientation="portrait">
         </activity>
 
         <service
