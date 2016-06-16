@@ -8,13 +8,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.IBinder;
-import android.util.Log;
 
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-import es.ucm.as.integracion.Evento;
 import es.ucm.as.negocio.conexion.msg.Mensaje;
 import es.ucm.as.negocio.suceso.TransferEvento;
 import es.ucm.as.negocio.suceso.TransferTarea;
@@ -46,9 +44,7 @@ public class ServicioNotificaciones extends Service {
         Intent i = new Intent(getApplicationContext(), CargarNotificaciones.class);
 
         Mensaje info;
-        if(intent.getExtras() == null)
-            Log.e("servicio", "no le llega info a traves del bundle");
-        else {
+        if(intent.getExtras() != null) {
             info = (Mensaje)intent.getExtras().getSerializable("info");
             List<TransferTarea> tareas = info.getTareas();
             List<TransferEvento> eventos = info.getEventos();

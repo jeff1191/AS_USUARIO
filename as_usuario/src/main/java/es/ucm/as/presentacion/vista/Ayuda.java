@@ -3,7 +3,6 @@ package es.ucm.as.presentacion.vista;
 import android.app.Activity;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 
 import es.ucm.as.R;

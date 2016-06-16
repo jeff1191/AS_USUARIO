@@ -7,16 +7,12 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
-import android.util.Log;
 
 import java.text.SimpleDateFormat;
-
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.StringTokenizer;
-
-import es.ucm.as.R;
 
 import es.ucm.as.negocio.conexion.msg.Mensaje;
 import es.ucm.as.negocio.suceso.TransferEvento;
@@ -140,7 +136,6 @@ public class CargarNotificaciones extends BroadcastReceiver {
         horaNotificacionCal.set(Calendar.MINUTE, minutos);
         horaNotificacionCal.set(Calendar.SECOND, 0);
         horaNotificacionCal.set(Calendar.MILLISECOND, 0);
-        Log.e("lanzarBucle", "Guarda notificacion a las "+ titulo + " "+ horaNotificacionCal.toString());
         long horaActual = horaActualCal.getTimeInMillis();
         long horaNotificacion = horaNotificacionCal.getTimeInMillis();
 
@@ -155,7 +150,6 @@ public class CargarNotificaciones extends BroadcastReceiver {
     }
 
     public void lanzarBucle(Context context, Mensaje info){
-        Log.e("lanzarBucle", "Se mete para guardar la ultima not hoy a las 23.47");
 
         AlarmManager am =(AlarmManager)context.getSystemService(Context.ALARM_SERVICE);
         Intent i = new Intent(context, BucleNotificaciones.class);

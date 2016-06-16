@@ -3,15 +3,12 @@ package es.ucm.as.presentacion.controlador.imp;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.Toast;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
-
 
 import es.ucm.as.negocio.conexion.msg.Mensaje;
 import es.ucm.as.negocio.suceso.TransferEvento;
@@ -77,7 +74,6 @@ public class DispatcherImp extends Dispatcher{
                     toast.show();
 
                     // Si la sincronizacion ha sido correcta se relanza el servicio de notificaciones
-                    Log.e("DISPATCHER", "SE VA A REINICIAR_SERVICIO_NOTIFICACIONES comando");
                     Intent service = new Intent(Contexto.getInstancia().getContext(),  ServicioNotificaciones.class);
                     service.putExtra("info", info);
                     Contexto.getInstancia().getContext().stopService(service);
@@ -100,7 +96,6 @@ public class DispatcherImp extends Dispatcher{
                     intentSincroPrim.putExtra("usuario", infoRegistro.getUsuario());
                     intentSincroPrim.setFlags(intentSincroPrim.getFlags() | Intent.FLAG_ACTIVITY_NO_HISTORY);
 
-                    Log.e("DISPATCHER", "SE VA A INICIAR_SERVICIO_NOTIFICACIONES Registro");
                     Intent serviceRegistro = new Intent(Contexto.getInstancia().getContext(),  ServicioNotificaciones.class);
                     serviceRegistro.putExtra("info", infoRegistro);
                     Contexto.getInstancia().getContext().stopService(serviceRegistro);

@@ -3,7 +3,6 @@ package es.ucm.as.negocio.suceso.imp;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Environment;
-import android.util.Log;
 
 import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Document;
@@ -136,14 +135,10 @@ public class SASucesoImp implements SASuceso {
                 if(Calendar.SATURDAY == Calendar.getInstance().get(Calendar.DAY_OF_WEEK)) {
                     Calendar alarma = Calendar.getInstance();
                     alarma.setTime(tarea.getHoraAlarma());
-                    Log.e("SASuceso", "Antes alarma" + alarma.getTime().toString());
                     alarma.add(Calendar.DAY_OF_MONTH, 2);
-                    Log.e("SASuceso","Despues alarma" +  alarma.getTime().toString());
                     Calendar pregunta = Calendar.getInstance();
                     pregunta.setTime(tarea.getHoraPregunta());
-                    Log.e("SASuceso", "Antes pregunta" + pregunta.getTime().toString());
                     pregunta.add(Calendar.DAY_OF_MONTH, 2);
-                    Log.e("SASuceso","Despues pregunta" +  pregunta.getTime().toString());
                     tarea.setHoraAlarma(alarma.getTime());
                     tarea.setHoraPregunta(pregunta.getTime());
                     tareaDao.update(tarea);
@@ -151,14 +146,10 @@ public class SASucesoImp implements SASuceso {
                 else if(Calendar.SUNDAY == Calendar.getInstance().get(Calendar.DAY_OF_WEEK)) {
                     Calendar alarma = Calendar.getInstance();
                     alarma.setTime(tarea.getHoraAlarma());
-                    Log.e("SASuceso", "Antes alarma" + alarma.getTime().toString());
                     alarma.add(Calendar.DAY_OF_MONTH, 1);
-                    Log.e("SASuceso","Despues alarma" +  alarma.getTime().toString());
                     Calendar pregunta = Calendar.getInstance();
                     pregunta.setTime(tarea.getHoraPregunta());
-                    Log.e("SASuceso", "Antes pregunta" + pregunta.getTime().toString());
                     pregunta.add(Calendar.DAY_OF_MONTH, 1);
-                    Log.e("SASuceso","Despues pregunta" +  pregunta.getTime().toString());
                     tarea.setHoraAlarma(alarma.getTime());
                     tarea.setHoraPregunta(pregunta.getTime());
                     tareaDao.update(tarea);

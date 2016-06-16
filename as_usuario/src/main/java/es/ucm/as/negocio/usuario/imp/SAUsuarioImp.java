@@ -5,8 +5,6 @@ package es.ucm.as.negocio.usuario.imp;
 
 
 
-import android.util.Log;
-
 import com.j256.ormlite.android.apptools.OpenHelperManager;
 import com.j256.ormlite.dao.Dao;
 
@@ -15,12 +13,12 @@ import java.util.List;
 
 import es.ucm.as.R;
 import es.ucm.as.integracion.DBHelper;
+import es.ucm.as.integracion.Usuario;
 import es.ucm.as.negocio.factoria.FactoriaSA;
 import es.ucm.as.negocio.suceso.SASuceso;
 import es.ucm.as.negocio.suceso.TransferTarea;
 import es.ucm.as.negocio.usuario.SAUsuario;
 import es.ucm.as.negocio.usuario.TransferUsuario;
-import es.ucm.as.integracion.Usuario;
 import es.ucm.as.presentacion.vista.Contexto;
 
 public class SAUsuarioImp implements SAUsuario {
@@ -54,9 +52,7 @@ public class SAUsuarioImp implements SAUsuario {
 		return datos;
 	}
 
-	/*
-	puntuacion = (10 * nºtareas positivas / nº tareas totales
-	* */
+
 	@Override
 	public Integer calcularPuntuacion() {
 		Integer ret;
@@ -84,7 +80,6 @@ public class SAUsuarioImp implements SAUsuario {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		Log.e("SASuceso", "actualiza puntuacion" + ret.toString());
 		return ret;
 	}
 
@@ -140,7 +135,6 @@ public class SAUsuarioImp implements SAUsuario {
 
 	@Override
 	public TransferUsuario consultarUsuario() {
-        Log.e("SASuceso", "consultarUsuario");
 		Dao<Usuario, Integer> daoUsuario;
 		TransferUsuario transferUsuario = new TransferUsuario();
 		try {

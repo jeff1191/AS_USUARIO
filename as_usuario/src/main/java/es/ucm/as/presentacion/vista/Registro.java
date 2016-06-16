@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -67,7 +66,6 @@ public class Registro extends Activity {
 
             Mensaje msg = new Mensaje("registro");
             msg.setUsuario(crearUsuario);
-            Log.e("REGISTRO", "A SINCRONIZAR!");
             Controlador.getInstancia().ejecutaComando(ListaComandos.SINCRONIZAR_REGISTRO, msg);
         }
     }
