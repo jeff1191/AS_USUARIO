@@ -27,6 +27,8 @@ public class MainActivity extends Activity {
     private ImageButton sync;
     private int REQUEST_CODE = 1;
 
+    private boolean state = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -35,6 +37,7 @@ public class MainActivity extends Activity {
             TransferUsuario usuario = (TransferUsuario) getIntent().getExtras().getSerializable("usuario");
 
             if (usuario != null) {
+                state = true;
                 // Completa los datos del usuario que se muestran en esta pantalla
                 Configuracion.temaActual = usuario.getColor();
                 cargarTema();
@@ -80,6 +83,20 @@ public class MainActivity extends Activity {
             return true;
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        state = false;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        if(!state)
+            Controlador.getInstancia().ejecutaComando(ListaComandos.CONSULTAR_USUARIO, null);
     }
 
     public void personalizacion(View v){
